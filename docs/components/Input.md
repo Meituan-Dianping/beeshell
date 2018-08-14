@@ -5,7 +5,7 @@
 ## Install
 
 ```
-npm --registry=http://r.npm.sankuai.com install @mfe/beeshell
+npm  install beeshell
 ```
 
 ## Usage
@@ -13,12 +13,12 @@ npm --registry=http://r.npm.sankuai.com install @mfe/beeshell
 ### 引入方式
 #### 全部引入
 ```
-import { Input } from '@mfe/beeshell';
+import { Input } from 'beeshell';
 ```
 
 #### 单独引入
 ```
-import Input from '@mfe/beeshell/components/Input';
+import Input from 'beeshell/components/Input';
 ```
 
 ### Examples
@@ -29,7 +29,7 @@ import Input from '@mfe/beeshell/components/Input';
 
 ```js
 
-import { Input } from '@mfe/beeshell';
+import { Input } from 'beeshell';
 
 <Input
     placeholder="请输入姓名"

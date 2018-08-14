@@ -5,7 +5,7 @@
 ## Install
 
 ```
-npm install @mfe/beeshell --registry=http://r.npm.sankuai.com
+npm install beeshell 
 ```
 
 ## Usage
@@ -13,12 +13,12 @@ npm install @mfe/beeshell --registry=http://r.npm.sankuai.com
 ### 引入方式
 #### 全部引入
 ```
-import { Button } from '@mfe/beeshell';
+import { Button } from 'beeshell';
 ```
 
 #### 单独引入
 ```
-import Button from '@mfe/beeshell/components/Button';
+import Button from 'beeshell/components/Button';
 ```
 
 
@@ -32,7 +32,7 @@ import Button from '@mfe/beeshell/components/Button';
 ```js
 
 import React from 'react';
-import { Button } from '@mfe/beeshell';
+import { Button } from 'beeshell';
 
 class App extends React.Component {
     render() {

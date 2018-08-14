@@ -5,7 +5,7 @@
 ## Install
 
 ```
-npm install @mfe/beeshell --registry=http://r.npm.sankuai.com
+npm install beeshell 
 ```
 
 ## Usage
@@ -13,12 +13,12 @@ npm install @mfe/beeshell --registry=http://r.npm.sankuai.com
 ### 引入方式
 #### 全部引入
 ```
-import { SlideModal } from '@mfe/beeshell';
+import { SlideModal } from 'beeshell';
 ```
 
 #### 单独引入
 ```
-import SlideModal from '@mfe/beeshell/components/Modal/extensions/SlideModal';
+import SlideModal from 'beeshell/components/Modal/extensions/SlideModal';
 ```
 
 
@@ -37,7 +37,7 @@ Beeshell 对于动画的部分使用了策略模式来集成，Modal 使用 Fade
 ### Code
 
 ```jsx
-import { SlideModal } from '@mfe/beeshell';
+import { SlideModal } from 'beeshell';
 
 class App extends React.Component {
     render() {

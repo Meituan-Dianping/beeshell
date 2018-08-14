@@ -8,13 +8,13 @@ react native 实现标签筛选组件，数据可配置，支持单选和多选�
 ## Install
 
 ```
-npm install @mfe/beeshell --registry=http://r.npm.sankuai.com 
+npm install beeshell  
 ```
 
 ## 示例
 
 ```
-import { FilterPanel } from '@mfe/beeshell';
+import { FilterPanel } from 'beeshell';
 ```
 
 ## 示例

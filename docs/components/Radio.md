@@ -4,7 +4,7 @@
 ## Install
 
 ```
-npm --registry=http://r.npm.sankuai.com install @mfe/beeshell
+npm  install beeshell
 ```
 
 ## Usage
@@ -12,12 +12,12 @@ npm --registry=http://r.npm.sankuai.com install @mfe/beeshell
 ### 引入方式
 #### 全部引入
 ```
-import { Radio } from '@mfe/beeshell';
+import { Radio } from 'beeshell';
 ```
 
 #### 单独引入
 ```
-import Radio from '@mfe/beeshell/components/Radio';
+import Radio from 'beeshell/components/Radio';
 ```
 
 ### Examples
@@ -28,7 +28,7 @@ import Radio from '@mfe/beeshell/components/Radio';
 
 ```js
 
-import { Radio } from '@mfe/beeshell';
+import { Radio } from 'beeshell';
 
 <Radio checkedValues={this.state.deliveryTime} onChange={() => {}}>
     <Radio.Item key={'a'} label="百度" trueValue="1" />

@@ -5,7 +5,7 @@
 ## Install
 
 ```
-npm install @mfe/beeshell --registry=http://r.npm.sankuai.com
+npm install beeshell 
 ```
 
 ## Usage
@@ -13,12 +13,12 @@ npm install @mfe/beeshell --registry=http://r.npm.sankuai.com
 ### 引入方式
 #### 全部引入
 ```
-import { Datepicker } from '@mfe/beeshell';
+import { Datepicker } from 'beeshell';
 ```
 #### 单独引入
 
 ```
-import Datepicker from '@mfe/beeshell/components/Datepicker';
+import Datepicker from 'beeshell/components/Datepicker';
 ```
 因为该组件库实现使用了继承、组合等方式复用代码，组件又有通用型、业务型组件的分类，所以导致单独引入的路径会比较长。
 
@@ -30,7 +30,7 @@ import Datepicker from '@mfe/beeshell/components/Datepicker';
 ### Code
 
 ```jsx
-import { Datepicker } from '@mfe/beeshell';
+import { Datepicker } from 'beeshell';
 
 class App extends React.Component {
   const date = '2018-01-01';

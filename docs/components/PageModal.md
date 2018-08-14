@@ -5,19 +5,19 @@
 ## Install
 
 ```
-npm install @mfe/beeshell --registry=http://r.npm.sankuai.com
+npm install beeshell 
 ```
 
 ## Usage
 ### 引入方式
 #### 全部引入
 ```
-import { PageModal } from '@mfe/beeshell';
+import { PageModal } from 'beeshell';
 ```
 
 #### 单独引入
 ```
-import PageModal from '@mfe/beeshell/modules/PageModal';
+import PageModal from 'beeshell/modules/PageModal';
 ```
 
 
@@ -31,7 +31,7 @@ import PageModal from '@mfe/beeshell/modules/PageModal';
 ### Code
 
 ```jsx
-import { PageModal } from '@mfe/beeshell';
+import { PageModal } from 'beeshell';
 
 class App extends React.Component {
     render() {

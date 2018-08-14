@@ -6,13 +6,13 @@
 ## Install
 
 ```
-npm install @mfe/beeshell --registry=http://r.npm.sankuai.com 
+npm install beeshell  
 ```
 
 ## 示例
 
 ```
-import { TableView } from '@mfe/beeshell';
+import { TableView } from 'beeshell';
 ```
 
 ### 1. 默认格式

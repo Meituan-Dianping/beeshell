@@ -6,7 +6,7 @@
 ## Install
 
 ```
-npm --registry=http://r.npm.sankuai.com install @mfe/beeshell
+npm  install beeshell
 ```
 
 ## Usage
@@ -14,12 +14,12 @@ npm --registry=http://r.npm.sankuai.com install @mfe/beeshell
 ### 引入方式
 #### 全部引入
 ```
-import { ConfirmModal } from '@mfe/beeshell';
+import { ConfirmModal } from 'beeshell';
 ```
 
 #### 单独引入
 ```
-import ConfirmModal from '@mfe/beeshell/components/Modal/extensions/ConfirmModal';
+import ConfirmModal from 'beeshell/components/Modal/extensions/ConfirmModal';
 ```
 
 
@@ -86,7 +86,7 @@ body 部分为自定义组件，注意设置属性 body="" 才会展示子组件
 ### Code
 
 ```jsx
-import { ConfirmModal } from '@mfe/beeshell';
+import { ConfirmModal } from 'beeshell';
 
 class App extends React.Component {
     render() {

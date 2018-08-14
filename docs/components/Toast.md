@@ -5,13 +5,13 @@
 ## Install
 
 ```
-npm install @mfe/beeshell --registry=http://r.npm.sankuai.com 
+npm install beeshell  
 ```
 
 ## Usage
 
 ```
-import { Tip } from '@mfe/beeshell';
+import { Tip } from 'beeshell';
 ```
 
 
@@ -47,7 +47,7 @@ Toast.show('中部 5s', 5000, 'center');
 
 1. 顶部显示 3 秒钟
 ```jsx
-import { Toast } from '@mfe/beeshell';
+import { Toast } from 'beeshell';
 
 class App extends React.Component {
     render() {
@@ -65,7 +65,7 @@ class App extends React.Component {
 
 2. 中部 5s, 但是2s后消失
 ```jsx
-import { Toast } from '@mfe/beeshell';
+import { Toast } from 'beeshell';
 
 class App extends React.Component {
     render() {

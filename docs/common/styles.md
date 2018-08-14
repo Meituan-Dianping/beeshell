@@ -3,7 +3,7 @@
 ## Install
 
 ```
-npm install @mfe/beeshell --registry=http://r.npm.sankuai.com
+npm install beeshell 
 ```
 
 ## Usage
@@ -11,7 +11,7 @@ npm install @mfe/beeshell --registry=http://r.npm.sankuai.com
 ### 引入方式
 
 ```
-import { setVaribles, colors, fontSize, padding } from '@mfe/beeshell/common/styles/varibles';
+import { setVaribles, colors, fontSize, padding } from 'beeshell/common/styles/varibles';
 ```
 
 ### Examples
@@ -46,7 +46,7 @@ setVaribles({
 ### Code
 
 ```jsx
-import { setVaribles, colors, fontSize, padding } from '@mfe/beeshell/common/styles/varibles';
+import { setVaribles, colors, fontSize, padding } from 'beeshell/common/styles/varibles';
 
 class App extends React.Component {
     render() {

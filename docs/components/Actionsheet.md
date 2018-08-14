@@ -7,12 +7,12 @@
 ### 引入方式
 #### 全部引入
 ```
-import { Actionsheet } from '@mfe/beeshell';
+import { Actionsheet } from 'beeshell';
 ```
 
 #### 单独引入
 ```
-import Actionsheet from '@mfe/beeshell/modules/Actionsheet';
+import Actionsheet from 'beeshell/modules/Actionsheet';
 ```
 
 ### Examples
@@ -23,7 +23,7 @@ import Actionsheet from '@mfe/beeshell/modules/Actionsheet';
 ### Code
 
 ```jsx
-import { Actionsheet } from '@mfe/beeshell';
+import { Actionsheet } from 'beeshell';
 
 class App extends React.Component {
     render() {

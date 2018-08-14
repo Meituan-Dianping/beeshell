@@ -4,13 +4,13 @@
 ## Install
 
 ```
-npm --registry=http://r.npm.sankuai.com install @mfe/beeshell
+npm  install beeshell
 ```
 
 ## Usage
 
 ```
-import { Cascader } from '@mfe/beeshell';
+import { Cascader } from 'beeshell';
 ```
 ## 示例
 

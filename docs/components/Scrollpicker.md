@@ -5,7 +5,7 @@
 ## Install
 
 ```
-npm install @mfe/beeshell --registry=http://r.npm.sankuai.com
+npm install beeshell 
 ```
 
 ## Usage
@@ -13,12 +13,12 @@ npm install @mfe/beeshell --registry=http://r.npm.sankuai.com
 ### 引入方式
 #### 全部引入
 ```
-import { Scrollpicker } from '@mfe/beeshell';
+import { Scrollpicker } from 'beeshell';
 ```
 #### 单独引入
 
 ```
-import Scrollpicker from '@mfe/beeshell/components/Scrollpicker';
+import Scrollpicker from 'beeshell/components/Scrollpicker';
 ```
 
 
@@ -36,7 +36,7 @@ import Scrollpicker from '@mfe/beeshell/components/Scrollpicker';
 ### Code
 
 ```jsx
-import { Scrollpicker } from '@mfe/beeshell';
+import { Scrollpicker } from 'beeshell';
 
 class App extends React.Component {
     render() {

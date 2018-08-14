@@ -6,17 +6,17 @@ Alert 弹窗
 ## Install
 
 ```
-npm --registry=http://r.npm.sankuai.com install @mfe/beeshell
+npm  install beeshell
 ```
 
 ## Usage
 
 ```
-import { Alert } from '@mfe/beeshell';
+import { Alert } from 'beeshell';
 ```
 
 ```js
-import { Alert } from '@mfe/beeshell';
+import { Alert } from 'beeshell';
 
 // 示例1: 普通
 Alert.alert(
@@ -108,4 +108,4 @@ Alert.alert(title, message, buttons, options);
 Alert.close(); // 关闭弹窗
 ## License
 
-@mfe/beeshell is released under the MIT license.
+beeshell is released under the MIT license.

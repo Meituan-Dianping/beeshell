@@ -6,7 +6,7 @@
 ## Install
 
 ```
-npm install @mfe/beeshell --registry=http://r.npm.sankuai.com
+npm install beeshell 
 ```
 
 ## Usage
@@ -14,12 +14,12 @@ npm install @mfe/beeshell --registry=http://r.npm.sankuai.com
 ### 引入方式
 #### 全部引入
 ```
-import { Tip } from '@mfe/beeshell';
+import { Tip } from 'beeshell';
 ```
 
 #### 单独引入
 ```
-import Tip from '@mfe/beeshell/components/Modal/extensions/Tip';
+import Tip from 'beeshell/components/Modal/extensions/Tip';
 ```
 
 ### Examples
@@ -28,7 +28,7 @@ import Tip from '@mfe/beeshell/components/Modal/extensions/Tip';
 ### Code
 
 ```jsx
-import { Tip } from '@mfe/beeshell';
+import { Tip } from 'beeshell';
 
 class App extends React.Component {
     render() {

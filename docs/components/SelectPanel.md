@@ -5,13 +5,13 @@ react native 实现排序筛选组件，可配置，目前仅支持单选，使�
 ## Install
 
 ```
-npm install @mfe/beeshell --registry=http://r.npm.sankuai.com
+npm install beeshell 
 ```
 
 ## Usage
 
 ```
-import { SelectPanel } from '@mfe/beeshell';
+import { SelectPanel } from 'beeshell';
 ```
 
 ## 示例

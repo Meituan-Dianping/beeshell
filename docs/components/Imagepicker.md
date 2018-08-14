@@ -6,7 +6,7 @@
 ## Install
 
 ```
-npm install @mfe/beeshell --registry=http://r.npm.sankuai.com
+npm install beeshell 
 ```
 
 ## Usage
@@ -14,12 +14,12 @@ npm install @mfe/beeshell --registry=http://r.npm.sankuai.com
 ### 引入方式
 #### 全部引入
 ```
-import { Imagepicker } from '@mfe/beeshell';
+import { Imagepicker } from 'beeshell';
 ```
 #### 单独引入
 
 ```
-import Imagepicker from '@mfe/beeshell/modules/Imagepicker';
+import Imagepicker from 'beeshell/modules/Imagepicker';
 ```
 
 ### Examples
@@ -36,7 +36,7 @@ import Imagepicker from '@mfe/beeshell/modules/Imagepicker';
 ### Code
 
 ```jsx
-import { Imagepicker } from '@mfe/beeshell';
+import { Imagepicker } from 'beeshell';
 
 class App extends React.Component {
     render() {

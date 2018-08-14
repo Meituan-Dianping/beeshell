@@ -6,13 +6,13 @@
 ## Install
 
 ```
-npm install @mfe/beeshell --registry=http://r.npm.sankuai.com
+npm install beeshell 
 ```
 
 ## Usage
 
 ```
-import { Longlist } from '@mfe/beeshell';
+import { Longlist } from 'beeshell';
 ```
 
 
@@ -23,7 +23,7 @@ import { Longlist } from '@mfe/beeshell';
 ### Code
 
 ```jsx
-import { Longlist } from '@mfe/beeshell';
+import { Longlist } from 'beeshell';
 
 class App extends React.Component {
     componentDidMount() {

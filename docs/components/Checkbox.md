@@ -4,7 +4,7 @@
 ## Install
 
 ```
-npm --registry=http://r.npm.sankuai.com install @mfe/beeshell
+npm  install beeshell
 ```
 
 ## Usage
@@ -12,12 +12,12 @@ npm --registry=http://r.npm.sankuai.com install @mfe/beeshell
 ### 引入方式
 #### 全部引入
 ```
-import { Checkbox } from '@mfe/beeshell';
+import { Checkbox } from 'beeshell';
 ```
 
 #### 单独引入
 ```
-import Checkbox from '@mfe/beeshell/components/Checkbox';
+import Checkbox from 'beeshell/components/Checkbox';
 ```
 
 ### Examples
@@ -28,7 +28,7 @@ import Checkbox from '@mfe/beeshell/components/Checkbox';
 
 ```js
 
-import { Checkbox } from '@mfe/beeshell';
+import { Checkbox } from 'beeshell';
 
 <Checkbox checkedValues={this.state.deliveryTime} onChange={() => {}}>
     <Checkbox.Item key={'a'} label="百度" trueValue="1" />

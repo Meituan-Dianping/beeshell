@@ -5,7 +5,7 @@ Form 表单组件。
 ## Install
 
 ```
-npm --registry=http://r.npm.sankuai.com install @mfe/beeshell
+npm  install beeshell
 ```
 
 ## Usage
@@ -13,12 +13,12 @@ npm --registry=http://r.npm.sankuai.com install @mfe/beeshell
 ### 引入方式
 #### 全部引入
 ```
-import { Form } from '@mfe/beeshell';
+import { Form } from 'beeshell';
 ```
 
 #### 单独引入
 ```
-import Form from '@mfe/beeshell/components/Form';
+import Form from 'beeshell/components/Form';
 ```
 
 ### Examples
@@ -29,7 +29,7 @@ import Form from '@mfe/beeshell/components/Form';
 
 ```jsx
 
-import { Form, Input } from '@mfe/beeshell';
+import { Form, Input } from 'beeshell';
 const FormItem = Form.Item;
 
 class App extends React.Component {

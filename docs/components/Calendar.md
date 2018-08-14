@@ -5,13 +5,13 @@
 ## Install
 
 ```
-npm install @mfe/beeshell --registry=http://r.npm.sankuai.com
+npm install beeshell 
 ```
 
 ## Usage
 
 ```
-import { Calendar } from '@mfe/beeshell';
+import { Calendar } from 'beeshell';
 ```
 
 
@@ -22,7 +22,7 @@ import { Calendar } from '@mfe/beeshell';
 ### Code
 
 ```jsx
-import { Calendar } from '@mfe/beeshell';
+import { Calendar } from 'beeshell';
 
 class App extends React.Component {
   render() {
@@ -73,7 +73,7 @@ class App extends React.Component {
 ### 自定义渲染例子
 
 ``` react
-import { Calendar } from '@mfe/beeshell';
+import { Calendar } from 'beeshell';
 
 class App extends React.Component {
   renderItem = (item, date) => {

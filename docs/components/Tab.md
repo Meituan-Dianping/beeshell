@@ -5,7 +5,7 @@
 ## Install
 
 ```
-npm install @mfe/beeshell --registry=http://r.npm.sankuai.com
+npm install beeshell 
 ```
 
 ## Usage
@@ -13,12 +13,12 @@ npm install @mfe/beeshell --registry=http://r.npm.sankuai.com
 ### 引入方式
 #### 全部引入
 ```
-import { Tab } from '@mfe/beeshell';
+import { Tab } from 'beeshell';
 ```
 
 #### 单独引入
 ```
-import Tab from '@mfe/beeshell/components/Tab';
+import Tab from 'beeshell/components/Tab';
 ```
 
 ### Examples
@@ -28,7 +28,7 @@ import Tab from '@mfe/beeshell/components/Tab';
 ### Code
 
 ```jsx
-import { Tab } from '@mfe/beeshell';
+import { Tab } from 'beeshell';
 
 class App extends React.Component {
     constructor(props) {
