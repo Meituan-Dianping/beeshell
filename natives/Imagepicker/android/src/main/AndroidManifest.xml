@@ -1,9 +1,0 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.beeshell.imagepicker" >
-
-    <application>
-        <activity android:name="com.beeshell.imagepicker.ImageRotateActivity" />
-        <activity android:name="com.beeshell.imagepicker.ImageCropActivity" />
-    </application>
-
-</manifest>
