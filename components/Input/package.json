@@ -1,0 +1,16 @@
+{
+    "name": "@mfe/react-native-input",
+    "version": "0.1.3",
+    "description": "react-native-input 表单类组件",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "git@git.sankuai.com/wm/waimai_mfe_beeshell.git"
+    },
+    "author": "mengqian02@meituan.com",
+    "license": "MIT",
+    "dependencies": {
+    },
+    "devDependencies": {
+    }
+}

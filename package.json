@@ -1,0 +1,40 @@
+{
+  "name": "beeshell",
+  "version": "1.0.1",
+  "description": "美团外卖 M 端 React Native 组件库",
+  "main": "index",
+  "scripts": {
+    "test": "jest --coverage -u"
+  },
+  "author": "Meituan Waimai FEM Team",
+  "license": "MIT",
+  "files": [
+    "common",
+    "components",
+    "modules",
+    "natives",
+    "index.js"
+  ],
+  "dependencies": {
+    "async-validator": "^1.8.1",
+    "awlibs": "1.0.17",
+    "moment": "^2.21.0"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "create-react-class": "15.6.3",
+    "jest": "19.0.2",
+    "react": "16.2.0",
+    "react-native": "0.53.3",
+    "react-test-renderer": "^16.3.2"
+  },
+  "jest": {
+    "preset": "react-native",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(react-native|react-native-.+|react-navigation|@mfe)/)"
+    ]
+  }
+}

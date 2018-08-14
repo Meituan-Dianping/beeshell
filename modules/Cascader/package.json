@@ -1,0 +1,16 @@
+{
+  "name": "@mfe/react-native-cascader",
+  "version": "0.2.3",
+  "description": "react-native-cascader 联动多层菜单",
+  "main": "index.js",
+  "repository": {
+      "type": "git",
+      "url": "git@git.sankuai.com/wm/waimai_mfe_beeshell.git"
+  },
+  "author": "mengqian02@meituan.com",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
