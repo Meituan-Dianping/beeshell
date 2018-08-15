@@ -1,18 +1,29 @@
-# Beeshell
+<p align="center">
+    <h3 align="center">Beeshell</h3>
 
-Beeshell 是一个 React Native 应用的基础组件库，基于 0.53.3 版本，提供一整套开箱即用的高质量组件，包含 JS 组件和复合组件（包含 Native 代码），涉及 FE、iOS、Android 三端技术，兼顾通用性和定制化，支持自定义主题，用于开发和服务企业级移动应用。
+    <p align="center">
+        一个 React Native 应用的基础组件库，基于 0.53.3 版本，提供一整套开箱即用的高质量组件，包含 JS 组件和复合组件（包含 Native 代码），涉及 FE、iOS、Android 三端技术，兼顾通用性和定制化，支持自定义主题，用于开发和服务企业级移动应用。
+    </p>
+</p>
 
-- [Github 地址](https://github.com/meituan/beeshell)
-- [使用文档](./docs/index.md)
-- [详细设计思路和特性](./docs/popularize.md)
+## Table of contents
+- [Quick start](#quick-start)
+- [Status](#status)
+- [Feature](#feature)
+- [Comparison](#comparison)
+- [What's included](#whats-included)
+- [Github](https://github.com/meituan/beeshell)
+- [Docs](./docs/index.md)
+- [Popularize](./docs/popularize.md)
 
-# npm
+## Quick start
 
-[npm_beeshell](https://www.npmjs.com/package/beeshell)
+- Install with [npm](https://www.npmjs.com/): `npm install beeshell`
 
-import { Modal, Toast, Datepicker } from 'beeshell'
+## Status
+[![npm version](https://img.shields.io/npm/v/beeshell.svg)](https://www.npmjs.com/package/beeshell)
 
-# 特性
+## Feature
 
 - UI 样式的一致性和定制化。
 - 通用性。主要使用 JS 来实现，保证跨平台通用性。
@@ -21,7 +32,7 @@ import { Modal, Toast, Datepicker } from 'beeshell'
 - 功能丰富。不仅仅提供组件，还提供了基础工具、动画以及 UI 规范。
 - 完善的文档和使用示例。
 
-# 对比
+## Comparison
 
 在开源之前，我们对业界已经开源的组件库进行了调研，这里对比下 Beeshell 与其他组件库的优势与劣势，为大家选择组件库提供参考意见。业界开源的组件库比较多，这里选取 Github Star 数 5000 以上的组件库，从组件数量、通用性、定制化、是否包含原生功能、文档完善程度五个方面来具体做对比分析：
 
@@ -35,16 +46,16 @@ import { Modal, Toast, Datepicker } from 'beeshell'
 通过对比可以看出，Beeshell 只在组件数量上有劣势，其他方面都一致或者优于其他产品。基于 Beeshell 有良好的系统架构，组件数量的丰富只时间问题，而且我们也已经有了详细的规划来完善数量上的不足。
 
 
-# 功能
+## What's included
 
-## 组件列表
+### 组件
 
-### 基础类
+#### 基础类
 * [Button 按钮](./docs/components/Button.md)
 * [Tab 组件](./docs/components/Tab.md)
 * [Scrollpicker 滚动选择](./docs/components/Scrollpicker.md)
 
-### 弹窗类
+#### 弹窗类
 * [Modal 基础弹窗](./docs/components/Modal.md)
 * [ConfirmModal 包含标题，取消、确认按钮](./docs/components/ConfirmModal.md)
 * [SlideModal 下拉/上拉](./docs/components/SlideModal.md)
@@ -52,31 +63,27 @@ import { Modal, Toast, Datepicker } from 'beeshell'
 * [ActionSheet 选择面板](./docs/components/Actionsheet.md)
 * [Tip 提示信息弹窗](./docs/components/Tip.md)
 
-
-### 表单输入类
+#### 表单输入类
 * [Form 表单](./docs/components/Form.md)
 * [Input 输入框](./docs/components/Input.md)
 * [Checkbox 多选](./docs/components/Checkbox.md)
 * [Radio 单选](./docs/components/Radio.md)
 
-### 日期类
+#### 日期类
 * [Datepicker 日期选择](./docs/components/Datepicker.md)
 * [DatepickerUp 日期数据源扩展](./docs/components/DatepickerUp.md)
 * [Calender 日历](./docs/components/Calendar.md)
 
-### 复合组件（包含 Native 部分）
+#### 复合组件（包含 Native 部分）
 * [Imagepicker 日历](./docs/components/Imagepicker.md)
 
-### 其他
+#### 其他
 * [Cascader 级联菜单](./docs/components/Cascader.md)
 * [Longlist 长列表](./docs/components/Longlist.md)
 * [Filterpanel 标签筛选组件](./docs/components/FilterPanel.md)
 * [SelectPanel 下拉选择组件](./docs/components/SelectPanel.md)
 
-## 基础工具
-* [样式规范](./common/styles.md)
-* [动画](./common/animations.md)
-* [JS Utils](./common/utils.md)
-
-# 其他
-
+### 基础工具
+* [样式规范](./docs/common/styles.md)
+* [动画](./docs/common/animations.md)
+* [JS Utils](./docs/common/utils.md)
