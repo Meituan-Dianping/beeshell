@@ -44,7 +44,7 @@ import { TableView } from 'beeshell';
       deliveryFee: 12.01
     },
     {
-      title: '杨明宇黄焖鸡',
+      title: '刀削面',
       yesterDayExposure: 3443,
       yesterDayOrderNum: 122,
       deliveryFee: 11.00
@@ -86,7 +86,7 @@ this.state = {
         tasteScore: 77,
       },
       {
-        title: '杨明宇黄焖鸡',
+        title: '刀削面',
         yesterDayExposure: 3443,
         yesterDayOrderNum: 122,
         deliveryFee: 11.00,
@@ -133,7 +133,7 @@ this.state = {
         rate: 'A',
       },
       {
-        title: '杨明宇黄焖鸡',
+        title: '小面',
         opentime: '11:00-19:00',
         deliveryFee: 11.20,
         rate: 'B+',

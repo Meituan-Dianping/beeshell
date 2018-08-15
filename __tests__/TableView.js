@@ -50,7 +50,7 @@ describe('renders correctly', () => {
             "tableData": [
                 {
                     "title": {
-                        "label": "比格比萨（肖家河店）",
+                        "label": "比萨（通州店）",
                         "highlight": null,
                         "image": null
                     },
@@ -63,7 +63,7 @@ describe('renders correctly', () => {
                 },
                 {
                     "title": {
-                        "label": "胡记黄焖鸡米饭",
+                        "label": "焖鸡米饭",
                         "highlight": null,
                         "image": null
                     },
