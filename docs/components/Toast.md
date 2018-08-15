@@ -75,5 +75,6 @@ Toast.show('中部 5s', 5000, 'center');
 Toast.hide();
 ```
 
+
 Toast 是单例，是对 Tip 组件的封装，Toast 每调用一次 show 就会实例化一个 Tip 类型对象，Toast.hide 方法只能隐藏最后一个 Tip 对象，所以 Toast.show 显示的内容都会延时自动隐藏。
 
