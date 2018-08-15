@@ -1,17 +1,24 @@
-# Tip
+# Toast
 
-继承自 [Modal](./Modal.md) 组件，属于 Modal 系列。
+是对 [Tip](./Tip.md) 组件封装，使用 API 而不是标签的方式调用。
 
 ## Install
 
 ```
-npm install beeshell  
+npm install beeshell
 ```
 
 ## Usage
 
+### 引入方式
+#### 全部引入
 ```
-import { Tip } from 'beeshell';
+import { Toast } from 'beeshell';
+```
+
+#### 单独引入
+```
+import Toast from 'beeshell/modules/Toast';
 ```
 
 
@@ -20,67 +27,53 @@ import { Tip } from 'beeshell';
 ![image](../images/Toast/1.gif)
 
 
+### Code
+
+```jsx
+import { Toast } from 'beeshell';
+
+class App extends React.Component {
+    render() {
+        <View>
+            <TouchableOpacity
+                onPress={() => {
+                    Toast.show('在顶部，3s 后自动消失，我比较长会自动换行自动换行自动换行自动换行', 3000, 'top');
+                }}>
+                <Text style={styles.btnText}>点击</Text>
+            </TouchableOpacity>
+        </View>
+    }
+}
+```
+
 
 ### Props
 
-| Name     | Type   | Required | Default             | Description                                                 |
+| Name     | Type   | Required | Default| Description|
 | -------- | ------ | -------- | ------------------- | -------------------------------------------- |
-| msg      | String | false    | 'hello world'       | 提示文案                                              |
-| duration | Number | false    | 1000                | 弹出后在 duration 指定的毫秒数后自动关闭 |
-| posotion | String | false    | center 可选: center/top/bottom | 显示位置                                         |
+| msg      | String | false    | 'hello world'       | 提示文案|
+| duration | Number | false    | 2000                | 弹出后在 duration 指定的毫秒数后自动关闭 |
+| posotion | String | false    | 'center' |显示位置，值为：`'center'` `'top'` `'bottom'`|
 
 
 ### Methods
 
-#### .open('文案内容', 持续时间, 位置)
+#### .show(msg, duration, positon)
 
-打开弹窗。
+显示提示信息。
 
 ```
-Toast.show('操作成功')
+Toast.show('操作成功');
 Toast.show('顶部 3s 自动消失 我比较长会自动换行自动换行自动换行自动换行', 3000, 'top');
 Toast.show('中部 5s', 5000, 'center');
 ```
 
-
-### Code
-
-1. 顶部显示 3 秒钟
-```jsx
-import { Toast } from 'beeshell';
-
-class App extends React.Component {
-    render() {
-        <View>
-            <TouchableOpacity
-                onPress={() => {
-                    Toast.show('顶部 3s 自动消失 我比较长会自动换行自动换行自动换行自动换行', 3000, 'top');
-                }}>
-                <Text style={styles.btnText}>顶部3s</Text>
-            </TouchableOpacity>
-        </View>
-    }
-}
-```
-
-2. 中部 5s, 但是2s后消失
-```jsx
-import { Toast } from 'beeshell';
-
-class App extends React.Component {
-    render() {
-        <View>
-            <TouchableOpacity
-                onPress={() => {
-                    Toast.show('中部 5s, 2s后消失', 5000, 'center');
-                    setTimeout(() => {
-                        Toast.hide();
-                    }, 2000);
-                }}>
-                <Text style={styles.btnText}>中部 5s, 但是2s后消失</Text>
-            </TouchableOpacity>
-        </View>
-    }
-}
+#### .hide()
+隐藏提示信息。
 
 ```
+Toast.hide();
+```
+
+Toast 是单例，是对 Tip 组件的封装，Toast 每调用一次 show 就会实例化一个 Tip 类型对象，Toast.hide 方法只能隐藏最后一个 Tip 对象，所以 Toast.show 显示的内容都会延时自动隐藏。
+
