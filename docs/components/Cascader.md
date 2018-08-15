@@ -47,7 +47,7 @@ import { Cascader } from 'beeshell';
 
 
 ### 1. React.Element
-Cascader 是一个 React.Element 对象, 和 [@mfe/react-native-popup](http://npm.sankuai.com/package/@mfe/react-native-popup) 一起服用效果更佳
+Cascader 是一个 React.Element 对象
 
 ### 2. Cascader 两种数据源
 

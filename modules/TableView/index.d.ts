@@ -1,4 +1,4 @@
-declare module '@mfe/react-native-tableview' {
+declare module 'beeshell/tableview'
 
     import * as React from 'react';
     import { StyleProp, ViewStyle } from 'react-native';

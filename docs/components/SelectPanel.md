@@ -20,7 +20,6 @@ import { SelectPanel } from 'beeshell';
 ## 用例
 
 ```
-import SelectPanel from '@mfe/react-native-selectpanel';
 
 <SelectPanel
     selectPanelInfo={this.state.selectPanelInfo}

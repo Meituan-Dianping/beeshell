@@ -23,7 +23,6 @@ import { FilterPanel } from 'beeshell';
 ## 用例
 
 ```
-import FilterPanel from '@mfe/react-native-filterpanel';
 
  <FilterPanel
     filterPanelInfo={this.state.filterPanelInfo}
