@@ -1,9 +1,3 @@
-<style>
-    img {
-        max-width: 600px !important;
-    }
-</style>
-
 # Beeshell —— 开源的 React Native 组件库
 
 ## 介绍
