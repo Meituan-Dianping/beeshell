@@ -74,7 +74,7 @@
 * [Calender 日历](./docs/components/Calendar.md)
 
 #### 复合组件（包含 Native 部分）
-* [Imagepicker 日历](./docs/components/Imagepicker.md)
+* [Imagepicker 图片选择](./docs/components/Imagepicker.md)
 
 #### 其他
 * [Cascader 级联菜单](./docs/components/Cascader.md)

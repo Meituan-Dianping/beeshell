@@ -53,7 +53,7 @@ Beeshell 是一个 React Native 应用的基础组件库，基于 0.53.3 版本�
 * [Calender 日历](./components/Calendar.md)
 
 ### 复合组件（包含 Native 部分）
-* [Imagepicker 日历](./components/Imagepicker.md)
+* [Imagepicker 图片选择](./components/Imagepicker.md)
 
 ### 其他
 * [Cascader 级联菜单](./components/Cascader.md)
