@@ -6,7 +6,7 @@
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/meituan/beeshell/blob/master/LICENSE)
 [![npm version](https://img.shields.io/npm/v/beeshell.svg)](https://www.npmjs.com/package/beeshell)
 [![NPM downloads](http://img.shields.io/npm/dm/beeshell.svg?style=flat-square)](http://www.npmtrends.com/beeshell)
-[![Percentage of issues still open](http://isitmaintained.com/badge/open/beeshell/beeshell.svg)](http://isitmaintained.com/project/beeshell/ant-design "Percentage of issues still open")
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/beeshell/beeshell.svg)](http://isitmaintained.com/project/beeshell/beeshell "Percentage of issues still open")
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/meituan/beeshell/pulls)
 </div>
 
