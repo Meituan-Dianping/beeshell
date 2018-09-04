@@ -1,9 +1,15 @@
-<p align="center">
-    <h3 align="center">Beeshell</h3>
-    <p align="center">
-    一个 React Native 应用的基础组件库，基于 0.53.3 版本，提供一整套开箱即用的高质量组件，包含 JS 组件和复合组件（包含 Native 代码），涉及 FE、iOS、Android 三端技术，兼顾通用性和定制化，支持自定义主题，用于开发和服务企业级移动应用。
-    </p>
-</p>
+<h3 align="center"><a href="https://github.com/meituan/beeshell">Beeshell</a></h3>
+
+<div align="center">
+一个 React Native 应用的基础组件库，基于 0.53.3 版本，提供一整套开箱即用的高质量组件，包含 JS 组件和复合组件（包含 Native 代码），涉及 FE、iOS、Android 三端技术，兼顾通用性和定制化，支持自定义主题，用于开发和服务企业级移动应用。
+    
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/meituan/beeshell/blob/master/LICENSE)
+[![npm version](https://img.shields.io/npm/v/beeshell.svg)](https://www.npmjs.com/package/beeshell)
+[![NPM downloads](http://img.shields.io/npm/dm/beeshell.svg?style=flat-square)](http://www.npmtrends.com/beeshell)
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/beeshell/beeshell.svg)](http://isitmaintained.com/project/beeshell/ant-design "Percentage of issues still open")
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/meituan/beeshell/pulls)
+</div>
+
 
 ## Table of contents
 - [Quick start](#quick-start)
@@ -17,10 +23,11 @@
 
 ## Quick start
 
-- Install with [npm](https://www.npmjs.com/): `npm install beeshell`
+Install with [npm](https://www.npmjs.com/)
 
-## Status
-[![npm version](https://img.shields.io/npm/v/beeshell.svg)](https://www.npmjs.com/package/beeshell)
+```bash
+npm install beeshell
+```
 
 ## Feature
 
