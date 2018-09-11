@@ -30,7 +30,7 @@ class App extends React.Component {
         this.refreshState(1);
     }
 
-    refreshState(pageNo) {
+    refreshState = (pageNo) => {
         const params = {
             pageNo: pageNo || 1,
             pagesize: this.state.pagesize,
@@ -62,8 +62,8 @@ class App extends React.Component {
                   return (<Text>{item.label}</Text>);
               }}
               hasRefreshControl={true}
-              onEndReached={this.refreshState.bind(this)}
-              onRefresh={this.refreshState.bind(this)}
+              onEndReached={this.refreshState}
+              onRefresh={this.refreshState}
           />
       );
     }
