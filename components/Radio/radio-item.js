@@ -41,7 +41,7 @@ class RadioItem extends Component {
         const {checked, trueValue, label} = this.props;
         // checked 模式下触发 emitOneChange
         if (checked) {
-            const _label = trueValue || label;          
+            const _label = trueValue == null ? label : trueValue;          
             this.context.emitOneChange && this.context.emitOneChange(_label, checked);                      
         }
     }

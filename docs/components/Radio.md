@@ -30,7 +30,7 @@ import Radio from 'beeshell/components/Radio';
 
 import { Radio } from 'beeshell';
 
-<Radio checkedValues={this.state.deliveryTime} onChange={() => {}}>
+<Radio checkedValue={this.state.deliveryTime} onChange={() => {}}>
     <Radio.Item key={'a'} label="百度" trueValue="1" />
     <Radio.Item key={'b'} label="阿里" trueValue="2" />
     <Radio.Item key={'c'} label="腾讯" trueValue="3" />
@@ -43,7 +43,7 @@ import { Radio } from 'beeshell';
 
 | Name | Type | Required | Default | Description |
 | ---- | ---- | ---- | ---- | ---- |
-| checkedValues | Array | false | null | 默认选中的值，其中的值就是 Radio.Item 的 label 或者 trueValue（优先级高），再次被设置时会相应改变, 并联动全选状态的改变 |
+| checkedValue | Any | false | null | 默认选中的值，其中的值就是 Radio.Item 的 label 或者 trueValue（优先级高），再次被设置时会相应改变, 并联动全选状态的改变 |
 | showAllChecked | Boolean | false | false | 是否展示全选按钮 |
 | onChange | Function | false | null | 选项变化回调 |
 | iconPosition | String | false | 'left' | 选项扭 icon 位置 |
