@@ -59,5 +59,5 @@ class App extends React.Component {
 | ---- | ---- | ---- | ---- | ---- |
 | type | String | true | null | 指明按钮的预定义样式，`default` `primary` `success` `info` `warning` `danger` `disabled`  |
 | size | String | false | 'md' | 尺寸，`lg` `md` `sm` |
-| responsive | Boolean | false | false | 是否拉伸至父组件 100% 宽度 |
+| responsive | Boolean | false | true | 是否拉伸至父组件 100% 宽度 |
 | onPress | Function | false | null | 点击回调 |
