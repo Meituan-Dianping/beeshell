@@ -16,8 +16,8 @@
     "outDir": "./distExamples"
   },
   "include": [
-    "examples/**/*",
-    "src/**/*"
+    "./examples/**/*",
+    "./src/**/*"
   ]
 }
   

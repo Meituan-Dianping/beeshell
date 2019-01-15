@@ -8,12 +8,17 @@
     "start": "mrn start --appName meituan",
     "test": "jest --coverage",
     "lint": "tslint -p ./ -c ./tslint.json",
-    "tsc": "rm -rf dist; cd src; tsc --outDir ../dist"
+    "tsc:examples": "rm -rf distExamples && tsc",
+    "tsc:src": "rm -rf dist && tsc -p ./src"
   },
-  "author": "",
   "license": "ISC",
   "dependencies": {
     "@ss/mtd-react-native": "0.0.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm run tsc:examples"
+    }
   },
   "devDependencies": {
     "@commitlint/cli": "^7.2.1",
