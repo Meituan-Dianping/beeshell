@@ -102,7 +102,7 @@ let RootStack = createStackNavigator({
   Home: {
     screen: Home,
     navigationOptions: ({ navigation }) => ({
-      header: MakeHeader(navigation, 'MTD RN')
+      header: MakeHeader(navigation, 'roo-mobile-rn')
     })
   },
   // 其余的展示页
