@@ -12,9 +12,12 @@
     "moduleResolution": "node",
     "strict": false,
     "skipLibCheck": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "outDir": "./distExamples"
   },
   "include": [
-    "examples/App.tsx"
+    "examples/**/*",
+    "src/**/*"
   ]
 }
+  
