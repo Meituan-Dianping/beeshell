@@ -1,5 +1,5 @@
 {
-  "name": "roo-mobile-rn",
+  "name": "@roo/roo-mobile-rn",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
@@ -9,15 +9,19 @@
     "test": "jest --coverage",
     "lint": "tslint -p ./ -c ./tslint.json",
     "tsc:examples": "rm -rf distExamples && tsc",
-    "tsc:src": "rm -rf dist && tsc -p ./src"
+    "tsc:src": "rm -rf dist && tsc -p ./src",
+    "prepublish": "npm run tsc:src"
   },
+  "files": [
+    "dist/**/*.{ts,js}"
+  ],
   "license": "ISC",
   "dependencies": {
     "@ss/mtd-react-native": "0.0.5"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && npm run tsc:examples"
+      "pre-commit": "npm run lint && npm run tsc:src"
     }
   },
   "devDependencies": {
