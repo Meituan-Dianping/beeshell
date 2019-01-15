@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "checkJs": false,
+    "declaration": true,
+    "target": "esnext",
+    "module": "esnext",
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "strict": false,
+    "skipLibCheck": true,
+    "baseUrl": "."
+  },
+  "include": [
+    "examples/App.tsx"
+  ]
+}

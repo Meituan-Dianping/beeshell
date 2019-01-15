@@ -1,0 +1,6 @@
+{
+    "extends": "tslint-config-standard",
+    "rules": {
+        "trailing-comma": [true, {"multiline": "ignore", "singleline": "never"}]
+    }
+}
