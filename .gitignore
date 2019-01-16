@@ -10,6 +10,8 @@ yarn-error.log*
 
 .idea
 .vscode
+*.sublime-project
+*.sublime-workspace
 
 package-lock.json
 node_modules
