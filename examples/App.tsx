@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { ScrollView, StyleSheet, TouchableOpacity, View, Text } from '@mrn/react-native'
+import { StyleSheet, TouchableOpacity, View, Text, SectionList } from '@mrn/react-native'
+import styles from './common/styles'
+import variables from './customTheme'
 
 import {
   createStackNavigator,
@@ -10,85 +12,140 @@ import {
 
 import { withSafeArea } from '@mrn/react-native-safe-area-view'
 import { NavigationBar } from '../src'
-import { PagesList } from './routers'
+import { pageList } from './routers'
 
 interface MyProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>
 }
 interface MyState {
-  PagesList: (any)[]
+  pageList: (any)[]
 }
-
-const styles = StyleSheet.create({
-  textCenter: {
-    width: '100%',
-    textAlign: 'center'
-  },
-  header: {
-    marginTop: 20,
-    padding: 20
-  },
-  panel: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    flexWrap: 'wrap',
-    paddingTop: 10,
-    paddingRight: 20,
-    paddingBottom: 10,
-    paddingLeft: 20,
-    backgroundColor: '#fff',
-    marginTop: 10,
-    marginLeft: 15,
-    marginRight: 15,
-    borderRadius: 4
-  },
-  nickname: {
-    color: '#777777'
-  },
-  handleIcon: {
-    color: '#ababab'
-  },
-  footer: {
-    marginTop: 20,
-    padding: 20,
-    marginBottom: 50
-  }
-})
 
 class Home extends Component<MyProps, MyState> {
   constructor (p) {
     super(p)
-    this.state = { PagesList }
+    this.state = {
+      sections: [
+        {
+          label: '通用类',
+          key: 'general',
+        },
+        {
+          label: '数据录入',
+          key: 'dataEntry',
+        },
+
+        {
+          label: '数据展示',
+          key: 'dataDisplay',
+        },
+
+        {
+          label: '操作反馈',
+          key: 'feedback'
+        },
+
+        {
+          label: '其他',
+          key: 'other'
+        }
+      ]
+    }
+
+    this.state.sections.forEach((item) => {
+      item.data = item.data || []
+      pageList.forEach((pageItem) => {
+        pageItem.group = pageItem.group || 'other'
+        if (pageItem.group === item.key) {
+          item.data.push(pageItem)
+        }
+      })
+    })
   }
 
   gotoPage (item) {
     this.props.navigation.navigate(item.key)
   }
 
-  render () {
+  renderSectionListItem = (rowData) => {
+    const { item, index, section } = rowData
+    // console.log(rowData)
+    const isFirst = index === 0
+    const isLast = index === section.data.length - 1
     return (
-      <ScrollView>
-        <View style={styles.header}>
-          <Text style={styles.textCenter}>
-            roo-mobile-rn components
+      <TouchableOpacity
+        onPress={() => {
+          this.gotoPage(item)
+        }}>
+        <View
+          style={[
+            {
+              paddingHorizontal: variables.mtdHSpacingXl,
+              paddingVertical: variables.mtdVSpacingXl,
+              backgroundColor: '#fff',
+              borderTopWidth: StyleSheet.hairlineWidth,
+              borderTopColor: 'transparent',
+              borderBottomWidth: StyleSheet.hairlineWidth,
+              borderBottomColor: 'transparent',
+
+            },
+            {
+              borderTopColor: isFirst ? variables.mtdGrayLightest : 'transparent',
+              marginTop: isFirst ? StyleSheet.hairlineWidth : 0,
+              borderBottomColor: isLast ? variables.mtdGrayLightest : 'transparent'
+            }
+          ]}>
+          <Text
+            style={{
+              color: variables.mtdGrayBase,
+              fontSize: 16
+            }}>
+              {item.label} - {item.key}
           </Text>
         </View>
         {
-          this.state.PagesList.map(item => (
-            <TouchableOpacity style={styles.panel} onPress={() => this.gotoPage(item)} key={item.key}>
-              <Text>
-                {item.name}
-                <Text style={styles.nickname}> {item.key}</Text>
-              </Text>
-              <Text style={styles.handleIcon}>></Text>
-            </TouchableOpacity>
-          ))
-        }
-        <View style={styles.footer}>
-          <Text style={styles.textCenter}></Text>
+            (!isLast) ?
+            <View
+              style={{
+                marginLeft: variables.mtdHSpacingXl,
+                height: StyleSheet.hairlineWidth,
+                backgroundColor: variables.mtdGrayLightest
+              }}>
+            </View> : null
+          }
+      </TouchableOpacity>
+    )
+  }
+
+  renderSectionHeader = (sectionData) => {
+    const { section } = sectionData
+
+    return (
+        <Text
+          style={[
+            styles.header,
+            {
+              color: variables.mtdBrandPrimaryDark,
+            }
+          ]}>
+          {section.label}
+        </Text>
+    )
+  }
+
+  render () {
+    return (
+      <View
+        style={styles.container}>
+        <SectionList
+          sections={this.state.sections}
+          renderSectionHeader={this.renderSectionHeader}
+          renderItem={this.renderSectionListItem}>
+        </SectionList>
+        <View style={{}}>
+          <Text style={{}}></Text>
         </View>
-      </ScrollView>
+      </View>
     )
   }
 }
@@ -106,10 +163,10 @@ let RootStack = createStackNavigator({
     })
   },
   // 其余的展示页
-  ...PagesList.reduce((res, item) => {
+  ...pageList.reduce((res, item) => {
     res[item.key] = {
       navigationOptions: ({ navigation }) => ({
-        header: MakeHeader(navigation, item.name)
+        header: MakeHeader(navigation, item.key)
       }),
       ...item
     }

@@ -1,36 +1,25 @@
 import React, { Component } from 'react'
 import { ScrollView, View, Text, StyleSheet, ActivityIndicator } from 'react-native'
-
+import variables from '../../src/common/styles/variables'
 import { Button, Icon } from '../../src'
+import styles from '../common/styles'
 
-const Styles = StyleSheet.create({
-  title: {
-    padding: 15,
-    fontSize: 16
+const componentStyles = StyleSheet.create({
+  spacingH: {
+    marginRight: 10,
   },
-  spaceGap: {
-    height: 20,
-    marginLeft: -20,
-    marginRight: -20,
-    backgroundColor: '#f2f3f4'
+
+  spacingV: {
+    marginBottom: 12
   },
-  panel: {
+
+  row: {
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 10,
-    paddingHorizontal: 15,
-    backgroundColor: '#fff',
-    borderBottomColor: '#E5E8E9',
-    borderBottomWidth: StyleSheet.hairlineWidth
+    flexWrap: 'wrap'
   }
-} as any)
+})
 
-interface State {
-  count: number
-}
-
-export default class ButtonScreen extends Component<{}, State> {
+export default class ButtonScreen extends Component<{}, {}> {
   constructor (p) {
     super(p)
     this.state = {
@@ -40,152 +29,81 @@ export default class ButtonScreen extends Component<{}, State> {
 
   render () {
     return (
-      <ScrollView style={Styles.warp}>
-
-        <Text style={Styles.headerTitle}>按钮 Button</Text>
-        <Text style={Styles.explainText}>用于触发一个行动并形成决策的组件。</Text>
-
-        <View style={Styles.section}>
-          <Text style={Styles.sectionTitle}>基础用法</Text>
-          <View style={Styles.panel}>
-            <Text>默认</Text>
-            <Button type='default' size='md'>默认 default</Button>
+      <ScrollView
+        style={styles.container}>
+        <Text style={styles.header}>预定义样式</Text>
+        <View style={styles.panel}>
+          <View style={componentStyles.row}>
+            <Button style={[componentStyles.spacingH, componentStyles.spacingV]} type='default' size='sm'>默认 default</Button>
+            <Button style={[componentStyles.spacingH, componentStyles.spacingV]} type='primary' size='sm' reverse>首选项 primary</Button>
+            <Button style={[componentStyles.spacingH, componentStyles.spacingV]} type='success' size='sm'>成功 success</Button>
+            <Button style={[componentStyles.spacingH, componentStyles.spacingV]} type='info' size='sm'>一般信息 info</Button>
+            <Button style={[componentStyles.spacingH, componentStyles.spacingV]} type='warning' size='sm'>警告 warning</Button>
+            <Button style={[componentStyles.spacingH, componentStyles.spacingV]} type='danger' size='sm'>危险 danger</Button>
+            <Button type='text' size='sm'>纯文本 text</Button>
           </View>
-
-          <View style={Styles.panel}>
-            <Text>首选项</Text>
-            <Button type='primary' size='md'>首选项 primary</Button>
-          </View>
-
-          <View style={Styles.panel}>
-            <Text>危险</Text>
-            <Button type='danger' size='md'>危险 danger</Button>
-          </View>
-
-          <View style={Styles.panel}>
-            <Text>一般信息</Text>
-            <Button type='info' size='md'>一般信息 info</Button>
-          </View>
-
-          <View style={Styles.panel}>
-            <Text>警告</Text>
-            <Button type='warning' size='md'>警告 warning</Button>
-          </View>
-
-          <View style={Styles.panel}>
-            <Text>成功</Text>
-            <Button type='success' size='md'>成功 success</Button>
-          </View>
-
-          <View style={Styles.spaceGap}></View>
-
-          <View style={Styles.panel}>
-            <Text>禁用</Text>
-            <Button type='default' size='md' disabled>default disabled</Button>
-          </View>
-
-          <View style={Styles.panel}>
-            <Text>禁用</Text>
-            <Button type='primary' size='md' disabled>primary disabled</Button>
-          </View>
-
-          <View style={Styles.panel}>
-            <Text>禁用</Text>
-            <Button type='danger' size='md' disabled>danger disabled</Button>
-          </View>
-
-          <View style={Styles.spaceGap}></View>
         </View>
 
-        <View style={[Styles.section, { marginBottom: 200 }]}>
-          <Text style={Styles.sectionTitle}>衍生用法</Text>
-
-          <View style={Styles.panel}>
-            <Text>圆角示范</Text>
-            <Button style={{ borderRadius: 50 }} type='primary' size='md'>primary</Button>
+        <Text style={styles.header}>尺寸</Text>
+        <View style={styles.panel}>
+          <View style={componentStyles.row}>
+            <Button style={[componentStyles.spacingH, componentStyles.spacingV]} type='primary' size='lg' reverse>大按钮</Button>
+            <Button style={[componentStyles.spacingH, componentStyles.spacingV]} type='default' size='lg'>大按钮</Button>
+          </View>
+          <View style={componentStyles.row}>
+            <Button style={[componentStyles.spacingH, componentStyles.spacingV]} type='primary' size='md' reverse>默认尺寸</Button>
+            <Button style={[componentStyles.spacingV]} type='default' size='md'>默认尺寸</Button>
           </View>
 
-          <View style={Styles.panel}>
-            <Text>圆角示范</Text>
-            <Button style={{ borderRadius: 50 }} type='primary' size='md' disabled>primary disabled</Button>
+          <View style={componentStyles.row}>
+            <Button style={[componentStyles.spacingH, componentStyles.spacingV]} type='primary' size='sm' reverse>小按钮</Button>
+            <Button style={[componentStyles.spacingH, componentStyles.spacingV]} type='default' size='sm'>小按钮</Button>
           </View>
 
-          <View style={Styles.spaceGap}></View>
+          <Button type='primary' size='md' reverse>默认尺寸拉伸</Button>
+        </View>
 
-          <View style={Styles.panel}>
-            <Text>纯文字示范</Text>
-            <Button type='text' size='md'>primary</Button>
+        <Text style={styles.header}>禁用/激活状态</Text>
+
+        <View style={styles.panel}>
+          <View style={componentStyles.row}>
+            <Button style={[componentStyles.spacingH, componentStyles.spacingV]} type='default' size='sm' disabled>默认 default</Button>
+            <Button style={[componentStyles.spacingH, componentStyles.spacingV]} type='primary' size='sm' reverse disabled>首选项 primary</Button>
+            <Button style={[componentStyles.spacingH]} type='success' size='sm' disabled>成功 success</Button>
+            <Button style={[componentStyles.spacingH]} type='text' size='sm' disabled>纯文本 text</Button>
           </View>
+        </View>
 
-          <View style={Styles.panel}>
-            <Text>纯文字示范</Text>
-            <Button type='text' size='md' disabled>primary disabled</Button>
-          </View>
-
-          <View style={Styles.spaceGap}></View>
-
-          <View style={Styles.panel}>
-            <Text>图标示范</Text>
-            <Button style={{ borderRadius: 50, backgroundColor: 'transparent' }} type='primary' size='md'>
-              <ActivityIndicator />
+        <Text style={styles.header}>自定义</Text>
+        <View style={styles.panel}>
+          <View style={[componentStyles.row, { alignItems: 'center' }]}>
+            <Button
+              style={[componentStyles.spacingH, { borderRadius: 50 }]}
+              type='primary'
+              size='md'
+              reverse>
+              圆角
             </Button>
-          </View>
-
-          <View style={Styles.panel}>
-            <Text>图标示范</Text>
-            <Button style={{ borderRadius: 50, backgroundColor: 'transparent' }} type='primary' size='md'>
-              <Icon type='search' />
-            </Button>
-          </View>
-
-          <View style={Styles.panel}>
-            <Text>图标示范</Text>
-            <Button style={{ borderRadius: 50, backgroundColor: 'transparent' }} type='primary' size='md' disabled>
-              <Icon type='search' />
-            </Button>
-          </View>
-
-          <View style={Styles.spaceGap}></View>
-
-          <View style={Styles.panel}>
-            <Text>图标 + 文字</Text>
-            <Button style={{ borderRadius: 50 }} type='primary' size='md'>
+            <Button
+              style={[componentStyles.spacingH]}
+              type='info'
+              size='sm'>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <ActivityIndicator style={{ width: 14, height: 14 }} />
-                <Text style={{ color: '#fff', marginLeft: 4 }}>加载中</Text>
+                <Icon type='search' tintColor='#fff'></Icon>
+                <Text style={{ color: '#fff', marginLeft: 5 }}>搜索</Text>
+              </View>
+            </Button>
+
+            <Button
+              style={[{ borderColor: variables.mtdBrandPrimaryDark }]}
+              type='default'
+              size='sm'>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Icon type='plus-circle-o' tintColor={variables.mtdBrandPrimaryDark}></Icon>
+                <Text style={{ color: variables.mtdBrandPrimaryDark, marginLeft: 5 }}>新增</Text>
               </View>
             </Button>
           </View>
-
-          <View style={Styles.panel}>
-            <Text>图标 + 文字</Text>
-            <Button style={{ borderRadius: 50 }} type='primary' size='md'>
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Icon type='search' tintColor='#fff' size={14} />
-                <Text style={{ color: '#fff', marginLeft: 4 }}>搜索</Text>
-              </View>
-            </Button>
-          </View>
-
-          <View style={Styles.panel}>
-            <Text>图标 + 文字</Text>
-            <Button style={{ borderRadius: 50 }} type='primary' size='md' disabled>
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Icon type='search' tintColor='#fff' size={14} />
-                <Text style={{ color: '#fff', marginLeft: 4 }}>搜索</Text>
-              </View>
-            </Button>
-          </View>
-
-          <View style={Styles.spaceGap}></View>
-
-          <View style={Styles.panel}>
-            <View style={{ flex: 1 }}>
-              <Button type='primary' size='md'>示例：横向拉伸至全屏</Button>
-            </View>
-          </View>
-
-          <View style={Styles.spaceGap}></View>
         </View>
       </ScrollView>
     )
