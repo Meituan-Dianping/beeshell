@@ -3,7 +3,7 @@ import variables from '../../customTheme'
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: variables.mtdFillBody,
     flex: 1,
   },
   header: {
@@ -15,7 +15,7 @@ export default StyleSheet.create({
   panel: {
     paddingHorizontal: variables.mtdHSpacingXl,
     paddingVertical: variables.mtdVSpacingL,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
 
   footer: {

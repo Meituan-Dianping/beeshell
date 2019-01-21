@@ -82,7 +82,7 @@ export default class IconScreen extends Component<{}, State> {
           </View>
 
           <View style={styles.content}>
-            <Icon type='question-circle' tintColor='#000' />
+            <Icon type='question-circle' />
             <Text style={styles.title}>question-circle</Text>
           </View>
 

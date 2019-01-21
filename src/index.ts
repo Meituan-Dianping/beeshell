@@ -1,9 +1,11 @@
 export * from './components/Button'
-export * from '@ss/mtd-react-native/lib/Icon'
+export * from './components/Icon'
 
-export * from '@ss/mtd-react-native/lib/Form'
-export * from '@ss/mtd-react-native/lib/Input'
+export * from './components/Form'
+export * from './components/Input'
 export * from '@ss/mtd-react-native/lib/Radio'
+export * from '@ss/mtd-react-native/lib/Checkbox'
+export * from '@ss/mtd-react-native/lib/Switch'
 
 export * from '@ss/mtd-react-native/lib/Modal'
 export * from '@ss/mtd-react-native/lib/SlideModal'

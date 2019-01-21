@@ -1,9 +1,5 @@
-import * as mtdObj from '@ss/mtd-react-native/lib/common/styles/variables'
 import { StyleSheet } from 'react-native'
 const px = StyleSheet.hairlineWidth
-
-const mtdVariables = mtdObj.default
-const mtdUseTheme = mtdObj.useTheme
 
 // 全局/品牌色
 const mtdBrandColors = {
@@ -86,15 +82,27 @@ const button = {
   buttonSVSpacing: 8
 }
 
-// /**
-//  * Input组件
-//  */
-// const input = {
-//     // input组件安全区域 高度
-//     inputLAreaHeight: 40,
-//     inputMAreaHeight: 30,
-//     inputSAreaHeight: 20
-// }
+/**
+ * Form 组件
+ */
+const form = {
+}
+
+const formItem = {
+  formItemHSpacing: mtdSpacing.mtdHSpacingXl,
+  formItemVSpacing: 18,
+
+  formItemLabelWidth: 90,
+  formItemLabelMarginRight: 32
+}
+
+/**
+ * Input组件
+ */
+const input = {
+  // input组件安全区域 高度
+  inputTextFontSize: 14
+}
 // /**
 //  * Tip 组件
 //  */
@@ -191,21 +199,23 @@ const variables = {
   ...mtdFontSize,
   ...mtdSpacing,
   ...mtdRadius,
-  ...button
+
+  ...button,
+
+  ...form,
+  ...formItem,
+
+  ...input
 }
 
 
 
 function useTheme(args = {}) {
-  const tmp = {
-    ...variables,
-    ...args,
-  }
-  mtdUseTheme(tmp)
-  return mtdVariables
+  Object.assign(variables, args)
+  return variables
 }
 
-export default mtdVariables
+export default variables
 
 export {
     useTheme

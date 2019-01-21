@@ -1,7 +1,18 @@
 import React, { Component } from 'react'
-import { ScrollView, View } from 'react-native'
+import { ScrollView, View, Text, StyleSheet } from 'react-native'
+import { Icon, Input, Form, Button, Checkbox, Switch, Radio } from '../../src'
+import styles from '../common/styles'
+import variables from '../customTheme'
 
-import { Input, Form, Button, Checkbox, Switch } from '../../src'
+const componentStyles = StyleSheet.create({
+  header: {
+    paddingHorizontal: variables.mtdHSpacingXl,
+    paddingTop: 16,
+    paddingBottom: 8
+    color: variables.mtdGray,
+  },
+})
+
 
 export default class FormScreen extends Component<{}, any> {
   form = null
@@ -91,40 +102,71 @@ export default class FormScreen extends Component<{}, any> {
 
   render () {
     return (
-      <ScrollView>
-        <Form model={this.state.model} ref={(ref) => this.form = ref }
-          rules = {this.state.model}
-        >
+      <ScrollView
+        style={styles.container}>
+        <Text style={componentStyles.header}>基本信息</Text>
+        <Form
+          ref={(ref) => this.form = ref }
+          model={this.state.model}
+          rules={this.state.model}>
           <Form.Item
             prop='name'
-            label='名字'
-            showValidation
-          >
+            label={
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  width: variables.formItemLabelWidth,
+                  marginRight: variables.formItemLabelMarginRight
+                }}>
+                <Text style={{ color: variables.mtdBrandDanger, marginRight: 2 }}>*</Text>
+                <Text>姓名</Text>
+                <Icon style={{ marginLeft: 4 }} type='question-circle' size={14}></Icon>
+              </View>
+            }
+            hasLine>
+            <Input value={this.state.model.name} placeholder='姓名' onChange={this.handleNameChange} />
+          </Form.Item>
+          <Form.Item prop='email' label='邮箱' hasLine>
+            <Input placeholder='请填写邮箱' onChange={this.handleEmailChange}/>
+          </Form.Item>
 
+          <Form.Item label='手机号码' hasLine>
+            <Input placeholder='请填写手机号码' textAlign='right' onChange={() => {}}/>
+            <Text style={{ color: variables.mtdGrayLighter, fontSize: 12, marginTop: 4 }}>该信息非常重要，请认真填写</Text>
           </Form.Item>
-          <View style={{ backgroundColor: 'cyan', paddingLeft: 30, paddingRight: 30 }}>
-            <Form.Item prop='name' label='姓名' hasLine>
-              <Input value={this.state.model.name} onChange={this.handleNameChange} />
-            </Form.Item>
-          </View>
-          <Form.Item prop='email' label='邮箱'>
-            <Input placeholder='邮箱'
-              onChange={this.handleEmailChange}
-            />
-          </Form.Item>
-          <Form.Item prop='needPackage' label='是否需要包装' hasLine validateOnMount>
-            <Switch value={this.state.model.needPackage} onChange={this.handlePackageChange}/>
+          <Form.Item prop='needPackage' label='是否开启定位' hasLine validateOnMount>
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+              <Switch value={this.state.model.needPackage} onChange={this.handlePackageChange}/>
+            </View>
           </Form.Item>
           <Form.Item prop='deliveryTime' label='配送时间' hasLine>
+            <View></View>
             <Checkbox
-                checkedValues={this.state.model.deliveryTime}
-                onChange={this.handleDeliveryChange}
-                iconPosition='right'
-              >
-              <Checkbox.Item label='PM12:00-01:00' trueValue='time_1' />
-              <Checkbox.Item label='PM06:00-07:00' trueValue='time_2' />
-              <Checkbox.Item label='PM09:00-10:00' trueValue='time_3' />
+              style={{ marginTop: 5 }}
+              checkedValues={this.state.model.deliveryTime}
+              onChange={this.handleDeliveryChange}
+              iconPosition='right'>
+              <Checkbox.Item label='上午' trueValue='time_1' />
+              <Checkbox.Item label='下午' trueValue='time_2' />
+              <Checkbox.Item label='晚上' trueValue='time_3' />
             </Checkbox>
+          </Form.Item>
+
+          <Form.Item label='地址'>
+            <View></View>
+            <Radio
+              checkedValue={this.state.address || 1}
+              onChange={(value) => {
+                this.setState({
+                  address: value
+                })
+              }}
+              style={{ marginTop: 5 }}
+              iconPosition='right'>
+              <Radio.Item label='北京' value={1} />
+              <Radio.Item label='上海' trueValue={2} />
+            </Radio>
           </Form.Item>
         </Form>
         <View style={{ flexDirection: 'row', marginTop: 20, paddingHorizontal: 20 }}>
@@ -133,8 +175,9 @@ export default class FormScreen extends Component<{}, any> {
               type='primary'
               onPress={() => {
                 this.handlePress()
-              }}>
-              校验保存
+              }}
+              reverse>
+              保存
             </Button>
           </View>
         </View>
