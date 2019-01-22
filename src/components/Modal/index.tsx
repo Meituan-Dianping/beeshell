@@ -17,16 +17,15 @@ export { modalStyles }
 
 export interface ModalProps {
   cancelable: boolean
-  opacity?: number
+  backdropOpacity?: number
 
   animatedTranslateX?: number | null
   animatedTranslateY?: number | null
 
   alignItems?: FlexAlignType
-  flex?: number | null
-  marginHorizontal?: number
-  marginTop?: number
-  marginBottom?: number
+
+  containerPositon?: 'top' | 'center' | 'bottom'
+  containerStyle?: any
 
   onOpen?: any
   onOpened?: any
@@ -43,16 +42,13 @@ export class Modal<
 
   static defaultProps = {
     cancelable: true,
-    opacity: 0.3,
+    backdropOpacity: 0.3,
 
     animatedTranslateX: null,
     animatedTranslateY: null,
 
-    alignItems: 'center',
-    flex: null,
-    marginHorizontal: 0,
-    marginTop: 90, // 对应 container alignItems: 'flex-start'
-    marginBottom: 90, // 对应 container alignItems: 'flex-end'
+    containerPositon: 'center',
+    containerStyle:  {},
 
     onOpen: null,
     onOpened: null,
@@ -114,7 +110,7 @@ export class Modal<
     }
   }
 
-  handleMaskPress () {
+  handleBackdropPress () {
     if (this.props.cancelable) {
       this.close().catch(e => {
         return null
@@ -126,37 +122,29 @@ export class Modal<
     const styles = modalStyles
     const tmp = inner == null ? this.props.children : inner
     const animatedState = this.animated ? this.animated.getState() : {}
+    const containerPositon = this.props.containerPositon === 'top' ? 'flex-start' : (
+      this.props.containerPositon === 'bottom' ? 'flex-end' : 'center'
+    )
 
     return (
       <View
         style={[
           styles.container,
           {
-            alignItems: this.props.alignItems
+            alignItems: containerPositon
           }
         ]}
       >
         <TouchableOpacity
-          style={[styles.mask, { opacity: this.props.opacity }]}
-          activeOpacity={this.props.opacity}
-          onPress={this.handleMaskPress.bind(this)}
+          style={[styles.backdrop, { opacity: this.props.backdropOpacity }]}
+          activeOpacity={this.props.backdropOpacity}
+          onPress={this.handleBackdropPress.bind(this)}
         />
 
         <Animated.View
           style={[
             styles.content,
-            {
-              flex: this.props.flex,
-              marginTop:
-                this.props.alignItems === 'flex-start'
-                  ? this.props.marginTop
-                  : null,
-              marginBottom:
-                this.props.alignItems === 'flex-end'
-                  ? this.props.marginBottom
-                  : null,
-              marginHorizontal: this.props.marginHorizontal
-            },
+            this.props.containerStyle,
 
             {
               transform: [

@@ -1,6 +1,8 @@
 import {
   StyleSheet
 } from 'react-native'
+import variables from '../../common/styles/variables'
+
 
 export default StyleSheet.create({
   container: {
@@ -14,14 +16,14 @@ export default StyleSheet.create({
     justifyContent: 'center',
     overflow: 'hidden'
   },
-  mask: {
+  backdrop: {
     position: 'absolute',
     top: 0,
     left: 0,
     bottom: 0,
     right: 0,
     backgroundColor: '#000',
-    opacity: 0.3
+    opacity: variables.mtdOpacity
   },
   content: {
     flexDirection: 'column',

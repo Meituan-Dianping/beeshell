@@ -13,7 +13,6 @@ export * from './components/Rate'
 export * from './components/Stepper'
 export * from './components/Scrollpicker'
 
-
 export * from './components/Carousel'
 export * from './components/Progress'
 

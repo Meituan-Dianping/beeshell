@@ -33,8 +33,11 @@ export class Dialog extends Modal<DialogProps, any> {
   static defaultProps = {
     ...Modal.defaultProps,
 
-    flex: 1,
-    marginHorizontal: 40,
+    containerStyle: {
+      flex: 1,
+      marginHorizontal: 40,
+    },
+
     header: '标题',
     body: '内容',
     cancelable: true,
