@@ -18,7 +18,7 @@ const mtdGrayColors = {
   mtdGray: '#999999',
   mtdGrayLight: '#aaaaaa',
   mtdGrayLighter: '#cccccc',
-  mtdGrayLightest: '#eeeeee'
+  mtdGrayLightest: '#ebebeb'
 }
 // 背景色
 const mtdFillColors = {
@@ -62,6 +62,13 @@ const mtdRadius = {
   mtdRadiusM: 6,
   mtdRadiusL: 8
 }
+const mtdBorder = {
+  mtdBorderWidth: 1 * px,
+  mtdBorderColor: '#F5F5F5',
+  mtdBorderColorDark: '#e5e5e5'
+}
+
+
 /**
  * Button 组件
  */
@@ -103,6 +110,9 @@ const input = {
   // input组件安全区域 高度
   inputTextFontSize: 14
 }
+
+
+
 // /**
 //  * Tip 组件
 //  */
@@ -140,26 +150,26 @@ const input = {
 //     toastFontColor: '#ffffff',
 //     toastMHSpacing: mtdSpacing.mtdHSpacingXL * 2
 // }
-// /**
-//  * Slider 组件
-//  */
-// const slider = {
-//     sliderSlideHeight: 40,
-//     sliderSlideHeightForTip: 100,
-//     sliderTrackHeight: 5,
-//     sliderThumbSize: 34,
-//     sliderMarkHeight: 40,
-//     sliderMarkLineSize: 10,
-//     sliderSlideToolTip: 30,
-//     sliderSlideToolTipIconSize: 4
-// }
+/**
+ * Slider 组件
+ */
+const slider = {
+  sliderSlideHeight: 40,
+  sliderSlideHeightForTip: 100,
+  sliderTrackHeight: 5,
+  sliderThumbSize: 34,
+  sliderMarkHeight: 40,
+  sliderMarkLineSize: 10,
+  sliderSlideToolTip: 30,
+  sliderSlideToolTipIconSize: 4
+}
 // /**
 //  * Checkbox 组件
 //  */
-// const checkbox = {
-//     checkboxIconContainSize: 20,
-//     checkboxIconSize: 10
-// }
+const checkbox = {
+  checkboxIconContainSize: 20,
+  checkboxIconSize: 10
+}
 // /**
 //  * Popover 组件
 //  */
@@ -179,13 +189,13 @@ const input = {
 //     calendarDayMiddleSelected: '#f3de8b',
 //     calendarMiddleSelectedTextColor: '#ff9a14'
 // }
-// /**
-//  * Carousel 组件
-//  */
-// const carousel = {
-//     carouselPaginationVSpacing: mtdSpacing.mtdVSpacingXl,
-//     carouselPaginationHSpacing: mtdSpacing.mtdHSpacingL
-// }
+/**
+ * Carousel 组件
+ */
+const carousel = {
+  carouselPaginationVSpacing: mtdSpacing.mtdVSpacingXl,
+  carouselPaginationHSpacing: mtdSpacing.mtdHSpacingL
+}
 // const tags = {
 //     tagRadius: 4,
 //     tagsBrokenHight: 24,
@@ -199,13 +209,17 @@ const variables = {
   ...mtdFontSize,
   ...mtdSpacing,
   ...mtdRadius,
+  ...mtdBorder,
+  mtdOpacity: 0.3,
 
   ...button,
-
   ...form,
   ...formItem,
+  ...input,
+  ...checkbox,
+  ...slider,
 
-  ...input
+  ...carousel,
 }
 
 

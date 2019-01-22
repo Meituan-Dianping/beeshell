@@ -27,8 +27,18 @@ class Home extends Component<MyProps, MyState> {
     this.state = {
       sections: [
         {
-          label: '通用类',
+          label: '通用',
           key: 'general',
+        },
+
+        // {
+        //   label: '布局',
+        //   key: 'layout',
+        // },
+
+        {
+          label: '导航',
+          key: 'navigation',
         },
         {
           label: '数据录入',
@@ -98,7 +108,7 @@ class Home extends Component<MyProps, MyState> {
           <Text
             style={{
               color: variables.mtdGrayBase,
-              fontSize: 16
+              // fontSize: 14
             }}>
               {item.label} - {item.key}
           </Text>
@@ -136,7 +146,7 @@ class Home extends Component<MyProps, MyState> {
   render () {
     return (
       <View
-        style={styles.container}>
+        style={styles.body}>
         <SectionList
           sections={this.state.sections}
           renderSectionHeader={this.renderSectionHeader}
@@ -150,8 +160,15 @@ class Home extends Component<MyProps, MyState> {
   }
 }
 
-function MakeHeader (navigation, title) {
-  return <NavigationBar hasSearchBar={false} title={title} onPressBackButton={e => navigation.back()} />
+function MakeHeader (navigation, title, backLabel) {
+  return (
+    <NavigationBar
+      title={title}
+      backLabel={backLabel}
+      backCallback={() => {
+        navigation.back()
+      }} />
+  )
 }
 
 let RootStack = createStackNavigator({
@@ -159,14 +176,14 @@ let RootStack = createStackNavigator({
   Home: {
     screen: Home,
     navigationOptions: ({ navigation }) => ({
-      header: MakeHeader(navigation, 'roo-mobile-rn')
+      header: MakeHeader(navigation, 'roo-mobile-rn', null)
     })
   },
   // 其余的展示页
   ...pageList.reduce((res, item) => {
     res[item.key] = {
       navigationOptions: ({ navigation }) => ({
-        header: MakeHeader(navigation, item.key)
+        header: MakeHeader(navigation, item.key, '')
       }),
       ...item
     }

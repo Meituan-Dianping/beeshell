@@ -2,24 +2,29 @@
 import Button from './Button'
 import Icon from './Icon'
 
+import NavigationBar from './NavigationBar'
+
 import Form from './Form'
 import Input from './Input'
 import Radio from './Radio'
+import Scrollpicker from './Scrollpicker'
 
 import Actionsheet from './Actionsheet'
+import Dialog from './Dialog'
+import BottomModal from './BottomModal'
+import Picker from './Picker'
 
 // import Checkbox from './Checkbox'
 // import Modal from './Modal'
 // import SlideModal from './SlideModal'
 
-// import Scrollpicker from './Scrollpicker'
-// import Dialog from './Dialog'
+
 // import Dropdown from './Dropdown'
 
 // import Tab from './Tab'
 // import Progress from './Progress'
 // import Select from './Select'
-// import NavigationBar from './NavigationBar'
+
 // import Tip from './Tip'
 // import Toast from './Toast'
 // import Stepper from './Stepper'
@@ -32,12 +37,10 @@ import Actionsheet from './Actionsheet'
 // import Slider from './Slider'
 // import Carousel from './Carousel'
 
-// import Picker from './Picker'
+
 // import Popover from './Popover'
 // import Calendar from './Calendar'
 // import Tags from './Tags'
-
-// import BottomModal from './BottomModal'
 // yarn new import 的占位
 
 export const pageList = [
@@ -53,6 +56,13 @@ export const pageList = [
     key: 'Icon',
     group: 'general',
     label: '图标'
+  },
+
+  {
+    screen: NavigationBar,
+    key: 'NavigationBar',
+    group: 'navigation',
+    label: '导航条'
   },
 
   {
@@ -106,6 +116,14 @@ export const pageList = [
     group: 'dataEntry',
     label: '计步器'
   },
+
+  {
+    screen: Scrollpicker,
+    key: 'Scrollpicker',
+    label: '滚动选择',
+    group: 'dataEntry'
+  },
+
 
   {
     screen: () => {},
@@ -164,11 +182,28 @@ export const pageList = [
     label: '行动面板'
   },
 
-  // {
-  //   screen: BottomModal,
-  //   key: 'BottomModal',
-  //   label: '半页弹窗'
-  // },
+  {
+    screen: Dialog,
+    key: 'Dialog',
+    label: '对话框',
+    group: 'feedback'
+  },
+
+  {
+    screen: BottomModal,
+    key: 'BottomModal',
+    label: '半页弹窗',
+    group: 'feedback'
+  },
+
+  {
+    screen: Picker,
+    key: 'Picker',
+    label: '筛选',
+    group: 'feedback'
+  },
+
+
   // {
   //   screen: Tab,
   //   key: 'Tab',
@@ -180,11 +215,6 @@ export const pageList = [
   //   label: '复选框'
   // },
   // {
-  //   screen: Scrollpicker,
-  //   key: 'Scrollpicker',
-  //   label: '滚动选择'
-  // },
-  // {
   //   screen: Radio,
   //   key: 'Radio',
   //   label: '单选框'
@@ -193,11 +223,6 @@ export const pageList = [
   //   screen: Slider,
   //   key: 'Slider',
   //   label: '滑块'
-  // },
-  // {
-  //   screen: Dialog,
-  //   key: 'Dialog',
-  //   label: '对话框'
   // },
   // {
   //   screen: Form,
@@ -223,11 +248,6 @@ export const pageList = [
   //   screen: Rate,
   //   key: 'Rate',
   //   label: '评分'
-  // },
-  // {
-  //   screen: Picker,
-  //   key: 'Picker',
-  //   label: '筛选'
   // },
   // {
   //   screen: Stepper,

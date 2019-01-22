@@ -2,25 +2,10 @@ import React, { Component } from 'react'
 import { ScrollView, View, StyleSheet, Text, Dimensions, TouchableOpacity } from 'react-native'
 
 import { Button, Actionsheet, Icon } from '../../src/'
-import varibles from '../../src/common/styles/variables'
+import variables from '../customTheme'
 import styles from '../common/styles'
 
 const screen = Dimensions.get('window')
-
-const componentStyles = StyleSheet.create({
-  card: {
-    backgroundColor: '#ffffff',
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginBottom: 2
-  },
-  cell: {
-    paddingTop: 10,
-    paddingBottom: 10,
-    borderColor: '#dddddd',
-    borderBottomWidth: 1
-  }
-})
 
 export default class ActionsheetScreen extends Component<{}, any> {
   private actionsheet = null;
@@ -41,9 +26,11 @@ export default class ActionsheetScreen extends Component<{}, any> {
   render () {
     return (
       <ScrollView
-        style={styles.container}>
-        <View style={styles.panel}>
+        style={styles.body}>
+        <View style={styles.container}>
           <Button
+            style={{ marginTop: 12 }}
+            size='sm'
             type='primary'
             reverse
             onPress={() => {
@@ -58,13 +45,12 @@ export default class ActionsheetScreen extends Component<{}, any> {
             }}
             title={'标题'}
             options={[
-              { label: '选项 1', value: '1' },
-              '选项 2',
-              { label: '选项 3', value: '3' },
-              { label: '选项 4', value: '4' },
-              { label: '选项 5', value: '5' },
-              { label: '选项 6', value: '6' },
-              7
+              { label: '选项一', value: '1' },
+              '选项二',
+              { label: '选项三', value: '3' },
+              { label: '选项四', value: '4' },
+              { label: '选项五', value: '5' },
+              { label: '选项六', value: '6' },
             ]}
             cancelable={true}
             confirmCallback={item => {
@@ -74,95 +60,97 @@ export default class ActionsheetScreen extends Component<{}, any> {
               console.log('cancel')
             }}
           />
-        </View>
 
-        <View style={componentStyles.card}>
-          {/* 基础 */}
-          <View style={componentStyles.cell}>
-          </View>
 
-          {/* 自定义头部 */}
-          <View style={componentStyles.cell}>
-            <Button
-              onPress={() => {
-                this.actionsheet2.open()
-              }}
-            >
-              自定义头部、选项以及 footer
-            </Button>
 
-            <Actionsheet
-              ref={(c) => {
-                this.actionsheet2 = c
-              }}
-              heading={
+          <Button
+            style={{ marginTop: 12 }}
+            size='sm'
+            onPress={() => {
+              this.actionsheet2.open()
+            }}>
+            自定义头部、选项、footer
+          </Button>
+
+          <Actionsheet
+            ref={(c) => {
+              this.actionsheet2 = c
+            }}
+            header={
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderBottomWidth: StyleSheet.hairlineWidth,
+                  borderBottomColor: variables.mtdBorderColor,
+                  backgroundColor: '#fff',
+                  paddingVertical: 12
+                }}>
+                <Text
+                  style={{
+                    fontSize: 14,
+                    marginRight: 5,
+                    color: variables.mtdGray
+                  }}>
+                  自定义头部
+                </Text>
+                <Icon type='question-circle'></Icon>
+              </View>
+            }
+            options={[
+              {
+                text: '自定义选项一',
+                value: '1'
+              },
+              {
+                text: '自定义选项二',
+                value: '2'
+              },
+              {
+                text: '自定义选项三',
+                value: '3'
+              }
+            ]}
+            cancelable={true}
+            renderItem={(item, index) => {
+              return (
+                <View style={{ flexDirection: 'row', paddingVertical: 13, alignItems: 'center', justifyContent: 'center', borderBottomColor: variables.mtdBorderColorDark, borderBottomWidth: StyleSheet.hairlineWidth, backgroundColor: '#fff' }}>
+                  <Icon type='star-o' tintColor='#111' />
+                  <Text style={{ marginLeft: 5, fontSize: 16 }}>{item.text}</Text>
+                </View>
+              )
+            }}
+            footer={
+              <TouchableOpacity>
                 <View
                   style={{
-                    borderBottomWidth: StyleSheet.hairlineWidth,
-                    borderBottomColor: varibles.mtdBorderColorBase,
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
                     backgroundColor: '#fff',
-                    paddingVertical: 15
+                    paddingVertical: 12
                   }}>
                   <Text
                     style={{
                       textAlign: 'center',
-                      fontSize: 20,
-                      color: 'red'
+                      fontSize: 14,
+                      color: variables.mtdGray,
+                      marginRight: 5
                     }}>
-                    自定义头部
+                    自定义底部
                   </Text>
+                  <Icon type='times' size={14}></Icon>
                 </View>
-              }
-              options={[
-                {
-                  text: '选项1',
-                  value: '1'
-                },
-                {
-                  text: '选项2',
-                  value: '2'
-                },
-                {
-                  text: '选项3',
-                  value: '3'
-                }
-              ]}
-              cancelable={true}
-              renderItem={(item) => {
-                return (
-                  <View style={{ flexDirection: 'row', paddingVertical: 15, alignItems: 'center', justifyContent: 'center' }}>
-                    <Icon type='star-o' tintColor='red' />
-                    <Text style={{ marginLeft: 5, fontSize: 16, fontWeight: 'bold' }}>{item.text}</Text>
-                  </View>
-                )
-              }}
-              footer={
-                <TouchableOpacity>
-                  <View
-                    style={{
-                      marginTop: 3,
-                      backgroundColor: '#fff',
-                      paddingVertical: 15
-                    }}>
-                    <Text
-                      style={{
-                        textAlign: 'center',
-                        fontSize: 16,
-                        color: 'red'
-                      }}>
-                      自定义底部
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              }
-              confirmCallback={item => {
-                console.log(item)
-              }}
-              cancelCallback={() => {
-                console.log('cancel')
-              }}
-            />
-          </View>
+              </TouchableOpacity>
+            }
+            confirmCallback={item => {
+              console.log(item)
+            }}
+            cancelCallback={() => {
+              console.log('cancel')
+            }}
+          />
         </View>
       </ScrollView>
     )

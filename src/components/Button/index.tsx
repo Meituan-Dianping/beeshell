@@ -6,7 +6,9 @@ import {
   View
 } from 'react-native'
 import buttonStyles from './styles'
+export { buttonStyles }
 import varibles from '../../common/styles/variables'
+
 
 const fontSizeMap = {
   lg: varibles.buttonLFontSize,

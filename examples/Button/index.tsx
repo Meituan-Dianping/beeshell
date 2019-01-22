@@ -30,7 +30,7 @@ export default class ButtonScreen extends Component<{}, {}> {
   render () {
     return (
       <ScrollView
-        style={styles.container}>
+        style={styles.body}>
         <Text style={styles.header}>预定义样式</Text>
         <View style={styles.panel}>
           <View style={componentStyles.row}>

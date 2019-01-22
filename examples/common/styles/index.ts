@@ -2,9 +2,12 @@ import { StyleSheet } from '@mrn/react-native'
 import variables from '../../customTheme'
 
 export default StyleSheet.create({
-  container: {
+  body: {
     backgroundColor: variables.mtdFillBody,
     flex: 1,
+  },
+  container: {
+    paddingHorizontal: variables.mtdHSpacingXl,
   },
   header: {
     paddingHorizontal: variables.mtdHSpacingXl,

@@ -103,7 +103,7 @@ export default class FormScreen extends Component<{}, any> {
   render () {
     return (
       <ScrollView
-        style={styles.container}>
+        style={styles.body}>
         <Text style={componentStyles.header}>基本信息</Text>
         <Form
           ref={(ref) => this.form = ref }
