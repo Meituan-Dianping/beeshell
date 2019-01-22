@@ -12,6 +12,7 @@ import Scrollpicker from './Scrollpicker'
 
 import Modal from './Modal'
 import Dialog from './Dialog'
+import Tip from './Tip'
 
 import SlideModal from './SlideModal'
 import Actionsheet from './Actionsheet'
@@ -28,7 +29,6 @@ import Picker from './Picker'
 // import Progress from './Progress'
 // import Select from './Select'
 
-// import Tip from './Tip'
 // import Toast from './Toast'
 // import Stepper from './Stepper'
 // import Switch from './Switch'
@@ -192,6 +192,12 @@ export const pageList = [
     group: 'feedback'
   },
 
+  {
+    screen: Tip,
+    key: 'Tip',
+    label: '弹窗提示',
+    group: 'feedback'
+  },
 
   {
     screen: SlideModal,
@@ -305,11 +311,6 @@ export const pageList = [
   //   screen: Tags,
   //   key: 'Tags',
   //   label: '标签集合'
-  // },
-  // {
-  //   screen: Tip,
-  //   key: 'Tip',
-  //   label: '顶部提示'
   // },
   // {
   //   screen: Popover,
