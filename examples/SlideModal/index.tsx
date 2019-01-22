@@ -22,10 +22,12 @@ export default class SlideModalScreen extends Component<{}, any> {
         contentContainerStyle={styles.container}>
 
         <Button
+          style={{ marginTop: 12 }}
+          size='sm'
           onPress={() => {
             this.slideModal.open()
           }}>
-          SlideModal 基础
+          基础
         </Button>
 
         <SlideModal
@@ -43,7 +45,8 @@ export default class SlideModalScreen extends Component<{}, any> {
         </SlideModal>
 
         <Button
-          style={styles.cell}
+          style={{ marginTop: 12 }}
+          size='sm'
           ref={element => {
             this.btnEl2 = element
           }}
@@ -80,7 +83,8 @@ export default class SlideModalScreen extends Component<{}, any> {
         </SlideModal>
 
         <Button
-          style={styles.cell}
+          style={{ marginTop: 12 }}
+          size='sm'
           ref={element => {
             this.btnEl3 = element
           }}
@@ -121,7 +125,8 @@ export default class SlideModalScreen extends Component<{}, any> {
         </SlideModal>
 
         <Button
-          style={styles.cell}
+          style={{ marginTop: 12 }}
+          size='sm'
           ref={element => {
             this.btnEl4 = element
           }}
@@ -135,7 +140,7 @@ export default class SlideModalScreen extends Component<{}, any> {
             })
           }}
         >
-          SlideModal 指定位置、左拉
+          指定位置、左拉
         </Button>
 
         <SlideModal
@@ -156,7 +161,8 @@ export default class SlideModalScreen extends Component<{}, any> {
         </SlideModal>
 
         <Button
-          style={styles.cell}
+          style={{ marginTop: 12 }}
+          size='sm'
           ref={element => {
             this.btnEl5 = element
           }}
@@ -170,7 +176,7 @@ export default class SlideModalScreen extends Component<{}, any> {
             })
           }}
         >
-          SlideModal 指定位置、右拉
+          指定位置、右拉
         </Button>
 
         <SlideModal
@@ -195,71 +201,6 @@ export default class SlideModalScreen extends Component<{}, any> {
             </View>
           </View>
         </SlideModal>
-
-        <Text style={styles.title}>BottomModal 继承 SlideModal</Text>
-        <Button
-          onPress={() => {
-            this.bottomModal1.open()
-          }}
-        >
-          BottomModal 基础
-        </Button>
-
-        <BottomModal
-          ref={(c) => { this.bottomModal1 = c }}
-          title='选择品类'
-          cancelable={true}
-          cancelCallback={() => {
-            console.log('cancel')
-          }}
-          confirmCallback={() => {
-            console.log('confirm')
-          }}
-        >
-          <View
-            style={{
-              backgroundColor: '#fff',
-              height: 300,
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-          >
-            <Text>自定义内容</Text>
-          </View>
-        </BottomModal>
-
-        <Button
-          style={styles.cell}
-          onPress={() => {
-            this.bottomModal2.open()
-          }}
-        >
-          BottomModal 自定义按钮
-        </Button>
-
-        <BottomModal
-          ref={(c) => { this.bottomModal2 = c }}
-          title='选择品类'
-          cancelable={true}
-          cancelLabel={null}
-          confirmLabel={
-            <Text style={{ textAlign: 'right', fontSize: 30, color: '#aaa', marginRight: 15 }}>&times;</Text>
-          }
-          confirmCallback={() => {
-            console.log('confirm')
-          }}
-        >
-          <View
-            style={{
-              backgroundColor: '#fff',
-              height: 300,
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-          >
-            <Text>自定义内容</Text>
-          </View>
-        </BottomModal>
       </ScrollView>
     )
   }
