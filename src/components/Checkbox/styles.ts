@@ -2,23 +2,23 @@ import { StyleSheet } from 'react-native'
 import variables from '../../common/styles/variables'
 
 export default {
+  container: {
+    backgroundColor: '#fff'
+  },
   touchContainer: {
-    paddingVertical: variables.mtdVSpacingM,
+    paddingVertical: variables.radioItemVSpacing,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start'
   },
-  hasLine: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: variables.mtdBorderColorDark
-  },
+
   labelText: {
     fontSize: variables.mtdFontSizeM,
     color: variables.mtdGrayBase
   },
   icon: {
-    height: variables.checkboxIconContainSize,
-    width: variables.checkboxIconContainSize,
+    height: variables.checkboxIconContainerSize,
+    width: variables.checkboxIconContainerSize,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -32,14 +32,11 @@ export default {
     backgroundColor: '#ffffff',
     borderColor: variables.mtdBorderColorDark,
     borderWidth: StyleSheet.hairlineWidth,
-    borderRadius: variables.checkboxIconContainSize
+    borderRadius: variables.checkboxIconContainerSize
   },
   iconChecked: {
     backgroundColor: variables.mtdBrandPrimary,
     borderColor: variables.mtdBrandPrimary
-  },
-  iconDisabled: {
-    opacity: variables.mtdOpacity
   },
   iconLeftPosition: {
     marginRight: variables.mtdHSpacingM

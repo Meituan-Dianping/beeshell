@@ -110,6 +110,7 @@ export default class FormScreen extends Component<{}, any> {
           model={this.state.model}
           rules={this.state.model}>
           <Form.Item
+            style={{ paddingVertical: 13 }}
             prop='name'
             label={
               <View
@@ -128,10 +129,13 @@ export default class FormScreen extends Component<{}, any> {
             <Input value={this.state.model.name} placeholder='姓名' onChange={this.handleNameChange} />
           </Form.Item>
           <Form.Item prop='email' label='邮箱' hasLine>
-            <Input placeholder='请填写邮箱' onChange={this.handleEmailChange}/>
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
+              <Text style={{ color: variables.mtdGray }}>请输入</Text>
+              <Icon type='angle-right' size={14} tintColor={variables.mtdGray}></Icon>
+            </View>
           </Form.Item>
 
-          <Form.Item label='手机号码' hasLine>
+          <Form.Item style={{ paddingVertical: 13 }} label='手机号码' hasLine>
             <Input placeholder='请填写手机号码' textAlign='right' onChange={() => {}}/>
             <Text style={{ color: variables.mtdGrayLighter, fontSize: 12, marginTop: 4 }}>该信息非常重要，请认真填写</Text>
           </Form.Item>

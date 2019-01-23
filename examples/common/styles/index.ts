@@ -7,16 +7,19 @@ export default StyleSheet.create({
     flex: 1,
   },
   container: {
-    paddingHorizontal: variables.mtdHSpacingXl,
+    paddingHorizontal: variables.mtdHSpacingXL,
+  },
+  row: {
+    marginHorizontal: -variables.mtdHSpacingXL
   },
   header: {
-    paddingHorizontal: variables.mtdHSpacingXl,
+    paddingHorizontal: variables.mtdHSpacingXL,
     paddingVertical: variables.mtdVSpacingL,
     backgroundColor: variables.mtdFillGray,
     fontWeight: 'bold'
   },
   panel: {
-    paddingHorizontal: variables.mtdHSpacingXl,
+    paddingHorizontal: variables.mtdHSpacingXL,
     paddingVertical: variables.mtdVSpacingL,
     backgroundColor: '#fff',
   },

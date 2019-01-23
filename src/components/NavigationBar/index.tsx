@@ -51,7 +51,7 @@ export class NavigationBar extends Component<NavigationBarProps, any> {
           style={{
             flexDirection: 'row',
             alignItems: 'center',
-            paddingHorizontal: variables.mtdHSpacingXl
+            paddingHorizontal: variables.mtdHSpacingXL
           }}>
           <TouchableOpacity
             style={{
@@ -95,7 +95,7 @@ export class NavigationBar extends Component<NavigationBarProps, any> {
               flexDirection: 'row',
               justifyContent: 'flex-end',
               alignItems: 'center',
-              paddingHorizontal: variables.mtdHSpacingXl
+              paddingHorizontal: variables.mtdHSpacingXL
             }}>
             <Text
               style={{

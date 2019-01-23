@@ -29,35 +29,36 @@ const mtdFillColors = {
 }
 // 字体尺寸
 const mtdFontSize = {
-  mtdFontSizeXs: 10,
+  mtdFontSizeXS: 10,
   mtdFontSizeS: 12,
   mtdFontSizeM: 14,
   mtdFontSizeL: 16,
-  mtdFontSizeXl: 18,
-  mtdFontSizeXxl: 20,
-  mtdFontSizeXxxl: 22,
-  mtdFontSizeXxxxl: 24,
-  mtdFontSizeXxxxxl: 28
+  mtdFontSizeXL: 18,
+  mtdFontSizeXXL: 20,
+  mtdFontSizeXXXL: 22,
+  mtdFontSizeXXXXL: 24,
+  mtdFontSizeXXXXXL: 28
 }
 // 水平间距
 const mtdSpacing = {
   mtdHSpacingS: 4,
   mtdHSpacingM: 8,
   mtdHSpacingL: 12,
-  mtdHSpacingXl: 16,
-  mtdHSpacingXxL: 20,
+  mtdHSpacingXL: 16,
+  mtdHSpacingXXL: 20,
 
-  mtdVSpacingXs: 2,
+  mtdVSpacingXS: 2,
   mtdVSpacingS: 4,
   mtdVSpacingM: 8,
   mtdVSpacingL: 10,
-  mtdVSpacingXl: 12,
-  mtdVSpacingXxl: 16,
-  mtdVSpacingXxxL: 20,
+  mtdVSpacingXL: 12,
+  mtdVSpacingXXL: 16,
+  mtdVSpacingXXXL: 18,
+  mtdVSpacingXXXXL: 20
 }
 // 圆角
 const mtdRadius = {
-  mtdRadiusXs: 2,
+  mtdRadiusXS: 2,
   mtdRadiusS: 4,
   mtdRadiusM: 6,
   mtdRadiusL: 8
@@ -76,7 +77,7 @@ const button = {
   buttonBorderRadius: 0,
   buttonActiveOpacity: 0.3,
 
-  buttonLFontSize: mtdFontSize.mtdFontSizeXl,
+  buttonLFontSize: mtdFontSize.mtdFontSizeXL,
   buttonLHSpacing: 50,
   buttonLVSpacing: 14,
 
@@ -85,7 +86,7 @@ const button = {
   buttonMVSpacing: 13,
 
   buttonSFontSize: mtdFontSize.mtdFontSizeM,
-  buttonSHSpacing: mtdSpacing.mtdHSpacingXl,
+  buttonSHSpacing: mtdSpacing.mtdHSpacingXL,
   buttonSVSpacing: 8
 }
 
@@ -96,7 +97,7 @@ const form = {
 }
 
 const formItem = {
-  formItemHSpacing: mtdSpacing.mtdHSpacingXl,
+  formItemHSpacing: mtdSpacing.mtdHSpacingXL,
   formItemVSpacing: 18,
 
   formItemLabelWidth: 90,
@@ -108,11 +109,15 @@ const formItem = {
  */
 const input = {
   // input组件安全区域 高度
-  inputTextFontSize: 14
+  inputTextFontSize: 14,
+  inputAreaHeight: 30
 }
 
 
-
+const radio = {}
+const radioItem = {
+  radioItemVSpacing: 18
+}
 // /**
 //  * Tip 组件
 //  */
@@ -125,7 +130,7 @@ const input = {
 //  * NavigationBar 组件
 //  */
 // const navigationBar = {
-//     navigationBarIconSizeMd: mtdFontSize.mtdFontSizeXxxl,
+//     navigationBarIconSizeMd: mtdFontSize.mtdFontSizeXxXL,
 //     navigationBarIconSizeSm: mtdFontSize.mtdFontSizeL,
 //     navigationBarSearchBarInputHeight: 30,
 //     navigationBarSearchBarFill: mtdFillColors.mtdFillBody,
@@ -135,8 +140,8 @@ const input = {
 //  * Loading 组件
 //  */
 // const loading = {
-//     loadingVSpacing: mtdSpacing.mtdVSpacingXl,
-//     loadingHSpacing: mtdSpacing.mtdVSpacingXl,
+//     loadingVSpacing: mtdSpacing.mtdVSpacingXL,
+//     loadingHSpacing: mtdSpacing.mtdVSpacingXL,
 //     loadingFontColor: '#ffffff',
 //     loadingFontSize: mtdFontSize.mtdFontSizeM,
 //     loadingLineHeight: mtdFontSize.mtdFontSizeM * 1.2
@@ -145,8 +150,8 @@ const input = {
 //  * Toast 组件
 //  */
 // const toast = {
-//     toastFontSizeMd: mtdFontSize.mtdFontSizeXl,
-//     toastLineHeight: mtdFontSize.mtdFontSizeXl * 1.2,
+//     toastFontSizeMd: mtdFontSize.mtdFontSizeXL,
+//     toastLineHeight: mtdFontSize.mtdFontSizeXL * 1.2,
 //     toastFontColor: '#ffffff',
 //     toastMHSpacing: mtdSpacing.mtdHSpacingXL * 2
 // }
@@ -167,8 +172,8 @@ const slider = {
 //  * Checkbox 组件
 //  */
 const checkbox = {
-  checkboxIconContainSize: 20,
-  checkboxIconSize: 10
+  checkboxIconContainerSize: 18,
+  checkboxIconSize: 12
 }
 // /**
 //  * Popover 组件
@@ -193,7 +198,7 @@ const checkbox = {
  * Carousel 组件
  */
 const carousel = {
-  carouselPaginationVSpacing: mtdSpacing.mtdVSpacingXl,
+  carouselPaginationVSpacing: mtdSpacing.mtdVSpacingXL,
   carouselPaginationHSpacing: mtdSpacing.mtdHSpacingL
 }
 // const tags = {
@@ -216,6 +221,8 @@ const variables = {
   ...form,
   ...formItem,
   ...input,
+  ...radio,
+  ...radioItem,
   ...checkbox,
   ...slider,
 

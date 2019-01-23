@@ -24,8 +24,8 @@ export default StyleSheet.create({
   },
 
   title: {
-    paddingVertical: varibles.mtdVSpacingXl,
-    paddingHorizontal: varibles.mtdHSpacingXl,
+    paddingVertical: varibles.mtdVSpacingXL,
+    paddingHorizontal: varibles.mtdHSpacingXL,
     fontSize: varibles.mtdFontSizeL,
     textAlign: 'center',
     color: varibles.mtdGrayBase
@@ -33,8 +33,8 @@ export default StyleSheet.create({
 
   operator: {
     flex: 1,
-    paddingVertical: varibles.mtdVSpacingXl,
-    paddingHorizontal: varibles.mtdHSpacingXl,
+    paddingVertical: varibles.mtdVSpacingXL,
+    paddingHorizontal: varibles.mtdHSpacingXL,
     fontSize: varibles.mtdFontSizeL,
     color: varibles.mtdGray
   }

@@ -7,6 +7,9 @@ import NavigationBar from './NavigationBar'
 import Form from './Form'
 import Input from './Input'
 import Radio from './Radio'
+import Checkbox from './Checkbox'
+import Switch from './Switch'
+
 import Scrollpicker from './Scrollpicker'
 
 
@@ -19,8 +22,6 @@ import Actionsheet from './Actionsheet'
 import BottomModal from './BottomModal'
 import Picker from './Picker'
 
-// import Checkbox from './Checkbox'
-
 
 
 // import Dropdown from './Dropdown'
@@ -31,7 +32,7 @@ import Progress from './Progress'
 
 // import Toast from './Toast'
 // import Stepper from './Stepper'
-// import Switch from './Switch'
+
 // import Cascader from './Cascader'
 
 // import Badge from './Badge'
@@ -85,20 +86,20 @@ export const pageList = [
   },
 
   {
-    screen: () => {},
+    screen: Radio,
     key: 'Radio',
     group: 'dataEntry',
     label: '单选'
   },
 
   {
-    screen: () => {},
+    screen: Checkbox,
     key: 'Checkbox',
     group: 'dataEntry',
     label: '多选'
   },
   {
-    screen: () => {},
+    screen: Switch,
     key: 'Switch',
     group: 'dataEntry',
     label: '开关'
@@ -253,11 +254,6 @@ export const pageList = [
   //   screen: Form,
   //   key: 'Form',
   //   label: '表单'
-  // },
-  // {
-  //   screen: Switch,
-  //   key: 'Switch',
-  //   label: '开关'
   // },
   // {
   //   screen: Input,

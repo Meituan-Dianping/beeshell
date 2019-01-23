@@ -90,8 +90,8 @@ class Home extends Component<MyProps, MyState> {
         <View
           style={[
             {
-              paddingHorizontal: variables.mtdHSpacingXl,
-              paddingVertical: variables.mtdVSpacingXl,
+              paddingHorizontal: variables.mtdHSpacingXL,
+              paddingVertical: variables.mtdVSpacingXL,
               backgroundColor: '#fff',
               borderTopWidth: StyleSheet.hairlineWidth,
               borderTopColor: 'transparent',
@@ -117,7 +117,7 @@ class Home extends Component<MyProps, MyState> {
             (!isLast) ?
             <View
               style={{
-                marginLeft: variables.mtdHSpacingXl,
+                marginLeft: variables.mtdHSpacingXL,
                 height: StyleSheet.hairlineWidth,
                 backgroundColor: variables.mtdGrayLightest
               }}>

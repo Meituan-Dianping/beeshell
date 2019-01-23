@@ -8,19 +8,19 @@ import {
 
 import radioItemStyles from './radioItemStyles'
 import variables from '../../common/styles/variables'
+import styleUtils from '../../common/styles/utils'
 import { Icon } from '../Icon'
 
 interface RadioItemProps {
-  label?: any
+  label: string | Function
   value: any
   disabled?: boolean
   checked?: boolean
   iconPosition?: 'left' | 'right'
   onChange: Function
-  renderItem: Function
 }
 
-class RadioItem extends Component<RadioItemProps> {
+export default class RadioItem extends Component<RadioItemProps> {
   static displayName = 'RadioItem'
   static defaultProps = {
     label: '选项',
@@ -28,7 +28,6 @@ class RadioItem extends Component<RadioItemProps> {
     disabled: false,
     checked: false,
     iconPosition: 'right',
-    renderItem: null
   }
 
   constructor (props) {
@@ -65,57 +64,48 @@ class RadioItem extends Component<RadioItemProps> {
   }
 
   renderLabelText = (checked) => {
-    const titleTextView =
-      typeof this.props.label === 'string' ? (
-        <Text
-          style={[
-            radioItemStyles.labelText,
-            checked ? { color: variables.mtdBrandPrimary } : null
-          ]}
-        >
-          {this.props.label}
-        </Text>
-      ) : (
-        this.props.label
-      )
-
-    return titleTextView
+    return (
+      <Text
+        style={[
+          radioItemStyles.labelText,
+          checked ? [ styleUtils.textPrimaryDark, styleUtils.textBold ] : null
+        ]}>
+        {this.props.label}
+      </Text>
+    )
   }
 
   render () {
-    const { disabled, checked, iconPosition, renderItem } = this.props
+    const { disabled, checked, iconPosition, label } = this.props
 
     return (
-      <View
+      <TouchableOpacity
         style={[
           radioItemStyles.container,
           {
-            opacity: disabled ? 0.3 : 1
+            opacity: disabled ? variables.mtdOpacity : 1
           }
         ]}
-      >
-        <TouchableOpacity onPress={this.handlePress}>
-          {
-            renderItem ? renderItem(checked) :
-            <View
-              style={[
-                radioItemStyles.touchContainer,
-                this.props.iconPosition === 'right' ? {
-                  flexDirection: 'row-reverse',
-                  justifyContent: 'space-between'
-                } : null
-              ]}
-            >
-              {this.renderIcon(checked, iconPosition)}
-              <View style={radioItemStyles.label}>
-                {this.renderLabelText(checked)}
-              </View>
+        activeOpacity={variables.mtdOpacity}
+        onPress={this.handlePress}>
+        {
+          typeof label === 'function' ? label(checked) :
+          <View
+            style={[
+              radioItemStyles.touchContainer,
+              this.props.iconPosition === 'right' ? {
+                flexDirection: 'row-reverse',
+                justifyContent: 'space-between'
+              } : null
+            ]}
+          >
+            {this.renderIcon(checked, iconPosition)}
+            <View style={radioItemStyles.label}>
+              {this.renderLabelText(checked)}
             </View>
-          }
-        </TouchableOpacity>
-      </View>
+          </View>
+        }
+      </TouchableOpacity>
     )
   }
 }
-
-export default RadioItem

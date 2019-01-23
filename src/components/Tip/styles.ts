@@ -8,7 +8,7 @@ export default StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 30,
 
-    borderRadius: varibles.mtdRadiusXs,
+    borderRadius: varibles.mtdRadiusXS,
     backgroundColor: 'rgba(0, 0, 0, 0.75)',
     overflow: 'hidden',
   },

@@ -7,6 +7,8 @@ export default {
   },
   inputStyle: {
     padding: 0,
-    fontSize: variables.inputTextFontSize
+    fontSize: variables.inputTextFontSize,
+    height: variables.inputAreaHeight,
+    textAlignVertical: 'center'
   }
 }

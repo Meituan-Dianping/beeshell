@@ -62,7 +62,8 @@ export class BottomModal extends SlideModal<BottomModalProps, BottomModalState> 
             style={[
               styles.operator,
               styleUtils.textRight,
-              styleUtils.textPrimaryDark
+              styleUtils.textPrimaryDark,
+              styleUtils.textBold
             ]}
             numberOfLines={1}>
             {rightLabel}

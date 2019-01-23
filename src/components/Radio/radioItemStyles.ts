@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import defaultTheme from '../../common/styles/variables'
+import variables from '../../common/styles/variables'
 
 export default StyleSheet.create({
   container: {},
@@ -7,14 +7,14 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    paddingVertical: defaultTheme.mtdVSpacingL
+    paddingVertical: variables.radioItemVSpacing
   },
 
   label: {
     flex: 1
   },
   labelText: {
-    fontSize: defaultTheme.mtdFontSizeM,
-    color: defaultTheme.mtdGrayBase
+    fontSize: variables.mtdFontSizeM,
+    color: variables.mtdGrayBase
   }
 })

@@ -26,7 +26,7 @@ const buttons = {
 export default StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    borderRadius: variables.mtdRadiusXs,
+    borderRadius: variables.mtdRadiusXS,
     overflow: 'hidden'
   },
   header: {
