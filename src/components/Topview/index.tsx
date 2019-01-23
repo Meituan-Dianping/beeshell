@@ -9,17 +9,17 @@ import {
 
 let topview = null
 
-class Topview extends Component<any, {count: number, modelList: Array<any>}> {
-  static styles = StyleSheet.create({
-    container: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0
-    }
-  })
+const topviewStyles = StyleSheet.create({
+  container: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0
+  }
+})
 
+class Topview extends Component<any, {count: number, modelList: Array<any>}> {
   constructor (props) {
     super(props)
     this.state = {
@@ -133,13 +133,13 @@ class Topview extends Component<any, {count: number, modelList: Array<any>}> {
         <View
           pointerEvents='box-none'
           collapsable={false}
-          style={Topview.styles.container}>
+          style={topviewStyles.container}>
 
           {
             modelList.map((item) => {
               return item.component ? (
                   <View
-                      style={Topview.styles.container}
+                      style={topviewStyles.container}
                       key={item.id}
                       collapsable={false}
                       pointerEvents={'box-none'}>
