@@ -109,7 +109,8 @@ const formItem = {
  */
 const input = {
   // input组件安全区域 高度
-  inputTextFontSize: 14
+  inputTextFontSize: 14,
+  inputAreaHeight: 30
 }
 
 

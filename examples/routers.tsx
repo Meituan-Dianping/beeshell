@@ -8,6 +8,8 @@ import Form from './Form'
 import Input from './Input'
 import Radio from './Radio'
 import Checkbox from './Checkbox'
+import Switch from './Switch'
+
 import Scrollpicker from './Scrollpicker'
 
 
@@ -30,7 +32,7 @@ import Picker from './Picker'
 
 // import Toast from './Toast'
 // import Stepper from './Stepper'
-// import Switch from './Switch'
+
 // import Cascader from './Cascader'
 
 // import Badge from './Badge'
@@ -95,7 +97,7 @@ export const pageList = [
     label: '多选'
   },
   {
-    screen: () => {},
+    screen: Switch,
     key: 'Switch',
     group: 'dataEntry',
     label: '开关'
@@ -250,11 +252,6 @@ export const pageList = [
   //   screen: Form,
   //   key: 'Form',
   //   label: '表单'
-  // },
-  // {
-  //   screen: Switch,
-  //   key: 'Switch',
-  //   label: '开关'
   // },
   // {
   //   screen: Input,
