@@ -7,7 +7,7 @@ import NavigationBar from './NavigationBar'
 import Form from './Form'
 import Input from './Input'
 import Radio from './Radio'
-// import Checkbox from './Checkbox'
+import Checkbox from './Checkbox'
 import Scrollpicker from './Scrollpicker'
 
 
@@ -89,7 +89,7 @@ export const pageList = [
   },
 
   {
-    screen: () => {},
+    screen: Checkbox,
     key: 'Checkbox',
     group: 'dataEntry',
     label: '多选'

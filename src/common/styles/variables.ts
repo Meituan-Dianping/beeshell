@@ -171,8 +171,8 @@ const slider = {
 //  * Checkbox 组件
 //  */
 const checkbox = {
-  checkboxIconContainSize: 20,
-  checkboxIconSize: 10
+  checkboxIconContainerSize: 18,
+  checkboxIconSize: 12
 }
 // /**
 //  * Popover 组件

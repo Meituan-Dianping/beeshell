@@ -1,5 +1,5 @@
 import Checkbox from './Checkbox'
-import CheckboxItem from './CheckboxItem'
+import { CheckboxItem } from './CheckboxItem'
 
 Checkbox.Item = CheckboxItem
 

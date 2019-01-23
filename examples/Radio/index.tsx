@@ -84,19 +84,19 @@ export default class RadioScreen extends Component<any, any> {
             }}>
             <Radio.Item
               value={1}
-              renderItem={(checked) => {
+              label={(checked) => {
                 return this.renderItem(checked, 0, '选项一')
               }}
             />
             <Radio.Item
               value={2}
-              renderItem={(checked) => {
+              label={(checked) => {
                 return this.renderItem(checked, 1, '选项二')
               }}
             />
             <Radio.Item
               value={3}
-              renderItem={(checked) => {
+              label={(checked) => {
                 return this.renderItem(checked, 2, '选项三')
               }}
             />
