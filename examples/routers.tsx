@@ -27,7 +27,7 @@ import Picker from './Picker'
 // import Dropdown from './Dropdown'
 
 // import Tab from './Tab'
-// import Progress from './Progress'
+import Progress from './Progress'
 // import Select from './Select'
 
 // import Toast from './Toast'
@@ -39,13 +39,15 @@ import Picker from './Picker'
 // import Rate from './Rate'
 // import Loading from './Loading'
 // import Slider from './Slider'
-// import Carousel from './Carousel'
+import Carousel from './Carousel'
 
 
 // import Popover from './Popover'
 // import Calendar from './Calendar'
 // import Tags from './Tags'
 // yarn new import 的占位
+
+console.disableYellowBox = true
 
 export const pageList = [
   {
@@ -130,14 +132,14 @@ export const pageList = [
 
 
   {
-    screen: () => {},
+    screen: Carousel,
     key: 'Carousel',
     group: 'dataDisplay',
     label: '轮播'
   },
 
   {
-    screen: () => {},
+    screen: Progress,
     key: 'Progress',
     group: 'dataDisplay',
     label: '进度条'

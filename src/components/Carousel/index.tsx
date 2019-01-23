@@ -11,6 +11,8 @@ import {
 
 import carouselStyle from './styles'
 
+import variables from '../../common/styles/variables'
+
 export interface CarouselProps {
   style?: any
   horizontal?: boolean
@@ -389,7 +391,7 @@ export class Carousel extends Component<CarouselProps, any> {
 
     let dots = []
     const ActiveDot = this.props.activeDot || <View style={[{
-      backgroundColor: this.props.activeDotColor || '#007aff',
+      backgroundColor: this.props.activeDotColor || variables.mtdBrandPrimary,
       width: 8,
       height: 8,
       borderRadius: 4,
