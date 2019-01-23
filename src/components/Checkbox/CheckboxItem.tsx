@@ -115,7 +115,7 @@ export class CheckboxItem<T extends CheckboxItemProps, P > extends Component<T, 
         activeOpacity={variables.mtdOpacity}>
 
         {
-          typeof label === 'function' ? label.call(null, checked) :
+          typeof label === 'function' ? (label as any).call(null, checked) :
           <View
             style={[
               styles.touchContainer,
