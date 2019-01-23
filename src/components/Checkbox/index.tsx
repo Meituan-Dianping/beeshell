@@ -1,4 +1,4 @@
-import Checkbox from './Checkbox1'
+import Checkbox from './Checkbox'
 import CheckboxItem from './CheckboxItem'
 
 Checkbox.Item = CheckboxItem
