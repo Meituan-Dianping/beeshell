@@ -9,14 +9,18 @@ import Input from './Input'
 import Radio from './Radio'
 import Scrollpicker from './Scrollpicker'
 
-import Actionsheet from './Actionsheet'
+
+import Modal from './Modal'
 import Dialog from './Dialog'
+import Tip from './Tip'
+
+import SlideModal from './SlideModal'
+import Actionsheet from './Actionsheet'
 import BottomModal from './BottomModal'
 import Picker from './Picker'
 
 // import Checkbox from './Checkbox'
-// import Modal from './Modal'
-// import SlideModal from './SlideModal'
+
 
 
 // import Dropdown from './Dropdown'
@@ -25,7 +29,6 @@ import Picker from './Picker'
 // import Progress from './Progress'
 // import Select from './Select'
 
-// import Tip from './Tip'
 // import Toast from './Toast'
 // import Stepper from './Stepper'
 // import Switch from './Switch'
@@ -176,10 +179,10 @@ export const pageList = [
 
 
   {
-    screen: Actionsheet,
-    key: 'Actionsheet',
-    group: 'feedback',
-    label: '行动面板'
+    screen: Modal,
+    key: 'Modal',
+    label: '基础弹窗',
+    group: 'feedback'
   },
 
   {
@@ -187,6 +190,26 @@ export const pageList = [
     key: 'Dialog',
     label: '对话框',
     group: 'feedback'
+  },
+
+  {
+    screen: Tip,
+    key: 'Tip',
+    label: '弹窗提示',
+    group: 'feedback'
+  },
+
+  {
+    screen: SlideModal,
+    key: 'SlideModal',
+    label: '拉动弹窗',
+    group: 'feedback'
+  },
+  {
+    screen: Actionsheet,
+    key: 'Actionsheet',
+    group: 'feedback',
+    label: '行动面板'
   },
 
   {
@@ -290,11 +313,6 @@ export const pageList = [
   //   label: '标签集合'
   // },
   // {
-  //   screen: Tip,
-  //   key: 'Tip',
-  //   label: '顶部提示'
-  // },
-  // {
   //   screen: Popover,
   //   key: 'Popover',
   //   label: '下拉选择'
@@ -311,16 +329,7 @@ export const pageList = [
   // },
   // // 下面是基础组件，名字需要商榷一些
   // // 可以展示出来，但 example 要求统一漂亮一点～
-  // {
-  //   screen: Modal,
-  //   key: 'Modal',
-  //   label: '底层类'
-  // },
-  // {
-  //   screen: SlideModal,
-  //   key: 'SlideModal',
-  //   label: '底层类'
-  // },
+
   // {
   //   screen: Dropdown,
   //   key: 'Dropdown',

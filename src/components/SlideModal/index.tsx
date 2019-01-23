@@ -39,7 +39,7 @@ export class SlideModal<
   static defaultProps = {
     ...Modal.defaultProps,
     cancelable: false,
-    opacity: 0.3,
+    backdropOpacity: 0.3,
     offsetX: 0,
     offsetY: screen.height,
     direction: 'up',
@@ -101,7 +101,7 @@ export class SlideModal<
   open (c) {
     let containerReverseRect = null
     if (this.props.forceFullScreen) {
-      const { direction, offsetX, offsetY, opacity } = this.props
+      const { direction, offsetX, offsetY, backdropOpacity } = this.props
       const { directionType } = this.state
 
       containerReverseRect = {
@@ -121,8 +121,8 @@ export class SlideModal<
             direction === 'right' ? offsetX : screen.width - offsetX
         ) : screen.width,
 
-        backgroundColor: StyleSheet.flatten(modalStyles.mask).backgroundColor,
-        opacity
+        backgroundColor: StyleSheet.flatten(modalStyles.backdrop).backgroundColor,
+        opacity: backdropOpacity
       }
     }
 
@@ -163,10 +163,10 @@ export class SlideModal<
         ]}
       >
         <TouchableOpacity
-          style={[modalStyles.mask, { opacity: this.props.opacity }]}
-          activeOpacity={this.props.opacity}
+          style={[modalStyles.backdrop, { opacity: this.props.backdropOpacity }]}
+          activeOpacity={this.props.backdropOpacity}
           onPress={() => {
-            this.handleMaskPress()
+            this.handleBackdropPress()
           }}
         />
 

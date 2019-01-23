@@ -13,23 +13,22 @@ export * from './components/Rate'
 export * from './components/Stepper'
 export * from './components/Scrollpicker'
 
-
 export * from './components/Carousel'
 export * from './components/Progress'
 
 
-export * from './components/Actionsheet'
+
+export * from './components/Modal'
 export * from './components/Dialog'
-export * from './components/BottomModal'
-
-
+export * from './components/Tip'
 
 export * from './components/SlideModal'
-export * from './components/Topview'
-export * from './components/Modal'
-
-
+export * from './components/Actionsheet'
+export * from './components/BottomModal'
 export * from './components/Picker'
+
+export * from './components/Topview'
+
 
 
 export * from './components/Datepicker'
