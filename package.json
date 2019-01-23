@@ -1,6 +1,6 @@
 {
   "name": "@roo/roo-mobile-rn",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,7 +9,7 @@
     "test": "jest --coverage",
     "lint": "tslint -p ./ -c ./tslint.json",
     "tsc:examples": "rm -rf distExamples && tsc",
-    "tsc:src": "rm -rf dist && tsc -p ./src",
+    "tsc:src": "rm -rf dist && tsc -p ./src && rsync -rv --exclude=*.ts --exclude=*.tsx src/ dist/",
     "prepublish": "npm run tsc:src"
   },
   "files": [
