@@ -46,7 +46,7 @@ export default {
   textTriangle: {
     position: 'absolute',
     top: 10,
-    fontSize: variables.mtdFontSizeXs,
+    fontSize: variables.mtdFontSizeXS,
     color: '#fff'
   }
 }

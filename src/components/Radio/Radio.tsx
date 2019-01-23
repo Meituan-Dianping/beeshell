@@ -4,10 +4,10 @@ import radioStyles from './radioStyles'
 import { FormItemConsumer } from '../Form/formItemContext'
 
 interface RadioProps {
-  // 对齐方式
-  iconPosition?: 'left' | 'right',
-  onChange: Function,
-  children: ReactChild[],
+  style: any
+  iconPosition?: 'left' | 'right'
+  onChange: Function
+  children: ReactChild[]
   checkedValue: any
 }
 
@@ -15,6 +15,7 @@ export default class Radio extends Component<RadioProps> {
   static Item = null
   static displayName = 'Radio'
   static defaultProps = {
+    style: {},
     checkedValue: undefined,
     onChange: null,
     iconPosition: 'left'
@@ -61,7 +62,7 @@ export default class Radio extends Component<RadioProps> {
 
   render () {
     return (
-      <View style={[radioStyles.container]}>
+      <View style={[radioStyles.container, this.props.style]}>
         <FormItemConsumer>
           { (contextObject) => {
             this.formItemContext = contextObject

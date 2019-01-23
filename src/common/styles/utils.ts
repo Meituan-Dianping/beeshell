@@ -44,11 +44,15 @@ const utils = StyleSheet.create({
     color: variables.mtdBrandWarning
   },
 
+
   /**
-   * Layout
+   * Text weight
    */
-  row: {
-    marginHorizontal: -variables.mtdHSpacingM
+  textNormal: {
+    fontWeight: 'normal'
+  },
+  textBold: {
+    fontWeight: 'bold'
   },
 
   /**

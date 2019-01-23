@@ -17,8 +17,8 @@ export default StyleSheet.create({
   },
 
   title: {
-    paddingVertical: variables.mtdVSpacingXl,
-    paddingHorizontal: variables.mtdHSpacingXl,
+    paddingVertical: variables.mtdVSpacingXL,
+    paddingHorizontal: variables.mtdHSpacingXL,
 
     textAlign: 'center',
     fontSize: variables.mtdFontSizeM,
@@ -38,8 +38,8 @@ export default StyleSheet.create({
   },
 
   itemText: {
-    paddingVertical: variables.mtdVSpacingXxl,
-    paddingHorizontal: variables.mtdHSpacingXl,
+    paddingVertical: variables.mtdVSpacingXXL,
+    paddingHorizontal: variables.mtdHSpacingXL,
 
     fontSize: variables.mtdFontSizeL,
     textAlign: 'center',

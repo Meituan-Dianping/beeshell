@@ -7,7 +7,7 @@ import {
   SafeAreaView
 } from 'react-native'
 import { Scrollpicker, Datepicker, Button, Icon, BottomModal } from '../../src'
-import variables from '../../src/common/styles/variables'
+import variables from '../customTheme'
 
 import styles from '../common/styles'
 

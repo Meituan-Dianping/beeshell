@@ -8,10 +8,11 @@ import {
 
 import radioItemStyles from './radioItemStyles'
 import variables from '../../common/styles/variables'
+import styleUtils from '../../common/styles/utils'
 import { Icon } from '../Icon'
 
 interface RadioItemProps {
-  label?: any
+  label?: string
   value: any
   disabled?: boolean
   checked?: boolean
@@ -20,7 +21,7 @@ interface RadioItemProps {
   renderItem: Function
 }
 
-class RadioItem extends Component<RadioItemProps> {
+export default class RadioItem extends Component<RadioItemProps> {
   static displayName = 'RadioItem'
   static defaultProps = {
     label: '选项',
@@ -65,21 +66,15 @@ class RadioItem extends Component<RadioItemProps> {
   }
 
   renderLabelText = (checked) => {
-    const titleTextView =
-      typeof this.props.label === 'string' ? (
-        <Text
-          style={[
-            radioItemStyles.labelText,
-            checked ? { color: variables.mtdBrandPrimary } : null
-          ]}
-        >
-          {this.props.label}
-        </Text>
-      ) : (
-        this.props.label
-      )
-
-    return titleTextView
+    return (
+      <Text
+        style={[
+          radioItemStyles.labelText,
+          checked ? [ styleUtils.textPrimaryDark, styleUtils.textBold ] : null
+        ]}>
+        {this.props.label}
+      </Text>
+    )
   }
 
   render () {
@@ -90,11 +85,13 @@ class RadioItem extends Component<RadioItemProps> {
         style={[
           radioItemStyles.container,
           {
-            opacity: disabled ? 0.3 : 1
+            opacity: disabled ? variables.mtdOpacity : 1
           }
         ]}
       >
-        <TouchableOpacity onPress={this.handlePress}>
+        <TouchableOpacity
+          activeOpacity={ disabled ? 1 : variables.mtdOpacity}
+          onPress={this.handlePress}>
           {
             renderItem ? renderItem(checked) :
             <View
@@ -117,5 +114,3 @@ class RadioItem extends Component<RadioItemProps> {
     )
   }
 }
-
-export default RadioItem

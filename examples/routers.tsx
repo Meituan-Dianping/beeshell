@@ -7,6 +7,7 @@ import NavigationBar from './NavigationBar'
 import Form from './Form'
 import Input from './Input'
 import Radio from './Radio'
+// import Checkbox from './Checkbox'
 import Scrollpicker from './Scrollpicker'
 
 
@@ -18,8 +19,6 @@ import SlideModal from './SlideModal'
 import Actionsheet from './Actionsheet'
 import BottomModal from './BottomModal'
 import Picker from './Picker'
-
-// import Checkbox from './Checkbox'
 
 
 
@@ -83,7 +82,7 @@ export const pageList = [
   },
 
   {
-    screen: () => {},
+    screen: Radio,
     key: 'Radio',
     group: 'dataEntry',
     label: '单选'
