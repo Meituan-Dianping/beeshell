@@ -28,7 +28,7 @@ import Picker from './Picker'
 
 // import Dropdown from './Dropdown'
 
-// import Tab from './Tab'
+import Tab from './Tab'
 import Progress from './Progress'
 // import Select from './Select'
 
@@ -37,8 +37,7 @@ import Progress from './Progress'
 
 // import Cascader from './Cascader'
 
-// import Badge from './Badge'
-
+import Badge from './Badge'
 // import Loading from './Loading'
 
 import Carousel from './Carousel'
@@ -148,7 +147,7 @@ export const pageList = [
   },
 
   {
-    screen: () => {},
+    screen: Badge,
     key: 'Badge',
     group: 'dataDisplay',
     label: '角标'
@@ -156,13 +155,13 @@ export const pageList = [
 
   {
     screen: () => {},
-    key: 'Tag',
+    key: 'Tags',
     group: 'dataDisplay',
     label: '标签'
   },
 
   {
-    screen: () => {},
+    screen: Tab,
     key: 'Tab',
     group: 'dataDisplay',
     label: '标签页'

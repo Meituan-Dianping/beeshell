@@ -39,14 +39,15 @@ const mtdFontSize = {
   mtdFontSizeXXXXL: 24,
   mtdFontSizeXXXXXL: 28
 }
-// 水平间距
+
 const mtdSpacing = {
+  // 水平间距
   mtdHSpacingS: 4,
   mtdHSpacingM: 8,
   mtdHSpacingL: 12,
   mtdHSpacingXL: 16,
   mtdHSpacingXXL: 20,
-
+  // 垂直间距
   mtdVSpacingXS: 2,
   mtdVSpacingS: 4,
   mtdVSpacingM: 8,
@@ -207,11 +208,6 @@ const carousel = {
   carouselPaginationVSpacing: mtdSpacing.mtdVSpacingXL,
   carouselPaginationHSpacing: mtdSpacing.mtdHSpacingL
 }
-// const tags = {
-//     tagRadius: 4,
-//     tagsBrokenHight: 24,
-//     tagFontSize: 10
-// }
 
 const variables = {
   ...mtdBrandColors,

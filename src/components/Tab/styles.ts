@@ -12,7 +12,7 @@ export default {
   item: {
     flexDirection: 'column',
     alignItems: 'center',
-    paddingVertical: variables.mtdVSpacingL,
+    paddingVertical: variables.mtdVSpacingXXL,
     paddingHorizontal: variables.mtdHSpacingL
   },
 
@@ -26,7 +26,7 @@ export default {
     bottom: 0,
     width: 25,
     height: 2,
-    marginTop: variables.mtdVSpacingL - 1,
+    marginTop: variables.mtdVSpacingXXL - 1,
     backgroundColor: '#fff'
   }
 }
