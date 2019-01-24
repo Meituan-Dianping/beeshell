@@ -9,6 +9,7 @@ import Input from './Input'
 import Radio from './Radio'
 import Checkbox from './Checkbox'
 import Switch from './Switch'
+import Slider from './Slider'
 
 import Scrollpicker from './Scrollpicker'
 
@@ -38,7 +39,7 @@ import Progress from './Progress'
 // import Badge from './Badge'
 // import Rate from './Rate'
 // import Loading from './Loading'
-// import Slider from './Slider'
+
 import Carousel from './Carousel'
 
 
@@ -105,7 +106,7 @@ export const pageList = [
     label: '开关'
   },
   {
-    screen: () => {},
+    screen: Slider,
     key: 'Slider',
     group: 'dataEntry',
     label: '滑块'
@@ -244,11 +245,6 @@ export const pageList = [
   //   screen: Radio,
   //   key: 'Radio',
   //   label: '单选框'
-  // },
-  // {
-  //   screen: Slider,
-  //   key: 'Slider',
-  //   label: '滑块'
   // },
   // {
   //   screen: Form,

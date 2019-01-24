@@ -25,7 +25,7 @@ const mtdFillColors = {
   mtdFillBase: '#ffffff',
   mtdFillGray: '#F5F5F5',
   mtdFillBody: '#F8F8F8',
-  mtdFillMask: 'rgba(0, 0, 0, .3)' // 遮罩背景
+  mtdFillBackdrop: 'rgba(0, 0, 0, .3)'
 }
 // 字体尺寸
 const mtdFontSize = {
@@ -69,13 +69,14 @@ const mtdBorder = {
   mtdBorderColorDark: '#e5e5e5'
 }
 
+const mtdOpacity = 0.3
 
 /**
  * Button 组件
  */
 const button = {
   buttonBorderRadius: 0,
-  buttonActiveOpacity: 0.3,
+  buttonActiveOpacity: mtdOpacity,
 
   buttonLFontSize: mtdFontSize.mtdFontSizeXL,
   buttonLHSpacing: 50,
@@ -215,7 +216,7 @@ const variables = {
   ...mtdSpacing,
   ...mtdRadius,
   ...mtdBorder,
-  mtdOpacity: 0.3,
+  mtdOpacity,
 
   ...button,
   ...form,

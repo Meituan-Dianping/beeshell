@@ -47,19 +47,19 @@ export class NavigationBar extends Component<NavigationBarProps, any> {
 
     if (index === 0) {
       return backLabel == null ? null : (
-        <View
+        <TouchableOpacity
           style={{
             flexDirection: 'row',
             alignItems: 'center',
             paddingHorizontal: variables.mtdHSpacingXL
+          }}
+          onPress={() => {
+            backCallback && backCallback()
           }}>
-          <TouchableOpacity
+          <View
             style={{
               flexDirection: 'row',
               minWidth: 30
-            }}
-            onPress={() => {
-              backCallback && backCallback()
             }}>
             <Icon
               type='angle-left'
@@ -73,8 +73,8 @@ export class NavigationBar extends Component<NavigationBarProps, any> {
               }}>
               {backLabel}
             </Text>
-          </TouchableOpacity>
-        </View>
+          </View>
+        </TouchableOpacity>
       )
     }
 
