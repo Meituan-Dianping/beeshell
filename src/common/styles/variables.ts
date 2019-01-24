@@ -176,6 +176,11 @@ const checkbox = {
   checkboxIconContainerSize: 18,
   checkboxIconSize: 12
 }
+
+const rate = {
+  rateIconSize: 20,
+  rateIconColor: mtdBrandColors.mtdBrandPrimary
+}
 // /**
 //  * Popover 组件
 //  */
@@ -226,6 +231,7 @@ const variables = {
   ...radioItem,
   ...checkbox,
   ...slider,
+  ...rate,
 
   ...carousel,
 }

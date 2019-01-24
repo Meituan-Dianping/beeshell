@@ -10,6 +10,7 @@ import Radio from './Radio'
 import Checkbox from './Checkbox'
 import Switch from './Switch'
 import Slider from './Slider'
+import Rate from './Rate'
 
 import Scrollpicker from './Scrollpicker'
 
@@ -37,7 +38,7 @@ import Progress from './Progress'
 // import Cascader from './Cascader'
 
 // import Badge from './Badge'
-// import Rate from './Rate'
+
 // import Loading from './Loading'
 
 import Carousel from './Carousel'
@@ -112,7 +113,7 @@ export const pageList = [
     label: '滑块'
   },
   {
-    screen: () => {},
+    screen: Rate,
     key: 'Rate',
     group: 'dataEntry',
     label: '评分'

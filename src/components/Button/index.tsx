@@ -7,27 +7,27 @@ import {
 } from 'react-native'
 import buttonStyles from './styles'
 export { buttonStyles }
-import varibles from '../../common/styles/variables'
+import variables from '../../common/styles/variables'
 
 
 const fontSizeMap = {
-  lg: varibles.buttonLFontSize,
-  md: varibles.buttonMFontSize,
-  sm: varibles.buttonSFontSize
+  lg: variables.buttonLFontSize,
+  md: variables.buttonMFontSize,
+  sm: variables.buttonSFontSize
 }
 
 const paddingMap = {
   lg: {
-    paddingHorizontal: varibles.buttonLHSpacing,
-    paddingVertical: varibles.buttonLVSpacing
+    paddingHorizontal: variables.buttonLHSpacing,
+    paddingVertical: variables.buttonLVSpacing
   },
   md: {
-    paddingHorizontal: varibles.buttonMHSpacing,
-    paddingVertical: varibles.buttonMVSpacing
+    paddingHorizontal: variables.buttonMHSpacing,
+    paddingVertical: variables.buttonMVSpacing
   },
   sm: {
-    paddingHorizontal: varibles.buttonSHSpacing,
-    paddingVertical: varibles.buttonSVSpacing
+    paddingHorizontal: variables.buttonSHSpacing,
+    paddingVertical: variables.buttonSVSpacing
   }
 }
 
@@ -76,14 +76,14 @@ export class Button extends React.Component<ButtonProps, {}> {
         style={[
           styleWrapper,
           {
-            opacity: disabled ? (varibles as any).buttonActiveOpacity : 1,
+            opacity: disabled ? (variables as any).buttonActiveOpacity : 1,
             ...(paddingMap[size] || paddingMap['md'])
           },
           style
         ]}
         disabled={disabled}
         onPress={() => this.onPressHandle()}
-        activeOpacity={disabled ? 1 : (varibles as any).buttonActiveOpacity}>
+        activeOpacity={disabled ? 1 : (variables as any).buttonActiveOpacity}>
         {
           React.isValidElement(children) ? children : (
             <Text
