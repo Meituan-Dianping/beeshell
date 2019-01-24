@@ -121,7 +121,7 @@ export class Stepper extends Component<StepperProps, StepperState> {
     return (
       <View style={[stepperStyles.container, style]}>
         <TouchableOpacity
-          activeOpacity={0.3}
+          activeOpacity={variables.mtdOpacity}
           onPress={this.onDecrease}
           disabled={!decreasable}>
 
@@ -150,7 +150,7 @@ export class Stepper extends Component<StepperProps, StepperState> {
           keyboardType='numeric'
         />
         <TouchableOpacity
-          activeOpacity={0.3}
+          activeOpacity={variables.mtdOpacity}
           onPress={this.onIncrease}
           disabled={!increasable}>
          <View
