@@ -27,13 +27,12 @@ export default {
     width: 136
   },
   ctrl: {
-    width: 34,
-    height: 34,
+    width: variables.stepperOperatorSize,
+    height: variables.stepperOperatorSize,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 17,
     backgroundColor: variables.mtdBrandPrimary,
-    opacity: 1
+    borderRadius: variables.mtdRadiusXS
   },
   squareSolid: {
     borderRadius: 4
@@ -93,8 +92,8 @@ export default {
   input: {
     flex: 1,
     textAlign: 'center',
-    fontSize: 22,
-    color: '#333'
+    fontSize: 14,
+    color: variables.mtdGrayBase
   },
   inputWithBorder: {
     borderTopColor: variables.mtdBrandPrimary,
@@ -103,6 +102,6 @@ export default {
     borderBottomWidth: StyleSheet.hairlineWidth
   },
   disabled: {
-    opacity: 0.6
+    opacity: variables.mtdOpacity
   }
 }
