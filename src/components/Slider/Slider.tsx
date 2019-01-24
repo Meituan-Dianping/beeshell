@@ -17,56 +17,60 @@ import sliderStyle from './styles'
 import Coord from './Coord'
 
 const minTrackDisabledColor = variables.mtdGrayLighter
+const thumbTouchSize = {
+  width: 34,
+  height: 34
+}
+const thumbImage = require('./images/rectangle.png')
+const otherThumbImage = require('./images/rectangle.png')
 
 interface Props {
-  value?: number,
-  otherValue?: number,
-  minValue?: number,
-  maxValue?: number,
-  disabled?: boolean,
-  step?: number,
-  markOtptions?: any[],
-  renderMarkOptionItem?: (option: any, index: number) => ReactElement<any>,
-  renderToolTip?: (value: any) => ReactElement<any>,
-  minTrackColor?: string,
-  maxTrackColor?: string,
-  thumbColor?: string,
-  thumbTouchSize?: {
-    width?: number,
-    height?: number
-  },
-  onChange?: (value: number | number []) => void,
-  onStart?: (value: number | number []) => void,
-  onEnd?: (value: number | number []) => void,
-  trackStyle?: object,
-  thumbStyle?: object,
-  thumbImage?: ImageSourcePropType | '',
-  otherThumbImage?: ImageSourcePropType | '',
-  isRange?: boolean,
-  showTip?: boolean,
   style?: ViewStyle | RegisteredStyle<ViewStyle>
+
+  value?: number
+  otherValue?: number
+  minValue?: number
+  maxValue?: number
+  disabled?: boolean
+  step?: number
+  markOtptions?: any[]
+  renderMarkOptionItem?: Function
+
+  maxTrackColor?: string
+  minTrackColor?: string
+  rangeMinTrackColor?: string
+
+  onChange?: (value: number | number []) => void
+  onStart?: (value: number | number []) => void
+  onEnd?: (value: number | number []) => void
+
+  showTip?: boolean
+  renderToolTip?: (value: any) => ReactElement<any>
+  renderThumb?: Function
+
+  isRange?: boolean
 }
 
 interface State {
   containerSize: {
-    width: number,
+    width: number
     height: number
-  },
+  }
   trackSize: {
-    width: number,
+    width: number
     height: number
-  },
+  }
   thumbSize: {
-    width: number,
+    width: number
     height: number
-  },
+  }
   otherThumbSize: {
-    width: number,
+    width: number
     height: number
-  },
-  value: Animated.Value,
-  otherValue: Animated.Value,
-  tip: string,
+  }
+  value: Animated.Value
+  otherValue: Animated.Value
+  tip: string
   otherTip: string
 }
 
@@ -85,15 +89,13 @@ export default class Slider extends PureComponent<Props, State> {
     minValue: 0,
     maxValue: 1,
     step: 0,
+    maxTrackColor: variables.mtdFillBody,
     minTrackColor: variables.mtdBrandPrimary,
-    maxTrackColor: variables.mtdFillBase,
-    thumbColor: variables.mtdBrandPrimary,
-    thumbTouchSize: { width: 34, height: 34 },
-    thumbImage: require('./images/rectangle.png'),
+    rangeMinTrackColor: variables.mtdFillBody,
+
     isRange: false,
     otherValue: 0,
     showTip: false,
-    otherThumbImage: require('./images/rectangle.png')
   }
 
   constructor (props) {
@@ -175,11 +177,11 @@ export default class Slider extends PureComponent<Props, State> {
     return new Coord(
       touchOverflowSize.width / 2 +
         this.getThumbLeft(this.getCurrentValue(isOther), isOther) +
-        (thumbSize.width - props.thumbTouchSize.width) / 2,
+        (thumbSize.width - thumbTouchSize.width) / 2,
       touchOverflowSize.height / 2 +
-        (state.containerSize.height - props.thumbTouchSize.height) / 2,
-      props.thumbTouchSize.width,
-      props.thumbTouchSize.height
+        (state.containerSize.height - thumbTouchSize.height) / 2,
+      thumbTouchSize.width,
+      thumbTouchSize.height
     )
   }
 
@@ -384,11 +386,11 @@ export default class Slider extends PureComponent<Props, State> {
     const size: any = {}
     size.width = Math.max(
       0,
-      props.thumbTouchSize.width - thumbSize.width
+      thumbTouchSize.width - thumbSize.width
     )
     size.height = Math.max(
       0,
-      props.thumbTouchSize.height - state.containerSize.height
+      thumbTouchSize.height - state.containerSize.height
     )
 
     return size
@@ -415,8 +417,6 @@ export default class Slider extends PureComponent<Props, State> {
    * 默认滑块的的滑块图片渲染
    */
   renderThumbImage = (isOther?: boolean) => {
-    const { thumbImage, otherThumbImage, thumbTouchSize } = this.props
-
     if (!isOther && !thumbImage) return
 
     if (isOther && !otherThumbImage) return
@@ -440,7 +440,7 @@ export default class Slider extends PureComponent<Props, State> {
         markViewArr.push(renderMarkOptionItem(markOtptions[currStep], currStep))
       } else {
         markViewArr.push(
-          <View style={styles.markItemView}>
+          <View key={currStep} style={styles.markItemView}>
             <Text style={styles.markItemText}>{markOtptions[currStep]}</Text>
             <View style={styles.markItemLine}></View>
           </View>
@@ -472,10 +472,10 @@ export default class Slider extends PureComponent<Props, State> {
           renderToolTip ? renderToolTip(isOther ? otherTip : tip)
           :
             [
-              <View style={styles.toolTipTextContain}>
+              <View key={1} style={styles.toolTipTextContain}>
                 <Text style={styles.toolTipText}>{isOther ? otherTip : tip}</Text>
               </View>,
-              <View style={styles.toolTipIcon}></View>
+              <View key={2} style={styles.toolTipIcon}></View>
             ]
         }
       </View>
@@ -489,10 +489,6 @@ export default class Slider extends PureComponent<Props, State> {
     const {
       minValue,
       maxValue,
-      thumbColor,
-      thumbImage,
-      thumbStyle,
-      thumbTouchSize
     } = this.props
     const {
       value,
@@ -505,7 +501,7 @@ export default class Slider extends PureComponent<Props, State> {
       outputRange: [-1, containerSize.width - thumbSize.width + 1]
     })
 
-    const thumBg = thumbImage ? {} : { backgroundColor: thumbColor }
+    const thumBg = thumbImage ? {} : {}
 
     if (this.showAndroidTip) {
       return (
@@ -526,7 +522,6 @@ export default class Slider extends PureComponent<Props, State> {
           <View
             style={[
               thumBg,
-              thumbStyle,
               thumbTouchSize,
               { borderRadius: thumbTouchSize.width / 2 }
             ]}
@@ -543,7 +538,6 @@ export default class Slider extends PureComponent<Props, State> {
         style={[
           thumBg,
           styles.thumb,
-          thumbStyle,
           thumbTouchSize,
           { borderRadius: thumbTouchSize.width / 2 },
           {
@@ -564,11 +558,7 @@ export default class Slider extends PureComponent<Props, State> {
     const {
       minValue,
       maxValue,
-      thumbColor,
-      thumbImage,
-      thumbStyle,
       isRange,
-      thumbTouchSize
     } = this.props
 
     if (!isRange) {
@@ -581,7 +571,7 @@ export default class Slider extends PureComponent<Props, State> {
       otherThumbSize
     } = this.state
 
-    const thumBg = thumbImage ? {} : { backgroundColor: thumbColor }
+    const thumBg = thumbImage ? {} : {}
 
     const otherThumbRight = otherValue.interpolate({
       inputRange: [minValue, maxValue],
@@ -607,7 +597,6 @@ export default class Slider extends PureComponent<Props, State> {
           <View
             style={[
               thumBg,
-              thumbStyle,
               thumbTouchSize,
               { borderRadius: thumbTouchSize.width / 2 }
             ]}
@@ -625,7 +614,6 @@ export default class Slider extends PureComponent<Props, State> {
         style={[
           thumBg,
           styles.thumb,
-          thumbStyle,
           {
             transform: [{ translateX: otherThumbRight }, { translateY: 0 }]
           }
@@ -645,8 +633,7 @@ export default class Slider extends PureComponent<Props, State> {
       minValue,
       maxValue,
       minTrackColor,
-      maxTrackColor,
-      trackStyle,
+      rangeMinTrackColor,
       disabled,
       isRange
     } = this.props
@@ -659,7 +646,7 @@ export default class Slider extends PureComponent<Props, State> {
       inputRange: [minValue, maxValue],
       outputRange: [0, containerSize.width - thumbSize.width]
     })
-    const minimumTrackColor = isRange ? maxTrackColor : (disabled ? minTrackDisabledColor : minTrackColor)
+    const minimumTrackColor = isRange ? rangeMinTrackColor : (disabled ? minTrackDisabledColor : minTrackColor)
     const minimumTrackStyle = {
       position: 'absolute',
       width: Animated.add(minimumTrackWidth, thumbSize.width / 2),
@@ -668,7 +655,7 @@ export default class Slider extends PureComponent<Props, State> {
     return (
       <Animated.View
         renderToHardwareTextureAndroid
-        style={[styles.track, trackStyle, minimumTrackStyle]}
+        style={[styles.track, minimumTrackStyle]}
       />
     )
   }
@@ -681,7 +668,6 @@ export default class Slider extends PureComponent<Props, State> {
       minValue,
       maxValue,
       minTrackColor,
-      trackStyle,
       disabled
     } = this.props
     const {
@@ -702,7 +688,7 @@ export default class Slider extends PureComponent<Props, State> {
     return (
       <Animated.View
         renderToHardwareTextureAndroid
-        style={[styles.track, trackStyle, minimumTrackStyle]}
+        style={[styles.track, minimumTrackStyle]}
       />
     )
   }
@@ -710,9 +696,9 @@ export default class Slider extends PureComponent<Props, State> {
   render () {
     const {
       maxTrackColor,
-      trackStyle,
       style,
-      showTip
+      showTip,
+      renderThumb
     } = this.props
 
     const touchOverflowStyle = this.getTouchOverflowStyle()
@@ -729,9 +715,8 @@ export default class Slider extends PureComponent<Props, State> {
         >
           <View
             style={[
-              { backgroundColor: maxTrackColor },
               styles.track,
-              trackStyle
+              { backgroundColor: maxTrackColor },
             ]}
             renderToHardwareTextureAndroid
             onLayout={this.measureTrack}

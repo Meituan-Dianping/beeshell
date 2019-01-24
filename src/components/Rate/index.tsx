@@ -2,27 +2,30 @@ import React, { Component } from 'react'
 import { StyleSheet, View, PanResponder, InteractionManager } from 'react-native'
 
 import { Icon } from '../Icon'
-import styleObject from './styles'
+import styles from './styles'
+import variables from '../../common/styles/variables'
+
 export interface Props {
-  value: number,
-  maximum?: number,
+  value: number
+  maximum?: number
   icons?: {
-    emptyStar: JSX.Element,
-    fullStar: JSX.Element,
+    emptyStar: JSX.Element
+    fullStar: JSX.Element
     halfStar?: JSX.Element
-  },
-  starSize?: number,
-  marginOfStar?: number,
-  style?: any,
+  }
+  starSize?: number
+  starColor?: string
+  marginOfStar?: number
+  style?: any
   /**
-   * 只支持点击, 不响应滑动
+   * 只支持点击 不响应滑动
    */
-  clickOnly?: boolean,
+  clickOnly?: boolean
   /**
-   * 一旦开始选择,就不可以可以取消选择
+   * 一旦开始选择就不可以可以取消选择
    */
-  allowCancel?: boolean,
-  onChange?: Function,
+  allowCancel?: boolean
+  onChange?: Function
   onChangeMove?: Function
 }
 
@@ -30,17 +33,17 @@ export interface State {
   value: number
 }
 
-const Style = StyleSheet.create(styleObject as any)
+const rateStyles = StyleSheet.create(styles as any)
 
 export class Rate extends Component<Props, State> {
   static defaultProps = {
     maximum: 5,
     icons: {
-      emptyStar: <Icon type='star' size={20} tintColor='#efefef' />,
-      fullStar: <Icon type='star' size={20} />,
-      halfStar: <Icon type='star-half' size={20} />
+      emptyStar: <Icon type='star-o' size={variables.rateIconSize} tintColor={variables.rateIconColor} />,
+      fullStar: <Icon type='star' size={variables.rateIconSize} tintColor={variables.rateIconColor} />,
+      halfStar: <Icon type='star-half-o' size={variables.rateIconSize} tintColor={variables.rateIconColor} />
     },
-    starSize: 20,
+    starSize: variables.rateIconSize,
     marginOfStar: 4,
     clickOnly: false,
     allowCancel: true
@@ -84,7 +87,7 @@ export class Rate extends Component<Props, State> {
     return (
       <View
         ref={c => { this.containerView = c }}
-        style={[Style.warp, this.props.style]}
+        style={[rateStyles.warp, this.props.style]}
         {...extraProps}
         collapsable={false}
       >
@@ -94,11 +97,11 @@ export class Rate extends Component<Props, State> {
   }
 
   getStars (currentRating) {
-    const { icons: { halfStar, fullStar, emptyStar }, maximum, marginOfStar, starSize } = this.props
+    const { icons: { halfStar, fullStar, emptyStar }, maximum, marginOfStar, starSize, starColor } = this.props
 
     const stars = []
     for (let i = 0; i < maximum; i++) {
-      const extraProps = { key: i, style: { marginRight: marginOfStar, width: starSize, height: starSize } }
+      const extraProps = { key: i, style: { marginRight: marginOfStar }, size: starSize, tintColor: starColor }
       if (
         halfStar &&
         currentRating > i &&

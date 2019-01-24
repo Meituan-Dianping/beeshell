@@ -27,7 +27,7 @@ export default {
   },
   track: {
     height: variables.sliderTrackHeight,
-    borderRadius: variables.sliderTrackHeight / 2
+    borderRadius: variables.sliderTrackHeight / 2,
   },
   thumb: {
     position: 'absolute',
@@ -35,7 +35,6 @@ export default {
   },
   touchArea: {
     position: 'absolute',
-    backgroundColor: 'transparent',
     top: 0,
     left: 0,
     right: 0,
@@ -52,7 +51,7 @@ export default {
     alignItems: 'center',
     paddingHorizontal: variables.mtdHSpacingM,
     paddingVertical: variables.mtdHSpacingS,
-    backgroundColor: variables.mtdFillMask,
+    backgroundColor: variables.mtdFillBackdrop,
     borderRadius: variables.mtdRadiusS
   },
   toolTipText: {
@@ -72,7 +71,7 @@ export default {
     borderTopWidth: variables.sliderSlideToolTipIconSize,
     borderLeftColor: 'transparent',
     borderRightColor: 'transparent',
-    borderTopColor: variables.mtdFillMask,
+    borderTopColor: variables.mtdFillBackdrop,
     borderBottomColor: 'transparent'
   }
 }
