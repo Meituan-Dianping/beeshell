@@ -8,16 +8,16 @@ import styles from '../common/styles'
 
 
 const iconsCDN = {
-  // emptyStar: <Icon type='star' tintColor='#efefef' />,
-  // halfStar: <Icon type='star' />,
-  // fullStar: <Icon type='star' tintColor='#4d73ff' />
+  emptyStar: <Icon type='star' tintColor='#efefef' />,
+  halfStar: <Icon type='star' />,
+  fullStar: <Icon type='star' tintColor='#4d73ff' />
 }
 
 // 本地图标地址
 const iconsLocal = {
-  // emptyStar: <Image source={require('./images/star-empty.png')} />,
-  // halfStar: <Image source={require('./images/star-half.png')} />,
-  // fullStar: <Image source={require('./images/star-filled.png')} />
+  emptyStar: <Image source={require('./images/star-o.png')} style={{ width: 40, height: 40 }} />,
+  halfStar: <Image source={require('./images/star-half-o.png')} style={{ width: 40, height: 40 }} />,
+  fullStar: <Image source={require('./images/star.png')} style={{ width: 40, height: 40 }} />
 }
 
 
@@ -63,8 +63,14 @@ export default class RateScreen extends Component<Props, State> {
 
         <Text style={styles.header}>自定义图标颜色、大小、间距</Text>
         <View style={[styles.panel, { alignItems: 'center' }]}>
-          <Rate value={5} starSize={40} starColor={variables.mtdBrandDanger} marginOfStar={15} onChange={e => console.log(e)} />
+          <Rate value={4} starSize={40} starColor={variables.mtdBrandDanger} marginOfStar={15} onChange={e => console.log(e)} />
         </View>
+
+        <Text style={styles.header}>自定义图标 marginLeft: 20</Text>
+        <View style={[styles.panel, { alignItems: 'center' }]}>
+          <Rate value={3.5} icons={iconsLocal} starSize={40} onChange={e => console.log(e)} marginOfStar={10} />
+        </View>
+
       </View>
     )
   }

@@ -98,19 +98,20 @@ export class Rate extends Component<Props, State> {
 
   getStars (currentRating) {
     const { icons: { halfStar, fullStar, emptyStar }, maximum, marginOfStar, starSize, starColor } = this.props
-
     const stars = []
     for (let i = 0; i < maximum; i++) {
-      const extraProps = { key: i, style: { marginRight: marginOfStar }, size: starSize, tintColor: starColor }
       if (
         halfStar &&
         currentRating > i &&
         currentRating < i + 1
       ) {
+        const extraProps = { key: i, style: [{ marginRight: marginOfStar }, halfStar.props.style], size: starSize, tintColor: starColor }
         stars.push(React.cloneElement(halfStar, extraProps))
       } else if (currentRating >= i + 1) {
+        const extraProps = { key: i, style: [{ marginRight: marginOfStar }, fullStar.props.style], size: starSize, tintColor: starColor }
         stars.push(React.cloneElement(fullStar, extraProps))
       } else {
+        const extraProps = { key: i, style: [{ marginRight: marginOfStar }, emptyStar.props.style], size: starSize, tintColor: starColor }
         stars.push(React.cloneElement(emptyStar, extraProps))
       }
     }
@@ -119,16 +120,17 @@ export class Rate extends Component<Props, State> {
   }
 
   round (value) {
-    // const { icons: { halfStar }, maximum, clickOnly } = this.props
-    // 1、如果是点击 click 则仅 1.0 步长的计算
-    // 2、如果是可以滑动，则可以 0.5 步长的计算
-    // 3、如果 halfStar 没传进来，则 1.0 步长的计算
-    // const inv = 1.0 / (clickOnly ? 1.0 : (halfStar ? 0.5 : 1.0))
-    // const rating = halfStar ? Math.round(value * inv) / inv : Math.ceil(value)
-
+    const { icons: { halfStar }, maximum, clickOnly } = this.props
+    const inv = 1.0 / (clickOnly ? 1.0 : (halfStar ? 0.5 : 1.0))
+    let rating
+    if (halfStar) {
+      rating = value > Math.floor(value) + 0.5 ? Math.ceil(value) : Math.floor(value) + 0.5
+    } else {
+      rating = Math.ceil(value)
+    }
     // 步长全部为 1 免得麻烦
-    const { maximum } = this.props
-    const rating = Math.ceil(value)
+    // const { maximum } = this.props
+    // const rating = Math.ceil(value)
     if (rating < 0) {
       return 0
     } else if (rating > maximum) {
