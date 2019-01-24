@@ -2,16 +2,16 @@ import React, { Component } from 'react'
 import { ScrollView, View, Text, StyleSheet } from 'react-native'
 
 import { Icon } from '../../src'
+import variables from '../customTheme'
+import styles from '../common/styles'
 
-const styles = StyleSheet.create({
+const componentStyles = StyleSheet.create({
   panel: {
     flexDirection: 'row',
     alignItems: 'center',
     flexWrap: 'wrap',
     paddingTop: 10,
-    paddingBottom: 10,
-    paddingHorizontal: 15,
-    backgroundColor: '#fff'
+    paddingBottom: 10
   },
   content: {
     alignItems: 'center',
@@ -42,106 +42,109 @@ export default class IconScreen extends Component<{}, State> {
   render () {
     return (
       <ScrollView
-        contentContainerStyle={{
-          flexDirection: 'column'
-        }}>
-
-        <View style={styles.panel}>
-          <View style={styles.content}>
-            <Icon type='caret-down' tintColor='#000' />
-            <Text style={styles.title}>caret-down</Text>
+        style={styles.body}
+        contentContainerStyle={styles.container}>
+        <View style={componentStyles.panel}>
+          <View style={componentStyles.content}>
+            <Icon size={20} type='caret-down' tintColor='#000' />
+            <Text style={componentStyles.title}>caret-down</Text>
           </View>
 
-          <View style={styles.content}>
-            <Icon type='caret-right' tintColor='#000' />
-            <Text style={styles.title}>caret-right</Text>
+          <View style={componentStyles.content}>
+            <Icon size={20} type='caret-right' tintColor='#000' />
+            <Text style={componentStyles.title}>caret-right</Text>
           </View>
 
-          <View style={styles.content}>
-            <Icon type='caret-up' tintColor='#000' />
-            <Text style={styles.title}>caret-up</Text>
+          <View style={componentStyles.content}>
+            <Icon size={20} type='caret-up' tintColor='#000' />
+            <Text style={componentStyles.title}>caret-up</Text>
           </View>
-          <View style={styles.content}>
-            <Icon type='check' tintColor='#000' />
-            <Text style={styles.title}>check</Text>
-          </View>
-
-          <View style={styles.content}>
-            <Icon type='check-circle' />
-            <Text style={styles.title}>check-circle</Text>
+          <View style={componentStyles.content}>
+            <Icon size={20} type='check' tintColor='#000' />
+            <Text style={componentStyles.title}>check</Text>
           </View>
 
-          <View style={styles.content}>
-            <Icon type='circle-o' tintColor='#000' />
-            <Text style={styles.title}>circle-o</Text>
+          <View style={componentStyles.content}>
+            <Icon size={20} type='check-circle' />
+            <Text style={componentStyles.title}>check-circle</Text>
           </View>
 
-          <View style={styles.content}>
-            <Icon type='plus-circle-o' tintColor='#000' />
-            <Text style={styles.title}>plus-circle-o</Text>
+          <View style={componentStyles.content}>
+            <Icon size={20} type='circle-o' tintColor='#000' />
+            <Text style={componentStyles.title}>circle-o</Text>
           </View>
 
-          <View style={styles.content}>
-            <Icon type='question-circle' />
-            <Text style={styles.title}>question-circle</Text>
+          <View style={componentStyles.content}>
+            <Icon size={20} type='plus-circle-o' tintColor='#000' />
+            <Text style={componentStyles.title}>plus-circle-o</Text>
           </View>
 
-          <View style={styles.content}>
-            <Icon type='chevron-left' tintColor='#000' />
-            <Text style={styles.title}>chevron-left</Text>
+          <View style={componentStyles.content}>
+            <Icon size={20} type='question-circle' />
+            <Text style={componentStyles.title}>question-circle</Text>
           </View>
 
-          <View style={styles.content}>
-            <Icon type='times' tintColor='#000' />
-            <Text style={styles.title}>times</Text>
+          <View style={componentStyles.content}>
+            <Icon size={20} type='chevron-left' tintColor='#000' />
+            <Text style={componentStyles.title}>chevron-left</Text>
           </View>
 
-          <View style={styles.content}>
-            <Icon type='times-circle' tintColor='#000' />
-            <Text style={styles.title}>times-circle</Text>
+          <View style={componentStyles.content}>
+            <Icon size={20} type='times' tintColor='#000' />
+            <Text style={componentStyles.title}>times</Text>
           </View>
 
-          <View style={styles.content}>
-            <Icon type='times-circle-o' tintColor='#000' />
-            <Text style={styles.title}>times-circle-o</Text>
+          <View style={componentStyles.content}>
+            <Icon size={20} type='times-circle' tintColor='#000' />
+            <Text style={componentStyles.title}>times-circle</Text>
           </View>
 
-          <View style={styles.content}>
-            <Icon type='minus' size={30} tintColor='#000' />
-            <Text style={styles.title}>minus</Text>
+          <View style={componentStyles.content}>
+            <Icon size={20} type='times-circle-o' tintColor='#000' />
+            <Text style={componentStyles.title}>times-circle-o</Text>
           </View>
 
-          <View style={styles.content}>
-            <Icon type='map-marker' tintColor='#000' />
-            <Text style={styles.title}>map-marker</Text>
+          <View style={componentStyles.content}>
+            <Icon size={20} type='minus' tintColor='#000' />
+            <Text style={componentStyles.title}>minus</Text>
           </View>
 
-          <View style={styles.content}>
-            <Icon type='star-o' tintColor='#000' />
-            <Text style={styles.title}>star-o</Text>
+          <View style={componentStyles.content}>
+            <Icon size={20} type='map-marker' tintColor='#000' />
+            <Text style={componentStyles.title}>map-marker</Text>
           </View>
 
-          <View style={styles.content}>
-            <Icon type='star' tintColor='#000' />
-            <Text style={styles.title}>star</Text>
+          <View style={componentStyles.content}>
+            <Icon size={20} type='star' tintColor='#000' />
+            <Text style={componentStyles.title}>star</Text>
           </View>
 
-          <View style={styles.content}>
-            <Icon type='search' tintColor='#000' />
-            <Text style={styles.title}>search</Text>
+          <View style={componentStyles.content}>
+            <Icon size={20} type='star-o' tintColor='#000' />
+            <Text style={componentStyles.title}>star-o</Text>
           </View>
 
-          <View style={styles.content}>
-            <Icon type='share-square-o' tintColor='#000' />
-            <Text style={styles.title}>share-square-o</Text>
+          <View style={componentStyles.content}>
+            <Icon size={20} type='star-half-o' tintColor='#000' />
+            <Text style={componentStyles.title}>star-half-o</Text>
           </View>
 
-          <View style={styles.content}>
-            <Icon type='ellipsis-h' tintColor='#000' />
-            <Text style={styles.title}>ellipsis-h</Text>
+          <View style={componentStyles.content}>
+            <Icon size={20} type='search' tintColor='#000' />
+            <Text style={componentStyles.title}>search</Text>
           </View>
 
-          <View style={styles.content}>
+          <View style={componentStyles.content}>
+            <Icon size={20} type='share-square-o' tintColor='#000' />
+            <Text style={componentStyles.title}>share-square-o</Text>
+          </View>
+
+          <View style={componentStyles.content}>
+            <Icon size={20} type='ellipsis-h' tintColor='#000' />
+            <Text style={componentStyles.title}>ellipsis-h</Text>
+          </View>
+
+          <View style={componentStyles.content}>
             <Icon
               size={50}
               source={{
@@ -149,7 +152,7 @@ export default class IconScreen extends Component<{}, State> {
               }}
               tintColor='#000'
             />
-            <Text style={styles.title}>自定义 source</Text>
+            <Text style={componentStyles.title}>自定义 source</Text>
           </View>
         </View>
       </ScrollView>
