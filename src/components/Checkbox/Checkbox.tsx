@@ -11,7 +11,6 @@ import { CheckboxItemAllChecked } from './CheckboxItemAllChecked'
 import checkboxStyles from './styles'
 import variables from '../../common/styles/variables'
 import { CheckboxItem } from './CheckboxItem'
-import { FormItemConsumer } from '../Form/formItemContext'
 
 interface Props {
   style?: ViewStyle | RegisteredStyle<ViewStyle>,
@@ -125,12 +124,6 @@ export default class Checkbox extends Component<Props, State> {
 
     return (
       <View style={[styles.container, style]}>
-        <FormItemConsumer>
-          { (contextObject) => {
-            this.formItemContext = contextObject
-            return (null)
-          }}
-        </FormItemConsumer>
         <View>
           {
             showAllChecked ?

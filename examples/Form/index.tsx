@@ -106,9 +106,7 @@ export default class FormScreen extends Component<{}, any> {
         style={styles.body}>
         <Text style={componentStyles.header}>基本信息</Text>
         <Form
-          ref={(ref) => this.form = ref }
-          model={this.state.model}
-          rules={this.state.model}>
+          ref={(ref) => this.form = ref }>
           <Form.Item
             style={{ paddingVertical: 13 }}
             prop='name'

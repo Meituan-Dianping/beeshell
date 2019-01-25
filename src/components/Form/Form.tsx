@@ -5,7 +5,6 @@ import {
   StyleSheet
 } from 'react-native'
 
-import { FormProvider } from './formContext'
 import formStyles from './styles'
 import { FormItem } from './FormItem'
 const styles = StyleSheet.create<any>(formStyles)
@@ -104,31 +103,10 @@ export class Form extends Component<FormProps, FormState> {
     }
   }
 
-  renderTitle = () => {
-    if (this.props.title) {
-      if (typeof this.props.title === 'string') {
-        return <Text style={styles.title}>{this.props.title}</Text>
-      } else {
-        return this.props.title
-      }
-    } else {
-      return null
-    }
-  }
-
   render () {
     return (
       <View style={[styles.form, this.props.style]}>
-        { this.renderTitle() }
-        <FormProvider
-          value={{
-            model: this.props.model,
-            rules: this.props.rules,
-            addField: this.addField,
-            removeField: this.removeField
-          }}>
-          {this.props.children}
-        </FormProvider>
+        {this.props.children}
       </View>
     )
   }

@@ -15,13 +15,12 @@ import variables from '../../common/styles/variables'
 
 export interface NavigationBarProps {
   style?: any
-  title?: string
   proportion?: number[]
-  backLabel?: string
+  title?: any
+  backLabel?: any
   backCallback?: Function
-  forwardLabel?: string
-  forwardCallback: Function,
-  renderItem: Function,
+  forwardLabel?: any
+  forwardCallback: Function
 }
 
 export class NavigationBar extends Component<NavigationBarProps, any> {
@@ -46,57 +45,73 @@ export class NavigationBar extends Component<NavigationBarProps, any> {
     const fontColor = variables.mtdGrayBase
 
     if (index === 0) {
-      return backLabel == null ? null : (
+      if (backLabel == null) {
+        return null
+      }
+      return (
         <TouchableOpacity
           style={{
             flexDirection: 'row',
             alignItems: 'center',
+            paddingVertical: variables.mtdVSpacingXL,
             paddingHorizontal: variables.mtdHSpacingXL
           }}
           onPress={() => {
             backCallback && backCallback()
           }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              minWidth: 30
-            }}>
-            <Icon
-              type='angle-left'
-              size={fontSize}
-              tintColor={fontColor}>
-            </Icon>
-            <Text
+
+          {
+            React.isValidElement(backLabel) ? backLabel :
+            <View
               style={{
-                fontSize,
-                color: fontColor
+                flexDirection: 'row',
+                minWidth: 30
               }}>
-              {backLabel}
-            </Text>
-          </View>
+              <Icon
+                type='angle-left'
+                size={fontSize}
+                tintColor={fontColor}>
+              </Icon>
+              <Text
+                style={{
+                  fontSize,
+                  color: fontColor
+                }}>
+                {backLabel}
+              </Text>
+            </View>
+          }
         </TouchableOpacity>
       )
     }
 
     if (index === 1) {
       return (
-        <Text style={{ textAlign: 'center', fontSize, color: fontColor }} >{title}</Text>
+        <View
+          style={{
+            paddingVertical: variables.mtdVSpacingXL,
+            paddingHorizontal: variables.mtdHSpacingXL
+          }}>
+          { React.isValidElement(title) ? title : <Text style={{ textAlign: 'center', fontSize, color: fontColor }} >{title}</Text>}
+        </View>
       )
     }
 
     if (index === 2) {
       return forwardLabel == null ? null : (
         <TouchableOpacity
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+            paddingVertical: variables.mtdVSpacingXL,
+            paddingHorizontal: variables.mtdHSpacingXL
+          }}
           onPress={() => {
             forwardCallback && forwardCallback()
           }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'flex-end',
-              alignItems: 'center',
-              paddingHorizontal: variables.mtdHSpacingXL
-            }}>
+          {
+            React.isValidElement(forwardLabel) ? forwardLabel :
             <Text
               style={{
                 fontSize,
@@ -104,15 +119,15 @@ export class NavigationBar extends Component<NavigationBarProps, any> {
               }}>
               {forwardLabel}
             </Text>
-          </View>
+          }
         </TouchableOpacity>
       )
     }
   }
 
   render() {
+    // paddingVertical: variables.mtdVSpacingXL,
     const {
-      renderItem,
       style,
       proportion
     } = this.props
@@ -125,7 +140,7 @@ export class NavigationBar extends Component<NavigationBarProps, any> {
               <View
                 key={index}
                 style={{ flex: item }}>
-                { renderItem ? renderItem(item, index) : this.renderItem(index) }
+                { this.renderItem(index) }
               </View>
             )
           })

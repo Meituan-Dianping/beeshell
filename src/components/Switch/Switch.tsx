@@ -9,7 +9,6 @@ import {
   PanResponderInstance,
   Platform
 } from 'react-native'
-import { FormItemConsumer } from '../Form/formItemContext'
 
 const styles = StyleSheet.create<any>(switchStyle)
 
@@ -268,12 +267,6 @@ export default class Switch extends Component<Props, State> {
       <Animated.View
         {...this.panResponder.panHandlers}
         style={[styles.container, this.getContainBaseStyle()]}>
-          <FormItemConsumer>
-            { (contextObject) => {
-              this.formItemContext = contextObject
-              return (null)
-            }}
-          </FormItemConsumer>
           <Animated.View style={[this.getRockerBaseStyle(), {
             borderWidth: (Platform.OS === 'android' && Platform.Version < 21) ? 1 : 0
           },

@@ -1,7 +1,6 @@
 import React, { Component, ReactChild } from 'react'
 import { View } from 'react-native'
 import radioStyles from './radioStyles'
-import { FormItemConsumer } from '../Form/formItemContext'
 
 interface RadioProps {
   style: any
@@ -63,12 +62,6 @@ export default class Radio extends Component<RadioProps> {
   render () {
     return (
       <View style={[radioStyles.container, this.props.style]}>
-        <FormItemConsumer>
-          { (contextObject) => {
-            this.formItemContext = contextObject
-            return (null)
-          }}
-        </FormItemConsumer>
         <View style={radioStyles.children}>
           { this.renderChildren() }
         </View>

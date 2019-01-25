@@ -1,8 +1,3 @@
-/*
- * @Author: mengqian02
- * @Date: 2018-11-20 11:26:57
- */
-
 import React, { Component } from 'react'
 import {
   View,
@@ -17,7 +12,6 @@ import {
 import inputStyles from './styles'
 import variables from '../../common/styles/variables'
 import { Icon } from '../Icon'
-import { FormItemConsumer } from '../Form/formItemContext'
 
 const styles = StyleSheet.create<any>(inputStyles)
 
@@ -106,12 +100,6 @@ export class Input extends Component<InputProps, InputState> {
   renderiOS = () => {
     return (
       <View style={[styles.container, { flexDirection: 'column', justifyContent: 'center' }]}>
-        <FormItemConsumer>
-          { (contextObject) => {
-            this.formItemContext = contextObject
-            return (null)
-          }}
-        </FormItemConsumer>
         <TextInput
           {...this.props}
           style={[styles.inputStyle, this.props.style]}
@@ -130,12 +118,6 @@ export class Input extends Component<InputProps, InputState> {
 
     return (
       <View style={[styles.container, { flexDirection: 'row', alignItems: 'center' }]}>
-        <FormItemConsumer>
-          { (contextObject) => {
-            this.formItemContext = contextObject
-            return (null)
-          }}
-        </FormItemConsumer>
         <TextInput
           {...this.props}
           clearButtonMode='never'

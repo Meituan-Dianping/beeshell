@@ -6,8 +6,6 @@ import {
   TouchableOpacity
 } from 'react-native'
 import Schema from 'async-validator'
-import { FormConsumer } from './formContext'
-import { FormItemProvider } from './formItemContext'
 import { Icon } from '../Icon'
 import variables from '../../common/styles/variables'
 import formStyles from './styles'
@@ -76,13 +74,13 @@ export class FormItem extends Component<FormItemProps, FormItemState> {
       this.formContext.addField(this)
     }
 
-    if (this.props.validateOnMount) {
+    if (this.formContext && this.props.validateOnMount) {
       this.validate('', '')
     }
   }
 
   componentWillUnmount () {
-    this.formContext.removeField(this)
+    this.formContext && this.formContext.removeField(this)
   }
 
   // rules 变更时重新校验
@@ -196,13 +194,6 @@ export class FormItem extends Component<FormItemProps, FormItemState> {
 
     return (
       <View>
-        {/* 注册consumer */}
-        <FormConsumer>
-          { (contextObject) => {
-            this.formContext = contextObject
-            return (null)
-          }}
-        </FormConsumer>
         <View style={[styles.formItem, this.props.style]}>
           <View style={styles.container}>
             {
@@ -215,13 +206,7 @@ export class FormItem extends Component<FormItemProps, FormItemState> {
             }
 
             <View style={[styles.control]}>
-            {/* 和组件库自带的表单类元素利用context 通讯 */}
-              <FormItemProvider value={{
-                emitValueChange: this.handleValueChange,
-                emitValueBlur: this.handleValueBlur
-              }}>
-                {children[0]}
-              </FormItemProvider>
+              {children[0]}
             </View>
           </View>
 
