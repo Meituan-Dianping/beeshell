@@ -24,7 +24,7 @@ export class Tip extends Modal<TipProps, any> {
   static defaultProps = {
     ...Modal.defaultProps,
 
-    containerStyle: {
+    contentContainerStyle: {
       marginHorizontal: 40,
       marginVertical: 90,
     },
@@ -40,7 +40,7 @@ export class Tip extends Modal<TipProps, any> {
     Tip.tipInstance = new Tip({
       ...Tip.defaultProps,
 
-      containerPosition: position,
+      contentContainerPosition: position,
       body: msg,
       cancelable: true,
       duration: Number(duration) || 2000,

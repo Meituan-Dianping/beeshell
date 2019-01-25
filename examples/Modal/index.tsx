@@ -61,7 +61,7 @@ export default class ModalScreen extends Component<{}, any> {
             this.modal3 = c
           }}
           cancelable={true}
-          containerStyle={{
+          contentContainerStyle={{
             flex: 1,
             marginHorizontal: 40,
           }}>
@@ -88,8 +88,8 @@ export default class ModalScreen extends Component<{}, any> {
             this.modal4 = c
           }}
           cancelable={true}
-          containerPositon={this.state.containerPositon}
-          containerStyle={{
+          contentContainerPositon={this.state.containerPositon}
+          contentContainerStyle={{
             marginTop: this.state.containerPositon === 'top' ? 90 : null,
             marginBottom: this.state.containerPositon === 'bottom' ? 90 : null,
           }}>

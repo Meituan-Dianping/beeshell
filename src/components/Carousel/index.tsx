@@ -15,11 +15,11 @@ import variables from '../../common/styles/variables'
 
 export interface CarouselProps {
   style?: any
+  paginationStyle?: any
+
   horizontal?: boolean
   children?: JSX.Element[],
-  containerStyle?: any
-  scrollViewStyle?: any
-  showsPagination?: boolean
+
   loadMinimal?: boolean
   loadMinimalSize?: number
   loadMinimalLoader?: JSX.Element
@@ -29,13 +29,7 @@ export interface CarouselProps {
   autoplayDirection?: boolean
   index?: number
   renderPagination?: Function
-  dotStyle?: any
-  activeDotStyle?: any
-  dotColor?: any
-  activeDotColor?: any
-  activeDot?: any
-  dot?: any
-  paginationStyle?: any
+
   onIndexChanged?: (index: number) => void
   onTouchStartCapture?: () => void
   onTouchStart?: () => void
@@ -71,7 +65,6 @@ export class Carousel extends Component<CarouselProps, any> {
     scrollsToTop: false,
     removeClippedSubviews: true,
     automaticallyAdjustContentInsets: false,
-    showsPagination: true,
     loop: true,
     loadMinimal: false,
     loadMinimalSize: 1,
@@ -389,23 +382,29 @@ export class Carousel extends Component<CarouselProps, any> {
       return null
     }
 
+    const dotSize = 6
+    const dotRadius = dotSize / 2
+    const dotMargin = 3
+
     let dots = []
-    const ActiveDot = this.props.activeDot || <View style={[{
-      backgroundColor: this.props.activeDotColor || variables.mtdBrandPrimary,
-      width: 8,
-      height: 8,
-      borderRadius: 4,
-      marginLeft: 3,
-      marginRight: 3
-    }, this.props.activeDotStyle]} />
-    const Dot = this.props.dot || <View style={[{
-      backgroundColor: this.props.dotColor || 'rgba(0,0,0,.2)',
-      width: 8,
-      height: 8,
-      borderRadius: 4,
-      marginLeft: 3,
-      marginRight: 3
-    }, this.props.dotStyle]} />
+    const ActiveDot = <View style={[
+      {
+        backgroundColor: variables.mtdBrandPrimary,
+        width: dotSize,
+        height: dotSize,
+        borderRadius: dotRadius,
+        marginHorizontal: dotMargin
+      }
+    ]} />
+    const Dot = <View style={[
+      {
+        backgroundColor: variables.mtdFillGray,
+        width: dotSize,
+        height: dotSize,
+        borderRadius: dotRadius,
+        marginHorizontal: dotMargin
+      }
+    ]} />
     for (let i = 0; i < this.state.total; i++) {
       dots.push(i === this.state.index
         ? React.cloneElement(ActiveDot, {
@@ -423,8 +422,7 @@ export class Carousel extends Component<CarouselProps, any> {
         style={[
           styles['pagination' + this.state.dir.toUpperCase()],
           this.props.paginationStyle
-        ]}
-      >
+        ]}>
         {dots}
       </View>
     )
@@ -437,26 +435,26 @@ export class Carousel extends Component<CarouselProps, any> {
   renderScrollView = pages => {
     if (Platform.OS === 'ios') {
       return (
-        <ScrollView ref={this.refScrollView}
+        <ScrollView
+          ref={this.refScrollView}
           {...this.props}
           {...this.scrollViewPropOverrides()}
-          contentContainerStyle={[styles.wrapperIOS, this.props.style]}
           contentOffset={this.state.offset}
           onScrollBeginDrag={this.onScrollBegin}
           onMomentumScrollEnd={this.onScrollEnd}
-          onScrollEndDrag={this.onScrollEndDrag}
-          style={this.props.scrollViewStyle}>
+          onScrollEndDrag={this.onScrollEndDrag}>
           {pages}
         </ScrollView>
       )
     }
     return (
-      <ViewPagerAndroid ref={this.refScrollView}
-        {...this.props}
-        initialPage={this.props.loop ? this.state.index + 1 : this.state.index}
-        onPageSelected={this.onScrollEnd}
-        key={pages.length}
-        style={[styles.wrapperAndroid, this.props.style]}>
+      <ViewPagerAndroid
+          ref={this.refScrollView}
+          {...this.props}
+          initialPage={this.props.loop ? this.state.index + 1 : this.state.index}
+          onPageSelected={this.onScrollEnd}
+          key={pages.length}
+          style={[styles.wrapperAndroid]}>
         {pages}
       </ViewPagerAndroid>
     )
@@ -471,13 +469,12 @@ export class Carousel extends Component<CarouselProps, any> {
     } = this.state
     const {
       children,
-      containerStyle,
+      style,
       loop,
       loadMinimal,
       loadMinimalSize,
       loadMinimalLoader,
       renderPagination,
-      showsPagination
     } = this.props
     const loopVal = loop ? 1 : 0
     let pages: any = []
@@ -519,14 +516,12 @@ export class Carousel extends Component<CarouselProps, any> {
       <View
         style={[
           styles.container,
-          containerStyle
+          style
         ]}
-        onLayout={this.onLayout}
-      >
+        onLayout={this.onLayout}>
+
         {this.renderScrollView(pages)}
-        {showsPagination && (renderPagination
-          ? renderPagination(index, total, this)
-          : this.renderPagination())}
+        {renderPagination ? renderPagination(index, total) : this.renderPagination()}
       </View>
     )
   }

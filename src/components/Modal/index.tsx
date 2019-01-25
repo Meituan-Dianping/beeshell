@@ -24,8 +24,8 @@ export interface ModalProps {
 
   alignItems?: FlexAlignType
 
-  containerPositon?: 'top' | 'center' | 'bottom'
-  containerStyle?: any
+  contentContainerPositon?: 'top' | 'center' | 'bottom'
+  contentContainerStyle?: any
 
   onOpen?: any
   onOpened?: any
@@ -47,8 +47,8 @@ export class Modal<
     animatedTranslateX: null,
     animatedTranslateY: null,
 
-    containerPositon: 'center',
-    containerStyle:  {},
+    contentContainerPositon: 'center',
+    contentContainerStyle:  {},
 
     onOpen: null,
     onOpened: null,
@@ -122,8 +122,8 @@ export class Modal<
     const styles = modalStyles
     const tmp = inner == null ? this.props.children : inner
     const animatedState = this.animated ? this.animated.getState() : {}
-    const containerPositon = this.props.containerPositon === 'top' ? 'flex-start' : (
-      this.props.containerPositon === 'bottom' ? 'flex-end' : 'center'
+    const contentContainerPositon = this.props.contentContainerPositon === 'top' ? 'flex-start' : (
+      this.props.contentContainerPositon === 'bottom' ? 'flex-end' : 'center'
     )
 
     return (
@@ -131,7 +131,7 @@ export class Modal<
         style={[
           styles.container,
           {
-            alignItems: containerPositon
+            alignItems: contentContainerPositon
           }
         ]}
       >
@@ -144,7 +144,7 @@ export class Modal<
         <Animated.View
           style={[
             styles.content,
-            this.props.containerStyle,
+            this.props.contentContainerStyle,
 
             {
               transform: [

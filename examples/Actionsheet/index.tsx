@@ -116,7 +116,7 @@ export default class ActionsheetScreen extends Component<{}, any> {
             renderItem={(item, index) => {
               return (
                 <View style={{ flexDirection: 'row', paddingVertical: 13, alignItems: 'center', justifyContent: 'center', borderBottomColor: variables.mtdBorderColorDark, borderBottomWidth: StyleSheet.hairlineWidth, backgroundColor: '#fff' }}>
-                  <Icon type='star-o' tintColor='#111' />
+                  <Icon type='star-o' tintColor='#111' size={16} />
                   <Text style={{ marginLeft: 5, fontSize: 16 }}>{item.text}</Text>
                 </View>
               )

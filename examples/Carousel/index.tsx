@@ -7,8 +7,10 @@ import {
 } from 'react-native'
 
 import { Carousel } from '../../src'
+import variables from '../customTheme'
+import styles from '../common/styles'
 
-const styles = StyleSheet.create({
+const componentStyles = StyleSheet.create({
   header: {
     paddingHorizontal: 15,
     paddingVertical: 20
@@ -47,16 +49,11 @@ const styles = StyleSheet.create({
     position: 'relative'
   },
   slide: {
-    backgroundColor: '#ffffff',
+    flex: 1,
+    backgroundColor: '#ced',
     borderRadius: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    height: 80
-  },
-  slideText: {
-    fontSize: 14,
-    lineHeight: 20,
-    color: '#000000'
   },
   page: {
     height: 14,
@@ -68,6 +65,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 7
   }
 })
+
+
 export default class CarouselScreen extends Component<any, any> {
 
   constructor (props) {
@@ -86,74 +85,74 @@ export default class CarouselScreen extends Component<any, any> {
 
   render () {
     return (
-      <ScrollView style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.title}>轮播 Carousel</Text>
-          <Text style={styles.description}>用于多个同等级信息展示。</Text>
+      <ScrollView
+        style={styles.body}
+        contentContainerStyle={styles.container}>
+
+        <View style={styles.row}>
+          <Text style={styles.header}>基础</Text>
         </View>
-        <Text style={styles.subtitle}>基础</Text>
-        <View style={{ height: 10 }}></View>
-        <View style={styles.wrapper}>
-          <Carousel
-            dotStyle={{ width: 6, height: 6, borderRadius: 3, backgroundColor: '#e5e5e5' }}
-            activeDotStyle={{ width: 6, height: 6 }}
-            paginationStyle={{ bottom: 8 }}
-            onTouchStart={() => console.log('onTouchStart')}
-            onTouchEnd={() => console.log('onTouchEnd')}
-          >
-            <View style={styles.slide}>
-              <Text style={styles.slideText}>内容-1</Text>
-            </View>
-            <View style={styles.slide}>
-              <Text style={styles.slideText}>内容-2</Text>
-            </View>
-            <View style={styles.slide}>
-              <Text style={styles.slideText}>内容-3</Text>
-            </View>
-          </Carousel>
-        </View>
-        <View style={{ height: 30 }}></View>
-        <Text style={styles.subtitle}>小圆轮播</Text>
-        <View style={styles.wrapper}>
-          <Carousel
-            autoplay={true}
-            dotStyle={{ width: 4, height: 4, borderRadius: 2, backgroundColor: '#e5e5e5' }}
-            activeDotStyle={{ width: 4, height: 4, backgroundColor: '#0000ff' }}
-            paginationStyle={{ justifyContent: 'flex-end', bottom: 6, paddingRight: 10 }}
-          >
-            <View style={styles.slide}>
-              <Text style={styles.slideText}>内容-1</Text>
-            </View>
-            <View style={styles.slide}>
-              <Text style={styles.slideText}>自定义高亮dot样式</Text>
-            </View>
-            <View style={styles.slide}>
-              <Text style={styles.slideText}>内容-3</Text>
-            </View>
-          </Carousel>
-        </View>
-        <View style={{ height: 30 }}></View>
-        <Text style={styles.subtitle}>文字轮播</Text>
-        <View style={[styles.wrapper, { marginTop: 10 }]}>
-          <Carousel
-            autoplay={true}
-            showsPagination={false}
-            onIndexChanged={(index) => this.indexChange(index)}
-          >
-            <View style={styles.slide}>
-              <Text style={styles.slideText}>内容-1</Text>
-            </View>
-            <View style={styles.slide}>
-              <Text style={styles.slideText}>内容-2</Text>
-            </View>
-            <View style={styles.slide}>
-              <Text style={styles.slideText}>内容-3</Text>
-            </View>
-          </Carousel>
-          <View style={styles.page}>
-            <Text style={{ fontSize: 11, lineHeight: 14, color: 'white' }}>{this.state.currentIndex + 1}/3</Text>
+
+        <Carousel
+          style={{ height: 80 }}
+          paginationStyle={{ bottom: 8 }}
+          onTouchStart={() => console.log('onTouchStart')}
+          onTouchEnd={() => console.log('onTouchEnd')}>
+          <View style={componentStyles.slide}>
+            <Text>内容-1</Text>
           </View>
+          <View style={componentStyles.slide}>
+            <Text>内容-2</Text>
+          </View>
+          <View style={componentStyles.slide}>
+            <Text>内容-3</Text>
+          </View>
+        </Carousel>
+
+        <View style={styles.row}>
+          <Text style={styles.header}>自定义分页位置</Text>
         </View>
+
+        <Carousel
+          style={{ height: 80 }}
+          autoplay={true}
+          paginationStyle={{ justifyContent: 'flex-end', bottom: 6, paddingRight: 10 }}>
+          <View style={componentStyles.slide}>
+            <Text>内容-1</Text>
+          </View>
+          <View style={componentStyles.slide}>
+            <Text>自定义高亮dot样式</Text>
+          </View>
+          <View style={componentStyles.slide}>
+            <Text>内容-3</Text>
+          </View>
+        </Carousel>
+
+        <View style={styles.row}>
+          <Text style={styles.header}>自定义分页位置</Text>
+        </View>
+        <Carousel
+          style={{ height: 80 }}
+          autoplay={true}
+          renderPagination={(index, total) => {
+            return (
+              <View style={componentStyles.page}>
+                <Text style={{ fontSize: 11, lineHeight: 14, color: 'white' }}>{index + 1}/{total}</Text>
+              </View>
+            )
+          }}
+          onIndexChanged={(index) => this.indexChange(index)}>
+
+          <View style={componentStyles.slide}>
+            <Text>内容-1</Text>
+          </View>
+          <View style={componentStyles.slide}>
+            <Text>内容-2</Text>
+          </View>
+          <View style={componentStyles.slide}>
+            <Text>内容-3</Text>
+          </View>
+        </Carousel>
       </ScrollView>
     )
   }

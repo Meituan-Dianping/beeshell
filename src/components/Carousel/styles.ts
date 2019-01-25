@@ -6,9 +6,6 @@ export default {
     position: 'relative',
     flex: 1
   },
-  wrapperIOS: {
-    backgroundColor: 'transparent'
-  },
   wrapperAndroid: {
     backgroundColor: 'transparent',
     flex: 1
