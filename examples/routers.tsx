@@ -11,6 +11,7 @@ import Checkbox from './Checkbox'
 import Switch from './Switch'
 import Slider from './Slider'
 import Rate from './Rate'
+import Stepper from './Stepper'
 
 import Scrollpicker from './Scrollpicker'
 
@@ -33,7 +34,7 @@ import Progress from './Progress'
 // import Select from './Select'
 
 // import Toast from './Toast'
-// import Stepper from './Stepper'
+
 
 // import Cascader from './Cascader'
 
@@ -118,7 +119,7 @@ export const pageList = [
     label: '评分'
   },
   {
-    screen: () => {},
+    screen: Stepper,
     key: 'Stepper',
     group: 'dataEntry',
     label: '计步器'

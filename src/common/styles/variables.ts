@@ -120,46 +120,8 @@ const radio = {}
 const radioItem = {
   radioItemVSpacing: 18
 }
-// /**
-//  * Tip 组件
-//  */
-// const tip = {
-//     tipHSpacing: mtdSpacing.mtdHSpacingM,
-//     tipVSpacing: mtdSpacing.mtdVSpacingM,
-//     tipIconSize: mtdFontSize.mtdFontSizeM
-// }
-// /**
-//  * NavigationBar 组件
-//  */
-// const navigationBar = {
-//     navigationBarIconSizeMd: mtdFontSize.mtdFontSizeXxXL,
-//     navigationBarIconSizeSm: mtdFontSize.mtdFontSizeL,
-//     navigationBarSearchBarInputHeight: 30,
-//     navigationBarSearchBarFill: mtdFillColors.mtdFillBody,
-//     navigationBarHSpacingMd: mtdSpacing.mtdHSpacingM
-// }
-// /**
-//  * Loading 组件
-//  */
-// const loading = {
-//     loadingVSpacing: mtdSpacing.mtdVSpacingXL,
-//     loadingHSpacing: mtdSpacing.mtdVSpacingXL,
-//     loadingFontColor: '#ffffff',
-//     loadingFontSize: mtdFontSize.mtdFontSizeM,
-//     loadingLineHeight: mtdFontSize.mtdFontSizeM * 1.2
-// }
-// /**
-//  * Toast 组件
-//  */
-// const toast = {
-//     toastFontSizeMd: mtdFontSize.mtdFontSizeXL,
-//     toastLineHeight: mtdFontSize.mtdFontSizeXL * 1.2,
-//     toastFontColor: '#ffffff',
-//     toastMHSpacing: mtdSpacing.mtdHSpacingXL * 2
-// }
-/**
- * Slider 组件
- */
+
+
 const slider = {
   sliderSlideHeight: 40,
   sliderSlideHeightForTip: 100,
@@ -209,6 +171,10 @@ const carousel = {
   carouselPaginationHSpacing: mtdSpacing.mtdHSpacingL
 }
 
+const stepper = {
+  stepperOperatorSize: 30
+}
+
 const variables = {
   ...mtdBrandColors,
   ...mtdGrayColors,
@@ -228,7 +194,7 @@ const variables = {
   ...checkbox,
   ...slider,
   ...rate,
-
+  ...stepper,
   ...carousel,
 }
 
