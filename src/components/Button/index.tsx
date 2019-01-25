@@ -68,7 +68,7 @@ export class Button extends React.Component<ButtonProps, {}> {
     const styleWrapper = buttonStyles[type + 'Wrapper'] || buttonStyles.defaultWrapper
     const styleText = buttonStyles[type + 'Text'] || buttonStyles.defaultText
 
-    const textReverseStyle = reverse && type !== 'default' ? { color: '#000' } : {}
+    const textReverseStyle = reverse && type !== 'default' ? { color: variables.mtdGrayBase } : {}
 
     return (
       <TouchableOpacity

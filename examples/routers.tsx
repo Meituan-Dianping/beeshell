@@ -39,6 +39,7 @@ import Progress from './Progress'
 // import Cascader from './Cascader'
 
 import Badge from './Badge'
+import Tag from './Tag'
 // import Loading from './Loading'
 
 import Carousel from './Carousel'
@@ -46,7 +47,7 @@ import Carousel from './Carousel'
 
 // import Popover from './Popover'
 // import Calendar from './Calendar'
-// import Tags from './Tags'
+
 // yarn new import 的占位
 
 console.disableYellowBox = true
@@ -155,8 +156,8 @@ export const pageList = [
   },
 
   {
-    screen: () => {},
-    key: 'Tags',
+    screen: Tag,
+    key: 'Tag',
     group: 'dataDisplay',
     label: '标签'
   },
