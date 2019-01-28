@@ -10,15 +10,16 @@ export default {
   },
 
   item: {
+    flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    paddingVertical: variables.mtdVSpacingXXL,
-    paddingHorizontal: variables.mtdHSpacingL
+    paddingVertical: variables.mtdVSpacingXL,
+    paddingHorizontal: variables.mtdHSpacingXL
   },
 
   text: {
     fontSize: variables.mtdFontSizeM,
-    color: variables.mtdGrayBase
+    color: variables.mtdGray
   },
 
   line: {
@@ -26,7 +27,6 @@ export default {
     bottom: 0,
     width: 25,
     height: 2,
-    marginTop: variables.mtdVSpacingXXL - 1,
     backgroundColor: '#fff'
   }
 }
