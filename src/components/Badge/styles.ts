@@ -10,7 +10,7 @@ export default {
     borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FF301A'
+    backgroundColor: variables.mtdBrandDanger
   },
   textContent: {
     color: '#fff',
@@ -20,7 +20,7 @@ export default {
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: '#FF301A'
+    backgroundColor: variables.mtdBrandDanger
   },
   triangle: {
     width: 0,
@@ -33,7 +33,7 @@ export default {
     borderLeftWidth: 24,
     borderTopColor: 'transparent',
     borderRightColor: 'transparent',
-    borderBottomColor: '#FF301A',
+    borderBottomColor: variables.mtdBrandDanger,
     borderLeftColor: 'transparent',
     position: 'relative',
     alignItems: 'center',
