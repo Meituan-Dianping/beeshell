@@ -27,10 +27,9 @@ import Picker from './Picker'
 
 
 
-// import Dropdown from './Dropdown'
-
 import Tab from './Tab'
 import Progress from './Progress'
+import Longlist from './Longlist'
 // import Select from './Select'
 
 // import Toast from './Toast'
@@ -170,7 +169,7 @@ export const pageList = [
   },
 
   {
-    screen: () => {},
+    screen: Longlist,
     key: 'Longlist',
     group: 'dataDisplay',
     label: '长列表'
