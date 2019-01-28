@@ -52,6 +52,7 @@ export default class InputScreen extends Component<{}, {}> {
         <Text style={styles.header}>左对齐</Text>
         <Form>
           <Form.Item
+            style={{ paddingVertical: 13 }}
             label='姓名'
             hasLine>
             <Input value={this.state.name} placeholder='请输入姓名' onChange={(value) => {
@@ -62,6 +63,7 @@ export default class InputScreen extends Component<{}, {}> {
           </Form.Item>
 
           <Form.Item
+            style={{ paddingVertical: 13 }}
             label='住址'>
             <Input value={this.state.address} placeholder='请输入地址' onChange={(value) => {
               this.setState({
@@ -72,6 +74,28 @@ export default class InputScreen extends Component<{}, {}> {
         </Form>
 
         <Text style={styles.header}>右对齐</Text>
+        <Form>
+          <Form.Item
+            style={{ paddingVertical: 13 }}
+            label='姓名'
+            hasLine>
+            <Input textAlign='right' value={this.state.name} placeholder='请输入姓名' onChange={(value) => {
+              this.setState({
+                name: value
+              })
+            }} />
+          </Form.Item>
+
+          <Form.Item
+            style={{ paddingVertical: 13 }}
+            label='住址'>
+            <Input textAlign='right' value={this.state.address} placeholder='请输入地址' onChange={(value) => {
+              this.setState({
+                address: value
+              })
+            }} />
+          </Form.Item>
+        </Form>
       </ScrollView>
     )
   }
