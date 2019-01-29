@@ -17,7 +17,7 @@
   ],
   "license": "ISC",
   "dependencies": {
-    "@ss/mtd-react-native": "0.0.5"
+    "moment": "^2.24.0"
   },
   "husky": {
     "hooks": {

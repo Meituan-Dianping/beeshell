@@ -12,8 +12,8 @@ import Switch from './Switch'
 import Slider from './Slider'
 import Rate from './Rate'
 import Stepper from './Stepper'
-
 import Scrollpicker from './Scrollpicker'
+import Calendar from './Calendar'
 
 
 import Modal from './Modal'
@@ -41,7 +41,6 @@ import Carousel from './Carousel'
 
 
 // import Popover from './Popover'
-// import Calendar from './Calendar'
 
 // yarn new import 的占位
 
@@ -128,6 +127,12 @@ export const pageList = [
     group: 'dataEntry'
   },
 
+  {
+    screen: Calendar,
+    key: 'Calendar',
+    label: '日历',
+    group: 'dataEntry'
+  },
 
   {
     screen: Carousel,
@@ -177,7 +182,6 @@ export const pageList = [
     group: 'dataDisplay',
     label: '筛选器'
   },
-
 
   {
     screen: Modal,
@@ -312,11 +316,6 @@ export const pageList = [
   //   screen: Toast,
   //   key: 'Toast',
   //   label: '小提示'
-  // },
-  // {
-  //   screen: Calendar,
-  //   key: 'Calendar',
-  //   label: '日历'
   // },
   // // 下面是基础组件，名字需要商榷一些
   // // 可以展示出来，但 example 要求统一漂亮一点～

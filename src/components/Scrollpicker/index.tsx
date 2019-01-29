@@ -130,7 +130,6 @@ export class Scrollpicker extends React.Component<ScrollpickerProps, Scrollpicke
     this.getUIData(this.containerRef, DEFAULT_CONTAINER_HEIGHT).then((data: any) => {
       const { targetItemHeight } = data
       const containerHeight = this.resizeContainerHeight(targetItemHeight)
-      // console.log(containerHeight, targetItemHeight);
 
       this.setState(
         {
@@ -155,7 +154,6 @@ export class Scrollpicker extends React.Component<ScrollpickerProps, Scrollpicke
   }
 
   componentWillReceiveProps (nextProps) {
-    // console.log('componentWillReceiveProps', nextProps == this.props);
 
     if (nextProps !== this.props) {
       const data = this.initialize(nextProps)
@@ -187,11 +185,11 @@ export class Scrollpicker extends React.Component<ScrollpickerProps, Scrollpicke
         let ret = null
 
         element.measure((x, y, width, height, left, top) => {
-          console.log(
-            `Get container height: ${height}, accurate height: ${accurateHeight} and target item height: ${
-              this.targetItemHeight
-            } for ${++count}th.`
-          )
+          // console.log(
+          //   `Get container height: ${height}, accurate height: ${accurateHeight} and target item height: ${
+          //     this.targetItemHeight
+          //   } for ${++count}th.`
+          // )
 
           if (height) {
             // 安卓机器获取高度不精确
@@ -284,12 +282,7 @@ export class Scrollpicker extends React.Component<ScrollpickerProps, Scrollpicke
   }
 
   onScroll (scrollIndex, scrollHeight) {
-    // const { offsetCount } = this.props
-    // const { list, containerHeight, targetItemHeight } = this.state
-
     const targetItemIndex = this.scrollProper(scrollIndex, scrollHeight)
-
-    // console.log(scrollIndex, targetItemIndex);
 
     this.props.onChange && this.props.onChange(scrollIndex, targetItemIndex)
   }
@@ -332,8 +325,6 @@ export class Scrollpicker extends React.Component<ScrollpickerProps, Scrollpicke
   render () {
     const styles = scrollpickerStyles
     const { list, proportion, containerHeight, targetItemHeight } = this.state
-
-    // console.log('render', containerHeight);
 
     return (
       <View

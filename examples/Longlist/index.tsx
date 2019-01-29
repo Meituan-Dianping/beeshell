@@ -162,7 +162,3 @@ export default class LonglistScreen extends React.Component {
     )
   }
 }
-
-
-
-
