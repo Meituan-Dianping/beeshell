@@ -5,7 +5,6 @@ import {
   StyleSheet,
   TouchableOpacity
 } from 'react-native'
-import Schema from 'async-validator'
 import { Icon } from '../Icon'
 import variables from '../../common/styles/variables'
 import formStyles from './styles'
@@ -137,33 +136,33 @@ export class FormItem extends Component<FormItemProps, FormItemState> {
    * @memberof FormItem
    */
   validate = (triggers, callback) => {
-    const prop = this.props.prop
-    const rules = this.getFilteredRules(triggers)
+    // const prop = this.props.prop
+    // const rules = this.getFilteredRules(triggers)
 
-    if (rules.length === 0) {
-      if (typeof callback === 'function') {
-        callback(null)
-      }
-      return true
-    }
+    // if (rules.length === 0) {
+    //   if (typeof callback === 'function') {
+    //     callback(null)
+    //   }
+    //   return true
+    // }
 
-    this.setState({ validating: true })
+    // this.setState({ validating: true })
 
-    const descriptor = { [prop]: rules }
-    const schema = new Schema(descriptor)
-    const source = { [prop]: this.fieldValue() }
+    // const descriptor = { [prop]: rules }
+    // const schema = new Schema(descriptor)
+    // const source = { [prop]: this.fieldValue() }
 
-    schema.validate(source, { first: true }, (errors) => {
-      this.setState({
-        validation: errors ? errors[0].message : '',
-        valid: !errors,
-        validating: false
-      }, () => {
-        if (typeof callback === 'function') {
-          callback(errors)
-        }
-      })
-    })
+    // schema.validate(source, { first: true }, (errors) => {
+    //   this.setState({
+    //     validation: errors ? errors[0].message : '',
+    //     valid: !errors,
+    //     validating: false
+    //   }, () => {
+    //     if (typeof callback === 'function') {
+    //       callback(errors)
+    //     }
+    //   })
+    // })
   }
 
   /**
