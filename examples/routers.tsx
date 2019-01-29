@@ -14,12 +14,11 @@ import Rate from './Rate'
 import Stepper from './Stepper'
 import Scrollpicker from './Scrollpicker'
 import Calendar from './Calendar'
-
+import Cascader from './Cascader'
 
 import Modal from './Modal'
 import Dialog from './Dialog'
 import Tip from './Tip'
-
 import SlideModal from './SlideModal'
 import Actionsheet from './Actionsheet'
 import BottomModal from './BottomModal'
@@ -31,7 +30,6 @@ import Longlist from './Longlist'
 import FilterPanel from './FilterPanel'
 // import Select from './Select'
 // import Toast from './Toast'
-// import Cascader from './Cascader'
 
 import Badge from './Badge'
 import Tag from './Tag'
@@ -135,6 +133,14 @@ export const pageList = [
   },
 
   {
+    screen: Cascader,
+    key: 'Cascader',
+    label: '级联菜单',
+    group: 'dataEntry'
+  },
+
+
+  {
     screen: Carousel,
     key: 'Carousel',
     group: 'dataDisplay',
@@ -179,8 +185,8 @@ export const pageList = [
   {
     screen: FilterPanel,
     key: 'FilterPanel',
-    group: 'dataDisplay',
-    label: '筛选器'
+    group: 'other',
+    label: 'FilterPanel'
   },
 
   {
@@ -256,11 +262,6 @@ export const pageList = [
   //   screen: Input,
   //   key: 'Input',
   //   label: '输入框'
-  // },
-  // {
-  //   screen: Cascader,
-  //   key: 'Cascader',
-  //   label: '级联菜单'
   // },
   // {
   //   screen: Rate,

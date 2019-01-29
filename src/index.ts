@@ -14,6 +14,7 @@ export * from './components/Stepper'
 export * from './components/Scrollpicker'
 export * from './components/Datepicker'
 export * from './components/Calendar'
+export * from './components/Cascader'
 
 export * from './components/Carousel'
 export * from './components/Progress'
@@ -33,5 +34,4 @@ export * from './components/Picker'
 
 export * from './components/Topview'
 
-export * from './components/Datepicker'
 export * from './modules/FilterPanel'
