@@ -9,103 +9,129 @@ import {
   ViewStyle
 } from 'react-native'
 
-import ProgressStyle from './style'
+import styles from './styles'
 
 export interface ProgressProps {
+  style?: any
+  barStyle?: any
   percent?: number
-  wrapperWidth?: number
-  styles?: any
-  wrapperStyle?: StyleProp<ViewStyle>
-  barStyle?: StyleProp<ViewStyle>
   easing?: boolean
   duration?: number
 }
 
-const progressStyles = StyleSheet.create<any>(ProgressStyle)
+const progressStyles = StyleSheet.create<any>(styles)
 
 export class Progress extends Component<ProgressProps, any> {
 
   static defaultProps = {
+    style: {},
+    barStyle: {},
     percent: 0,
     easing: false,
-    styles: progressStyles,
     duration: 1000
   }
 
   constructor (props: ProgressProps) {
     super(props)
     this.state = {
-      wrapperWidth: props.wrapperWidth || Dimensions.get('window').width,
-      percentage: new Animated.Value(0)
+      wrapperWidth: null,
+      barWidth: new Animated.Value(0)
     }
   }
 
   componentDidMount () {
-    if (this.props.easing) {
-      this.state.percentage.setValue(0)
-      Animated.timing(
-        this.state.percentage,
-        {
-          toValue: this.getWidth(),
-          duration: this.props.duration
-        }
-      ).start()
-    }
   }
 
   componentWillReceiveProps (nextProps: ProgressProps) {
-    if (nextProps.wrapperWidth !== this.props.wrapperWidth) {
-      this.setState({
-        wrapperWidth: nextProps.wrapperWidth
-      })
-    }
-    if (this.props.easing && nextProps.percent !== this.props.percent) {
-      this.setState({
-        percentage: new Animated.Value(this.getWidth(nextProps.percent))
-      })
+    if (
+      this.props.easing &&
+      nextProps.percent !== this.props.percent
+    ) {
+      this.toAnimate(
+        this.state.barWidth,
+        this.getWidthByPercent(this.state.wrapperWidth, this.props.percent),
+        this.getWidthByPercent(this.state.wrapperWidth, nextProps.percent),
+        this.props.duration
+      )
     }
   }
 
-  normalPercent = (percent?: number) => {
-    let widthPercent: any = 0
+  normalPercent(percent: number) {
+    let ret = 0
 
-    if (percent !== undefined && percent > 0) {
-      widthPercent = percent > 100 ? 100 : percent
+    if (percent != null && percent > 0) {
+      ret = percent > 100 ? 100 : percent
     }
 
-    return widthPercent
+    return ret
   }
 
-  getWidth = (percent = this.props.percent) => {
-    return this.state.wrapperWidth * (this.normalPercent(percent) / 100)
+  getWidthByPercent(baseWidth, percent) {
+    return baseWidth * (this.normalPercent(percent) / 100)
   }
 
   onLayout = (e: LayoutChangeEvent) => {
-    this.setState({
-      wrapperWidth: e.nativeEvent.layout.width
-    })
+    if (this.state.wrapperWidth == null) {
+      // console.log('onLayout: ', e.nativeEvent.layout.width)
+      this.setState({
+        wrapperWidth: e.nativeEvent.layout.width
+      }, () => {
+
+        if (this.props.easing) {
+          this.toAnimate(
+            this.state.barWidth,
+            0,
+            this.getWidthByPercent(this.state.wrapperWidth, this.props.percent),
+            this.props.duration
+          )
+        }
+      })
+    }
+  }
+
+  toAnimate(target, fromValue, toValue, duration) {
+    target.setValue(fromValue)
+    Animated.timing(
+      target,
+      {
+        toValue,
+        duration: duration
+      }
+    ).start()
   }
 
   render () {
     const {
+      style,
+      barStyle,
       easing,
-      styles,
-      barStyle
+      percent
     } = this.props
 
-    const percentStyle = easing ? {
-      width: this.state.percentage
-    } : {
-      width: this.getWidth()
+    const { wrapperWidth, barWidth } = this.state
+
+    let percentStyle
+    if (wrapperWidth == null) {
+      percentStyle = {}
+    } else {
+      percentStyle = easing ? {
+        width: barWidth
+      } : {
+        width: this.getWidthByPercent(wrapperWidth, percent)
+      }
     }
 
     return (
-      <View style={styles.wrapper} onLayout={this.onLayout}>
-        {easing ? (
-          <Animated.View style={[styles.progressBar, percentStyle, barStyle]} />
-        ) : (
-          <View style={[styles.progressBar, percentStyle, barStyle]} />
-        )}
+      <View style={[progressStyles.wrapper, style]} onLayout={this.onLayout}>
+        {
+          wrapperWidth == null ? null : (
+            easing ? (
+              <Animated.View style={[progressStyles.progressBar, barStyle, percentStyle]} />
+            ) : (
+              <View style={[progressStyles.progressBar, barStyle, percentStyle]} />
+            )
+          )
+        }
       </View>
     )
   }

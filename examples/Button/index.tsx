@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { ScrollView, View, Text, StyleSheet, ActivityIndicator } from 'react-native'
-import variables from '../customTheme'
 import { Button, Icon } from '../../src'
 import styles from '../common/styles'
+import variables from '../customTheme'
 
 const componentStyles = StyleSheet.create({
   spacingH: {

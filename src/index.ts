@@ -18,6 +18,7 @@ export * from './components/Progress'
 export * from './components/Badge'
 export * from './components/Tag'
 export * from './components/Tab'
+export * from './components/Longlist'
 
 
 

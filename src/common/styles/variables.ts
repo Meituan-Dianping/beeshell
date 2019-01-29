@@ -132,9 +132,7 @@ const slider = {
   sliderSlideToolTip: 30,
   sliderSlideToolTipIconSize: 4
 }
-// /**
-//  * Checkbox 组件
-//  */
+
 const checkbox = {
   checkboxIconContainerSize: 18,
   checkboxIconSize: 12
@@ -144,28 +142,7 @@ const rate = {
   rateIconSize: 20,
   rateIconColor: mtdBrandColors.mtdBrandPrimary
 }
-// /**
-//  * Popover 组件
-//  */
-// const popover = {
-//     popoverColor: '#fff',
-//     popoverBackgroundColor: '#2C2F34',
-//     popoverActiveBackgroundColor: '#1C1C1D',
-//     popoverBorderColor: '#565859'
-// }
-// /**
-//  * Calender 组件
-//  */
-// const calender = {
-//     calendarSelectedTextColor: '#fff',
-//     calendarFontFamily: 'PingFangSC-Medium',
-//     calendarDayHight: 65,
-//     calendarDayMiddleSelected: '#f3de8b',
-//     calendarMiddleSelectedTextColor: '#ff9a14'
-// }
-/**
- * Carousel 组件
- */
+
 const carousel = {
   carouselPaginationVSpacing: mtdSpacing.mtdVSpacingXL,
   carouselPaginationHSpacing: mtdSpacing.mtdHSpacingL
@@ -173,6 +150,10 @@ const carousel = {
 
 const stepper = {
   stepperOperatorSize: 30
+}
+
+const tab = {
+  tabActiveColor: mtdGrayColors.mtdGrayBase
 }
 
 const variables = {
@@ -196,6 +177,7 @@ const variables = {
   ...rate,
   ...stepper,
   ...carousel,
+  ...tab,
 }
 
 
