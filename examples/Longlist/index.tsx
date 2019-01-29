@@ -18,14 +18,47 @@ import { Longlist } from '../../src'
 import styles from '../common/styles'
 import variables from '../customTheme'
 
+const dataModal = {
+  total: 100,
+  list: [
+    {
+      id: 1
+    },
+    {
+      id: 2
+    },
+    {
+      id: 3
+    },
+    {
+      id: 4
+    },
+    {
+      id: 5
+    },
+    {
+      id: 6
+    },
+    {
+      id: 7
+    },
+  ]
+}
+
+
 export default class LonglistScreen extends React.Component {
+  private longlist = null
+
   constructor(props) {
     super(props)
 
     this.state = {
-      list: null,
-      pagesize: 5,
+      pageNo: 1,
+      pagesize: 7,
     }
+
+    this.state.list = this.modifyList(dataModal.list, this.state.pageNo)
+    this.state.total = dataModal.total
   }
 
   getList(params) {
@@ -33,35 +66,19 @@ export default class LonglistScreen extends React.Component {
 
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve({
-          total: 10,
-          data: [
-            {
-              id: 1
-            },
-            {
-              id: 2
-            },
-            {
-              id: 3
-            },
-            {
-              id: 4
-            },
-            {
-              id: 5
-            },
-            {
-              id: 6
-            },
-            {
-              id: 7
-            },
-          ]
-        })
-      }, 1000)
+        resolve(dataModal)
+      }, 3000)
     }).catch((e) => {
       console.log(e)
+    })
+  }
+
+  modifyList(list, pageNo) {
+    return list.map((item, index) => {
+      return {
+        ...item,
+        label: `第 ${pageNo} 页，第 ${index + 1} 项`
+      }
     })
   }
 
@@ -72,41 +89,32 @@ export default class LonglistScreen extends React.Component {
       id: '123456',
     }
 
-    console.log('getList by pageNo:', pageNo)
     return this.getList(params).then((resData) => {
-      const { data, total } = resData
-      const list = data.map((item) => {
-        return {
-          ...item,
-          label: `第 ${params.pageNo} 页，第 ${item.id} 项`,
-        }
-      })
+      const { list, total } = resData
+      const newList = this.modifyList(list, pageNo)
+
+      const oldList = (pageNo === 1 || this.state.list == null) ? [] : this.state.list
 
       this.setState({
+        pageNo,
         total,
-        list: (pageNo === 1 ? [] : this.state.list).concat(list),
+        list: oldList.concat(newList),
       })
-    }).catch(() => {
-      this.setState({
-        list: this.state.list.concat()
-      })
+    }).catch((e) => {
+      console.log(e)
     })
   }
 
 
   componentDidMount() {
-    this.refreshState(1).catch((e) => {
-      console.log(e)
-    })
-  }
-
-  componentDidUpdate() {
-    // console.log('componentDidUpdate')
+    // this.refreshState(1).catch((e) => {
+    //   console.log(e)
+    // })
   }
 
 
   render() {
-    const { list, pagesize, total } = this.state
+    const { list, pagesize, total, pageNo } = this.state
     let textInfo
     if (!list) {
       textInfo = '加载中...'
@@ -128,6 +136,9 @@ export default class LonglistScreen extends React.Component {
     return (
       <View style={styles.body}>
         <Longlist
+          ref={(c) => {
+            this.longlist = c
+          }}
           total={total}
           data={list}
           renderItem={({ item, index }) => {

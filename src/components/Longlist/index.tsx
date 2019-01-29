@@ -1,5 +1,6 @@
 import {
   FlatList,
+  FlatListProps,
   Text,
   StyleSheet,
   Platform,
@@ -7,7 +8,7 @@ import {
   View,
   ActivityIndicator,
 } from 'react-native'
-import React from 'react'
+import React, { ReactElement } from 'react'
 import variables from '../../common/styles/variables'
 
 const styles = StyleSheet.create({
@@ -16,20 +17,20 @@ const styles = StyleSheet.create({
   }
 })
 
-export interface LonglistProps {
-  data?: Array<any>
+export interface LonglistProps extends FlatListProps<any> {
+  data: Array<any>
   total?: number
-  renderItem?: Function
+  renderItem: () => ReactElement<any>
   renderFooter?: Function
-  onEndReached?: Function
-  onRefresh?: Function
+  onEndReached?: any
+  onRefresh?: (pageNo?: number) => Promise<any>
   hasRefreshControl?: boolean
   initialNumToRender?: number
 }
 
 export class Longlist extends React.Component<LonglistProps, any> {
   private pageNo = 1
-  private timeoutId = null
+  flatList = null
 
   static defaultProps = {
     hasRefreshControl: true,
@@ -61,36 +62,38 @@ export class Longlist extends React.Component<LonglistProps, any> {
       return
     }
 
-    clearTimeout(this.timeoutId)
-    this.timeoutId = setTimeout(() => {
-      this.setState({
-        loading: true,
-      }, () => {
-        const pageNo = ++this.pageNo
-        const timeoutId = this.timeoutId
+    if (this.state.loading) {
+      return
+    }
 
-        this.props.onEndReached(pageNo).then(() => {
-          // console.log(`Load pageNo: ${pageNo} success.`)
-          this.setState({
-            loading: false
-          })
-        }).catch((e) => {
-          --this.pageNo
-          this.setState({
-            loading: false
-          })
+    const pageNo = this.pageNo + 1
+    this.setState({
+      loading: true,
+    }, () => {
+      // console.log(`Load pageNo: ${pageNo} start.`)
+      this.props.onEndReached(pageNo).then(() => {
+        // console.log(`Load pageNo: ${pageNo} success.`)
+        this.pageNo = pageNo
+        this.setState({
+          loading: false
+        })
+      }).catch((e) => {
+        this.setState({
+          loading: false
         })
       })
-    }, 1000)
+    })
   }
 
   onRefresh() {
+    const pageNo = 1
     this.setState({
       refreshing: true
     }, () => {
-      this.pageNo = 1
-
-      this.props.onRefresh(this.pageNo).then(() => {
+      // console.log(`Load pageNo: ${pageNo} start.`)
+      this.props.onRefresh(1).then(() => {
+        // console.log(`Load pageNo: ${pageNo} success.`)
+        this.pageNo = pageNo
         this.setState({
           refreshing: false,
         })
@@ -147,8 +150,8 @@ export class Longlist extends React.Component<LonglistProps, any> {
       ...this.props,
     } as any
 
-    if (!hasRefreshControl) {
-      delete retProps.refreshing
+    if (!hasRefreshControl || loading) {
+      // delete retProps.refreshing
       delete retProps.onRefresh
     } else {
       retProps.refreshing = refreshing
@@ -158,6 +161,9 @@ export class Longlist extends React.Component<LonglistProps, any> {
     return (
       <FlatList
         {...retProps}
+        ref={(c) => {
+          this.flatList = c
+        }}
         keyExtractor={(item, index) => {
           return index.toString()
         }}
