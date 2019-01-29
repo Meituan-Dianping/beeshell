@@ -24,7 +24,7 @@ const thumbTouchSize = {
 const thumbImage = require('./images/rectangle.png')
 const otherThumbImage = require('./images/rectangle.png')
 
-interface Props {
+export interface SliderProps {
   style?: ViewStyle | RegisteredStyle<ViewStyle>
 
   value?: number
@@ -76,7 +76,7 @@ interface State {
 
 const styles = StyleSheet.create<any>(sliderStyle)
 
-export default class Slider extends PureComponent<Props, State> {
+export default class Slider extends PureComponent<SliderProps, State> {
 
   panResponder: PanResponderInstance
   previousLeft: number

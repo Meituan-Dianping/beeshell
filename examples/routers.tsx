@@ -25,16 +25,12 @@ import Actionsheet from './Actionsheet'
 import BottomModal from './BottomModal'
 import Picker from './Picker'
 
-
-
 import Tab from './Tab'
 import Progress from './Progress'
 import Longlist from './Longlist'
+import FilterPanel from './FilterPanel'
 // import Select from './Select'
-
 // import Toast from './Toast'
-
-
 // import Cascader from './Cascader'
 
 import Badge from './Badge'
@@ -180,13 +176,12 @@ export const pageList = [
     label: '长列表'
   },
 
-  // {
-  //   screen: () => {},
-  //   key: 'FilterPanel',
-  //   group: 'dataDisplay',
-  //   label: '筛选器'
-  // },
-
+  {
+    screen: FilterPanel,
+    key: 'FilterPanel',
+    group: 'dataDisplay',
+    label: '筛选器'
+  },
 
   {
     screen: Modal,
