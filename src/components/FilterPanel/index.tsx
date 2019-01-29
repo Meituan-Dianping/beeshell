@@ -1,6 +1,4 @@
-import ReactNative from 'react-native'
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import FilterBlock from './FilterBlock'
 import { Icon } from '../Icon'
 
@@ -21,16 +19,16 @@ const {
   width, height
 } = Dimensions.get('window')
 
-import filterStyle from './styles'
-const styles = StyleSheet.create<any>(filterStyle)
+import { FilterPanelStyle } from './styles'
+const styles = StyleSheet.create<any>(FilterPanelStyle)
 
 export interface FilterPanelProps {
   filterPanelInfo: any[],
   hasCommonLabals?: boolean,
-  onClear?: Function,
-  onConfirm?: Function,
+  onClear?: () => void,
+  onConfirm?: (result: any, filterPanelInfo: any) => void,
   commonLabels?: any[],
-  modyfyCommonLabels?: Function,
+  modyfyCommonLabels?: (labels: string) => void,
   panelMaxHeight?: number,
   panelMinHeight?: number,
   panelHeight?: number,
@@ -80,13 +78,13 @@ class FilterPanel extends Component<FilterPanelProps, any> {
     panelMaxHeight: height - 124,
     panelMinHeight: 0,
     activeExpand: false,
-  };
+  }
 
   private labelIdToName = {}
   private labelInfoArr = []
 
   constructor(props) {
-    super(props);
+    super(props)
 
     const { labelMap, infoArr, selectedArr } = processInfo(props.filterPanelInfo)
 
@@ -102,8 +100,8 @@ class FilterPanel extends Component<FilterPanelProps, any> {
 
   renderPanelItem = () => {
     const { filterPanelInfo } = this.props
-    if (!filterPanelInfo || (filterPanelInfo && filterPanelInfo.length == 0) ) {
-      return null;
+    if (!filterPanelInfo || (filterPanelInfo && filterPanelInfo.length === 0)) {
+      return null
     }
 
     const { selectedArr, editingSelects, isEditing } = this.state
@@ -139,22 +137,22 @@ class FilterPanel extends Component<FilterPanelProps, any> {
           }
         }}
       />
-    ));
+    ))
   }
 
   resetFilterPanelInfoBySelected = () => {
     const { selectedArr } = this.state
-    const newInfo = JSON.parse(JSON.stringify(this.props.filterPanelInfo));
+    const newInfo = JSON.parse(JSON.stringify(this.props.filterPanelInfo))
     newInfo.forEach((filterBlock, index) => {
       filterBlock.items.forEach((label) => {
         if (selectedArr[index].indexOf(label.label_id) < 0) {
-          label.selected = false;
+          label.selected = false
         } else {
-          label.selected = true;
+          label.selected = true
         }
-      });
-    });
-    return newInfo;
+      })
+    })
+    return newInfo
   }
 
   deleteLabel = (id) => {
@@ -285,16 +283,15 @@ class FilterPanel extends Component<FilterPanelProps, any> {
 
   render() {
     let { panelMaxHeight, panelMinHeight } = this.props
-
-    let usePanelHeight = false;
-
+    let usePanelHeight = false
 
     if (this.props.filterPanelInfo.length === 0) {
-      return null;
+      return null
     }
+
     if (this.props.panelHeight !== undefined) {
-      panelMaxHeight = this.props.panelHeight;
-      panelMinHeight = this.props.panelMinHeight;
+      panelMaxHeight = this.props.panelHeight
+      panelMinHeight = this.props.panelMinHeight
       usePanelHeight = true
     }
 
@@ -321,7 +318,7 @@ class FilterPanel extends Component<FilterPanelProps, any> {
                   })
 
                   if (this.props.onClear) {
-                    this.props.onClear();
+                    this.props.onClear()
                   }
                 }}
               >
@@ -334,7 +331,7 @@ class FilterPanel extends Component<FilterPanelProps, any> {
                   const result = selectedCondition.join(',')
                   const filterPanelInfo = this.resetFilterPanelInfoBySelected()
                   if (this.props.onConfirm) {
-                    this.props.onConfirm(result, filterPanelInfo);
+                    this.props.onConfirm(result, filterPanelInfo)
                   }
                 }}
               >
@@ -343,8 +340,8 @@ class FilterPanel extends Component<FilterPanelProps, any> {
             </View>}
         </View>
       </View>
-    );
+    )
   }
 }
 
-export default FilterPanel;
+export default FilterPanel

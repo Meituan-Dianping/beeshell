@@ -6,6 +6,6 @@
     "no-empty": [true, "allow-empty-catch", "allow-empty-functions"],
     "no-consecutive-blank-lines": false,
     "space-before-function-paren": [true, {"anonymous": "always", "named": "ignore", "asyncArrow": "always"}],
-    "one-variable-per-declaration": [true, "ignore-for-loop"],
+    "one-variable-per-declaration": [true, "ignore-for-loop"]
   }
 }

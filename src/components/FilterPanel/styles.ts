@@ -2,13 +2,14 @@ import variables from '../../common/styles/variables'
 import {
   StyleSheet,
   Dimensions,
+  Platform,
 } from 'react-native'
 
 const {
   width,
 } = Dimensions.get('window')
 
-export default {
+const FilterPanelStyle = {
   selectPanel: {
     backgroundColor: '#fff',
     width,
@@ -73,7 +74,7 @@ export default {
     paddingVertical: 15,
     paddingHorizontal: 15,
     borderTopColor: '#D2D2D2',
-    borderTopWidth: Global.onePx,
+    borderTopWidth: StyleSheet.hairlineWidth,
   },
   basicBtn: {
     position: 'relative',
@@ -82,7 +83,7 @@ export default {
     marginBottom: 11,
     marginRight: 11,
     borderColor: '#D2D2D2',
-    borderRadius: Global.onePx * 4,
+    borderRadius: variables.buttonBorderRadius,
     backgroundColor: '#F9F9F9',
   },
   labelBtnIcon: {
@@ -114,3 +115,79 @@ export default {
     color: '#FFB301',
   },
 }
+
+
+
+const FilterBolckStyles = {
+  container: {
+    backgroundColor: '#fff',
+    paddingHorizontal: 16,
+    paddingTop: 15,
+    paddingBottom: 5,
+    flexDirection: 'column',
+  },
+  title: {
+    fontSize: 14,
+    color: '#333333',
+  },
+  titleWrap: {
+    paddingBottom: 15,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: 35,
+  },
+  showMoreButton: {
+    height: 50,
+    flexDirection: 'row',
+  },
+  arrow: {
+    width: 14,
+    height: 14,
+    marginRight: 10,
+    marginTop: Platform.OS === 'ios' ? 0 : 3
+  },
+  btnGroup: {
+    flexDirection: 'row',
+    width,
+    flexWrap: 'wrap',
+    alignItems: 'flex-start',
+    paddingRight: 15,
+  },
+  basicBtn: {
+    position: 'relative',
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    marginBottom: 11,
+    marginRight: 11,
+    borderColor: '#D2D2D2',
+    borderRadius: variables.buttonBorderRadius,
+    backgroundColor: '#F9F9F9',
+  },
+  btnIcon: {
+    position: 'absolute',
+    left: 1,
+    top: 12,
+    width: 12,
+    height: 12,
+  },
+  basicBtnText: {
+    fontSize: 14,
+    color: '#333333',
+  },
+  btnTouched: {
+    backgroundColor: '#FFFBF1',
+    borderColor: '#FECB2E',
+    borderWidth: StyleSheet.hairlineWidth,
+  },
+  btnTextSelected: {
+    color: '#FECB2E',
+    fontWeight: 'bold',
+  },
+  bottomBorder: {
+    borderBottomColor: '#F0F0F0',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+}
+
+
+export { FilterPanelStyle, FilterBolckStyles }
