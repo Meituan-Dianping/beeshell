@@ -17,7 +17,7 @@ export default class CalendarScreen extends Component<{}, {}> {
     return (
       <ScrollView
         style={styles.body}>
-        <Text style={styles.header}>预定义样式</Text>
+        <Text style={styles.header}>基础</Text>
         <Calendar
           date={this.state.date}
           startDate={'2018-04-11'}
