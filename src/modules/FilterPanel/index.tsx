@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import FilterBlock from './FilterBlock'
-import { Icon } from '../Icon'
+import { Icon } from '../../components/Icon'
 
 
 import {

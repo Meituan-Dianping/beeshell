@@ -19,8 +19,6 @@ export * from './components/Badge'
 export * from './components/Tag'
 export * from './components/Tab'
 export * from './components/Longlist'
-export * from './components/FilterPanel'
-
 
 export * from './components/Modal'
 export * from './components/Dialog'
@@ -37,5 +35,5 @@ export * from './components/Topview'
 
 export * from './components/Datepicker'
 export * from '@ss/mtd-react-native/lib/Calendar'
-
 export * from '@ss/mtd-react-native/lib/Cascader'
+export * from './modules/FilterPanel'

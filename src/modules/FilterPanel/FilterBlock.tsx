@@ -11,7 +11,7 @@ import {
   ViewStyle,
   RegisteredStyle,
 } from 'react-native'
-import { Icon } from '../Icon'
+import { Icon } from '../../components/Icon'
 import { FilterBlockStyles } from './styles'
 const styles = StyleSheet.create<any>(FilterBlockStyles)
 
