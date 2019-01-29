@@ -69,7 +69,7 @@ const getCategoryIdx = (arr, id) => {
   return -1
 }
 
-class FilterPanel extends Component<FilterPanelProps, any> {
+export class FilterPanel extends Component<FilterPanelProps, any> {
 
   static defaultProps = {
     commonLabels: [],
@@ -343,5 +343,3 @@ class FilterPanel extends Component<FilterPanelProps, any> {
     )
   }
 }
-
-export default FilterPanel
