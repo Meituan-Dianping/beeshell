@@ -7,7 +7,7 @@ import {
   Alert,
 } from 'react-native'
 
-import { FilterPanel, Modal } from '../../src/'
+import { FilterPanel, SlideModal } from '../../src/'
 
 const styles = StyleSheet.create({
   container: {
@@ -89,11 +89,16 @@ export default class TagSelectDemo extends Component<any, any> {
           <Text>标签筛选组件,支持多选和单选,数据可配置，结合popup来使用效果更佳</Text>
         </View>
 
-        <Modal
+        <SlideModal
+          offsetY={130}
+          direction='down'
           ref={(c) => {
             this._modal = c
-          }}>
+          }}
+          cancelable
+        >
           <FilterPanel
+            panelMaxHeight={500}
             activeExpand
             hasCommonLabals={this.state.hasCommonLabel}
             commonLabels={this.state.commonLabels}
@@ -108,7 +113,7 @@ export default class TagSelectDemo extends Component<any, any> {
               // Popup.hide();
             }}
           />
-        </Modal>
+        </SlideModal>
       </View>
     )
   }

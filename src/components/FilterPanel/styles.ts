@@ -117,8 +117,7 @@ const FilterPanelStyle = {
 }
 
 
-
-const FilterBolckStyles = {
+const FilterBlockStyles = {
   container: {
     backgroundColor: '#fff',
     paddingHorizontal: 16,
@@ -141,8 +140,8 @@ const FilterBolckStyles = {
     flexDirection: 'row',
   },
   arrow: {
-    width: 14,
-    height: 14,
+    width: 12,
+    height: 12,
     marginRight: 10,
     marginTop: Platform.OS === 'ios' ? 0 : 3
   },
@@ -190,4 +189,4 @@ const FilterBolckStyles = {
 }
 
 
-export { FilterPanelStyle, FilterBolckStyles }
+export { FilterPanelStyle, FilterBlockStyles }
