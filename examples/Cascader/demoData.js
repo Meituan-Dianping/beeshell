@@ -1,10 +1,10 @@
-export const optionA = [
+export const optionsA = [
   {
     label: '甜点饮品',
     value: 'sweet',
     children: [
       { label: '甜品', value: 'sweetie' },
-      { label: 'icecream', value: 'icecream' }
+      { label: 'icecream', value: 'icecream' },
     ]
   },
   {
@@ -40,9 +40,7 @@ export const optionA = [
   }
 ]
 
-export const assignedOptionA = ['food', 'hotpot', 'yunnan']
-
-export const optionB = [
+export const optionsD = [
   {
     label: '甜点饮品',
     value: 19,
@@ -76,4 +74,3 @@ export const optionB = [
     ]
   }
 ];
-export const assignedOptionB = [22, 112, 600]

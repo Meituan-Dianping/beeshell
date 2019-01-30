@@ -11,50 +11,133 @@ import {
 } from 'react-native'
 
 import { Cascader, BottomModal, Button, Icon } from '../../src/'
-import { optionA, assignedOptionA , optionB, assignedOptionB } from './demoData.js'
-
 import styles from '../common/styles'
 import variables from '../customTheme'
-
+import { optionsA, optionsD } from './demoData.js'
 
 export default class CascaderScreen extends Component<any, any> {
-  bottomModalA = null
-  bottomModalB = null
-  bottomModalC = null
+  private bottomModalA = null
+  private bottomModalB = null
+  private bottomModalC = null
+
   constructor (props) {
     super(props)
     this.state = {
-      showPickerA: false,
-      confirmInfo: [],
-      changeInfo: []
+      valueA: [ 'sweet', 'sweetie' ],
+
+      optionsB: []
+      valueB: [],
     }
   }
 
-  handleConfirm (selectedChain) {
-    const confirmInfo = selectedChain.map(item => item.label).join('/')
-    this.setState({
-      confirmInfo
-    })
-    console.log('handleConfirm', confirmInfo, selectedChain)
-  }
+  componentDidMount() {
+    // setTimeout(() => {
+    //   this.setState({
+    //     valueA: [ 'sweet', 'icecream' ]
+    //   })
+    // }, 3000)
 
-  handleChange (selectedChain) {
-    const changeInfo = selectedChain.map(item => item.label).join('/')
-    console.log('handleChange', changeInfo, selectedChain)
-    this.setState({
-      changeInfo
-    })
-  }
-
-  showPickerA () {
-    this.setState({
-      showPickerA: true
+    this.fetchData().then((data) => {
+      this.setState({
+        optionsB: data.list
+      })
+    }).catch((e) => {
+      console.log(e)
     })
   }
 
-  showPickerB () {
-    this.setState({
-      showPickerB: true
+  handleChange () {
+
+  }
+
+  handleChangeB = (value) => {
+    // console.log('value', value)
+    const targetItem = this.getTargetItem(this.state.optionsB, value[value.length - 1])
+    if (!targetItem) {
+      console.log('error')
+      return
+    }
+    if (targetItem.children && targetItem.children.length) {
+      this.setState({
+        valueB: value
+      })
+    } else {
+      this.fetchData(value).then((data) => {
+        let newOptionsB
+        if (data && data.list && data.list.length) {
+          targetItem.children = data.list
+
+          newOptionsB = [
+            ...this.state.optionsB
+          ]
+        } else {
+          newOptionsB = this.state.optionsB
+        }
+        // console.log('newOptionsB', newOptionsB)
+        this.setState({
+          valueB: value,
+          optionsB: newOptionsB
+        })
+      }).catch((e) => {
+        console.log(e)
+      })
+    }
+  }
+
+  getTargetItem(options, targetValue) {
+    let targetItem = null
+    if (!options || !options.length) {
+      return targetItem
+    }
+    const matched = options.some((item) => {
+      if (item.value === targetValue) {
+        targetItem = item
+      } else {
+        targetItem = this.getTargetItem(item.children, targetValue)
+      }
+
+      if (targetItem) {
+        return true
+      }
+    })
+
+    return targetItem
+  }
+
+  fetchData(value) {
+    value = value || []
+    const length = value.length
+    let parentValue
+    if (length) {
+      parentValue = value[length - 1]
+    } else {
+      parentValue = 0
+    }
+
+    return new Promise((resolve) => {
+      const list = []
+      let base = parentValue * 10
+
+      let i
+      for (i = 1; i < 8; i++) {
+        const value = base + i
+        const label = `L${length + 1}-${i}(${value})`
+
+        list.push({
+          label,
+          value
+        })
+      }
+
+      setTimeout(() => {
+        if (value.length >= 4) {
+          resolve({})
+        } else {
+          resolve({
+            list
+          })
+        }
+      })
     })
   }
 
@@ -96,11 +179,25 @@ export default class CascaderScreen extends Component<any, any> {
     })
   }
 
+  modOptions(options, labelKey, valueKey, childrenKey) {
+    if (options && options.length) {
+      options.forEach((item) => {
+        item[labelKey] = `${item[labelKey]}(${item[valueKey]})`
+        if (item[childrenKey] && item[childrenKey].length) {
+          this.modOptions(item[childrenKey], labelKey, valueKey, childrenKey)
+        }
+      })
+    }
+  }
+
+
   render () {
+    // const modOptionsA = JSON.parse(JSON.stringify(optionsA))
+    // this.modOptions(modOptionsA, 'label', 'value', 'children')
+
     return (
-      <ScrollView
-        style={styles.body}
-        contentContainerStyle={styles.container}>
+      <View
+        style={[styles.body, styles.container]}>
 
         <Button
           style={{ marginTop: 12 }}
@@ -108,12 +205,13 @@ export default class CascaderScreen extends Component<any, any> {
           onPress={() => {
             this.bottomModalA.open()
           }}>
-          基础（同步数据）
+          基础
         </Button>
+
 
         <BottomModal
           ref={(c) => { this.bottomModalA = c }}
-          title='正常数据一次性请求'
+          title='基础'
           cancelable={true}
           leftCallback={() => {
             console.log('cancel')
@@ -121,15 +219,18 @@ export default class CascaderScreen extends Component<any, any> {
           rightCallback={() => {
             console.log('confirm')
           }}>
+          <Text style={{ padding: variables.mtdHSpacingXL }}>选中值：{String(this.state.valueA)}</Text>
           <Cascader
-            style={{ flex: 1, height: 200 }}
-            options={optionA}
-            assignedOption={assignedOptionA}
-            onConfirm={this.handleConfirm.bind(this)}
-            onChange={this.handleChange.bind(this)}
+            style={{ height: 200, marginBottom: 50 }}
+            options={optionsA}
+            value={this.state.valueA}
+            onChange={(value) => {
+              this.setState({
+                valueA: value
+              })
+            }}
           />
         </BottomModal>
-
 
         <Button
           style={{ marginTop: 12 }}
@@ -138,84 +239,78 @@ export default class CascaderScreen extends Component<any, any> {
             this.bottomModalC.open()
           }}
         >
-          自定义选项（异步数据）
+          异步数据
         </Button>
 
         <BottomModal
           ref={(c) => { this.bottomModalC = c }}
-          title='动态数据'
+          title='异步数据'
           cancelable={true}
           leftCallback={() => {
             console.log('cancel')
           }}
           rightCallback={() => {
             console.log('confirm')
-          }}
-        >
-          <Cascader
-            style={{ flex: 1 }}
-            onConfirm={this.handleConfirm.bind(this)}
-            onChange={this.handleChange.bind(this)}
-            itemSelectedStyle={{ color: variables.mtdBrandPrimary }}
-            flexCols={[2, 1, 1]}
-            structKeys={['name', 'value', 'child']}
-            onSyncData={this.syncLoadData.bind(this)}
-            renderItem={(item) => {
-              const selected = item.selected
-              const color = selected ? 'red' : '#333'
-              const backgroundColor = selected ? '#f5f5f5' : '#fff'
-              const icon = selected ? <Icon style={{ marginRight: 5 }} type='star' size={14} tintColor={color} /> : null
-              return (
-                <View style={{ padding: 15, backgroundColor, flexDirection: 'row', alignItems: 'center' }}>
-                  {icon}<Text style={{ color }}>{item.label}</Text>
-                </View>
-              )
-            }}
-            assignedOption={[11,22,33]}
-          />
+          }}>
 
-          <View style={{ maxHeight: 30 }}>
-            <SafeAreaView style={{ flex: 1 }}>
-              <View style={{ height: 60 }}></View>
-            </SafeAreaView>
-          </View>
+          <Cascader
+            style={{ height: 200, marginBottom: 50 }}
+            proportion={[1]}
+            options={this.state.optionsB}
+            value={this.state.valueB}
+            onChange={this.handleChangeB}
+          />
         </BottomModal>
 
-       {/* <Button
+
+        <Button
           style={{ marginTop: 12 }}
           size='sm'
           onPress={() => {
             this.bottomModalB.open()
           }}
         >
-          自定义structKeys ['label','value','child'], 样式自定义
+          自定义渲染项
         </Button>
 
         <BottomModal
           ref={(c) => { this.bottomModalB = c }}
-          title='自定义structKeys'
+          title='自定义渲染项'
           cancelable={true}
           leftCallback={() => {
             console.log('cancel')
           }}
           rightCallback={() => {
             console.log('confirm')
-          }}
-        >
-          <Cascader
-            style={{ flex: 1, height: 200 }}
-            options={optionB}
-            assignedOption={assignedOptionB}
-            onConfirm={this.handleConfirm.bind(this)}
-            onChange={this.handleChange.bind(this)}
-            structKeys={['label','value','child']}
-            itemStyle={{ color: 'coral' }}
-            itemSelectedStyle={{ backgroundColor: 'lemonchiffon', color: 'blue' }}
-            autoAddEntire
-          />
-        </BottomModal>*/}
+          }}>
 
-      </ScrollView>
+          <Cascader
+            style={{ height: 200, marginBottom: 50 }}
+            options={optionsA}
+            value={this.state.valueA}
+            onChange={(value) => {
+              this.setState({
+                valueA: value
+              })
+            }}
+            renderItem={(item) => {
+              const active = item.active
+              const hasChildren = item.children && item.children.length
+              const color = active ? variables.mtdBrandDanger : variables.mtdGrayBase
+              const backgroundColor = active ? variables.mtdFillBody : '#fff'
+              const icon = active ? <Icon style={{ marginRight: 5 }} type='star' size={14} tintColor={color} /> : <Icon style={{ marginRight: 5 }} type='star-o' size={14} tintColor={color} />
+              return (
+                <View style={{ padding: 15, backgroundColor, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <View style={{ flexDirection: 'row' }} >
+                    {icon}<Text style={{ color }}>{item.label}</Text>
+                  </View>
+                  { hasChildren ? <Icon type='caret-right' size={14} tintColor={color}></Icon> : null }
+                </View>
+              )
+            }}
+          />
+        </BottomModal>
+      </View>
     )
   }
 }

@@ -4,39 +4,24 @@ import {
 } from 'react-native'
 
 export default {
-  cascContainer: {
+  container: {
     justifyContent: 'flex-start',
     flexDirection: 'row',
     backgroundColor: 'white'
   },
-  cascaderMenu: {
-    flex: 1,
-    borderRightColor: '#E5E5E5',
-    borderRightWidth: StyleSheet.hairlineWidth
-  },
-  cascaderMenuItem: {
-    height: 44,
+
+  item: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 10
+    paddingHorizontal: variables.mtdHSpacingXL,
+    paddingVertical: variables.mtdVSpacingXXXL
+  },
+  itemText: {
+    fontSize: variables.mtdFontSizeM,
   },
   cascaderMenuItemSelected: {
     backgroundColor: variables.mtdFillGray
-  },
-  cascaderMenuItemHasChildren: {},
-  cascaderMenuText: {
-    lineHeight: 18,
-    fontSize: 13,
-    flex: 1
-  },
-  cascaderMenuTextSelected: {
-    color: variables.mtdGrayDarker,
-    fontWeight: 'bold'
-  },
-  childIcon: {
-    width: 8,
-    height: 12
   },
   selectedIcon: {
     width: 5,

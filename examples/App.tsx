@@ -73,6 +73,12 @@ class Home extends Component<MyProps, MyState> {
     })
   }
 
+  componentDidMount() {
+    setTimeout(() => {
+      this.props.navigation.navigate('Cascader')
+    }, 1000)
+  }
+
   gotoPage (item) {
     this.props.navigation.navigate(item.key)
   }
