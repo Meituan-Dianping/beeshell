@@ -28,20 +28,10 @@ import Tab from './Tab'
 import Progress from './Progress'
 import Longlist from './Longlist'
 import FilterPanel from './FilterPanel'
-import SelectPanel from './SelectPanel'
-// import Select from './Select'
-// import Toast from './Toast'
-
+import Dropdown from './Dropdown'
 import Badge from './Badge'
 import Tag from './Tag'
-// import Loading from './Loading'
-
 import Carousel from './Carousel'
-
-
-// import Popover from './Popover'
-
-// yarn new import 的占位
 
 console.disableYellowBox = true
 
@@ -191,13 +181,6 @@ export const pageList = [
   },
 
   {
-    screen: SelectPanel,
-    key: 'SelectPanel',
-    group: 'other',
-    label: 'SelectPanel'
-  },
-
-  {
     screen: Modal,
     key: 'Modal',
     label: '基础弹窗',
@@ -245,94 +228,10 @@ export const pageList = [
     group: 'feedback'
   },
 
-
-  // {
-  //   screen: Tab,
-  //   key: 'Tab',
-  //   label: '选项卡'
-  // },
-  // {
-  //   screen: Checkbox,
-  //   key: 'Checkbox',
-  //   label: '复选框'
-  // },
-  // {
-  //   screen: Radio,
-  //   key: 'Radio',
-  //   label: '单选框'
-  // },
-  // {
-  //   screen: Form,
-  //   key: 'Form',
-  //   label: '表单'
-  // },
-  // {
-  //   screen: Input,
-  //   key: 'Input',
-  //   label: '输入框'
-  // },
-  // {
-  //   screen: Rate,
-  //   key: 'Rate',
-  //   label: '评分'
-  // },
-  // {
-  //   screen: Stepper,
-  //   key: 'Stepper',
-  //   label: '计数器'
-  // },
-  // {
-  //   screen: NavigationBar,
-  //   key: 'NavigationBar',
-  //   label: '导航栏'
-  // },
-  // {
-  //   screen: Carousel,
-  //   key: 'Carousel',
-  //   label: '轮播'
-  // },
-  // {
-  //   screen: Select,
-  //   key: 'Select',
-  //   label: '选择框'
-  // },
-  // {
-  //   screen: Badge,
-  //   key: 'Badge',
-  //   label: '角标'
-  // },
-  // {
-  //   screen: Progress,
-  //   key: 'Progress',
-  //   label: '进度条'
-  // },
-  // {
-  //   screen: Loading,
-  //   key: 'Loading',
-  //   label: '加载'
-  // },
-  // {
-  //   screen: Tags,
-  //   key: 'Tags',
-  //   label: '标签集合'
-  // },
-  // {
-  //   screen: Popover,
-  //   key: 'Popover',
-  //   label: '下拉选择'
-  // },
-  // {
-  //   screen: Toast,
-  //   key: 'Toast',
-  //   label: '小提示'
-  // },
-  // // 下面是基础组件，名字需要商榷一些
-  // // 可以展示出来，但 example 要求统一漂亮一点～
-
-  // {
-  //   screen: Dropdown,
-  //   key: 'Dropdown',
-  //   label: '业务组件'
-  // }
-  // yarn new pageList 的占位
+  {
+    screen: Dropdown,
+    key: 'Dropdown',
+    label: 'Dropdown',
+    group: 'other'
+  }
 ]

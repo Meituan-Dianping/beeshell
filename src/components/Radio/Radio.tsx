@@ -3,11 +3,11 @@ import { View } from 'react-native'
 import radioStyles from './radioStyles'
 
 interface RadioProps {
-  style: any
+  style?: any
   iconPosition?: 'left' | 'right'
-  onChange: Function
-  children: ReactChild[]
-  checkedValue: any
+  onChange?: Function
+  children?: ReactChild[]
+  checkedValue?: any
 }
 
 export default class Radio extends Component<RadioProps> {
