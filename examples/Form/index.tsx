@@ -24,6 +24,7 @@ export default class FormScreen extends Component<{}, any> {
         name: 'bob.yao',
         store: '',
         email: '',
+        phone: '',
         needPackage: false
       },
       rules: {
@@ -61,6 +62,12 @@ export default class FormScreen extends Component<{}, any> {
   handleNameChange = (name) => {
     this.setState({
       model: { ...this.state.model, name }
+    })
+  }
+
+  handlePhoneChange = (phone) => {
+    this.setState({
+      model: { ...this.state.model, phone }
     })
   }
 
@@ -126,15 +133,15 @@ export default class FormScreen extends Component<{}, any> {
             hasLine>
             <Input value={this.state.model.name} placeholder='姓名' onChange={this.handleNameChange} />
           </Form.Item>
-          <Form.Item prop='email' label='邮箱' hasLine>
+          <Form.Item prop='email' label='属性' hasLine>
             <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-              <Text style={{ color: variables.mtdGray }}>请输入</Text>
+              <Text style={{ color: variables.mtdGray }}>请点击选择</Text>
               <Icon type='angle-right' size={14} tintColor={variables.mtdGray}></Icon>
             </View>
           </Form.Item>
 
-          <Form.Item style={{ paddingVertical: 13 }} label='手机号码' hasLine>
-            <Input placeholder='请填写手机号码' textAlign='right' onChange={() => {}}/>
+          <Form.Item prop='phone' style={{ paddingVertical: 13 }} label='手机号码' hasLine>
+            <Input placeholder='请填写手机号码' textAlign='right' value={this.state.model.phone} onChange={this.handlePhoneChange} />
             <Text style={{ color: variables.mtdGrayLighter, fontSize: 12, marginTop: 4 }}>该信息非常重要，请认真填写</Text>
           </Form.Item>
           <Form.Item prop='needPackage' label='是否开启定位' hasLine validateOnMount>
@@ -146,12 +153,12 @@ export default class FormScreen extends Component<{}, any> {
             <View></View>
             <Checkbox
               style={{ marginTop: 5 }}
-              checkedValues={this.state.model.deliveryTime}
+              checkedValue={this.state.model.deliveryTime}
               onChange={this.handleDeliveryChange}
               iconPosition='right'>
-              <Checkbox.Item label='上午' trueValue='time_1' />
-              <Checkbox.Item label='下午' trueValue='time_2' />
-              <Checkbox.Item label='晚上' trueValue='time_3' />
+              <Checkbox.Item label='上午' value='time_1' />
+              <Checkbox.Item label='下午' value='time_2' />
+              <Checkbox.Item label='晚上' value='time_3' />
             </Checkbox>
           </Form.Item>
 
@@ -167,7 +174,7 @@ export default class FormScreen extends Component<{}, any> {
               style={{ marginTop: 5 }}
               iconPosition='right'>
               <Radio.Item label='北京' value={1} />
-              <Radio.Item label='上海' trueValue={2} />
+              <Radio.Item label='上海' value={2} />
             </Radio>
           </Form.Item>
         </Form>
