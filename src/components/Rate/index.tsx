@@ -25,6 +25,10 @@ export interface Props {
    * 一旦开始选择就不可以可以取消选择
    */
   allowCancel?: boolean
+  /**
+   * 开启半星
+   */
+  enableHalfStar?: boolean
   onChange?: Function
   onChangeMove?: Function
 }
@@ -46,7 +50,8 @@ export class Rate extends Component<Props, State> {
     starSize: variables.rateIconSize,
     marginOfStar: 4,
     clickOnly: false,
-    allowCancel: true
+    allowCancel: true,
+    enableHalfStar: false
   }
 
   private viewOnly = true
@@ -120,10 +125,10 @@ export class Rate extends Component<Props, State> {
   }
 
   round (value) {
-    const { icons: { halfStar }, maximum, clickOnly } = this.props
+    const { icons: { halfStar }, enableHalfStar, maximum, clickOnly } = this.props
     const inv = 1.0 / (clickOnly ? 1.0 : (halfStar ? 0.5 : 1.0))
     let rating
-    if (halfStar) {
+    if (halfStar && enableHalfStar) {
       rating = value > Math.floor(value) + 0.5 ? Math.ceil(value) : Math.floor(value) + 0.5
     } else {
       rating = Math.ceil(value)

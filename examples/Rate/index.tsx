@@ -63,12 +63,12 @@ export default class RateScreen extends Component<Props, State> {
 
         <Text style={styles.header}>自定义图标颜色、大小、间距</Text>
         <View style={[styles.panel, { alignItems: 'center' }]}>
-          <Rate value={4} starSize={40} starColor={variables.mtdBrandDanger} marginOfStar={15} onChange={e => console.log(e)} />
+          <Rate value={4} starSize={40} enableHalfStar starColor={variables.mtdBrandDanger} marginOfStar={15} onChange={e => console.log(e)} />
         </View>
 
         <Text style={styles.header}>自定义图标 marginLeft: 20</Text>
         <View style={[styles.panel, { alignItems: 'center' }]}>
-          <Rate value={3.5} icons={iconsLocal} starSize={40} onChange={e => console.log(e)} marginOfStar={10} />
+          <Rate value={3.5} icons={iconsLocal} enableHalfStar starSize={40} onChange={e => console.log(e)} marginOfStar={10} />
         </View>
 
       </View>

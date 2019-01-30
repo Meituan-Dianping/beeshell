@@ -14,7 +14,8 @@ export default class CheckboxScreen extends Component<{}, any> {
     super(props)
     this.state = {
       address: ['v4'],
-      job: []
+      job: [],
+      job2: []
     }
   }
 
@@ -55,28 +56,27 @@ export default class CheckboxScreen extends Component<{}, any> {
               job: value
             })
           }}>
-          <Checkbox.Item label='美团' value='j1' />
-          <Checkbox.Item label='点评' value='j2' />
-          <Checkbox.Item label='猫眼' value='j3' />
-          <Checkbox.Item label='酒旅' value='j4' />
+          <Checkbox.Item label='外卖' value='j1' />
+          <Checkbox.Item label='团购' value='j2' />
+          <Checkbox.Item label='酒旅' value='j3' />
         </Checkbox>
 
         <Text style={styles.header}>全选功能</Text>
         <Checkbox
           showAllChecked
           style={{ paddingHorizontal: variables.mtdHSpacingXL }}
-          checkedValue={this.state.job}
+          checkedValue={this.state.job2}
           iconPosition='right'
           onChange={(value) => {
             console.log(value)
             this.setState({
-              job: value
+              job2: value
             })
           }}>
-          <Checkbox.Item label='美团' value='j1' />
-          <Checkbox.Item label='点评' value='j2' />
-          <Checkbox.Item label='猫眼' value='j3' />
-          <Checkbox.Item label='酒旅' value='j4' />
+          <Checkbox.Item label='上午' value='a1' />
+          <Checkbox.Item label='中午' value='a2' />
+          <Checkbox.Item label='下午' value='a3' />
+          <Checkbox.Item label='晚上' value='a4' />
         </Checkbox>
       </ScrollView>
     )
