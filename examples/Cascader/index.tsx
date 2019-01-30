@@ -10,7 +10,7 @@ import {
   SafeAreaView
 } from 'react-native'
 
-import { Cascader, BottomModal, Button, Icon } from '../../src/'
+import { Cascader, BottomModal, Button, Icon, Tip } from '../../src/'
 import { optionA, assignedOptionA , optionB, assignedOptionB } from './demoData.js'
 
 import styles from '../common/styles'
@@ -25,21 +25,22 @@ export default class CascaderScreen extends Component<any, any> {
     super(props)
     this.state = {
       showPickerA: false,
-      confirmInfo: [],
-      changeInfo: []
+      confirmInfo: '',
+      changeInfo: '',
     }
   }
 
   handleConfirm (selectedChain) {
-    const confirmInfo = selectedChain.map(item => item.label).join('/')
+    const confirmInfo = selectedChain.map(item => item.label).join(' / ')
     this.setState({
       confirmInfo
     })
     console.log('handleConfirm', confirmInfo, selectedChain)
+    Tip.show(confirmInfo)
   }
 
   handleChange (selectedChain) {
-    const changeInfo = selectedChain.map(item => item.label).join('/')
+    const changeInfo = selectedChain.map(item => item.label).join(' / ')
     console.log('handleChange', changeInfo, selectedChain)
     this.setState({
       changeInfo
@@ -77,7 +78,7 @@ export default class CascaderScreen extends Component<any, any> {
     const result = []
     return new Promise((resolve, reject) => {
       // 这里做多返回4级菜单
-      if (option.level < 100 && option.label !== '全部') {
+      if (option.level < 4 && option.label !== '全部') {
         const nextLevel = option.level + 1
         for (let index = 1; index < 7; index++) {
           result.push({
@@ -122,7 +123,7 @@ export default class CascaderScreen extends Component<any, any> {
             console.log('confirm')
           }}>
           <Cascader
-            style={{ flex: 1, height: 200 }}
+            style={{ flex: 1, height: 300 }}
             options={optionA}
             assignedOption={assignedOptionA}
             onConfirm={this.handleConfirm.bind(this)}
@@ -140,6 +141,7 @@ export default class CascaderScreen extends Component<any, any> {
         >
           自定义选项（异步数据）
         </Button>
+        <View><Text>{ this.state.changeInfo}</Text></View>
 
         <BottomModal
           ref={(c) => { this.bottomModalC = c }}
