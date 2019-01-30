@@ -28,6 +28,7 @@ import Tab from './Tab'
 import Progress from './Progress'
 import Longlist from './Longlist'
 import FilterPanel from './FilterPanel'
+import SelectPanel from './SelectPanel'
 // import Select from './Select'
 // import Toast from './Toast'
 
@@ -187,6 +188,13 @@ export const pageList = [
     key: 'FilterPanel',
     group: 'other',
     label: 'FilterPanel'
+  },
+
+  {
+    screen: SelectPanel,
+    key: 'SelectPanel',
+    group: 'other',
+    label: 'SelectPanel'
   },
 
   {
