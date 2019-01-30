@@ -35,3 +35,4 @@ export * from './components/Picker'
 export * from './components/Topview'
 
 export * from './modules/FilterPanel'
+export * from './modules/SelectPanel'
