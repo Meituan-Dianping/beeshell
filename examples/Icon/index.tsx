@@ -8,21 +8,23 @@ import styles from '../common/styles'
 const componentStyles = StyleSheet.create({
   panel: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     flexWrap: 'wrap',
-    paddingTop: 10,
-    paddingBottom: 10
+    paddingVertical: 12,
   },
   content: {
     alignItems: 'center',
+    width: 108,
     padding: 8,
-    marginRight: 8,
     marginBottom: 8,
-    backgroundColor: '#ebebea',
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: variables.mtdGrayLighter
     borderRadius: 2
   },
   title: {
     marginTop: 5,
+    fontSize: 12,
     color: '#666'
   }
 })
@@ -46,114 +48,114 @@ export default class IconScreen extends Component<{}, State> {
         contentContainerStyle={styles.container}>
         <View style={componentStyles.panel}>
           <View style={componentStyles.content}>
-            <Icon size={20} type='caret-down' tintColor='#000' />
+            <Icon size={20} type='caret-down' tintColor={variables.mtdGrayBase} />
             <Text style={componentStyles.title}>caret-down</Text>
           </View>
 
           <View style={componentStyles.content}>
-            <Icon size={20} type='caret-right' tintColor='#000' />
+            <Icon size={20} type='caret-right' tintColor={variables.mtdGrayBase} />
             <Text style={componentStyles.title}>caret-right</Text>
           </View>
 
           <View style={componentStyles.content}>
-            <Icon size={20} type='caret-up' tintColor='#000' />
+            <Icon size={20} type='caret-up' tintColor={variables.mtdGrayBase} />
             <Text style={componentStyles.title}>caret-up</Text>
           </View>
           <View style={componentStyles.content}>
-            <Icon size={20} type='check' tintColor='#000' />
+            <Icon size={20} type='check' tintColor={variables.mtdGrayBase} />
             <Text style={componentStyles.title}>check</Text>
           </View>
 
           <View style={componentStyles.content}>
-            <Icon size={20} type='check-circle' />
+            <Icon size={20} type='check-circle' tintColor={variables.mtdGrayBase} />
             <Text style={componentStyles.title}>check-circle</Text>
           </View>
 
           <View style={componentStyles.content}>
-            <Icon size={20} type='circle-o' tintColor='#000' />
+            <Icon size={20} type='circle-o' tintColor={variables.mtdGrayBase} />
             <Text style={componentStyles.title}>circle-o</Text>
           </View>
 
           <View style={componentStyles.content}>
-            <Icon size={20} type='plus-circle-o' tintColor='#000' />
+            <Icon size={20} type='plus-circle-o' tintColor={variables.mtdGrayBase} />
             <Text style={componentStyles.title}>plus-circle-o</Text>
           </View>
 
           <View style={componentStyles.content}>
-            <Icon size={20} type='question-circle' />
+            <Icon size={20} type='question-circle' tintColor={variables.mtdGrayBase}/>
             <Text style={componentStyles.title}>question-circle</Text>
           </View>
 
           <View style={componentStyles.content}>
-            <Icon size={20} type='chevron-left' tintColor='#000' />
+            <Icon size={20} type='chevron-left' tintColor={variables.mtdGrayBase} />
             <Text style={componentStyles.title}>chevron-left</Text>
           </View>
 
           <View style={componentStyles.content}>
-            <Icon size={20} type='times' tintColor='#000' />
+            <Icon size={20} type='times' tintColor={variables.mtdGrayBase} />
             <Text style={componentStyles.title}>times</Text>
           </View>
 
           <View style={componentStyles.content}>
-            <Icon size={20} type='times-circle' tintColor='#000' />
+            <Icon size={20} type='times-circle' tintColor={variables.mtdGrayBase} />
             <Text style={componentStyles.title}>times-circle</Text>
           </View>
 
           <View style={componentStyles.content}>
-            <Icon size={20} type='times-circle-o' tintColor='#000' />
+            <Icon size={20} type='times-circle-o' tintColor={variables.mtdGrayBase} />
             <Text style={componentStyles.title}>times-circle-o</Text>
           </View>
 
           <View style={componentStyles.content}>
-            <Icon size={20} type='minus' tintColor='#000' />
+            <Icon size={20} type='minus' tintColor={variables.mtdGrayBase} />
             <Text style={componentStyles.title}>minus</Text>
           </View>
 
           <View style={componentStyles.content}>
-            <Icon size={20} type='map-marker' tintColor='#000' />
+            <Icon size={20} type='map-marker' tintColor={variables.mtdGrayBase} />
             <Text style={componentStyles.title}>map-marker</Text>
           </View>
 
           <View style={componentStyles.content}>
-            <Icon size={20} type='star' tintColor='#000' />
+            <Icon size={20} type='star' tintColor={variables.mtdGrayBase} />
             <Text style={componentStyles.title}>star</Text>
           </View>
 
           <View style={componentStyles.content}>
-            <Icon size={20} type='star-o' tintColor='#000' />
+            <Icon size={20} type='star-o' tintColor={variables.mtdGrayBase} />
             <Text style={componentStyles.title}>star-o</Text>
           </View>
 
           <View style={componentStyles.content}>
-            <Icon size={20} type='star-half-o' tintColor='#000' />
+            <Icon size={20} type='star-half-o' tintColor={variables.mtdGrayBase} />
             <Text style={componentStyles.title}>star-half-o</Text>
           </View>
 
           <View style={componentStyles.content}>
-            <Icon size={20} type='search' tintColor='#000' />
+            <Icon size={20} type='search' tintColor={variables.mtdGrayBase} />
             <Text style={componentStyles.title}>search</Text>
           </View>
 
           <View style={componentStyles.content}>
-            <Icon size={20} type='share-square-o' tintColor='#000' />
+            <Icon size={20} type='share-square-o' tintColor={variables.mtdGrayBase} />
             <Text style={componentStyles.title}>share-square-o</Text>
           </View>
 
           <View style={componentStyles.content}>
-            <Icon size={20} type='ellipsis-h' tintColor='#000' />
+            <Icon size={20} type='ellipsis-h' tintColor={variables.mtdGrayBase} />
             <Text style={componentStyles.title}>ellipsis-h</Text>
           </View>
 
-          <View style={componentStyles.content}>
+          {/*<View style={componentStyles.content}>
             <Icon
               size={50}
               source={{
                 uri: 'http://s0.meituan.net/bs/fe-web-meituan/e5eeaef/img/logo.png'
               }}
-              tintColor='#000'
+              tintColor={variables.mtdGrayBase}
             />
             <Text style={componentStyles.title}>自定义 source</Text>
-          </View>
+          </View>*/}
         </View>
       </ScrollView>
     )

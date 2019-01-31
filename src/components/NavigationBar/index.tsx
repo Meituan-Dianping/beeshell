@@ -21,6 +21,7 @@ export interface NavigationBarProps {
   backCallback?: Function
   forwardLabel?: any
   forwardCallback: Function
+  renderItem: Function
 }
 
 export class NavigationBar extends Component<NavigationBarProps, any> {
@@ -32,7 +33,8 @@ export class NavigationBar extends Component<NavigationBarProps, any> {
     backLabel: '返回',
     backCallback: null,
     forwardLabel: null,
-    forwardCallback: null
+    forwardCallback: null,
+    renderItem: null
   }
 
   constructor (props: NavigationBarProps) {
@@ -126,10 +128,10 @@ export class NavigationBar extends Component<NavigationBarProps, any> {
   }
 
   render() {
-    // paddingVertical: variables.mtdVSpacingXL,
     const {
       style,
-      proportion
+      proportion,
+      renderItem
     } = this.props
 
     return (
@@ -140,7 +142,7 @@ export class NavigationBar extends Component<NavigationBarProps, any> {
               <View
                 key={index}
                 style={{ flex: item }}>
-                { this.renderItem(index) }
+                {renderItem ? renderItem(index) : this.renderItem(index)}
               </View>
             )
           })

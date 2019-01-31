@@ -4,16 +4,6 @@ import { Icon, Input, Form, Button, Checkbox, Switch, Radio } from '../../src'
 import styles from '../common/styles'
 import variables from '../customTheme'
 
-const componentStyles = StyleSheet.create({
-  header: {
-    paddingHorizontal: variables.mtdHSpacingXl,
-    paddingTop: 16,
-    paddingBottom: 8
-    color: variables.mtdGray,
-  },
-})
-
-
 export default class FormScreen extends Component<{}, any> {
   form = null
   constructor (p) {
@@ -111,7 +101,7 @@ export default class FormScreen extends Component<{}, any> {
     return (
       <ScrollView
         style={styles.body}>
-        <Text style={componentStyles.header}>基本信息</Text>
+        <Text style={styles.header}>基本信息</Text>
         <Form
           ref={(ref) => this.form = ref }>
           <Form.Item
@@ -127,7 +117,7 @@ export default class FormScreen extends Component<{}, any> {
                 }}>
                 <Text style={{ color: variables.mtdBrandDanger, marginRight: 2 }}>*</Text>
                 <Text>姓名</Text>
-                <Icon style={{ marginLeft: 4 }} type='question-circle' size={14}></Icon>
+                <Icon style={{ marginLeft: 4 }} type='question-circle' size={14} tintColor={variables.mtdGrayLighter}></Icon>
               </View>
             }
             hasLine>

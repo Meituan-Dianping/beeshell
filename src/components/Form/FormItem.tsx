@@ -12,27 +12,15 @@ import formStyles from './styles'
 const styles = StyleSheet.create<any>(formStyles)
 
 export interface FormItemProps {
-  /**
-   * 表单数据模型key
-   * 结合From.model属性
-   */
-  prop: string
-  /**
-   * 表单控件标签
-   */
-  label: string | ReactNode
-  labelWidth: number
-  /**
-   * 是否有下分割线
-   */
-  hasLine: boolean
-  /**
-   * 加载时校验
-   */
-  validateOnMount: boolean
-  showValidation: boolean
+  style?: any
+  label?: string | ReactNode
+  labelWidth?: number
+  hasLine?: boolean
   children?: ReactChild[] | ReactChild
-  style: any
+
+  prop?: string
+  showValidation?: boolean
+  validateOnMount?: boolean
 }
 
 interface FormItemState {
@@ -43,7 +31,6 @@ interface FormItemState {
 
 export class FormItem extends Component<FormItemProps, FormItemState> {
   static defaultProps = {
-    prop: '',
     label: '标题',
     labelWidth: variables.formItemLabelWidth,
     hasLine: false,

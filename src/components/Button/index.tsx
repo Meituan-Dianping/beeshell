@@ -32,11 +32,12 @@ const paddingMap = {
 }
 
 export interface ButtonProps {
-  type?: 'default' | 'primary' | 'danger' | 'info' | 'success' | 'warning' | 'text',
-  size?: 'sm' | 'md' | 'lg',
-  style?: any,
-  disabled?: boolean,
-  onPress?: Function,
+  style?: any
+  type?: 'default' | 'primary' | 'danger' | 'info' | 'success' | 'warning' | 'text'
+  size?: 'sm' | 'md' | 'lg'
+  children?: any
+  disabled?: boolean
+  onPress?: Function
   reverse?: boolean
 }
 

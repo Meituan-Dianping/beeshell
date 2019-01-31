@@ -10,20 +10,7 @@ import { FormItem } from './FormItem'
 const styles = StyleSheet.create<any>(formStyles)
 
 export interface FormProps {
-  // 表格
-  title?: string | ReactNode
-  // 样式
   style?: any
-  /**
-   * Form 的数据模型
-   * 配合Form.item的prop使用
-   */
-  model?: any
-  /**
-   * 校验规则匹配对象
-   * 参考 async-validator
-   */
-  rules?: any
 }
 
 interface FormState {
@@ -33,7 +20,7 @@ interface FormState {
 export class Form extends Component<FormProps, FormState> {
   static displayName = 'Form'
   static defaultProps = {
-
+    style: {}
   }
   static Item = FormItem
 
