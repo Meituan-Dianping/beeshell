@@ -75,7 +75,7 @@ class Home extends Component<MyProps, MyState> {
 
   componentDidMount() {
     setTimeout(() => {
-      // this.props.navigation.navigate('Icon')
+      this.props.navigation.navigate('Dialog')
     }, 1000)
   }
 

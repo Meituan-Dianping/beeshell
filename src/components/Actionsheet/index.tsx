@@ -24,7 +24,6 @@ interface OptionItem {
 interface ActionsheetProps extends SlideModalProps {
   header?: any
   footer?: any
-  title?: string | null | undefined
   options?: OptionItem[] | any
   maxShowNum?: number | null | undefined
   renderItem?: Function
@@ -43,13 +42,10 @@ export class Actionsheet<
 > extends SlideModal<T, P> {
   static defaultProps = {
     ...SlideModal.defaultProps,
-    width: screen.width,
 
     cancelable: true,
-    // 最多显示几项，设置后，超过指定个数将可滚动
     maxShowNum: null,
-    header: null,
-    title: null,
+    header: '标题',
     footer: null,
 
     useSafeAreaView: true,
@@ -65,20 +61,13 @@ export class Actionsheet<
 
   getHeader () {
     const styles = actionsheetStyles
+    const { header } = this.props
 
-    if (this.props.header && React.isValidElement(this.props.header)) {
-      return this.props.header
-    }
-
-    if (this.props.title) {
-      return (
-        <View style={styles.header}>
-          <Text style={styles.title}>{this.props.title}</Text>
-        </View>
-      )
-    }
-
-    return null
+    return React.isValidElement(header) ? header : (
+      <View style={styles.header}>
+        <Text style={styles.title}>{header}</Text>
+      </View>
+    )
   }
 
   getBody () {

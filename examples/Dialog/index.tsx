@@ -29,6 +29,25 @@ export default class DialogScreen extends Component<{}, State> {
     })
     console.warn('clickHandle', Object.keys(e))
   }
+
+  getLabel(label, type) {
+    const color = type === 'confirm' ? variables.mtdBrandPrimaryDark : variables.mtdGrayDark
+    return (
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          paddingVertical: 10,
+          paddingHorizontal: 15
+        }}>
+        <Icon type='star' size={16} tintColor={color} />
+        <Text style={{ fontSize: 16, color, marginLeft: 5 }} >{label}</Text>
+      </View>
+    )
+  }
+
   render () {
     return (
       <ScrollView
@@ -107,46 +126,28 @@ export default class DialogScreen extends Component<{}, State> {
                 </View>
               </View>}
             cancelable={true}
-            operationList={[
+            operations={[
               {
-                label: '操作一',
-                type: 'confirm',
-                callback: () => {
+                label: this.getLabel('操作一', 'confirm'),
+                onPress: () => {
                   console.log('操作一')
                 }
               },
               {
-                label: '操作二',
+                label: this.getLabel('操作二', 'confirm'),
                 type: 'confirm',
-                callback: () => {
+                onPress: () => {
                   console.log('操作二')
                 }
               },
               {
-                label: '操作三',
+                label: this.getLabel('操作三', 'cancel'),
                 type: 'cancel',
-                callback: () => {
+                onPress: () => {
                   console.log('操作三')
                 }
               }
-            ]}
-            renderOperationItem={(item, index) => {
-              const color = item.type === 'confirm' ? variables.mtdBrandPrimaryDark : variables.mtdGrayDark
-              return (
-                <View
-                  style={{
-                    flex: 1,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    paddingVertical: 10,
-                    paddingHorizontal: 15
-                  }}>
-                  <Icon type='star' size={16} tintColor={color} />
-                  <Text style={{ fontSize: 16, color, marginLeft: 5 }} >{item.label}</Text>
-                </View>
-              )
-            }}>
+            ]}>
           </Dialog>
 
           <Button
@@ -170,26 +171,26 @@ export default class DialogScreen extends Component<{}, State> {
                 </View>
               </View>}
             cancelable={true}
-            operationLayout='column'
-            operationList={[
+            operationsLayout='column'
+            operations={[
               {
                 label: '操作一',
                 type: 'cancel',
-                callback: () => {
+                onPress: () => {
                   console.log('操作一')
                 }
               },
               {
                 label: '操作二',
                 type: 'confirm',
-                callback: () => {
+                onPress: () => {
                   console.log('操作二')
                 }
               },
               {
                 label: '操作三',
                 type: 'confirm',
-                callback: () => {
+                onPress: () => {
                   console.log('操作三')
                 }
               }

@@ -11,9 +11,9 @@ import variables from '../../common/styles/variables'
 const px = 1 / PixelRatio.get()
 
 interface Operation {
-  label: string,
-  type: 'cancel' | 'confirm',
-  callback: Function
+  label: any
+  type?: 'cancel' | 'confirm'
+  onPress: Function
 }
 
 export interface DialogProps extends ModalProps {
@@ -24,9 +24,8 @@ export interface DialogProps extends ModalProps {
   confirmCallback?: Function
   confirmLabel?: string
 
-  operationLayout?: 'row' | 'column'
-  operationList?: Array<Operation>
-  renderOperationItem?: Function
+  operationsLayout?: 'row' | 'column'
+  operations?: Array<Operation>
 }
 
 export class Dialog extends Modal<DialogProps, any> {
@@ -46,8 +45,8 @@ export class Dialog extends Modal<DialogProps, any> {
     confirmCallback: null,
     confirmLabel: '确认',
 
-    operationLayout: 'row',
-    operationList: null,
+    operationsLayout: 'row',
+    operations: null,
     renderOperationItem: null
   }
 
@@ -106,52 +105,51 @@ export class Dialog extends Modal<DialogProps, any> {
       cancelLabel,
       confirmCallback,
       confirmLabel,
-      operationLayout,
-      operationList,
-      renderOperationItem
+      operationsLayout,
+      operations,
     } = this.props
 
-    operationList = operationList || []
+    operations = operations || []
 
-    if (!operationList.length) {
-      if (cancelCallback) {
-        operationList.push({
+    if (!operations.length) {
+      if (cancelLabel || cancelCallback) {
+        operations.push({
           label: cancelLabel,
           type: 'cancel',
-          callback: cancelCallback
+          onPress: cancelCallback
         })
       }
 
-      if (confirmCallback) {
-        operationList.push({
+      if (confirmLabel || confirmCallback) {
+        operations.push({
           label: confirmLabel,
           type: 'confirm',
-          callback: confirmCallback
+          onPress: confirmCallback
         })
       }
     }
-    const length = operationList.length
+    const length = operations.length
 
     if (!length) {
       return null
     }
 
-    const operationEl = []
-    operationList.forEach((item, index) => {
-      operationEl.push(
+    const operationEls = []
+    operations.forEach((item, index) => {
+      operationEls.push(
         <TouchableOpacity
           key={index}
           style={{
             flexDirection: 'row',
-            flex: operationLayout === 'column' ? null : 1
+            flex: operationsLayout === 'column' ? null : 1
           }}
-          activeOpacity={0.3}
+          activeOpacity={variables.mtdOpacity}
           onPress={() => {
-            item.callback(item, index)
+            item.onPress && item.onPress(item, index)
             this.close()
           }}>
           {
-            renderOperationItem ? renderOperationItem(item, index) :
+            React.isValidElement(item.label) ? item.label :
             <View
               style={[
                 item.type === 'cancel' ? styles.btnCancelWrapper : styles.btnConfirmWrapper
@@ -164,14 +162,14 @@ export class Dialog extends Modal<DialogProps, any> {
         </TouchableOpacity>
       )
       if (index < length - 1) {
-        operationEl.push(
+        operationEls.push(
           <View
             key={index + 'x'}
-            style={{ flexDirection: operationLayout === 'column' ? 'row' : 'column' }}>
+            style={{ flexDirection: operationsLayout === 'column' ? 'row' : 'column' }}>
             <View
               style={{
                 flex: 1,
-                [operationLayout === 'column' ? 'height' : 'width']: 1 * px,
+                [operationsLayout === 'column' ? 'height' : 'width']: 1 * px,
                 backgroundColor: variables.mtdBorderColor
               }}
             />
@@ -183,9 +181,9 @@ export class Dialog extends Modal<DialogProps, any> {
     return (
       <View style={[
         styles.footer,
-        { flexDirection: operationLayout }
+        { flexDirection: operationsLayout }
       ]}>
-        {operationEl}
+        {operationEls}
       </View>
     )
   }
