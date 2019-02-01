@@ -13,7 +13,7 @@ interface OptionItem {
 }
 
 export interface DropdownProps extends SlideModalProps {
-  width?: number
+  style?: any
   options: Array<OptionItem>
   checkedValue: any
   onChange: Function
@@ -51,9 +51,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
       <View
         style={[
           dropdownStyles.container,
-          {
-            width: this.props.width
-          }
+          this.props.style
         ]}>
         <Radio
           checkedValue={checkedValue}

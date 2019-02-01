@@ -1,9 +1,9 @@
 import React from 'react'
 import { range, isLeapYear, convert2Digit } from '../../common/utils'
 import { noop } from '../../common/utils/fns'
-import { Scrollpicker } from '../Scrollpicker'
+import { Scrollpicker, ScrollpickerProps } from '../Scrollpicker'
 
-export interface DatepickerProps {
+export interface DatepickerProps extends ScrollpickerProps {
   startYear?: number,
   proportion?: number[],
   numberOfYears?: number,
@@ -224,10 +224,9 @@ export class Datepicker extends React.Component<DatepickerProps, any> {
 
     return (
       <Scrollpicker
-        contentPaddingHorizontal={this.props.contentPaddingHorizontal}
+        {...this.props}
         list={viewList}
         value={value}
-        proportion={proportion}
         onChange={this.onChange.bind(this)}
       />
     )

@@ -16,12 +16,11 @@ import { SlideModal } from '../SlideModal'
 const screen = Dimensions.get('window')
 
 export interface PickerProps {
-  label?: string,
-  renderLabel?: Function
+  label?: any
   disabled?: boolean,
   style?: any,
   cancelable?: boolean
-  toggle?: Function
+  onPress?: Function
 }
 
 export interface PickerState {
@@ -36,9 +35,8 @@ export class Picker extends React.Component<PickerProps, PickerState> {
     label: '请选择',
     disabled: false,
     cancelable: true,
-    renderLabel: null,
     style: {},
-    toggle: null
+    onPress: null
   }
 
   constructor (props) {
@@ -50,7 +48,7 @@ export class Picker extends React.Component<PickerProps, PickerState> {
   }
 
   toggle = () => {
-    const { disabled, toggle } = this.props
+    const { disabled, onPress } = this.props
     if (disabled) {
       return
     }
@@ -59,7 +57,7 @@ export class Picker extends React.Component<PickerProps, PickerState> {
     this.setState({
       active
     })
-    toggle && toggle(active)
+    onPress && onPress(active)
 
     if (active) {
       this.open()
@@ -93,7 +91,7 @@ export class Picker extends React.Component<PickerProps, PickerState> {
   }
 
   render () {
-    let { style, disabled, label, cancelable, renderLabel } = this.props
+    let { style, disabled, label, cancelable } = this.props
     const { active, offsetY } = this.state
     const fontSize = StyleSheet.flatten(pickerStyles.btnText).fontSize
     let fontColor = StyleSheet.flatten(pickerStyles.btnText).color
@@ -115,7 +113,7 @@ export class Picker extends React.Component<PickerProps, PickerState> {
           activeOpacity={1}>
 
           {
-            renderLabel ? renderLabel(active) :
+            typeof label === 'function' ? label(active) :
             <View
               style={[
                 pickerStyles.btnWrapper,

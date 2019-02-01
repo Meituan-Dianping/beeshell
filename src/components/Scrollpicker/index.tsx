@@ -14,21 +14,21 @@ interface ListItem {
   [propName: string]: any
 }
 
-interface ScrollpickerProps {
-  list?: Array<Array<ListItem>> | any,
-  value?: number[],
-  proportion?: number[],
-  offsetCount?: number,
-  onChange?: Function,
-  renderItem?: Function,
-  contentPaddingHorizontal?: number
+export interface ScrollpickerProps {
+  style?: any
+  list?: Array<Array<ListItem>> | any
+  value?: number[]
+  proportion?: number[]
+  offsetCount?: number
+  onChange?: Function
+  renderItem?: Function
 }
 
 interface ScrollpickerState {
-  list: Array<Array<ListItem>>,
-  value: number[],
-  proportion: number[],
-  targetItemHeight: number,
+  list: Array<Array<ListItem>>
+  value: number[]
+  proportion: number[]
+  targetItemHeight: number
   containerHeight: number
 }
 
@@ -39,6 +39,7 @@ export class Scrollpicker extends React.Component<ScrollpickerProps, Scrollpicke
   containerHeight = null
 
   static defaultProps = {
+    style: {},
     list: [
       ['第一列第一项', '第一列第二项', '第一列第三项'],
       ['第二列第一项', '第二列第二项', '第二列第三项'],
@@ -49,8 +50,7 @@ export class Scrollpicker extends React.Component<ScrollpickerProps, Scrollpicke
     offsetCount: 2,
     fontSize: 14,
     onChange: null,
-    renderItem: null,
-    contentPaddingHorizontal: 0
+    renderItem: null
   }
 
   constructor (props) {
@@ -333,10 +333,8 @@ export class Scrollpicker extends React.Component<ScrollpickerProps, Scrollpicke
         }}
         style={[
           styles.container,
-          { height: containerHeight || DEFAULT_CONTAINER_HEIGHT },
-          {
-            paddingHorizontal: this.props.contentPaddingHorizontal
-          }
+          this.props.style,
+          { height: containerHeight || DEFAULT_CONTAINER_HEIGHT }
         ]}
       >
         {containerHeight && this.locateIndicator(targetItemHeight)}

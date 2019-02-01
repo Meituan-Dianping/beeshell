@@ -96,7 +96,7 @@ export default class DropdownScreen extends Component<{}, any> {
               this.slideModal2 = c
             }}
             offsetX={0}
-            width={screen.width}
+            style={{ width: screen.width }}
             offsetY={this.state.offsetY2}
             cancelable={true}
             checkedValue={checkedValue}
@@ -127,7 +127,7 @@ export default class DropdownScreen extends Component<{}, any> {
             ref={c => {
               this.slideModal3 = c
             }}
-            offsetX={0}
+            offsetX={this.state.offsetX3}
             offsetY={this.state.offsetY3}
             direction='up'
             cancelable={true}

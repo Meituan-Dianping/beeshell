@@ -56,8 +56,8 @@ export default class ScrollpickerScreen extends React.Component {
         >
           <View style={{ paddingVertical: 15 }}>
             <Datepicker
+              style={{ paddingHorizontal: 50 }}
               proportion={[1, 1, 1]}
-              contentPaddingHorizontal={50}
               startYear={2010}
               numberOfYears={10}
               date='2016-03-30'
@@ -92,10 +92,10 @@ export default class ScrollpickerScreen extends React.Component {
         >
           <View style={{ paddingVertical: 15 }}>
             <Scrollpicker
+              style={{ paddingHorizontal: 80 }}
               offsetCount={2}
               value={[0, 1]}
               proportion={[1, 1]}
-              contentPaddingHorizontal={80}
               list={[
                 ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
                 ['00', '10', '20', '30', '40', '50']
@@ -167,7 +167,7 @@ export default class ScrollpickerScreen extends React.Component {
         >
           <View style={{ paddingVertical: 15 }}>
             <Scrollpicker
-              contentPaddingHorizontal={20}
+              style={{ paddingHorizontal: 20 }}
               value={[3, 1, 2]}
               proportion={[2, 1, 1]}
               list={[
@@ -204,7 +204,7 @@ export default class ScrollpickerScreen extends React.Component {
           }}
         >
           <Scrollpicker
-            contentPaddingHorizontal={70}
+            style={{ paddingHorizontal: 70 }}
             list={[
               [{ label: 2010 }, { label: 2011 }, { label: 2012 }, { label: 2013 }],
               [{ label: 2010 }, { label: 2011 }, { label: 2012 }]

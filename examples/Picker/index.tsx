@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
-import { Picker } from '../../src/'
+import { Picker, Icon } from '../../src/'
+import variables from '../customTheme'
 
 const styles = StyleSheet.create({
   panel: {
@@ -48,7 +49,7 @@ export default class PickerScreen extends Component<{}, State> {
               label='甜点饮品'
               disabled={false}
               cancelable={true}
-              toggle={(active) => {
+              onPress={(active) => {
                 if (active) {
                   this.picker2.close().catch((e) => {
                     // console.log(e)
@@ -99,10 +100,23 @@ export default class PickerScreen extends Component<{}, State> {
             ref={(c) => {
               this.picker3 = c
             }}
-            label='全部业务'
+            label={(active) => {
+              const color = active ? variables.mtdBrandDanger : variables.mtdGrayBase
+              const size = 16
+              return (
+                <View style={{ flexDirection: 'row', padding: 15, alignItems: 'center' }}>
+                  <Text style={{ fontSize: size, textAlign: 'center', color, marginRight: 3 }}>
+                    自定义
+                  </Text>
+                  {
+                    active ? <Icon type='times' size={size - 3} tintColor={color}></Icon> : <Icon type='question-circle' size={size - 3} tintColor={color}></Icon>
+                  }
+                </View>
+              )
+            }}
             disabled={false}
             cancelable={true}
-            toggle={(active) => {
+            onPress={(active) => {
               if (active) {
                 this.picker1.close().catch((e) => {
                   // console.log(e)
@@ -126,37 +140,6 @@ export default class PickerScreen extends Component<{}, State> {
             </View>
           </Picker>
         </View>
-
-        <Picker
-          style={{ marginTop: 100 }}
-          ref={(c) => {
-            this.picker4 = c
-          }}
-          renderLabel={(active) => {
-            const color = active ? 'red' : '#444'
-            return (
-              <Text style={{ padding: 15, fontSize: 20, textAlign: 'center', color }}>
-                自定义按钮（{ active ? '打开' : '关闭'}）
-              </Text>
-            )
-          }}
-          disabled={false}
-          cancelable={true}
-          onPress={() => {
-            console.log('press, picker4')
-          }}>
-          <View
-            style={{
-              backgroundColor: '#fff',
-              alignItems: 'center',
-              justifyContent: 'center',
-              height: 300,
-              borderTopColor: '#ddd',
-              borderTopWidth: StyleSheet.hairlineWidth
-            }}>
-            <Text>内容区</Text>
-          </View>
-        </Picker>
       </View>
     )
   }
