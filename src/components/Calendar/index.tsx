@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
 })
 
 export interface CalendarProps {
+  style?: any
   locale?: string
   format?: string
   data?: string
@@ -97,6 +98,7 @@ export interface CalendarProps {
 
 export class Calendar extends React.Component<CalendarProps, any> {
   static defaultProps = {
+    style: {},
     locale: 'zh-cn',
     format: 'YYYY-MM-DD',
     date: '',
@@ -294,7 +296,7 @@ export class Calendar extends React.Component<CalendarProps, any> {
     const weekdays = calendarUtils.getWeekdays(calendar)
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, this.props.style]}>
           {
             this.props.renderHeader ?
               this.props.renderHeader(date, this.changeDate.bind(this)) :
