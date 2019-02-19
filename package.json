@@ -1,6 +1,6 @@
 {
   "name": "@roo/roo-mobile-rn",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -17,6 +17,7 @@
   ],
   "license": "ISC",
   "dependencies": {
+    "moment": "^2.24.0"
   },
   "husky": {
     "hooks": {
@@ -24,7 +25,6 @@
     }
   },
   "devDependencies": {
-    "moment": "^2.24.0",
     "@commitlint/cli": "^7.2.1",
     "@commitlint/config-conventional": "^7.1.2",
     "@mrn/babel-preset-mrn": "latest",
