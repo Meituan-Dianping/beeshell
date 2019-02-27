@@ -22,7 +22,8 @@ export interface ModalProps {
   animatedTranslateX?: number | null
   animatedTranslateY?: number | null
 
-  alignItems?: FlexAlignType
+  offsetX?: number
+  offsetY?: number
 
   contentContainerPositon?: 'top' | 'center' | 'bottom'
   contentContainerStyle?: any
@@ -43,6 +44,9 @@ export class Modal<
   static defaultProps = {
     cancelable: true,
     backdropOpacity: 0.3,
+
+    offsetX: 0,
+    offsetY: 0,
 
     animatedTranslateX: null,
     animatedTranslateY: null,
@@ -125,11 +129,16 @@ export class Modal<
     const contentContainerPositon = this.props.contentContainerPositon === 'top' ? 'flex-start' : (
       this.props.contentContainerPositon === 'bottom' ? 'flex-end' : 'center'
     )
+    const { offsetY, offsetX } = this.props
 
     return (
       <View
         style={[
           styles.container,
+          {
+            top: offsetY,
+            left: offsetX,
+          },
           {
             alignItems: contentContainerPositon
           }

@@ -128,6 +128,36 @@ export default class ModalScreen extends Component<{}, any> {
             <Text>自定义内容</Text>
           </View>
         </Modal>
+
+
+        <Button
+          style={{ marginTop: 12 }}
+          size='sm'
+          onPress={() => {
+            this.modalA.open()
+          }}>
+          自定义 offset
+        </Button>
+        <Modal
+          offsetY={100}
+          offsetX={50}
+          ref={c => {
+            this.modalA = c
+          }}
+          cancelable={true}>
+
+          <View
+            style={{
+              width: 200,
+              height: 100,
+              backgroundColor: '#fff',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: 4
+            }}>
+            <Text>自定义内容</Text>
+          </View>
+        </Modal>
       </ScrollView>
     )
   }
