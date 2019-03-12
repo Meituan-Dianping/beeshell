@@ -1,4 +1,10 @@
 
+## [1.0.8] - 2019-03-12
+
+### Changed
+- Rate 组件增加 this.containerView 判空
+- 因为没有render完就关闭容器会导致 this.containerView 为null
+  
 ## [1.0.7] - 2019-02-27
 
 ### Changed
