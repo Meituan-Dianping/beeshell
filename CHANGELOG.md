@@ -1,3 +1,8 @@
+## [1.0.11] - 2019-03-25
+### Changed
+- Input 组件，修改默认样式，替换 android 平台清空按钮图标（android 平台 Image 不支持 tintColor）
+
+
 ## [1.0.10] - 2019-03-25
 ### Added
 - roo 上报问题修复
