@@ -74,7 +74,7 @@ export class Rate extends Component<Props, State> {
 
   componentDidMount () {
     InteractionManager.runAfterInteractions(() => {
-      this.containerView.measure((ox, oy, width, height, px, py) => {
+      this.containerView && this.containerView.measure((ox, oy, width, height, px, py) => {
         this.viewX = px
       })
     })
