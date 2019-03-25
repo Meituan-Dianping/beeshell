@@ -1,6 +1,6 @@
 const http = require('http');
-const roo = require('./package.json');
-const pkg = require('../../../package.json');
+const roo = require('../package.json');
+const pkg = require('../../../../package.json');
 
 const APP_KEY = 'roo_mobile_rn';
 
