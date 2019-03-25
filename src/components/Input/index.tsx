@@ -98,11 +98,16 @@ export class Input extends Component<InputProps, InputState> {
   }
 
   renderiOS = () => {
+    const tmpProps = {
+      ...this.props
+    }
+    delete tmpProps.style
+
     return (
-      <View style={[styles.container, { flexDirection: 'column', justifyContent: 'center' }]}>
+      <View style={[styles.container, this.props.style, { flexDirection: 'column', justifyContent: 'center' }]}>
         <TextInput
-          {...this.props}
-          style={[styles.inputStyle, this.props.style]}
+          {...tmpProps}
+          style={[styles.inputStyle]}
           onChange={() => { return }}
           onChangeText={this.handleChange}
           onFocus={this.handleFocus.bind(this)}
@@ -116,12 +121,17 @@ export class Input extends Component<InputProps, InputState> {
     const androidClearButtonMode = this.props.clearButtonMode && this.props.clearButtonMode !== 'never'
     const showDelIcon = androidClearButtonMode && this.props.value && this.state.isEditing
 
+    const tmpProps = {
+      ...this.props
+    }
+    delete tmpProps.style
+
     return (
-      <View style={[styles.container, { flexDirection: 'row', alignItems: 'center' }]}>
+      <View style={[styles.container, this.props.style, { flexDirection: 'row', alignItems: 'center' }]}>
         <TextInput
-          {...this.props}
+          {...tmpProps}
           clearButtonMode='never'
-          style={[styles.inputStyle, { flex: 1 }, this.props.style]}
+          style={[styles.inputStyle, { flex: 1 }]}
           onChange={() => { return }}
           onChangeText={this.handleChange}
 
