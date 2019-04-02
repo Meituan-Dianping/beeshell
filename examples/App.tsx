@@ -75,7 +75,7 @@ class Home extends Component<MyProps, MyState> {
 
   componentDidMount() {
     setTimeout(() => {
-      this.props.navigation.navigate('Input')
+      this.props.navigation.navigate('SlideModal')
     }, 1000)
   }
 

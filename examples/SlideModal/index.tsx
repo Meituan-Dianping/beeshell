@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, View, Text, StyleSheet, Dimensions } from 'react-native'
+import { ScrollView, View, Text, StyleSheet, Dimensions, StatusBar, Platform } from 'react-native'
 
 import { Button, SlideModal, BottomModal } from '../../src/'
 import styles from '../common/styles'
@@ -35,6 +35,7 @@ export default class SlideModalScreen extends Component<{}, any> {
             this.slideModal = c
           }}
           cancelable={true}
+          screenHeight={Platform.OS === 'ios' ? screen.height : screen.height - StatusBar.currentHeight}
         >
           <View style={{ backgroundColor: '#fff', padding: 20, borderRadius: 4 }}>
             <View>

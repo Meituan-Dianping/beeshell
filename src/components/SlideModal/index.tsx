@@ -41,7 +41,7 @@ export class SlideModal<
     cancelable: false,
     backdropOpacity: 0.3,
     offsetX: 0,
-    offsetY: screen.height,
+    offsetY: undefined,
     direction: 'up',
     forceFullScreen: false // 是否强制全屏
   }
@@ -77,8 +77,11 @@ export class SlideModal<
       directionType = 'horizontal'
     }
 
+    const offsetY = typeof props.offsetY === 'number' ? props.offsetY : props.screenHeight
+
     const data = {
-      directionType
+      directionType,
+      offsetY
     }
 
     this.animated = new SlideAnimated({
@@ -90,7 +93,11 @@ export class SlideModal<
 
   componentWillReceiveProps (nextProps) {
     if (
-      nextProps.direction !== this.props.direction
+      nextProps.direction !== this.props.direction ||
+      nextProps.offsetX !== this.props.offsetX ||
+      nextProps.offsetY !== this.props.offsetY ||
+      nextProps.screenWidth !== this.props.screenWidth ||
+      nextProps.screenHeight !== this.props.screenHeight
     ) {
       this.setState({
         ...this.initSlideModalData(nextProps)
@@ -101,8 +108,8 @@ export class SlideModal<
   open (c) {
     let containerReverseRect = null
     if (this.props.forceFullScreen) {
-      const { direction, offsetX, offsetY, backdropOpacity } = this.props
-      const { directionType } = this.state
+      const { direction, offsetX, backdropOpacity, screenHeight } = this.props
+      const { directionType, offsetY } = this.state
 
       containerReverseRect = {
         top: directionType === 'vertical' ? (
@@ -110,8 +117,8 @@ export class SlideModal<
         ) : 0,
 
         height: directionType === 'vertical' ? (
-            direction === 'up' ? screen.height - offsetY : offsetY
-        ) : screen.height,
+            direction === 'up' ? screenHeight - offsetY : offsetY
+        ) : screenHeight,
 
         left: directionType === 'horizontal' ? (
             direction === 'right' ? 0 : offsetX
@@ -131,8 +138,8 @@ export class SlideModal<
 
   getContent (inner) {
     const styles = slideModalStyles
-    const { direction, offsetY, offsetX } = this.props
-    const { directionType } = this.state
+    const { direction, offsetX, screenHeight } = this.props
+    const { directionType, offsetY } = this.state
     const tmp = inner == null ? this.props.children : inner
 
     const containerRect = {
@@ -140,7 +147,7 @@ export class SlideModal<
           direction === 'up' ? 0 : offsetY
       ) : 0,
       height: directionType === 'vertical' ? (
-          direction === 'up' ? offsetY : screen.height - offsetY
+          direction === 'up' ? offsetY : screenHeight - offsetY
       ) : null,
 
       left: directionType === 'horizontal' ? (

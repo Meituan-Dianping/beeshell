@@ -19,6 +19,9 @@ export interface ModalProps {
   cancelable: boolean
   backdropOpacity?: number
 
+  screenWidth?: number
+  screenHeight?: number
+
   animatedTranslateX?: number | null
   animatedTranslateY?: number | null
 
@@ -44,6 +47,9 @@ export class Modal<
   static defaultProps = {
     cancelable: true,
     backdropOpacity: 0.3,
+
+    screenWidth: screen.width,
+    screenHeight: screen.height,
 
     offsetX: 0,
     offsetY: 0,
@@ -74,19 +80,17 @@ export class Modal<
 
   init (props) {
     const data = {
-      screenHeight: screen.height,
-      screenWidth: screen.width,
       animatedTranslateX: null,
       animatedTranslateY: null
     }
 
     data.animatedTranslateX =
       typeof props.animatedTranslateX === 'number'
-        ? props.animatedTranslateX - data.screenWidth / 2
+        ? props.animatedTranslateX - props.screenWidth / 2
         : null
     data.animatedTranslateY =
       typeof props.animatedTranslateY === 'number'
-        ? props.animatedTranslateY - data.screenHeight / 2
+        ? props.animatedTranslateY - props.screenHeight / 2
         : null
 
     if (!this.animated) {
