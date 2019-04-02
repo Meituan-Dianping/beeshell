@@ -1,3 +1,9 @@
+
+## [1.0.13] - 2019-04-02
+### Changed
+- Modal 系列组件底层升级，涉及改动 Modal、SlideModal、Topview、动画部分，建议对弹框相关的功能统一回归
+
+
 ## [1.0.12] - 2019-04-02
 ### Changed
 - Modal 系列组件（包括 SlideModal、Dialog 等），支持 screenWidth、screenHeight 属性，计算位置的基础值由用户控制，功能实现与平台环境解耦
