@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import { ScrollView, View, StyleSheet, Text, Dimensions, TouchableOpacity } from 'react-native'
+import { ScrollView, View, StyleSheet, Text, Dimensions, TouchableOpacity, StatusBar, Platform } from 'react-native'
 
 import { Button, Actionsheet, Icon } from '../../src/'
 import variables from '../customTheme'
 import styles from '../common/styles'
 
 const screen = Dimensions.get('window')
+
+const screenHeight = Platform.OS === 'ios' ? screen.height : screen.height - StatusBar.currentHeight
 
 export default class ActionsheetScreen extends Component<{}, any> {
   private actionsheet = null;
@@ -43,6 +45,7 @@ export default class ActionsheetScreen extends Component<{}, any> {
             ref={(c) => {
               this.actionsheet = c
             }}
+            screenHeight={screenHeight}
             title={'标题'}
             options={[
               { label: '选项一', value: '1' },
@@ -76,6 +79,7 @@ export default class ActionsheetScreen extends Component<{}, any> {
             ref={(c) => {
               this.actionsheet2 = c
             }}
+            screenHeight={screenHeight}
             header={
               <View
                 style={{
