@@ -75,7 +75,7 @@ class Home extends Component<MyProps, MyState> {
 
   componentDidMount() {
     setTimeout(() => {
-      this.props.navigation.navigate('Picker')
+      this.props.navigation.navigate('Tip')
     }, 1000)
   }
 

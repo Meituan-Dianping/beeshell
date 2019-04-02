@@ -1,5 +1,7 @@
-
-
+## [1.0.15] - 2019-04-02
+### Fixed
+- Picker 组件 Android 平台 bug 修复
+- Stepper 组件 Android 平台样式修复
 
 ## [1.0.14] - 2019-04-02
 ### Fixed

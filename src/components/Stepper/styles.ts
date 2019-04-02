@@ -24,7 +24,8 @@ export interface ConterStyle {
 export default {
   container: {
     flexDirection: 'row',
-    width: 136
+    width: 136,
+    alignItems: 'center'
   },
   ctrl: {
     width: variables.stepperOperatorSize,
@@ -93,7 +94,8 @@ export default {
     flex: 1,
     textAlign: 'center',
     fontSize: 14,
-    color: variables.mtdGrayBase
+    color: variables.mtdGrayBase,
+    textAlignVertical: 'center'
   },
   inputWithBorder: {
     borderTopColor: variables.mtdBrandPrimary,
