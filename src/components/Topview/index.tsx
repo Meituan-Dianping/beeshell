@@ -4,8 +4,11 @@ import {
   AppRegistry,
   StyleSheet,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  Dimensions
 } from 'react-native'
+
+const screen = Dimensions.get('window')
 
 let topview = null
 
@@ -143,8 +146,8 @@ class Topview extends Component<any, {count: number, modelList: Array<any>}> {
                         position: 'absolute',
                         top: 0,
                         left: 0,
-                        width: args.screenWidth,
-                        height: args.screenHeight
+                        width: args.screenWidth == null ? screen.width : args.screenWidth,
+                        height: args.screenHeight == null ? screen.height : args.screenHeight
                       }}
                       key={item.id}
                       collapsable={false}
