@@ -1,10 +1,59 @@
 import React, { Component } from 'react'
 import { ScrollView, View, Text, StyleSheet, Dimensions, StatusBar, Platform } from 'react-native'
-
 import { Button, SlideModal, BottomModal } from '../../src/'
 import styles from '../common/styles'
 
 const screen = Dimensions.get('window')
+const screenHeight = Platform.OS === 'ios' ? screen.height : screen.height - StatusBar.currentHeight
+
+const directonsWithAlign = [
+  {
+    direction: ['right'],
+    align: 'up'
+  },
+
+  {
+    direction: ['up', 'right'],
+  },
+
+  {
+    direction: ['up'],
+    align: 'right'
+  },
+  {
+    direction: ['down'],
+    align: 'right'
+  },
+  {
+    direction: ['down', 'right'],
+  },
+  {
+    direction: ['right'],
+    align: 'down',
+  },
+  {
+    direction: ['left'],
+    align: 'down',
+  },
+  {
+    direction: ['down', 'left'],
+  },
+  {
+    direction: ['down'],
+    align: 'left'
+  },
+  {
+    direction: ['up'],
+    align: 'left'
+  },
+  {
+    direction: ['up', 'left'],
+  },
+  {
+    direction: ['left'],
+    align: 'up'
+  }
+]
 
 export default class SlideModalScreen extends Component<{}, any> {
   [propName: string]: any
@@ -12,10 +61,23 @@ export default class SlideModalScreen extends Component<{}, any> {
   constructor (p) {
     super(p)
     this.state = {
+      directionIndex: 0
     }
   }
 
+  handleClosePinwheel = () => {
+    this.slideModalA.close()
+    this.slideModalB.close()
+    this.slideModalC.close()
+    this.slideModalD.close()
+  }
+
   render () {
+    const target = directonsWithAlign[this.state.directionIndex]
+    const contentEl = <View style={{ backgroundColor: '#fff', width: 50, height: 40 }}></View>
+    const centerX = screen.width / 2
+    const centerY = screen.height / 2
+
     return (
       <ScrollView
         style={styles.body}
@@ -34,8 +96,8 @@ export default class SlideModalScreen extends Component<{}, any> {
           ref={c => {
             this.slideModal = c
           }}
+          screenHeight={screenHeight}
           cancelable={true}
-          screenHeight={Platform.OS === 'ios' ? screen.height : screen.height - StatusBar.currentHeight}
         >
           <View style={{ backgroundColor: '#fff', padding: 20, borderRadius: 4 }}>
             <View>
@@ -54,7 +116,7 @@ export default class SlideModalScreen extends Component<{}, any> {
           onPress={() => {
             this.btnEl2.measure((fx, fy, width, height, px, py) => {
               this.setState({
-                offsetX2: px,
+                offsetX2: px + 130,
                 offsetY2: py
               })
               this.slideModal2.open().catch((e) => {
@@ -63,22 +125,30 @@ export default class SlideModalScreen extends Component<{}, any> {
             })
           }}
         >
-          指定位置、上拉
+          指定位置，自定义拉动方向，全屏
         </Button>
 
         <SlideModal
           ref={c => {
             this.slideModal2 = c
           }}
+          screenHeight={screenHeight}
           offsetX={this.state.offsetX2}
           offsetY={this.state.offsetY2}
+          direction={target.direction as any}
+          align={target.align as any}
           cancelable={true}
-          forceFullScreen={false}
+          fullScreenPatch={[true, true, true]}
+          onClosed={() => {
+            this.setState({
+              directionIndex: (this.state.directionIndex + 1) % directonsWithAlign.length
+            })
+          }}
         >
-          <View style={{ backgroundColor: '#fff', padding: 20 }}>
+          <View style={{ backgroundColor: '#fff', padding: 10 }}>
             <View>
               <Text>自定义内容</Text>
-              <Text>内容比较简单，完全由用户自定义</Text>
+              <Text>完全由用户自定义</Text>
             </View>
           </View>
         </SlideModal>
@@ -92,21 +162,22 @@ export default class SlideModalScreen extends Component<{}, any> {
           onPress={() => {
             this.btnEl3.measure((fx, fy, width, height, px, py) => {
               this.setState({
-                offsetX3: px,
+                // offsetX3: px,
                 offsetY3: py + height
               })
               this.slideModal3.open()
             })
           }}
         >
-          指定位置、下拉、强制全屏
+          指定位置、下拉、全屏
         </Button>
 
         <SlideModal
           ref={c => {
             this.slideModal3 = c
           }}
-          forceFullScreen={true}
+          screenHeight={screenHeight}
+          fullScreenPatch={[true, true, true]}
           offsetX={0}
           offsetY={this.state.offsetY3}
           direction='down'
@@ -141,13 +212,14 @@ export default class SlideModalScreen extends Component<{}, any> {
             })
           }}
         >
-          指定位置、左拉
+          指定位置、左拉、局部
         </Button>
 
         <SlideModal
           ref={c => {
             this.slideModal4 = c
           }}
+          screenHeight={screenHeight}
           offsetX={this.state.offsetX4}
           offsetY={this.state.offsetY4}
           direction='left'
@@ -184,6 +256,7 @@ export default class SlideModalScreen extends Component<{}, any> {
           ref={c => {
             this.slideModal5 = c
           }}
+          screenHeight={screenHeight}
           offsetX={this.state.offsetX5}
           offsetY={0}
           direction='right'
@@ -201,6 +274,79 @@ export default class SlideModalScreen extends Component<{}, any> {
               <Text>内容比较简单，完全由用户自定义</Text>
             </View>
           </View>
+        </SlideModal>
+
+        <Button
+          style={{ marginTop: 12 }}
+          size='sm'
+          onPress={() => {
+            this.slideModalA.open()
+            this.slideModalB.open()
+            this.slideModalC.open()
+            this.slideModalD.open()
+          }}
+        >
+          大风车
+        </Button>
+
+        <SlideModal
+          ref={c => {
+            this.slideModalA = c
+          }}
+          screenHeight={screenHeight}
+          offsetX={centerX}
+          offsetY={centerY}
+          cancelable={true}
+          direction={directonsWithAlign[0].direction as any}
+          align={directonsWithAlign[0].align as any}
+          onClose={this.handleClosePinwheel}
+        >
+          {contentEl}
+        </SlideModal>
+
+        <SlideModal
+          ref={c => {
+            this.slideModalB = c
+          }}
+          screenHeight={screenHeight}
+          offsetX={centerX}
+          offsetY={centerY}
+          cancelable={true}
+          direction={directonsWithAlign[3].direction as any}
+          align={directonsWithAlign[3].align as any}
+          onClose={this.handleClosePinwheel}
+        >
+          {contentEl}
+        </SlideModal>
+
+        <SlideModal
+          ref={c => {
+            this.slideModalC = c
+          }}
+          screenHeight={screenHeight}
+          offsetX={centerX}
+          offsetY={centerY}
+          cancelable={true}
+          direction={directonsWithAlign[6].direction as any}
+          align={directonsWithAlign[6].align as any}
+          onClose={this.handleClosePinwheel}
+        >
+          {contentEl}
+        </SlideModal>
+
+        <SlideModal
+          ref={c => {
+            this.slideModalD = c
+          }}
+          screenHeight={screenHeight}
+          offsetX={centerX}
+          offsetY={centerY}
+          cancelable={true}
+          direction={directonsWithAlign[9].direction as any}
+          align={directonsWithAlign[9].align as any}
+          onClose={this.handleClosePinwheel}
+        >
+          {contentEl}
         </SlideModal>
       </ScrollView>
     )

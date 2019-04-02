@@ -15,7 +15,7 @@ const topviewStyles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    bottom: 0
+    bottom: 0,
   }
 })
 
@@ -29,7 +29,7 @@ class Topview extends Component<any, {count: number, modelList: Array<any>}> {
     topview = this
   }
 
-  add (c, forceFullScreen, cancelable, closeFn, containerReverseRect) {
+  add (c, args) {
     return new Promise(resolve => {
       setTimeout(() => {
         let { modelList, count } = this.state
@@ -38,10 +38,7 @@ class Topview extends Component<any, {count: number, modelList: Array<any>}> {
         tmp.push({
           id: count,
           component: c,
-          forceFullScreen,
-          cancelable,
-          closeFn,
-          containerReverseRect
+          args
         })
         this.setState({
           count,
@@ -137,27 +134,40 @@ class Topview extends Component<any, {count: number, modelList: Array<any>}> {
 
           {
             modelList.map((item) => {
+              const args = item.args || {}
+              args.fullScreenPatch = args.fullScreenPatch || []
+
               return item.component ? (
                   <View
-                      style={topviewStyles.container}
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: args.screenWidth,
+                        height: args.screenHeight
+                      }}
                       key={item.id}
                       collapsable={false}
                       pointerEvents={'box-none'}>
 
                       {
-                        item.forceFullScreen ? (
-                          <TouchableOpacity
-                              activeOpacity={item.containerReverseRect.opacity}
+                        args.fullScreenPatch.map((patchItem, patchIndex) => {
+                          return (
+                            <TouchableOpacity
+                              key={patchIndex}
+                              activeOpacity={patchItem.rect.opacity}
                               style={{
-                                ...item.containerReverseRect
+                                position: 'absolute',
+                                ...patchItem.rect
                               }}
                               onPress={() => {
-                                if (item.cancelable) {
-                                  item.closeFn()
+                                if (patchItem.cancelable) {
+                                  patchItem.closeFn()
                                 }
                               }}>
-                          </TouchableOpacity>
-                        ) : null
+                            </TouchableOpacity>
+                          )
+                        })
                       }
 
                       { item.component }

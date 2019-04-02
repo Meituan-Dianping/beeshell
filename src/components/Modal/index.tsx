@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   Animated,
   Dimensions,
-  FlexAlignType
+  StyleSheet
 } from 'react-native'
 import { TopviewGetInstance } from '../Topview'
 import { FadeAnimated } from '../../common/animations'
@@ -18,17 +18,18 @@ export { modalStyles }
 export interface ModalProps {
   cancelable: boolean
   backdropOpacity?: number
+  backdropColor?: string
 
   screenWidth?: number
   screenHeight?: number
 
-  animatedTranslateX?: number | null
-  animatedTranslateY?: number | null
-
   offsetX?: number
   offsetY?: number
 
-  contentContainerPositon?: 'top' | 'center' | 'bottom'
+  animatedTranslateX?: number | null
+  animatedTranslateY?: number | null
+
+  contentContainerPosition?: 'top' | 'center' | 'bottom'
   contentContainerStyle?: any
 
   onOpen?: any
@@ -47,6 +48,7 @@ export class Modal<
   static defaultProps = {
     cancelable: true,
     backdropOpacity: 0.3,
+    backdropColor: StyleSheet.flatten(modalStyles.backdrop).backgroundColor,
 
     screenWidth: screen.width,
     screenHeight: screen.height,
@@ -57,7 +59,7 @@ export class Modal<
     animatedTranslateX: null,
     animatedTranslateY: null,
 
-    contentContainerPositon: 'center',
+    contentContainerPosition: 'center',
     contentContainerStyle:  {},
 
     onOpen: null,
@@ -94,7 +96,7 @@ export class Modal<
         : null
 
     if (!this.animated) {
-      this.animated = new FadeAnimated()
+      this.animated = new FadeAnimated({})
     }
     this.animated.setState('translateXList', [data.animatedTranslateX, null])
     this.animated.setState('translateYList', [data.animatedTranslateY, null])
@@ -130,8 +132,8 @@ export class Modal<
     const styles = modalStyles
     const tmp = inner == null ? this.props.children : inner
     const animatedState = this.animated ? this.animated.getState() : {}
-    const contentContainerPositon = this.props.contentContainerPositon === 'top' ? 'flex-start' : (
-      this.props.contentContainerPositon === 'bottom' ? 'flex-end' : 'center'
+    const contentContainerPosition = this.props.contentContainerPosition === 'top' ? 'flex-start' : (
+      this.props.contentContainerPosition === 'bottom' ? 'flex-end' : 'center'
     )
     const { offsetY, offsetX } = this.props
 
@@ -144,12 +146,18 @@ export class Modal<
             left: offsetX,
           },
           {
-            alignItems: contentContainerPositon
+            alignItems: contentContainerPosition
           }
         ]}
       >
         <TouchableOpacity
-          style={[styles.backdrop, { opacity: this.props.backdropOpacity }]}
+          style={[
+            styles.backdrop,
+            {
+              opacity: this.props.backdropOpacity,
+              backgroundColor: this.props.backdropColor
+            }
+          ]}
           activeOpacity={this.props.backdropOpacity}
           onPress={this.handleBackdropPress.bind(this)}
         />
@@ -212,7 +220,7 @@ export class Modal<
       })
   }
 
-  open (c, forceFullScreen, cancelable, closeFn, containerReverseRect) {
+  open (c: any, args: any[]) {
     if (this.modalState.opening || this.modalState.topviewId) {
       const msg = '不能重复打开'
       // console.log(msg)
@@ -232,7 +240,7 @@ export class Modal<
       })
 
     return TopviewGetInstance()
-      .add(this.getContent(c), forceFullScreen, cancelable, closeFn, containerReverseRect)
+      .add(this.getContent(c), args)
       .then(id => {
         this.modalState.topviewId = id
 

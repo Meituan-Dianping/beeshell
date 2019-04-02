@@ -3,11 +3,11 @@ import { Animated, Easing } from 'react-native'
 class CommonAnimated {
   state: any
   animated: any
-  constructor () {
+  constructor (props: any) {
     this.state = {
-      opacityList: [0, 1],
-      duration: 300,
-      easing: Easing.elastic(0.8)
+      opacityList: props.opacityList || [0, 1],
+      duration: props.opacityList || 300,
+      easing: props.easing || Easing.elastic(0.8)
     }
   }
 
@@ -35,8 +35,8 @@ class CommonAnimated {
 }
 
 export class FadeAnimated extends CommonAnimated {
-  constructor () {
-    super()
+  constructor (props: any) {
+    super(props || {})
     this.state = {
       ...this.state,
       scaleList: [0, 1],
@@ -73,7 +73,7 @@ export class FadeAnimated extends CommonAnimated {
     return this.fade(false)
   }
 
-  fade (tag) {
+  fade (tag: boolean) {
     this.stop()
     this.state.opacity.setValue(this.getPropertyValue('opacity', tag))
     this.state.scale.setValue(this.getPropertyValue('scale', tag))
@@ -117,8 +117,8 @@ export class FadeAnimated extends CommonAnimated {
 }
 
 export class SlideAnimated extends CommonAnimated {
-  constructor (props) {
-    super()
+  constructor (props: any) {
+    super(props)
 
     this.state = {
       ...this.state,
@@ -138,19 +138,22 @@ export class SlideAnimated extends CommonAnimated {
     )
   }
 
-  reset (size, directionType) {
+  reset (params: any) {
     const map = {
       vertical: 'translateYList',
       horizontal: 'translateXList'
     }
-    const key = map[directionType]
-
-    const tmp = this.state[key].concat()
-    tmp.splice(0, 1, size)
+    const ret = {}
+    params.forEach((paramItem: any) => {
+      const key = map[paramItem.directionTypeItem]
+      const tmp = this.state[key].concat()
+      tmp.splice(0, 1, paramItem.size)
+      ret[key] = tmp
+    })
 
     this.state = {
       ...this.state,
-      [key]: tmp
+      ...ret
     }
   }
 
@@ -169,7 +172,7 @@ export class SlideAnimated extends CommonAnimated {
     return this.slide(false)
   }
 
-  slide (tag) {
+  slide (tag: boolean) {
     this.stop()
     this.state.opacity.setValue(this.getPropertyValue('opacity', tag))
 
@@ -177,44 +180,56 @@ export class SlideAnimated extends CommonAnimated {
       vertical: 'translateY',
       horizontal: 'translateX'
     }
-    const key = map[this.state.directionType]
-
-    this.state[key].setValue(this.getPropertyValue(key, tag))
-
+    const keys = this.state.directionType.map((item: any) => {
+      return map[item]
+    })
+    keys.forEach((key: any) => {
+      this.state[key].setValue(this.getPropertyValue(key, tag))
+    })
     return new Promise(resolve => {
-      if (this.state[key + 'List'][0] == null) {
+      const invalid = keys.some((key: any) => {
+        return this.state[key + 'List'][0] == null
+      })
+
+      if (invalid) {
         setTimeout(() => {
+          // console.log('setTimeout 100 resolve')
           resolve('pre animated end')
         }, 100)
       } else {
         resolve('pre animated end')
       }
     })
-      .then(ret => {
+    .then(ret => {
+      keys.forEach((key: any) => {
         this.state[key].setValue(this.getPropertyValue(key, tag))
+      })
 
-        this.animated = Animated.parallel([
-          Animated.timing(this.state.opacity, {
-            toValue: this.getPropertyValue('opacity', !tag),
-            duration: this.state.duration,
-            easing: this.state.easing
-          }),
-
-          Animated.timing(this.state[key], {
-            toValue: this.getPropertyValue(key, !tag),
-            duration: this.state.duration,
-            easing: this.state.easing
-          })
-        ])
-
-        return new Promise(resolve => {
-          this.animated.start(() => {
-            resolve('animated end')
-          })
+      const parallelArray = keys.map((key: any) => {
+        return Animated.timing(this.state[key], {
+          toValue: this.getPropertyValue(key, !tag),
+          duration: this.state.duration,
+          easing: this.state.easing
         })
       })
-      .catch(e => {
-        console.log(e)
+
+      this.animated = Animated.parallel([
+        Animated.timing(this.state.opacity, {
+          toValue: this.getPropertyValue('opacity', !tag),
+          duration: this.state.duration,
+          easing: this.state.easing
+        }),
+        ...parallelArray
+      ])
+
+      return new Promise(resolve => {
+        this.animated.start(() => {
+          resolve('animated end')
+        })
       })
+    })
+    .catch(e => {
+      console.log(e)
+    })
   }
 }

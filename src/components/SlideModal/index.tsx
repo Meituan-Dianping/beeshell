@@ -4,12 +4,9 @@ import {
   TouchableOpacity,
   StyleSheet,
   Animated,
-  Dimensions
 } from 'react-native'
 import { Modal, ModalProps, modalStyles } from '../Modal'
 import { SlideAnimated } from '../../common/animations'
-
-const screen = Dimensions.get('window')
 
 export const slideModalStyles = StyleSheet.create({
   container: {
@@ -22,10 +19,15 @@ export const slideModalStyles = StyleSheet.create({
 })
 
 export interface SlideModalProps extends ModalProps {
+  screenWidth?: number
+  screenHeight?: number
   offsetX?: number | null | undefined
   offsetY?: number | null | undefined
-  direction?: 'up' | 'down' | 'left' | 'right'
-  forceFullScreen?: boolean
+  direction?: 'up' | ['up'] | ['up', 'left'] | ['up', 'right'] | 'down' | ['down'] |
+      ['down', 'left'] | ['down', 'right'] | 'left' | ['left'] | 'right' | ['right']
+  align?: 'left' | 'right' | 'up' | 'down'
+
+  fullScreenPatch?: boolean[]
 }
 
 export interface SlideModalState {
@@ -39,125 +41,249 @@ export class SlideModal<
   static defaultProps = {
     ...Modal.defaultProps,
     cancelable: false,
-    backdropOpacity: 0.3,
+
     offsetX: 0,
     offsetY: undefined,
     direction: 'up',
-    forceFullScreen: false // 是否强制全屏
+    align: 'right',
+    fullScreenPatch: [false, false, false]
   }
 
   constructor (props) {
     super(props)
-    const data = this.initSlideModalData(props)
+    const data = this.initSlideModal(props)
 
     this.state = {
       ...this.state,
       ...data
     }
+
+    this.animated = new SlideAnimated({
+      // duration: 1000
+      directionType: data.directionType,
+    })
   }
 
-  // 覆盖 Modal init 方法
-  init (props) {
-    // return
+  // 重写 Modal 父类 init 方法
+  init () {
+    return
   }
 
-  initSlideModalData (props): any {
-    const directions = ['up', 'down', 'left', 'right']
+  initSlideModal (props) {
+    const directions = [
+      ['up'],
+      ['up', 'left'],
+      ['up', 'right'],
+      ['down'],
+      ['down', 'left'],
+      ['down', 'right'],
+      ['left'],
+      ['right']
+    ]
+    const direction = typeof(props.direction) === 'string' ? [props.direction] : props.direction
+    const propsDirectionValid = directions.some((directionItem) => {
+      const str1 = (directionItem as any).join()
+      const str2 = (directionItem as any).reverse().join()
+      const str3 = direction.join()
 
-    if (directions.indexOf(props.direction) === -1) {
+      if (str3 === str1 || str3 === str2) {
+        return true
+      }
+    })
+
+    if (!propsDirectionValid) {
       throw new TypeError(`direction 参数 ${props.direction} 为无效值`)
     }
 
-    let directionType
-    if (props.direction === 'up' || props.direction === 'down') {
-      directionType = 'vertical'
+    const directionType = []
+    if (direction.indexOf('up') !== -1 || direction.indexOf('down') !== -1) {
+      directionType.push('vertical')
     }
 
-    if (props.direction === 'left' || props.direction === 'right') {
-      directionType = 'horizontal'
+    if (direction.indexOf('left') !== -1 || direction.indexOf('right') !== -1) {
+      directionType.push('horizontal')
+    }
+
+    let align: any
+    if (direction.length === 1) {
+      if (directionType.indexOf('vertical') !== -1) {
+        align = props.align === 'left' || props.align === 'right' ? props.align : 'right'
+      } else {
+        align = props.align === 'up' || props.align === 'down' ? props.align : 'down'
+      }
+    }
+
+    let directionWithAlign = []
+    if (direction.length === 2) {
+      directionWithAlign = direction
+    } else {
+      directionWithAlign = [
+        ...direction,
+        align
+      ]
     }
 
     const offsetY = typeof props.offsetY === 'number' ? props.offsetY : props.screenHeight
 
-    const data = {
+    return {
       directionType,
+      direction,
+      align,
+      directionWithAlign,
       offsetY
     }
-
-    this.animated = new SlideAnimated({
-      // duration: 1000
-      directionType: data.directionType
-    })
-    return data
   }
 
   componentWillReceiveProps (nextProps) {
     if (
       nextProps.direction !== this.props.direction ||
+      nextProps.align !== this.props.align ||
       nextProps.offsetX !== this.props.offsetX ||
       nextProps.offsetY !== this.props.offsetY ||
       nextProps.screenWidth !== this.props.screenWidth ||
       nextProps.screenHeight !== this.props.screenHeight
     ) {
+      const data = this.initSlideModal(nextProps)
+      this.animated = new SlideAnimated({
+        directionType: data.directionType,
+      })
       this.setState({
-        ...this.initSlideModalData(nextProps)
+        ...data
       })
     }
   }
 
   open (c) {
-    let containerReverseRect = null
-    if (this.props.forceFullScreen) {
-      const { direction, offsetX, backdropOpacity, screenHeight } = this.props
-      const { directionType, offsetY } = this.state
-
-      containerReverseRect = {
-        top: directionType === 'vertical' ? (
-            direction === 'up' ? offsetY : 0
-        ) : 0,
-
-        height: directionType === 'vertical' ? (
-            direction === 'up' ? screenHeight - offsetY : offsetY
-        ) : screenHeight,
-
-        left: directionType === 'horizontal' ? (
-            direction === 'right' ? 0 : offsetX
-        ) : 0,
-
-        width: directionType === 'horizontal' ? (
-            direction === 'right' ? offsetX : screen.width - offsetX
-        ) : screen.width,
-
-        backgroundColor: StyleSheet.flatten(modalStyles.backdrop).backgroundColor,
-        opacity: backdropOpacity
+    const { cancelable, backdropColor, backdropOpacity, fullScreenPatch, screenHeight, screenWidth } = this.props
+    if (fullScreenPatch.length !== 3) {
+      throw new TypeError(`fullScreenPatch 参数 ${fullScreenPatch} 为无效值`)
+    }
+    const rects = this.getRects()
+    const tmp = fullScreenPatch.map((patchItem, patchIndex) => {
+      if (patchItem) {
+        return `contentClockwise${patchIndex + 1}Rect`
+      } else {
+        return ''
       }
+    }).filter((tmpItem) => {
+      return tmpItem
+    }).map((key) => {
+      return {
+        key,
+        cancelable,
+        closeFn: this.close.bind(this, this.modalState.topviewId),
+        rect: {
+          ...rects[key],
+          backgroundColor: backdropColor,
+          opacity: backdropOpacity
+        }
+      }
+    })
+    return Modal.prototype.open.call(this, c, {
+      screenHeight,
+      screenWidth,
+      fullScreenPatch: tmp
+    })
+  }
+
+  getRects () {
+    const { offsetX, screenWidth, screenHeight } = this.props
+    const { directionWithAlign, offsetY } = this.state
+    const defaultRect = { top: null, bottom: null, left: null, right: null }
+    const contentContainerRect = { ...defaultRect }
+    const contentRect = { ...defaultRect }
+
+    const contentClockwise2Rect = {
+      backgroundColor: 'red',
+      ...defaultRect
+    }
+    const contentClockwise1Rect = {
+      backgroundColor: 'blue',
+      ...defaultRect
+    }
+    const contentClockwise3Rect = {
+      backgroundColor: 'green',
+      ...defaultRect
     }
 
-    return Modal.prototype.open.call(this, c, this.props.forceFullScreen, this.props.cancelable, this.close.bind(this, this.modalState.topviewId), containerReverseRect)
+    if (directionWithAlign.indexOf('up') !== -1) {
+      contentContainerRect.top = 0
+      contentContainerRect.bottom = screenHeight - offsetY
+
+      contentClockwise2Rect.top = offsetY
+      contentClockwise2Rect.bottom = 0
+
+      contentClockwise1Rect.left = offsetX
+      contentClockwise1Rect.right = 0
+
+      contentClockwise3Rect.left = 0
+      contentClockwise3Rect.right = screenWidth - offsetX
+
+      contentRect.bottom = 0
+    }
+    if (directionWithAlign.indexOf('down') !== -1) {
+      contentContainerRect.top = offsetY
+      contentContainerRect.bottom = 0
+
+      contentClockwise2Rect.top = 0
+      contentClockwise2Rect.bottom = screenHeight - offsetY
+
+      contentClockwise1Rect.left = 0
+      contentClockwise1Rect.right = screenWidth - offsetX
+
+      contentClockwise3Rect.left = offsetX
+      contentClockwise3Rect.right = 0
+
+      contentRect.top = 0
+    }
+
+    if (directionWithAlign.indexOf('right') !== -1) {
+      contentContainerRect.left = offsetX
+      contentContainerRect.right = 0
+
+      contentClockwise2Rect.left = 0
+      contentClockwise2Rect.right = screenWidth - offsetX
+
+      contentClockwise1Rect.top = offsetY
+      contentClockwise1Rect.bottom = 0
+
+      contentClockwise3Rect.top = 0
+      contentClockwise3Rect.bottom = screenHeight - offsetY
+
+      contentRect.left = 0
+    }
+
+    if (directionWithAlign.indexOf('left') !== -1) {
+      contentContainerRect.left = 0
+      contentContainerRect.right = screenWidth - offsetX
+
+      contentClockwise2Rect.left = offsetX
+      contentClockwise2Rect.right = 0
+
+      contentClockwise1Rect.top = 0
+      contentClockwise1Rect.bottom = screenHeight - offsetY
+
+      contentClockwise3Rect.top = offsetY
+      contentClockwise3Rect.bottom = 0
+
+      contentRect.right = 0
+    }
+
+    return {
+      contentContainerRect,
+      contentRect,
+
+      contentClockwise2Rect,
+      contentClockwise1Rect,
+      contentClockwise3Rect
+    }
   }
 
   getContent (inner) {
     const styles = slideModalStyles
-    const { direction, offsetX, screenHeight } = this.props
-    const { directionType, offsetY } = this.state
+    const { directionType, direction } = this.state
     const tmp = inner == null ? this.props.children : inner
-
-    const containerRect = {
-      top: directionType === 'vertical' ? (
-          direction === 'up' ? 0 : offsetY
-      ) : 0,
-      height: directionType === 'vertical' ? (
-          direction === 'up' ? offsetY : screenHeight - offsetY
-      ) : null,
-
-      left: directionType === 'horizontal' ? (
-          direction === 'right' ? offsetX : 0
-      ) : 0,
-
-      width: directionType === 'horizontal' ? (
-          direction === 'right' ? null : offsetX
-      ) : null
-    }
+    const { contentContainerRect, contentRect } = this.getRects()
 
     return (
       <View
@@ -165,12 +291,18 @@ export class SlideModal<
         style={[
           styles.container,
           {
-            ...containerRect
+            ...contentContainerRect
           }
         ]}
       >
         <TouchableOpacity
-          style={[modalStyles.backdrop, { opacity: this.props.backdropOpacity }]}
+          style={[
+            modalStyles.backdrop,
+            {
+              opacity: this.props.backdropOpacity,
+              backgroundColor: this.props.backdropColor
+            }
+          ]}
           activeOpacity={this.props.backdropOpacity}
           onPress={() => {
             this.handleBackdropPress()
@@ -181,35 +313,8 @@ export class SlideModal<
           style={[
             styles.content,
             {
-              left:
-                directionType === 'vertical'
-                  ? offsetX
-                  : direction === 'right'
-                  ? 0
-                  : null,
-
-              right:
-                directionType === 'vertical'
-                  ? null
-                  : direction === 'right'
-                  ? null
-                  : 0,
-
-              top:
-                directionType === 'vertical'
-                  ? direction === 'up'
-                    ? null
-                    : 0
-                  : offsetY,
-
-              bottom:
-                directionType === 'vertical'
-                  ? direction === 'up'
-                    ? 0
-                    : null
-                  : null
+              ...contentRect
             },
-
             {
               transform: [
                 { translateY: this.animated.getState().translateY },
@@ -219,22 +324,25 @@ export class SlideModal<
               opacity: this.animated.getState().opacity
             }
           ]}
-          onLayout={e => {
+          onLayout={(e: any) => {
             const { width, height } = e.nativeEvent.layout
+            const ret = []
+            directionType.forEach((directionTypeItem: any) => {
+              if (directionTypeItem === 'vertical') {
+                ret.push({
+                  size: direction.indexOf('up') !== -1 ? height : -height,
+                  directionTypeItem,
+                })
+              }
 
-            if (directionType === 'vertical') {
-              this.animated.reset(
-                direction === 'up' ? height : -height,
-                directionType
-              )
-            }
-
-            if (directionType === 'horizontal') {
-              this.animated.reset(
-                direction === 'left' ? width : -width,
-                directionType
-              )
-            }
+              if (directionTypeItem === 'horizontal') {
+                ret.push({
+                  size: direction.indexOf('right') !== -1 ? -width : width,
+                  directionTypeItem
+                })
+              }
+            })
+            this.animated.reset(ret)
           }}
         >
           {tmp || null}

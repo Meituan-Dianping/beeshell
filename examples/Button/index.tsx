@@ -15,6 +15,7 @@ const componentStyles = StyleSheet.create({
 
   row: {
     flexDirection: 'row',
+    alignItems: 'flex-start',
     flexWrap: 'wrap'
   }
 })
