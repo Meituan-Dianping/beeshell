@@ -1,4 +1,10 @@
 
+
+
+## [1.0.14] - 2019-04-02
+### Fixed
+- Topview screen 宽度与高度默认值修改，修复 1.0.13 版本的 bug
+
 ## [1.0.13] - 2019-04-02
 ### Changed
 - Modal 系列组件底层升级，涉及改动 Modal、SlideModal、Topview、动画部分，建议对弹框相关的功能统一回归
