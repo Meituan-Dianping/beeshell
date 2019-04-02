@@ -76,7 +76,7 @@ export default class ModalScreen extends Component<{}, any> {
           onPress={() => {
             setTimeout(() => {
               this.setState({
-                containerPositon: this.state.containerPositon === 'top' ? 'bottom' : 'top'
+                containerPosition: this.state.containerPosition === 'top' ? 'bottom' : 'top'
               })
               this.modal4.open()
             })
@@ -88,13 +88,13 @@ export default class ModalScreen extends Component<{}, any> {
             this.modal4 = c
           }}
           cancelable={true}
-          contentContainerPositon={this.state.containerPositon}
+          contentContainerPosition={this.state.containerPosition}
           contentContainerStyle={{
-            marginTop: this.state.containerPositon === 'top' ? 90 : null,
-            marginBottom: this.state.containerPositon === 'bottom' ? 90 : null,
+            marginTop: this.state.containerPosition === 'top' ? 90 : null,
+            marginBottom: this.state.containerPosition === 'bottom' ? 90 : null,
           }}>
           <View style={{ width: 200, height: 100, backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center' }}>
-            <Text>位置：{this.state.containerPositon}</Text>
+            <Text>位置：{this.state.containerPosition}</Text>
           </View>
         </Modal>
 

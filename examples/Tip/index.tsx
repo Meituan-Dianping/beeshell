@@ -96,7 +96,7 @@ export default class TipScreen extends Component<{}, State> {
           <Tip
             ref={(c) => { this.tip2 = c }}
             body={`位置${this.state.containerPositon}`}
-            contentContainerPositon={this.state.containerPositon}
+            contentContainerPosition={this.state.containerPositon}
             cancelable={true}>
           </Tip>
 
