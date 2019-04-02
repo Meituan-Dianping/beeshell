@@ -76,9 +76,10 @@ export class Picker extends React.Component<PickerProps, PickerState> {
     this.trigger.measure((fx, fy, width, height, px, py) => {
       this.setState({
         offsetY: py + height
-      })
-      this.slideModal.open().catch((e) => {
-        // console.log(e)
+      }, () => {
+        this.slideModal.open().catch((e) => {
+          // console.log(e)
+        })
       })
     })
   }
@@ -107,7 +108,8 @@ export class Picker extends React.Component<PickerProps, PickerState> {
         }}
         style={[
           style
-        ]}>
+        ]}
+        collapsable={false}>
         <TouchableOpacity
           onPress={this.toggle}
           activeOpacity={1}>
@@ -129,8 +131,9 @@ export class Picker extends React.Component<PickerProps, PickerState> {
                     color: fontColor
                   }
                 ]}>
-                {label} { this.renderIcon(active, fontSize, fontColor) }
+                {label}
               </Text>
+              { this.renderIcon(active, fontSize, fontColor) }
             </View>
           }
         </TouchableOpacity>

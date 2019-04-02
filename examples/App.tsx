@@ -75,7 +75,7 @@ class Home extends Component<MyProps, MyState> {
 
   componentDidMount() {
     setTimeout(() => {
-      this.props.navigation.navigate('Actionsheet')
+      this.props.navigation.navigate('Picker')
     }, 1000)
   }
 
