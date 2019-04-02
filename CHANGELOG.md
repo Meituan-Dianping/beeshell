@@ -1,3 +1,8 @@
+## [1.0.12] - 2019-04-02
+### Changed
+- Modal 系列组件（包括 SlideModal、Dialog 等），支持 screenWidth、screenHeight 属性，计算位置的基础值由用户控制，功能实现与平台环境解耦
+
+
 ## [1.0.11] - 2019-03-25
 ### Changed
 - Input 组件，修改默认样式，替换 android 平台清空按钮图标（android 平台 Image 不支持 tintColor）
