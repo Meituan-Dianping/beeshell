@@ -6,12 +6,12 @@
 
 ### 全部引入
 ```js
-import { Timepicker } from 'beeshell';
+import { Timepicker } from '@roo/roo-mobile-rn';
 ```
 ### 按需引入
 
 ```js
-import Timepicker from 'beeshell/dist/components/Timepicker';
+import Timepicker from '@roo/roo-mobile-rn/dist/components/Timepicker';
 ```
 
 ## Examples
@@ -23,7 +23,7 @@ import Timepicker from 'beeshell/dist/components/Timepicker';
 [详细 Code](../../examples/Timepicker/index.tsx)
 
 ```jsx
-import { Timepicker } from 'beeshell';
+import { Timepicker } from '@roo/roo-mobile-rn';
 
 <Timepicker
   style={{ paddingHorizontal: 50 }}

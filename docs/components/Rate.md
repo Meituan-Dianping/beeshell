@@ -6,12 +6,12 @@
 
 ### 全部引入
 ```js
-import { Rate } from 'beeshell';
+import { Rate } from '@roo/roo-mobile-rn';
 ```
 
 ### 按需引入
 ```js
-import Rate from 'beeshell/dist/components/Rate';
+import Rate from '@roo/roo-mobile-rn/dist/components/Rate';
 ```
 
 ## Examples
@@ -21,7 +21,7 @@ import Rate from 'beeshell/dist/components/Rate';
 [详细 Code](../../examples/Rate/index.tsx)
 
 ```jsx
-import { Rate } from 'beeshell'
+import { Rate } from '@roo/roo-mobile-rn'
 
 <Rate
   maximum={3}

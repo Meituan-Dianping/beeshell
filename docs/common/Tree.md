@@ -15,7 +15,7 @@ Tree 将两者进行了整合，输出一个扁平的结构，一个节点既通
 只支持按需引入。
 
 ```js
-import Tree from 'beeshell/dist/common/utils/Tree'
+import Tree from '@roo/roo-mobile-rn/dist/common/utils/Tree'
 ```
 
 ## Examples
@@ -28,7 +28,7 @@ import Tree from 'beeshell/dist/common/utils/Tree'
 [详细 Code](../../examples/common/TreeScreen/index.tsx)
 
 ```js
-import Tree from 'beeshell/dist/common/utils/Tree'
+import Tree from '@roo/roo-mobile-rn/dist/common/utils/Tree'
 
 const treeData = new Tree({
   type: 'nested',

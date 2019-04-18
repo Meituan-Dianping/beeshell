@@ -6,12 +6,12 @@
 
 ### 全部引入
 ```js
-import { Datepicker } from 'beeshell';
+import { Datepicker } from '@roo/roo-mobile-rn';
 ```
 ### 按需引入
 
 ```js
-import Datepicker from 'beeshell/dist/components/Datepicker';
+import Datepicker from '@roo/roo-mobile-rn/dist/components/Datepicker';
 ```
 
 ## Examples
@@ -23,7 +23,7 @@ import Datepicker from 'beeshell/dist/components/Datepicker';
 [详细 Code](../../examples/Datepicker/index.tsx)
 
 ```jsx
-import { Datepicker } from 'beeshell';
+import { Datepicker } from '@roo/roo-mobile-rn';
 
 <Datepicker
   proportion={[2, 1, 1]}

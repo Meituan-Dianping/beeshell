@@ -6,12 +6,12 @@
 
 ### 全部引入
 ```
-import { Radio } from 'beeshell';
+import { Radio } from '@roo/roo-mobile-rn';
 ```
 
 ### 按需引入
 ```
-import { Radio } from 'beeshell/dist/components/Radio';
+import { Radio } from '@roo/roo-mobile-rn/dist/components/Radio';
 ```
 
 ## Examples
@@ -22,7 +22,7 @@ import { Radio } from 'beeshell/dist/components/Radio';
 [详细 Code](../../examples/Radio/index.tsx)
 
 ```jsx
-import { Radio } from 'beeshell'
+import { Radio } from '@roo/roo-mobile-rn'
 
 <Radio
   value={this.state.value}

@@ -7,7 +7,7 @@
 只支持按需引入。
 
 ```js
-import { FadeAnimated, SlideAnimated } from 'beeshell/dist/common/animations'
+import { FadeAnimated, SlideAnimated } from '@roo/roo-mobile-rn/dist/common/animations'
 ```
 
 ## Examples

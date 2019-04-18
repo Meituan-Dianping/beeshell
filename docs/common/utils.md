@@ -7,5 +7,5 @@
 只支持按需引入。
 
 ```js
-import { range, isLeapYear, convert2Digit } from 'beeshell/dist/common/utils'
+import { range, isLeapYear, convert2Digit } from '@roo/roo-mobile-rn/dist/common/utils'
 ```

@@ -5,12 +5,12 @@
 
 ### 全部引入
 ```
-import { NavigationBar } from 'beeshell';
+import { NavigationBar } from '@roo/roo-mobile-rn';
 ```
 
 ### 按需引入
 ```
-import { NavigationBar } from 'beeshell/dist/components/NavigationBar';
+import { NavigationBar } from '@roo/roo-mobile-rn/dist/components/NavigationBar';
 ```
 
 ## Examples
@@ -20,7 +20,7 @@ import { NavigationBar } from 'beeshell/dist/components/NavigationBar';
 [详细 Code](../../examples/NavigationBar/index.tsx)
 
 ```jsx
-import { NavigationBar } from 'beeshell';
+import { NavigationBar } from '@roo/roo-mobile-rn';
 
 <NavigationBar
   title='标题'

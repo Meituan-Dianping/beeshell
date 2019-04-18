@@ -8,12 +8,12 @@
 
 ### 全部引入
 ```
-import { Icon } from 'beeshell';
+import { Icon } from '@roo/roo-mobile-rn';
 ```
 
 ### 按需引入
 ```
-import { Icon } from 'beeshell/dist/components/Icon';
+import { Icon } from '@roo/roo-mobile-rn/dist/components/Icon';
 ```
 
 ## Examples
@@ -24,7 +24,7 @@ import { Icon } from 'beeshell/dist/components/Icon';
 [详细 Code](../../examples/Icon/index.tsx)
 
 ```jsx
-import { Icon } from 'beeshell'
+import { Icon } from '@roo/roo-mobile-rn'
 
 <Icon type='caret-down' size={14} tintColor='#FECB2E' />
 <Icon type='times-circle-o' size={20} tintColor='red' />

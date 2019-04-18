@@ -7,12 +7,12 @@
 ### 全部引入
 
 ```
-import { Actionsheet } from 'beeshell';
+import { Actionsheet } from '@roo/roo-mobile-rn';
 ```
 
 ### 按需引入
 ```
-import Actionsheet from 'beeshell/dist/components/Actionsheet';
+import Actionsheet from '@roo/roo-mobile-rn/dist/components/Actionsheet';
 ```
 
 ## Examples
@@ -24,7 +24,7 @@ import Actionsheet from 'beeshell/dist/components/Actionsheet';
 [详细 Code](../../examples/Actionsheet/index.tsx)
 
 ```jsx
-import { Actionsheet } from 'beeshell';
+import { Actionsheet } from '@roo/roo-mobile-rn';
 
 <Actionsheet
   ref={(c) => { this._actionsheet = c; }}

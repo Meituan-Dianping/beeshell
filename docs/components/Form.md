@@ -6,12 +6,12 @@
 
 ### 全部引入
 ```
-import { Form } from 'beeshell';
+import { Form } from '@roo/roo-mobile-rn';
 ```
 
 ### 按需引入
 ```
-import { Form } from 'beeshell/dist/components/Form';
+import { Form } from '@roo/roo-mobile-rn/dist/components/Form';
 ```
 
 ## Examples
@@ -30,7 +30,7 @@ import { Form } from 'beeshell/dist/components/Form';
 [详细 Code](../../examples/Form/index.tsx)
 
 ```jsx
-import { Form, Input } from 'beeshell';
+import { Form, Input } from '@roo/roo-mobile-rn';
 
 <Form>
   <Form.Item label="姓名" hasLine>

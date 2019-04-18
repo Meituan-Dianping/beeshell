@@ -6,12 +6,12 @@
 
 ### 全部引入
 ```
-import { Tag } from 'beeshell';
+import { Tag } from '@roo/roo-mobile-rn';
 ```
 
 ### 按需引入
 ```
-import Tag from 'beeshell/dist/components/Tag';
+import Tag from '@roo/roo-mobile-rn/dist/components/Tag';
 ```
 
 ## Examples

@@ -6,12 +6,12 @@
 
 ### 全部引入
 ```
-import { Scrollpicker } from 'beeshell';
+import { Scrollpicker } from '@roo/roo-mobile-rn';
 ```
 ### 按需引入
 
 ```
-import Scrollpicker from 'beeshell/dist/components/Scrollpicker';
+import Scrollpicker from '@roo/roo-mobile-rn/dist/components/Scrollpicker';
 ```
 
 ## Examples
@@ -30,7 +30,7 @@ import Scrollpicker from 'beeshell/dist/components/Scrollpicker';
 [详细 Code](../../examples/Scrollpicker/index.tsx)
 
 ```jsx
-import { Scrollpicker } from 'beeshell';
+import { Scrollpicker } from '@roo/roo-mobile-rn';
 
 <Scrollpicker
   list={[

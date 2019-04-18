@@ -6,12 +6,12 @@
 
 ### 全部引入
 ```
-import { BottomModal } from 'beeshell';
+import { BottomModal } from '@roo/roo-mobile-rn';
 ```
 
 ### 按需引入
 ```
-import BottomModal from 'beeshell/dist/components/BottomModal';
+import BottomModal from '@roo/roo-mobile-rn/dist/components/BottomModal';
 ```
 
 ## Examples
@@ -22,7 +22,7 @@ import BottomModal from 'beeshell/dist/components/BottomModal';
 [详细 Code](../../examples/BottomModal/index.tsx)
 
 ```jsx
-import { BottomModal } from 'beeshell';
+import { BottomModal } from '@roo/roo-mobile-rn';
 
 <BottomModal
   title='选择品类'

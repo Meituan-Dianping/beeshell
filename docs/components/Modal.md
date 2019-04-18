@@ -5,12 +5,12 @@
 
 ### 全部引入
 ```js
-import { Modal } from 'beeshell';
+import { Modal } from '@roo/roo-mobile-rn';
 ```
 
 ### 按需引入
 ```js
-import Modal from 'beeshell/dist/components/Modal';
+import Modal from '@roo/roo-mobile-rn/dist/components/Modal';
 ```
 
 ## Examples
@@ -21,7 +21,7 @@ import Modal from 'beeshell/dist/components/Modal';
 [详细 Code](../../examples/Modal/index.tsx)
 
 ```jsx
-import { Modal } from 'beeshell';
+import { Modal } from '@roo/roo-mobile-rn';
 
 <Modal
   ref={(c) => { this._modal = c; }}

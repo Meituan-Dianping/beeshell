@@ -7,7 +7,7 @@
 只支持按需引入。假如项目中有个 index.js 文件，使用主题变量的内容如下：
 
 ```js
-import variables from 'beeshell/dist/common/styles/variables';
+import variables from '@roo/roo-mobile-rn/dist/common/styles/variables';
 
 // 打印品牌主色，默认值为 '#FECB2E'
 console.log(varialbes.mtdBrandPrimary);
@@ -18,7 +18,7 @@ console.log(varialbes.mtdBrandPrimary);
 首先，必须提供一个单独的文件，例如：customTheme.js，文件内容如下：
 
 ```js
-import { useTheme } from 'beeshell/dist/common/styles/variables'
+import { useTheme } from '@roo/roo-mobile-rn/dist/common/styles/variables'
 
 // 自定义主题变量
 const customVariables = {
