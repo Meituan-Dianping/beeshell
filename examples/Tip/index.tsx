@@ -17,7 +17,7 @@ export default class TipScreen extends Component<{}, any> {
     }
   }
   componentDidMount() {
-    Tip.show('API 调用方式：Tip.show')
+    Tip.show('API 调用方式：Tip.show', 3000, true, 'center')
   }
   render () {
     return (

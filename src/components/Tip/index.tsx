@@ -36,13 +36,13 @@ export class Tip extends Modal<TipProps, any> {
 
   static tipInstance = null
 
-  static show = function (msg, duration?, position?) {
+  static show = function (msg: string, duration?: number, cancelable?: boolean, position?: string | string[]) {
     Tip.tipInstance = new Tip({
       ...Tip.defaultProps,
 
       contentContainerPosition: position || Tip.defaultProps.contentContainerPosition,
       body: msg,
-      cancelable: true,
+      cancelable: typeof cancelable === 'boolean' ? cancelable : true,
       duration: Number(duration) || 2000,
     })
 

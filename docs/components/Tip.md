@@ -51,7 +51,7 @@ this._tip.close()
 
 ### Methods
 
-#### .show(msg: string, duration?: number, position?: string|string[])
+#### .show(msg: string, duration?: number, cancelable?: boolean, position?: string | string[])
 
 这是一个类方法（静态方法）。
 
@@ -65,4 +65,5 @@ Tip.show('信息提示！')
 | ---- | ---- | ---- | ---- | ---- |
 | msg | string | true | null | 展示文案 |
 | duration | number | false | 2000 | 在多少毫秒后自动消失 |
+| cancelable | boolean | false | true | 点击空白处是否关闭 |
 | position | string/string[] | false | 'center' | 展示位置，与 Modal 组件的 contentContainerPosition 属性一致，支持 'top' 'center' 'bottom' ['top', 'left'] 等 |
