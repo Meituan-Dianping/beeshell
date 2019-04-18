@@ -1,16 +1,22 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.0.2] - 2019-04-18
+### Changed
+- Dropdown 实现完善
+- Tip 类方法 show 的实现方式完善，隐藏重复关闭警告
+
+
 ## [2.0.1] - 2019-04-18
 
-从 1.0 升级 2.0，建议对所有组件进行回归
+1.0 升级 2.0，有很多不兼容性改动，建议对所有组件进行回归
 
 ### Changed
 - 弹框系列统一修改
 - 动画修改
 - 各组件的图标属性暴露
 - Longlist Android 兼容性修复
-- 其他组件修改
+- 其他等等组件修改......
 
 ### Added
 - 文档
