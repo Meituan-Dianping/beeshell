@@ -11,7 +11,7 @@ import { Dropdown } from '@roo/roo-mobile-rn';
 
 ### 按需引入
 ```
-import Dropdown from '@roo/roo-mobile-rn/dist/modules/Dropdown';
+import { Dropdown } from '@roo/roo-mobile-rn/dist/modules/Dropdown';
 ```
 
 ## Examples
