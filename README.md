@@ -71,8 +71,8 @@
 * [Topview 顶层视图](./docs/components/Topview.md)
 
 #### 其他
-* [Dropdown 下拉菜单](./docs/modules/Dropdown.md)
-* [Ruler 刻度尺](./docs/modules/Ruler.md)
+* [Dropdown 下拉菜单](./docs/components/Dropdown.md)
+* [Ruler 刻度尺](./docs/components/Ruler.md)
 
 #### 复合组件（包含 Native 部分）
 
