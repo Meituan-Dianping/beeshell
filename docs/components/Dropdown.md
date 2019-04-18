@@ -32,7 +32,7 @@ import { Dropdown } from '@roo/roo-mobile-rn';
   offsetY={this.state.offsetY}
   cancelable={true}
   value={1}
-  options={[
+  data={[
     {
       label: '我关注的',
       value: 1
@@ -65,7 +65,7 @@ import { Dropdown } from '@roo/roo-mobile-rn';
 | direction | string | false | 'down' | 方向，只支持 'up' 'down' |
 | checkedIcon | ReactElement | false | 同 Radio | 选中图标 |
 | uncheckedIcon | ReactElement | false | 同 Radio | 未选中图标 |
-| options | Array | true | [] | 数据源，数组中元素是一个对象，必须包含 label 属性用于展示 |
+| data | Array | true | [] | 数据源，数组中元素是一个对象，必须包含 label 属性用于展示 |
 | value | any | false | null | 选中项的值 |
 | onChange | Function | false | null | 选中项变化的回调 |
 

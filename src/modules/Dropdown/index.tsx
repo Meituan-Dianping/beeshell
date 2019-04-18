@@ -16,7 +16,7 @@ interface OptionItem {
 export interface DropdownProps extends SlideModalProps {
   style?: ViewStyle
   direction?: 'up' | 'down'
-  options: Array<OptionItem>
+  data: Array<OptionItem>
   value: any
   checkedIcon?: ReactElement<any>
   uncheckedIcon?: ReactElement<any>
@@ -33,7 +33,8 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
     ...SlideModal.defaultProps,
     cancelable: false,
     direction: 'down',
-    fullScreenPatch: null
+    fullScreenPatch: null,
+    data: []
   }
 
   constructor (props) {
@@ -50,7 +51,11 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
   // componentDidMount () {}
 
   getContent () {
-    const { options, value, onChange, checkedIcon, uncheckedIcon } = this.props
+    const { data, value, onChange, checkedIcon, uncheckedIcon } = this.props
+
+    if (!data || !data.length) {
+      throw Error('Dropdown 组件请提供有效的 data 属性')
+    }
 
     return (
       <View
@@ -68,7 +73,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
           }}>
 
           {
-            options.map((item, index) => {
+            data.map((item, index) => {
               return (
                 <Radio.Item
                   key={index}

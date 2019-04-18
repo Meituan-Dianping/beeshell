@@ -13,7 +13,7 @@ export default class DropdownScreen extends Component<{}, any> {
     super(p)
     this.state = {
       value: 1,
-      options: [
+      data: [
         {
           label: '我关注的',
           value: 1
@@ -37,7 +37,7 @@ export default class DropdownScreen extends Component<{}, any> {
   }
 
   render () {
-    const { value, options } = this.state
+    const { value, data } = this.state
     return (
       <ScrollView
         style={styles.body}>
@@ -68,7 +68,7 @@ export default class DropdownScreen extends Component<{}, any> {
             offsetY={this.state.offsetY}
             cancelable={true}
             value={value}
-            options={options}
+            data={data}
             onChange={this.onChange}
           />
 
@@ -100,7 +100,7 @@ export default class DropdownScreen extends Component<{}, any> {
             offsetY={this.state.offsetY2}
             cancelable={true}
             value={value}
-            options={options}
+            data={data}
             onChange={this.onChange}
           />
 
@@ -133,7 +133,7 @@ export default class DropdownScreen extends Component<{}, any> {
             direction='up'
             cancelable={true}
             value={value}
-            options={options}
+            data={data}
             onChange={this.onChange}
           />
         </View>
