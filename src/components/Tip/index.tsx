@@ -88,7 +88,9 @@ export class Tip extends Modal<TipProps, any> {
     return Modal.prototype.open.call(this, c).then((ret) => {
       if (typeof this.props.duration === 'number') {
         setTimeout(() => {
-          this.close()
+          this.close().catch((e) => {
+            return null
+          })
         }, this.props.duration)
       }
 
