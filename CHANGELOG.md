@@ -2,10 +2,15 @@
 All notable changes to this project will be documented in this file.
 
 ## [2.0.1] - 2019-04-18
+
+从 1.0 升级 2.0，建议对所有组件进行回归
+
 ### Changed
 - 弹框系列统一修改
 - 动画修改
 - 各组件的图标属性暴露
+- Longlist Android 兼容性修复
+- 其他组件修改
 
 ### Added
 - 文档
