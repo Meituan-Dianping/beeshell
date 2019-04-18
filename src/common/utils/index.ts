@@ -30,7 +30,7 @@ export function isLeapYear (year) {
 export function convert2Digit (i) {
   i = Number(i)
 
-  if (i > 0 && i < 10) {
+  if (i >= 0 && i < 10) {
     i = '0' + i
   } else {
     i = '' + i

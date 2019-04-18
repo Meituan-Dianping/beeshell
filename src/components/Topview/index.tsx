@@ -1,26 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component, ReactElement } from 'react'
 import createReactClass from 'create-react-class'
 import {
   AppRegistry,
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  Dimensions
+  View
 } from 'react-native'
 
-const screen = Dimensions.get('window')
-
 let topview = null
-
-const topviewStyles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-  }
-})
 
 class Topview extends Component<any, {count: number, modelList: Array<any>}> {
   constructor (props) {
@@ -32,7 +17,7 @@ class Topview extends Component<any, {count: number, modelList: Array<any>}> {
     topview = this
   }
 
-  add (c, args) {
+  add (c: ReactElement<any>, args?: any) {
     return new Promise(resolve => {
       setTimeout(() => {
         let { modelList, count } = this.state
@@ -54,38 +39,35 @@ class Topview extends Component<any, {count: number, modelList: Array<any>}> {
     })
   }
 
-  remove (id) {
-    let { modelList, count } = this.state
-    let index
-
+  remove (id: number) {
     return new Promise(resolve => {
-      modelList.some((item, i) => {
-        /* tslint:disable:triple-equals */
-        if (item.id == id) {
-          index = i
-          return true
-        }
-      })
-      if (index == null) {
-        return resolve()
-      }
-
-      const tmp = modelList.concat()
-      tmp.splice(index, 1)
-
-      if (!tmp.length) {
-        count = 0
-      }
-
-      this.setState(
-        {
-          modelList: tmp,
-          count
-        },
-        () => {
+      setTimeout(() => {
+        let { modelList, count } = this.state
+        let index = null
+        modelList.some((item, i) => {
+          /* tslint:disable:triple-equals */
+          if (item.id == id) {
+            index = i
+            return true
+          }
+        })
+        if (index == null) {
           return resolve()
         }
-      )
+
+        const tmp = modelList.concat()
+        tmp.splice(index, 1)
+
+        if (!tmp.length) {
+          count = 0
+        }
+
+        this.setState({
+          modelList: tmp,
+          count
+        })
+        return resolve()
+      })
     }).catch(e => {
       console.error(e)
     })
@@ -93,32 +75,30 @@ class Topview extends Component<any, {count: number, modelList: Array<any>}> {
 
   replace (c, id) {
     return new Promise(resolve => {
-      let { modelList } = this.state
+      setTimeout(() => {
+        let { modelList } = this.state
+        const tmpList = modelList.concat()
+        let tmpIndex
+        let tmpItem = tmpList.filter((item, index) => {
+          if (item.id === id) {
+            tmpIndex = index
+            return true
+          }
+        })[0]
 
-      const tmpList = modelList.concat()
-      let tmpIndex
-      let tmpItem = tmpList.filter((item, index) => {
-        if (item.id === id) {
-          tmpIndex = index
-          return true
+        tmpItem = {
+          ...tmpItem,
+          component: c
         }
-      })[0]
 
-      tmpItem = {
-        ...tmpItem,
-        component: c
-      }
+        tmpList.splice(tmpIndex, 1, tmpItem)
 
-      tmpList.splice(tmpIndex, 1, tmpItem)
-
-      this.setState(
-        {
+        this.setState({
           modelList: tmpList
-        },
-        () => {
-          return resolve()
-        }
-      )
+        })
+
+        return resolve()
+      })
     }).catch(e => {
       console.error(e)
     })
@@ -131,51 +111,24 @@ class Topview extends Component<any, {count: number, modelList: Array<any>}> {
     } else {
       return (
         <View
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+          }}
           pointerEvents='box-none'
-          collapsable={false}
-          style={topviewStyles.container}>
+          collapsable={false}>
 
           {
             modelList.map((item) => {
               const args = item.args || {}
               args.fullScreenPatch = args.fullScreenPatch || []
 
-              return item.component ? (
-                  <View
-                      style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: args.screenWidth == null ? screen.width : args.screenWidth,
-                        height: args.screenHeight == null ? screen.height : args.screenHeight
-                      }}
-                      key={item.id}
-                      collapsable={false}
-                      pointerEvents={'box-none'}>
-
-                      {
-                        args.fullScreenPatch.map((patchItem, patchIndex) => {
-                          return (
-                            <TouchableOpacity
-                              key={patchIndex}
-                              activeOpacity={patchItem.rect.opacity}
-                              style={{
-                                position: 'absolute',
-                                ...patchItem.rect
-                              }}
-                              onPress={() => {
-                                if (patchItem.cancelable) {
-                                  patchItem.closeFn()
-                                }
-                              }}>
-                            </TouchableOpacity>
-                          )
-                        })
-                      }
-
-                      { item.component }
-                  </View>
-              ) : null
+              return item.component ? React.cloneElement(item.component, {
+                key: item.id
+              }) : null
             })
         }
         </View>

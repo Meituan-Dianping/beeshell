@@ -30,7 +30,7 @@ export default class DialogScreen extends Component<{}, State> {
     console.warn('clickHandle', Object.keys(e))
   }
 
-  getLabel(label, type) {
+  getLabel(label, type, index) {
     const color = type === 'confirm' ? variables.mtdBrandPrimaryDark : variables.mtdGrayDark
     return (
       <View
@@ -42,7 +42,7 @@ export default class DialogScreen extends Component<{}, State> {
           paddingVertical: 10,
           paddingHorizontal: 15
         }}>
-        <Icon type='star' size={16} tintColor={color} />
+        { index === 1 ? <Icon type='search' size={16} tintColor={color} /> : <Icon type='star' size={16} tintColor={color} />}
         <Text style={{ fontSize: 16, color, marginLeft: 5 }} >{label}</Text>
       </View>
     )
@@ -57,7 +57,7 @@ export default class DialogScreen extends Component<{}, State> {
             size='sm'
             style={{ marginTop: 12 }}
             type='primary'
-            reverse
+            textColorInverse
             onPress={() => {
               this.dialog1.open()
             }}
@@ -68,8 +68,8 @@ export default class DialogScreen extends Component<{}, State> {
             ref={(c) => {
               this.dialog1 = c
             }}
-            header='系统提示'
-            body='确认删除该信息？'
+            title='系统提示'
+            bodyText='确认删除该信息？'
             cancelable={true}
             cancelCallback={() => {
               console.log('cancel')
@@ -83,7 +83,28 @@ export default class DialogScreen extends Component<{}, State> {
             size='sm'
             style={{ marginTop: 12 }}
             type='primary'
-            reverse
+            textColorInverse
+            onPress={() => {
+              this.dialogX1.open()
+            }}
+          >
+            自定义标题样式
+          </Button>
+          <Dialog
+            ref={(c) => {
+              this.dialogX1 = c
+            }}
+            title='系统提示'
+            titleStyle={{ color: variables.mtdBrandDanger }}
+            bodyText='确认删除该信息？'
+            cancelable={true}
+          />
+
+          <Button
+            size='sm'
+            style={{ marginTop: 12 }}
+            type='primary'
+            textColorInverse
             onPress={() => {
               this.dialogA.open()
             }}
@@ -95,10 +116,11 @@ export default class DialogScreen extends Component<{}, State> {
             ref={(c) => {
               this.dialogA = c
             }}
-            header='系统提示'
-            body='确认删除该信息？确认删除该信息？确认删除该信息？'
+            title='系统提示'
+            bodyText='确认删除该信息？确认删除该信息？确认删除该信息？'
             cancelable={true}
-            confirmLabel='我知道了'
+            cancelLabelText={null}
+            confirmLabelText='我知道了'
             confirmCallback={() => {
               console.log('confirm')
             }}
@@ -108,7 +130,7 @@ export default class DialogScreen extends Component<{}, State> {
             size='sm'
             style={{ marginTop: 12 }}
             type='primary'
-            reverse
+            textColorInverse
             onPress={() => {
               this.dialog2.open()
             }}
@@ -118,7 +140,11 @@ export default class DialogScreen extends Component<{}, State> {
 
           <Dialog
             ref={(c) => { this.dialog2 = c }}
-            header={null}
+            header={
+              <View style={{ paddingTop: 30, paddingBottom: 10, alignItems: 'center' }}>
+                <Icon type='check-circle' size={50} tintColor={variables.mtdBrandSuccess} />
+              </View>
+            }
             body={
               <View style={{ backgroundColor: '#fff', padding: 20 }}>
                 <View style={{ backgroundColor: '#ebebea', height: 100, justifyContent: 'center', alignItems: 'center' }}>
@@ -128,20 +154,20 @@ export default class DialogScreen extends Component<{}, State> {
             cancelable={true}
             operations={[
               {
-                label: this.getLabel('操作一', 'confirm'),
+                label: this.getLabel('操作一', 'confirm', 1),
                 onPress: () => {
                   console.log('操作一')
                 }
               },
               {
-                label: this.getLabel('操作二', 'confirm'),
+                label: this.getLabel('操作二', 'confirm', 2),
                 type: 'confirm',
                 onPress: () => {
                   console.log('操作二')
                 }
               },
               {
-                label: this.getLabel('操作三', 'cancel'),
+                label: this.getLabel('操作三', 'cancel', 3),
                 type: 'cancel',
                 onPress: () => {
                   console.log('操作三')
@@ -154,7 +180,7 @@ export default class DialogScreen extends Component<{}, State> {
             size='sm'
             style={{ marginTop: 12 }}
             type='primary'
-            reverse
+            textColorInverse
             onPress={() => {
               this.dialog3.open()
             }}
@@ -174,21 +200,21 @@ export default class DialogScreen extends Component<{}, State> {
             operationsLayout='column'
             operations={[
               {
-                label: '操作一',
+                labelText: '操作一',
                 type: 'cancel',
                 onPress: () => {
                   console.log('操作一')
                 }
               },
               {
-                label: '操作二',
+                labelText: '操作二',
                 type: 'confirm',
                 onPress: () => {
                   console.log('操作二')
                 }
               },
               {
-                label: '操作三',
+                labelText: '操作三',
                 type: 'confirm',
                 onPress: () => {
                   console.log('操作三')

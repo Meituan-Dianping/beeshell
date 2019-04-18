@@ -11,6 +11,7 @@ import {
   PixelRatio,
   FlatList,
   RefreshControl,
+  ActivityIndicator
 } from 'react-native'
 
 
@@ -19,7 +20,7 @@ import styles from '../common/styles'
 import variables from '../customTheme'
 
 const dataModal = {
-  total: 100,
+  total: 30,
   list: [
     {
       id: 1
@@ -46,28 +47,36 @@ const dataModal = {
 }
 
 
-export default class LonglistScreen extends React.Component {
-  private longlist = null
+export default class LonglistScreen extends React.Component<any, any> {
+  private fetchListTimes: number
+  private _longlist: any
 
   constructor(props) {
     super(props)
-
+    this.fetchListTimes = 0
     this.state = {
-      pageNo: 1,
+      pageNo: 0,
       pagesize: 7,
+      list: [],
+      total: 0
     }
-
-    this.state.list = this.modifyList(dataModal.list, this.state.pageNo)
-    this.state.total = dataModal.total
   }
 
-  getList(params) {
+  componentDidMount () {
+    setTimeout(() => {
+      this._longlist.flatList.scrollToIndex({
+        index: 9
+      })
+    }, 10000)
+  }
+
+  fetchList(params) {
     const { pageNo, pagesize } = params
 
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(dataModal)
-      }, 3000)
+      }, 2000)
     }).catch((e) => {
       console.log(e)
     })
@@ -82,17 +91,24 @@ export default class LonglistScreen extends React.Component {
     })
   }
 
-  refreshState(pageNo) {
+  refreshState(pageNo?: number) {
+    pageNo = pageNo || (this.state.pageNo + 1)
     const params = {
-      pageNo: pageNo || 1,
+      pageNo,
       pagesize: this.state.pagesize,
       id: '123456',
     }
 
-    return this.getList(params).then((resData) => {
+    this.fetchListTimes++
+    const tmpFetchListTimes = this.fetchListTimes
+    return this.fetchList(params).then((resData: any) => {
+      // Promise 一旦发起不能终止，通过请求数据的次数，判断请求是否有效
+      if (tmpFetchListTimes !== this.fetchListTimes) {
+        return
+      }
+      const pageNo = params.pageNo
       const { list, total } = resData
       const newList = this.modifyList(list, pageNo)
-
       const oldList = (pageNo === 1 || this.state.list == null) ? [] : this.state.list
 
       this.setState({
@@ -106,38 +122,14 @@ export default class LonglistScreen extends React.Component {
   }
 
 
-  componentDidMount() {
-    // this.refreshState(1).catch((e) => {
-    //   console.log(e)
-    // })
-  }
-
-
   render() {
-    const { list, pagesize, total, pageNo } = this.state
-    let textInfo
-    if (!list) {
-      textInfo = '加载中...'
-    }
-
-    if (list && !list.length) {
-      textInfo = '无数据'
-    }
-    if (textInfo) {
-      return (
-        <View style={[styles.body]}>
-          <View style={{ paddingVertical: 12, alignItems: 'center' }}>
-            <Text style={{ color: variables.mtdGrayBase }}>{textInfo}</Text>
-          </View>
-        </View>
-      )
-    }
+    const { list, total } = this.state
 
     return (
       <View style={styles.body}>
         <Longlist
           ref={(c) => {
-            this.longlist = c
+            this._longlist = c
           }}
           total={total}
           data={list}
@@ -154,9 +146,12 @@ export default class LonglistScreen extends React.Component {
               </View>
             )
           }}
-          hasRefreshControl={true}
-          onEndReached={this.refreshState.bind(this)}
-          onRefresh={this.refreshState.bind(this)}
+          onEndReached={() => {
+            return this.refreshState()
+          }}
+          onRefresh={() => {
+            return this.refreshState(1)
+          }}
         />
       </View>
     )

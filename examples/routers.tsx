@@ -27,11 +27,15 @@ import Picker from './Picker'
 import Tab from './Tab'
 import Progress from './Progress'
 import Longlist from './Longlist'
-import FilterPanel from './FilterPanel'
 import Dropdown from './Dropdown'
 import Badge from './Badge'
 import Tag from './Tag'
-import Carousel from './Carousel'
+import AnimationsScreen from './common/AnimationsScreen'
+import TreeScreen from './common/TreeScreen'
+import Popover from './Popover'
+import TreeView from './TreeView'
+import Ruler from './Ruler'
+import Topview from './Topview'
 
 console.disableYellowBox = true
 
@@ -132,13 +136,6 @@ export const pageList = [
 
 
   {
-    screen: Carousel,
-    key: 'Carousel',
-    group: 'dataDisplay',
-    label: '轮播'
-  },
-
-  {
     screen: Progress,
     key: 'Progress',
     group: 'dataDisplay',
@@ -174,10 +171,10 @@ export const pageList = [
   },
 
   {
-    screen: FilterPanel,
-    key: 'FilterPanel',
-    group: 'other',
-    label: 'FilterPanel'
+    screen: Topview,
+    key: 'Topview',
+    label: '顶层视图',
+    group: 'feedback'
   },
 
   {
@@ -204,7 +201,7 @@ export const pageList = [
   {
     screen: SlideModal,
     key: 'SlideModal',
-    label: '拉动弹窗',
+    label: '滑动弹窗',
     group: 'feedback'
   },
   {
@@ -222,6 +219,13 @@ export const pageList = [
   },
 
   {
+    screen: Popover,
+    key: 'Popover',
+    label: '弹出框',
+    group: 'feedback'
+  },
+
+  {
     screen: Picker,
     key: 'Picker',
     label: '筛选',
@@ -231,7 +235,35 @@ export const pageList = [
   {
     screen: Dropdown,
     key: 'Dropdown',
-    label: 'Dropdown',
+    label: '下拉选择',
     group: 'other'
-  }
+  },
+
+  {
+    screen: AnimationsScreen,
+    key: 'AnimationsScreen',
+    label: '动画',
+    group: 'base'
+  },
+
+  {
+    screen: TreeScreen,
+    key: 'TreeScreen',
+    label: '树形结构处理',
+    group: 'base'
+  },
+
+  {
+    screen: TreeView,
+    key: 'TreeView',
+    label: '树形结构展示',
+    group: 'dataDisplay'
+  },
+
+  {
+    screen: Ruler,
+    key: 'Ruler',
+    label: '刻度尺',
+    group: 'other'
+  },
 ]

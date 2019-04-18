@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 
 import {
-  View
+  View,
+  ViewStyle,
 } from 'react-native'
 import { SlideModal, SlideModalProps, SlideModalState } from '../../components/SlideModal'
 import { Radio } from '../../components/Radio'
@@ -13,9 +14,12 @@ interface OptionItem {
 }
 
 export interface DropdownProps extends SlideModalProps {
-  style?: any
+  style?: ViewStyle
+  direction?: 'up' | 'down'
   options: Array<OptionItem>
-  checkedValue: any
+  value: any
+  checkedIcon?: ReactElement<any>
+  uncheckedIcon?: ReactElement<any>
   onChange: Function
 }
 
@@ -28,7 +32,8 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
   static defaultProps = {
     ...SlideModal.defaultProps,
     cancelable: false,
-    direction: 'down'
+    direction: 'down',
+    fullScreenPatch: null
   }
 
   constructor (props) {
@@ -45,7 +50,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
   // componentDidMount () {}
 
   getContent () {
-    const { options, checkedValue, onChange } = this.props
+    const { options, value, onChange, checkedIcon, uncheckedIcon } = this.props
 
     return (
       <View
@@ -54,7 +59,9 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
           this.props.style
         ]}>
         <Radio
-          checkedValue={checkedValue}
+          checkedIcon={checkedIcon}
+          uncheckedIcon={uncheckedIcon}
+          value={value}
           onChange={(value) => {
             this.slideModal.close()
             onChange(value)
@@ -77,11 +84,16 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
   }
 
   render () {
+    const { direction } = this.props
+    const fullScreenPatch = this.props.fullScreenPatch || (
+      direction === 'down' ? [true, false, false] : [false, false, true]
+    )
     return (
       <SlideModal
         ref={c => {
           this.slideModal = c
         }}
+        fullScreenPatch={fullScreenPatch}
         direction={this.props.direction}
         offsetX={this.props.offsetX}
         offsetY={this.props.offsetY}

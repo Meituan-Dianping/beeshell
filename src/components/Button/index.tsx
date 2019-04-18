@@ -3,7 +3,9 @@ import React from 'react'
 import {
   Text,
   TouchableOpacity,
-  View
+  View,
+  ViewStyle,
+  TextStyle
 } from 'react-native'
 import buttonStyles from './styles'
 export { buttonStyles }
@@ -32,24 +34,26 @@ const paddingMap = {
 }
 
 export interface ButtonProps {
-  style?: any
+  style?: ViewStyle
+  textStyle?: TextStyle
+  textColorInverse?: boolean
   type?: 'default' | 'primary' | 'danger' | 'info' | 'success' | 'warning' | 'text'
   size?: 'sm' | 'md' | 'lg'
   children?: any
   disabled?: boolean
   onPress?: Function
-  reverse?: boolean
 }
 
 export class Button extends React.Component<ButtonProps, {}> {
   private containerRef = null
   static defaultProps = {
+    style: {},
+    textStyle: {},
+    textColorInverse: false,
     type: 'default',
     size: 'md',
     disabled: false,
-    style: {},
     onPress: null,
-    reverse: false
   }
 
   measure (...args) {
@@ -64,12 +68,12 @@ export class Button extends React.Component<ButtonProps, {}> {
   }
 
   render () {
-    const { type, disabled, style, size , children, reverse } = this.props
+    const { type, disabled, style, textStyle, size , children, textColorInverse } = this.props
 
     const styleWrapper = buttonStyles[type + 'Wrapper'] || buttonStyles.defaultWrapper
     const styleText = buttonStyles[type + 'Text'] || buttonStyles.defaultText
 
-    const textReverseStyle = reverse && type !== 'default' ? { color: variables.mtdGrayBase } : {}
+    const inverseStyle = textColorInverse && type !== 'default' && type !== 'text' ? { color: variables.mtdGrayBase } : {}
 
     return (
       <TouchableOpacity
@@ -91,9 +95,10 @@ export class Button extends React.Component<ButtonProps, {}> {
               style={[
                 styleText,
                 {
-                  fontSize: fontSizeMap[size] || fontSizeMap['md'],
-                  ...textReverseStyle
-                }
+                  fontSize: fontSizeMap[size] || fontSizeMap['md']
+                },
+                inverseStyle,
+                textStyle
               ]}
             >{children}</Text>
           )

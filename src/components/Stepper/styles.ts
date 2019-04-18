@@ -28,8 +28,8 @@ export default {
     alignItems: 'center'
   },
   ctrl: {
-    width: variables.stepperOperatorSize,
-    height: variables.stepperOperatorSize,
+    width: 30,
+    height: 30,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: variables.mtdBrandPrimary,

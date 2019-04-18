@@ -1,29 +1,28 @@
 import React from 'react'
 import {
-  Image
+  Image,
+  ImageStyle
 } from 'react-native'
-
-import varibles from '../../common/styles/variables'
+import variables from '../../common/styles/variables'
 
 export interface IconProps {
-  type?: string,
-  size?: number | null | undefined,
-  tintColor?: string | null | undefined,
-  style?: any,
-  source?: any
+  style?: ImageStyle
+  type?: string
+  size?: number | null | undefined
+  tintColor?: string | null | undefined // Android 平台无效
 }
 
 export class Icon extends React.Component<IconProps, any> {
+  static displayName = 'Icon'
   static defaultProps = {
     type: 'caret-down',
-    size: null,
-    tintColor: null,
+    size: 14,
     style: {},
-    source: null
+    tintColor: variables.mtdBrandPrimaryDark
   }
 
   render () {
-    let { type, size, tintColor, style, source } = this.props
+    let { type, size, style, tintColor } = this.props
 
     const mainStyle = {
       tintColor,
@@ -36,12 +35,7 @@ export class Icon extends React.Component<IconProps, any> {
       delete mainStyle.height
     }
 
-    const tmpSource = source == null ? require(`../../common/images/icons/${type}.png`) : source
-
-    // 取消染色的方法
-    if (!tintColor) {
-      delete mainStyle.tintColor
-    }
+    const source = require(`../../common/images/icons/${type}.png`)
 
     return (
       <Image
@@ -51,7 +45,7 @@ export class Icon extends React.Component<IconProps, any> {
             ...mainStyle
           }
         ]}
-        source={tmpSource}
+        source={source}
       />
     )
   }

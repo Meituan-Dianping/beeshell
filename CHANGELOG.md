@@ -1,3 +1,16 @@
+# Changelog
+All notable changes to this project will be documented in this file.
+
+## [2.0.1] - 2019-04-18
+### Changed
+- 弹框系列统一修改
+- 动画修改
+- 各组件的图标属性暴露
+
+### Added
+- 文档
+
+
 ## [1.0.15] - 2019-04-02
 ### Fixed
 - Picker 组件 Android 平台 bug 修复

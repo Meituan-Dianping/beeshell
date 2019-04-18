@@ -46,7 +46,7 @@ export class Actionsheet<
     cancelable: true,
     maxShowNum: null,
     header: '标题',
-    footer: null,
+    footer: '取消',
 
     useSafeAreaView: true,
 
@@ -134,7 +134,7 @@ export class Actionsheet<
               styles.item,
               { borderBottomWidth: 0 }
             ]}>
-            <Text style={styles.itemText}>取消</Text>
+            <Text style={styles.itemText}>{footer}</Text>
           </View>
         }
       </TouchableOpacity>

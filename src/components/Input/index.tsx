@@ -120,7 +120,6 @@ export class Input extends Component<InputProps, InputState> {
   renderAndroid = () => {
     const androidClearButtonMode = this.props.clearButtonMode && this.props.clearButtonMode !== 'never'
     const showDelIcon = androidClearButtonMode && this.props.value && this.state.isEditing
-
     const tmpProps = {
       ...this.props
     }

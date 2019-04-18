@@ -11,39 +11,30 @@ import styleObject from './styles'
 const styles = StyleSheet.create<any>(styleObject)
 
 export interface BadgeProps {
-  style?: any
-  title?: string | number
-  type?: 'text' | 'dot' | 'triangle'
-  textWrapperStyle?: ViewStyle
-  textContentStyle?: TextStyle
-  triangleStyle?: ViewStyle
-  textTriangleStyle?: TextStyle
-  dotStyle?: ViewStyle
+  style?: ViewStyle
+  label?: string | number
+  labelStyle?: TextStyle
 }
 
 export class Badge extends React.PureComponent<BadgeProps> {
   static defaultProps = {
-    type: 'text'
   }
   constructor (props) {
     super(props)
   }
   render () {
-    const { style, title, type, textWrapperStyle, textContentStyle, triangleStyle, textTriangleStyle, dotStyle } = this.props
-    return (
-      <View style={[styles.wrapper, style]}>
-        {type === 'text' ? <View style={[styles.textWrapper, textWrapperStyle]}>
-          {title ? <Text style={[styles.textContent, textContentStyle]}>{title}</Text> : null}
-          {this.props.children}
-        </View> : null}
+    const { style, label, labelStyle } = this.props
 
-        {type === 'dot' ? <View style={[styles.dot, dotStyle]}></View> : null}
-
-        {type === 'triangle' ? <View style={[styles.triangle, triangleStyle]}>
-          {title ? <Text style={[styles.textTriangle, textTriangleStyle]}>{title}</Text> : null}
-          {this.props.children}
-        </View> : null}
-      </View>
-    )
+    if (label != null) {
+      return (
+        <View style={[styles.wrapper, style]}>
+          <Text style={[styles.label, labelStyle]}>{label}</Text>
+        </View>
+      )
+    } else {
+      return (
+        <View style={[styles.dot, style]}></View>
+      )
+    }
   }
 }

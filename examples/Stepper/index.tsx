@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { StyleSheet, View, Text, ScrollView, TextInput } from 'react-native'
 
 import { Stepper, Form } from '../../src/'
+import variables from '../customTheme'
 
 const styles = StyleSheet.create({
   root: {
@@ -38,14 +39,14 @@ export default class StepperScreen extends Component<any, State> {
     super(p)
     this.state = {
       min: 1,
-      max: 1000,
+      max: 500,
       value: null
     }
   }
-  onChange = (value, oldValue, action) => {
-    console.log(value, oldValue, action)
+  handleChange = (value, oldValue, action) => {
+    console.log(`value: ${value}, oldValue: ${oldValue}, action: ${action}`)
     this.setState({
-      value: value
+      value
     })
   }
   render () {
@@ -63,7 +64,7 @@ export default class StepperScreen extends Component<any, State> {
                 min={min}
                 max={max}
                 value={value}
-                onChange={this.onChange}
+                onChange={this.handleChange}
               />
             </View>
           </Form.Item>
@@ -80,7 +81,7 @@ export default class StepperScreen extends Component<any, State> {
                 max={max}
                 value={value}
                 editable={true}
-                onChange={this.onChange}
+                onChange={this.handleChange}
               />
             </View>
           </Form.Item>
@@ -92,12 +93,13 @@ export default class StepperScreen extends Component<any, State> {
 
             <View style={{ alignItems: 'flex-end' }}>
               <Stepper
-                operatorStyle={{ borderRadius: 15 }}
+                operatorStyle={{ backgroundColor: variables.mtdBrandInfo, borderRadius: 15 }}
+                operatorIconColor='#fff'
                 min={min}
                 max={max}
                 value={value}
                 editable={true}
-                onChange={this.onChange}
+                onChange={this.handleChange}
               />
             </View>
           </Form.Item>

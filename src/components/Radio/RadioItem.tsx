@@ -1,23 +1,28 @@
-import React, { Component } from 'react'
+import React, { Component, ReactElement } from 'react'
 import {
   View,
   Text,
   TouchableOpacity,
-  StyleSheet
+  Animated,
+  ViewStyle
 } from 'react-native'
 
-import radioItemStyles from './radioItemStyles'
+import styles from './styles'
 import variables from '../../common/styles/variables'
 import styleUtils from '../../common/styles/utils'
-import { Icon } from '../Icon'
+import { FadeAnimated } from '../../common/animations'
 
 interface RadioItemProps {
-  label: string | Function
+  style?: ViewStyle
+  label?: string
   value: any
   disabled?: boolean
   checked?: boolean
   iconPosition?: 'left' | 'right'
   onChange: Function
+  checkedIcon?: ReactElement<any>
+  uncheckedIcon?: ReactElement<any>
+  renderItem?: Function
 }
 
 export default class RadioItem extends Component<RadioItemProps> {
@@ -27,11 +32,31 @@ export default class RadioItem extends Component<RadioItemProps> {
     value: null,
     disabled: false,
     checked: false,
-    iconPosition: 'right',
+    iconPosition: 'right'
   }
 
+  private animated: any
   constructor (props) {
     super(props)
+    if (variables.radioEnableAnimated) {
+      this.animated = new FadeAnimated({})
+    }
+  }
+
+  componentDidMount () {
+    this.toAnimated()
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.checked !== this.props.checked) {
+      this.toAnimated()
+    }
+  }
+
+  toAnimated () {
+    if (this.animated) {
+      this.animated.toIn()
+    }
   }
 
   handlePress = () => {
@@ -46,28 +71,39 @@ export default class RadioItem extends Component<RadioItemProps> {
       return
     }
 
+    this.toAnimated()
     this.props.onChange && this.props.onChange(value)
   }
 
   renderIcon = (checked, iconPosition) => {
-    const fontSize = (StyleSheet.flatten(radioItemStyles.labelText) as any).fontSize
-    let iconContainerStyles = {
-      width: fontSize,
+    const iconContainerStyle = {
       marginRight: iconPosition === 'left' ? 6 : null
     }
 
-    let iconView = checked ? (
-      <Icon type='check' size={fontSize} tintColor={variables.mtdBrandPrimary} />
-    ) : null
+    const iconView = checked ? this.props.checkedIcon : this.props.uncheckedIcon
+    let animatedStyle: any = {}
+    if (variables.radioEnableAnimated) {
+      animatedStyle = {
+        transform: [{ scale: this.animated.getState().scale }],
+        opacity: this.animated.getState().opacity
+      }
+    }
 
-    return <View style={iconContainerStyles}>{iconView}</View>
+    return (
+      <View style={iconContainerStyle}>
+        <Animated.View
+          style={animatedStyle}>
+          {iconView}
+        </Animated.View>
+      </View>
+    )
   }
 
-  renderLabelText = (checked) => {
+  renderLabel = (checked) => {
     return (
       <Text
         style={[
-          radioItemStyles.labelText,
+          styles.radioItemLabel,
           checked ? [ styleUtils.textPrimaryDark, styleUtils.textBold ] : null
         ]}>
         {this.props.label}
@@ -76,12 +112,12 @@ export default class RadioItem extends Component<RadioItemProps> {
   }
 
   render () {
-    const { disabled, checked, iconPosition, label } = this.props
+    const { disabled, checked, iconPosition, style, renderItem } = this.props
 
     return (
       <TouchableOpacity
         style={[
-          radioItemStyles.container,
+          style,
           {
             opacity: disabled ? variables.mtdOpacity : 1
           }
@@ -89,10 +125,10 @@ export default class RadioItem extends Component<RadioItemProps> {
         activeOpacity={variables.mtdOpacity}
         onPress={this.handlePress}>
         {
-          typeof label === 'function' ? label(checked) :
+          typeof renderItem === 'function' ? renderItem(checked) :
           <View
             style={[
-              radioItemStyles.touchContainer,
+              styles.radioItemContainer,
               this.props.iconPosition === 'right' ? {
                 flexDirection: 'row-reverse',
                 justifyContent: 'space-between'
@@ -100,9 +136,7 @@ export default class RadioItem extends Component<RadioItemProps> {
             ]}
           >
             {this.renderIcon(checked, iconPosition)}
-            <View style={radioItemStyles.label}>
-              {this.renderLabelText(checked)}
-            </View>
+            {this.renderLabel(checked)}
           </View>
         }
       </TouchableOpacity>

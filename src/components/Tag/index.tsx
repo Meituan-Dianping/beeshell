@@ -3,33 +3,35 @@ import React from 'react'
 import {
   Text,
   TouchableOpacity,
-  View
+  View,
+  TextStyle,
+  ViewStyle
 } from 'react-native'
 import tagStyles from './styles'
 export { tagStyles }
 import variables from '../../common/styles/variables'
 
 export interface TagProps {
-  style?: any,
+  style?: ViewStyle
+  textStyle?: TextStyle
   type?: 'default' | 'primary' | 'danger' | 'info' | 'success' | 'warning'
-  reverse?: boolean
-  textColor?: string
+  textColorInverse?: boolean
 }
 
 export class Tag extends React.Component<TagProps, {}> {
   static defaultProps = {
     type: 'default',
     style: {},
-    reverse: false,
-    textColor: null
+    textColorInverse: false,
+    textStyle: {}
   }
 
   render () {
-    const { type, style, children, reverse, textColor } = this.props
+    const { type, style, children, textColorInverse, textStyle } = this.props
 
     const styleWrapper = tagStyles[type + 'Wrapper'] || tagStyles.defaultWrapper
     const styleText = tagStyles[type + 'Text'] || tagStyles.defaultText
-    const textReverseStyle = reverse && type !== 'default' ? { color: variables.mtdGrayBase } : {}
+    const reverseStyle = textColorInverse && type !== 'default' ? { color: variables.mtdGrayDarker } : {}
 
     return (
       <View
@@ -37,14 +39,18 @@ export class Tag extends React.Component<TagProps, {}> {
           styleWrapper,
           style
         ]}>
-        <Text
-          style={[
-            styleText,
-            textReverseStyle,
-            textColor ? { color: textColor } : {}
-          ]}>
-          {children}
-        </Text>
+
+        {
+          React.isValidElement(children) ? children :
+          <Text
+            style={[
+              styleText,
+              reverseStyle,
+              textStyle,
+            ]}>
+            {children}
+          </Text>
+        }
       </View>
     )
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, View, StyleSheet, Dimensions } from 'react-native'
+import { ScrollView, View, StyleSheet, Dimensions, Text } from 'react-native'
 import { Button, Dropdown } from '../../src/'
 import styles from '../common/styles'
 import variables from '../customTheme'
@@ -12,7 +12,7 @@ export default class DropdownScreen extends Component<{}, any> {
   constructor (p) {
     super(p)
     this.state = {
-      checkedValue: 1,
+      value: 1,
       options: [
         {
           label: '我关注的',
@@ -32,12 +32,12 @@ export default class DropdownScreen extends Component<{}, any> {
 
   onChange = (value) => {
     this.setState({
-      checkedValue: value
+      value: value
     })
   }
 
   render () {
-    const { checkedValue, options } = this.state
+    const { value, options } = this.state
     return (
       <ScrollView
         style={styles.body}>
@@ -67,7 +67,7 @@ export default class DropdownScreen extends Component<{}, any> {
             offsetX={this.state.offsetX}
             offsetY={this.state.offsetY}
             cancelable={true}
-            checkedValue={checkedValue}
+            value={value}
             options={options}
             onChange={this.onChange}
           />
@@ -99,7 +99,7 @@ export default class DropdownScreen extends Component<{}, any> {
             style={{ width: screen.width }}
             offsetY={this.state.offsetY2}
             cancelable={true}
-            checkedValue={checkedValue}
+            value={value}
             options={options}
             onChange={this.onChange}
           />
@@ -120,18 +120,19 @@ export default class DropdownScreen extends Component<{}, any> {
               })
             }}
           >
-            上拉
+            上拉、自定义图标
           </Button>
 
           <Dropdown
             ref={c => {
               this.slideModal3 = c
             }}
+            checkedIcon={<Text>&times;</Text>}
             offsetX={this.state.offsetX3}
             offsetY={this.state.offsetY3}
             direction='up'
             cancelable={true}
-            checkedValue={checkedValue}
+            value={value}
             options={options}
             onChange={this.onChange}
           />

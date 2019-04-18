@@ -18,7 +18,7 @@ const defaultWrapper = {
 
 const defaultText = {
   fontSize: variables.mtdFontSizeS,
-  color: variables.mtdGrayBase,
+  color: variables.mtdGrayDarker,
 }
 
 const primaryWrapper = {

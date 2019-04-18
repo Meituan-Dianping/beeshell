@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 
 import variables from '../../common/styles/variables'
-import styles, { ConterStyle } from './styles'
+import styles from './styles'
 const stepperStyles = StyleSheet.create<any>(styles)
 
 export interface StepperProps {
@@ -16,12 +16,11 @@ export interface StepperProps {
   operatorStyle?: ViewStyle
   operatorIconColor?: string
 
-  min: number
-  max: number
-  value?: number | string | null | undefined
+  min?: number
+  max?: number
+  value?: number | string
   step?: number
   editable?: boolean
-
   onChange?: Function
 }
 export interface StepperState {
@@ -30,7 +29,9 @@ export interface StepperState {
 export class Stepper extends Component<StepperProps, StepperState> {
   private textInputValue = ''
   static defaultProps = {
-    operatorIconColor: variables.mtdGrayBase,
+    operatorIconColor: variables.mtdGrayDarker,
+    min: 1,
+    max: 5,
     step: 1,
     editable: false
   }
@@ -46,12 +47,11 @@ export class Stepper extends Component<StepperProps, StepperState> {
   }
   onIncrease = () => {
     const { value, step, min } = this.props
-    const newValue = this.isEmpty(value) ? min : value
+    const newValue = this.isEmpty(value) ? min - 1 : value
     this.changeValue(newValue, step, 'increase')
   }
 
   onChangeText = (value) => {
-    console.log('onChangeText', value)
     let newValue
     if (!value) {
       newValue = ''

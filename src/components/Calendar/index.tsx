@@ -87,13 +87,11 @@ export interface CalendarProps {
   style?: any
   locale?: string
   format?: string
-  data?: string
+  date?: string
   startDate?: string
   endDate?: string
   onChange?: Function
-  renderHeader?: Function
   renderItem?: Function
-  renderWeekDay: Function
 }
 
 export class Calendar extends React.Component<CalendarProps, any> {
@@ -104,9 +102,7 @@ export class Calendar extends React.Component<CalendarProps, any> {
     date: '',
     startDate: '',
     endDate: '',
-    renderHeader: null,
     renderItem: null,
-    renderWeekDay: null,
   }
 
   constructor(props) {
@@ -277,10 +273,6 @@ export class Calendar extends React.Component<CalendarProps, any> {
   }
 
   renderWeekDay = (item, index) => {
-    const { renderWeekDay } = this.props
-    if (renderWeekDay) {
-      return renderWeekDay(item, index)
-    }
     return (
       <View style={styles.gridItemWrapper} key={index}>
         <Text style={{}}>{item}</Text>
@@ -298,9 +290,7 @@ export class Calendar extends React.Component<CalendarProps, any> {
     return (
         <View style={[styles.container, this.props.style]}>
           {
-            this.props.renderHeader ?
-              this.props.renderHeader(date, this.changeDate.bind(this)) :
-              this.renderHeader()
+            this.renderHeader()
           }
 
           <View>

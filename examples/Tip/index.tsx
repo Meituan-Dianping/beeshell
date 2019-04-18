@@ -5,14 +5,7 @@ import { Button, Tip, Icon } from '../../src/'
 import variables from '../customTheme'
 import styles from '../common/styles'
 
-
-interface State {
-  count: number,
-  animatedTranslateX: any,
-  animatedTranslateY: any
-}
-
-export default class TipScreen extends Component<{}, State> {
+export default class TipScreen extends Component<{}, any> {
   [propName: string]: any
 
   constructor (p) {
@@ -35,7 +28,7 @@ export default class TipScreen extends Component<{}, State> {
             size='sm'
             style={{ marginTop: 12 }}
             type='primary'
-            reverse
+            textColorInverse
             onPress={() => {
               this.tip1.open()
             }}
@@ -48,19 +41,13 @@ export default class TipScreen extends Component<{}, State> {
             }}
             body='信息删除成功！'
             cancelable={true}
-            cancelCallback={() => {
-              console.log('cancel')
-            }}
-            confirmCallback={() => {
-              console.log('confirm')
-            }}
           />
 
           <Button
             size='sm'
             style={{ marginTop: 12 }}
             type='primary'
-            reverse
+            textColorInverse
             onPress={() => {
               this.tipA.open()
             }}
@@ -80,11 +67,11 @@ export default class TipScreen extends Component<{}, State> {
             size='sm'
             style={{ marginTop: 12 }}
             type='primary'
-            reverse
+            textColorInverse
             onPress={() => {
               setTimeout(() => {
                 this.setState({
-                  containerPositon: this.state.containerPositon === 'top' ? 'bottom' : 'top'
+                  containerPosition: this.state.containerPosition === 'top' ? 'bottom' : 'top'
                 })
                 this.tip2.open()
               })
@@ -95,8 +82,8 @@ export default class TipScreen extends Component<{}, State> {
 
           <Tip
             ref={(c) => { this.tip2 = c }}
-            body={`位置${this.state.containerPositon}`}
-            contentContainerPosition={this.state.containerPositon}
+            body={`位置${this.state.containerPosition}`}
+            contentContainerPosition={this.state.containerPosition}
             cancelable={true}>
           </Tip>
 
@@ -104,7 +91,7 @@ export default class TipScreen extends Component<{}, State> {
             size='sm'
             style={{ marginTop: 12 }}
             type='primary'
-            reverse
+            textColorInverse
             onPress={() => {
               this.tip3.open()
             }}

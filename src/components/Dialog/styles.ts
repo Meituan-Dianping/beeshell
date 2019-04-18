@@ -19,7 +19,7 @@ const buttons = {
 
   defaultText: {
     fontSize: variables.mtdFontSizeM,
-    color: variables.mtdGrayBase
+    color: variables.mtdGrayDarker
   }
 }
 
@@ -37,7 +37,7 @@ export default StyleSheet.create({
   title: {
     fontSize: variables.mtdFontSizeL,
     fontWeight: 'bold',
-    color: variables.mtdGrayBase
+    color: variables.mtdGrayDarker
   },
 
   body: {
@@ -51,7 +51,7 @@ export default StyleSheet.create({
   bodyText: {
     flex: 1,
     textAlign: 'center',
-    color: variables.mtdGrayBase,
+    color: variables.mtdGrayDarker,
 
     // ...mixins.adjustFont(14, 1.2)
     fontSize: 14,

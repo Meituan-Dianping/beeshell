@@ -6,18 +6,12 @@ import { Rate, Icon } from '../../src/'
 import variables from '../customTheme'
 import styles from '../common/styles'
 
-
-const iconsCDN = {
-  emptyStar: <Icon type='star' tintColor='#efefef' />,
-  halfStar: <Icon type='star' />,
-  fullStar: <Icon type='star' tintColor='#4d73ff' />
-}
-
+const customIconSize = 20
 // 本地图标地址
-const iconsLocal = {
-  emptyStar: <Image source={require('./images/star-o.png')} style={{ width: 40, height: 40 }} />,
-  halfStar: <Image source={require('./images/star-half-o.png')} style={{ width: 40, height: 40 }} />,
-  fullStar: <Image source={require('./images/star.png')} style={{ width: 40, height: 40 }} />
+const customIcons = {
+  empty: <View style={{ backgroundColor: '#eee', width: customIconSize, height: 40 }}></View>,
+  half: <View style={{ backgroundColor: '#999', width: customIconSize, height: 40 }}></View>,
+  full: <View style={{ backgroundColor: '#111', width: customIconSize, height: 40 }}></View>
 }
 
 
@@ -26,18 +20,18 @@ export default class RateScreen extends Component<Props, State> {
     super(p)
 
     this.state = {
+      value1: 2
       // rateNumber: 2.5,
-      // exampleIcons: iconsLocal
+      // exampleIcons: customIcons
     }
   }
 
   componentDidMount () {
-    // // 动态修改 rateNumber
-    // setTimeout(() => {
-    //   this.setState({
-    //     rateNumber: 1
-    //   })
-    // }, 2000)
+    setTimeout(() => {
+      this.setState({
+        value1: 0
+      })
+    }, 2000)
 
     // 动态修改 exampleIcons
     // setTimeout(() => {
@@ -58,17 +52,31 @@ export default class RateScreen extends Component<Props, State> {
 
         <Text style={styles.header}>基础</Text>
         <View style={[styles.panel, { alignItems: 'center' }]}>
-          <Rate value={3} onChange={e => console.log(e)} />
+          <Text>value1: {this.state.value1}</Text>
+          <Rate value={this.state.value1} onChange={(value) => this.setState({ value1: value })} iconColor={variables.mtdBrandPrimaryDark} />
         </View>
 
-        <Text style={styles.header}>自定义图标颜色、大小、间距</Text>
+        <Text style={styles.header}>自定义图标大小、间距</Text>
         <View style={[styles.panel, { alignItems: 'center' }]}>
-          <Rate value={4} starSize={40} enableHalfStar starColor={variables.mtdBrandDanger} marginOfStar={15} onChange={e => console.log(e)} />
+          <Text>value2: {this.state.value2}</Text>
+          <Rate value={this.state.value2} iconSize={40} enableHalf iconColor={variables.mtdBrandPrimaryDark} iconSpace={15} onChange={value => this.setState({ value2: value }) } />
         </View>
 
-        <Text style={styles.header}>自定义图标 marginLeft: 20</Text>
+        <Text style={styles.header}>自定义图标</Text>
         <View style={[styles.panel, { alignItems: 'center' }]}>
-          <Rate value={3.5} icons={iconsLocal} enableHalfStar starSize={40} onChange={e => console.log(e)} marginOfStar={10} />
+          <Text>value3: {this.state.value3 || 0}</Text>
+          <Rate
+            maximum={3}
+            value={this.state.value3 || 0}
+            icons={customIcons}
+            iconSpace={80}
+            iconSize={customIconSize}
+            enableHalf={true}
+            clickOnly={false}
+            onChange={(value) => {
+              this.setState({ value3: value })
+            }}
+          />
         </View>
 
       </View>

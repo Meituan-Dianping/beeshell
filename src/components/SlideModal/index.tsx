@@ -26,7 +26,6 @@ export interface SlideModalProps extends ModalProps {
   direction?: 'up' | ['up'] | ['up', 'left'] | ['up', 'right'] | 'down' | ['down'] |
       ['down', 'left'] | ['down', 'right'] | 'left' | ['left'] | 'right' | ['right']
   align?: 'left' | 'right' | 'up' | 'down'
-
   fullScreenPatch?: boolean[]
 }
 
@@ -51,25 +50,10 @@ export class SlideModal<
 
   constructor (props) {
     super(props)
-    const data = this.initSlideModal(props)
-
-    this.state = {
-      ...this.state,
-      ...data
-    }
-
-    this.animated = new SlideAnimated({
-      // duration: 1000
-      directionType: data.directionType,
-    })
   }
 
   // 重写 Modal 父类 init 方法
-  init () {
-    return
-  }
-
-  initSlideModal (props) {
+  init (props, syncTag?: boolean) {
     const directions = [
       ['up'],
       ['up', 'left'],
@@ -125,12 +109,29 @@ export class SlideModal<
 
     const offsetY = typeof props.offsetY === 'number' ? props.offsetY : props.screenHeight
 
-    return {
+    const data = {
       directionType,
       direction,
       align,
       directionWithAlign,
       offsetY
+    }
+
+    this.animated = new SlideAnimated({
+      // duration: 1000
+      directionType: data.directionType,
+    })
+
+    if (syncTag) {
+      this.state = {
+        ...this.state,
+        ...data,
+      }
+    } else {
+      this.setState({
+        ...this.state,
+        ...data
+      })
     }
   }
 
@@ -143,47 +144,12 @@ export class SlideModal<
       nextProps.screenWidth !== this.props.screenWidth ||
       nextProps.screenHeight !== this.props.screenHeight
     ) {
-      const data = this.initSlideModal(nextProps)
-      this.animated = new SlideAnimated({
-        directionType: data.directionType,
-      })
-      this.setState({
-        ...data
-      })
+      this.init(nextProps, false)
     }
   }
 
   open (c) {
-    const { cancelable, backdropColor, backdropOpacity, fullScreenPatch, screenHeight, screenWidth } = this.props
-    if (fullScreenPatch.length !== 3) {
-      throw new TypeError(`fullScreenPatch 参数 ${fullScreenPatch} 为无效值`)
-    }
-    const rects = this.getRects()
-    const tmp = fullScreenPatch.map((patchItem, patchIndex) => {
-      if (patchItem) {
-        return `contentClockwise${patchIndex + 1}Rect`
-      } else {
-        return ''
-      }
-    }).filter((tmpItem) => {
-      return tmpItem
-    }).map((key) => {
-      return {
-        key,
-        cancelable,
-        closeFn: this.close.bind(this, this.modalState.topviewId),
-        rect: {
-          ...rects[key],
-          backgroundColor: backdropColor,
-          opacity: backdropOpacity
-        }
-      }
-    })
-    return Modal.prototype.open.call(this, c, {
-      screenHeight,
-      screenWidth,
-      fullScreenPatch: tmp
-    })
+    return Modal.prototype.open.call(this, c)
   }
 
   getRects () {
@@ -273,80 +239,143 @@ export class SlideModal<
       contentContainerRect,
       contentRect,
 
-      contentClockwise2Rect,
       contentClockwise1Rect,
+      contentClockwise2Rect,
       contentClockwise3Rect
     }
   }
 
-  getContent (inner) {
+  getFullScreenPatch() {
+    const { cancelable, backdropColor, backdropOpacity, fullScreenPatch } = this.props
+    if (fullScreenPatch.length !== 3) {
+      throw new TypeError(`fullScreenPatch 参数 ${fullScreenPatch} 为无效值`)
+    }
+    const rects = this.getRects()
+    const tmp = fullScreenPatch.map((patchItem, patchIndex) => {
+      if (patchItem) {
+        return `contentClockwise${patchIndex + 1}Rect`
+      } else {
+        return ''
+      }
+    }).filter((tmpItem) => {
+      return tmpItem
+    }).map((key) => {
+      return {
+        key,
+        cancelable,
+        closeFn: this.close.bind(this, this.modalState.topviewId),
+        rect: {
+          ...rects[key],
+          backgroundColor: backdropColor,
+          opacity: backdropOpacity
+        }
+      }
+    })
+
+    return tmp
+  }
+
+  getContent (inner?): any {
     const styles = slideModalStyles
     const { directionType, direction } = this.state
+    const { screenWidth, screenHeight } = this.props
     const tmp = inner == null ? this.props.children : inner
     const { contentContainerRect, contentRect } = this.getRects()
+    const fullScreenPatch = this.getFullScreenPatch()
 
     return (
       <View
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: screenWidth,
+          height: screenHeight
+        }}
         collapsable={false}
-        style={[
-          styles.container,
-          {
-            ...contentContainerRect
-          }
-        ]}
-      >
-        <TouchableOpacity
+        pointerEvents={'box-none'}>
+
+        {
+          fullScreenPatch.map((patchItem, patchIndex) => {
+            return (
+              <TouchableOpacity
+                key={patchIndex}
+                activeOpacity={patchItem.rect.opacity}
+                style={{
+                  position: 'absolute',
+                  ...patchItem.rect
+                }}
+                onPress={() => {
+                  if (patchItem.cancelable) {
+                    patchItem.closeFn()
+                  }
+                }}>
+              </TouchableOpacity>
+            )
+          })
+        }
+
+        <View
+          collapsable={false}
           style={[
-            modalStyles.backdrop,
+            styles.container,
             {
-              opacity: this.props.backdropOpacity,
-              backgroundColor: this.props.backdropColor
+              ...contentContainerRect
             }
-          ]}
-          activeOpacity={this.props.backdropOpacity}
-          onPress={() => {
-            this.handleBackdropPress()
-          }}
-        />
-
-        <Animated.View
-          style={[
-            styles.content,
-            {
-              ...contentRect
-            },
-            {
-              transform: [
-                { translateY: this.animated.getState().translateY },
-                { translateX: this.animated.getState().translateX }
-              ],
-
-              opacity: this.animated.getState().opacity
-            }
-          ]}
-          onLayout={(e: any) => {
-            const { width, height } = e.nativeEvent.layout
-            const ret = []
-            directionType.forEach((directionTypeItem: any) => {
-              if (directionTypeItem === 'vertical') {
-                ret.push({
-                  size: direction.indexOf('up') !== -1 ? height : -height,
-                  directionTypeItem,
-                })
+          ]}>
+          <TouchableOpacity
+            style={[
+              modalStyles.backdrop,
+              {
+                opacity: this.props.backdropOpacity,
+                backgroundColor: this.props.backdropColor
               }
+            ]}
+            activeOpacity={this.props.backdropOpacity}
+            onPress={() => {
+              this.handleBackdropPress()
+            }}
+          />
 
-              if (directionTypeItem === 'horizontal') {
-                ret.push({
-                  size: direction.indexOf('right') !== -1 ? -width : width,
-                  directionTypeItem
-                })
+          <Animated.View
+            style={[
+              styles.content,
+              {
+                ...contentRect
+              },
+              {
+                transform: [
+                  { translateY: this.animated.getState().translateY },
+                  { translateX: this.animated.getState().translateX }
+                ],
+
+                opacity: this.animated.getState().opacity
               }
-            })
-            this.animated.reset(ret)
-          }}
-        >
-          {tmp || null}
-        </Animated.View>
+            ]}
+            onLayout={(e: any) => {
+              const { width, height } = e.nativeEvent.layout
+              const ret = []
+              directionType.forEach((directionTypeItem: any) => {
+                if (directionTypeItem === 'vertical') {
+                  ret.push({
+                    size: direction.indexOf('up') !== -1 ? height : -height,
+                    directionTypeItem,
+                  })
+                }
+
+                if (directionTypeItem === 'horizontal') {
+                  ret.push({
+                    size: direction.indexOf('right') !== -1 ? -width : width,
+                    directionTypeItem
+                  })
+                }
+              })
+              this.animated.reset(ret)
+            }}
+          >
+            {tmp || null}
+          </Animated.View>
+        </View>
       </View>
     )
   }

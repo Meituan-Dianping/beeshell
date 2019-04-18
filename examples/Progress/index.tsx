@@ -55,8 +55,8 @@ export default class ProgressScreen extends Component<{}, any> {
         <View style={styles.panel}>
           <Text style={{ fontSize: 14, color: variables.mtdGrayBase, marginBottom: 4 }}>{this.state.percentA}%</Text>
           <Progress
-            style={{ backgroundColor: '#000' }}
-            barStyle={{ height: 4, backgroundColor: variables.mtdBrandDanger }}
+            style={{ backgroundColor: '#ccc' }}
+            barStyle={{ height: 8, backgroundColor: variables.mtdBrandDanger }}
             easing={false}
             percent={this.state.percentA}
           />

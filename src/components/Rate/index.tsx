@@ -1,189 +1,155 @@
-import React, { Component } from 'react'
-import { StyleSheet, View, PanResponder, InteractionManager } from 'react-native'
-
+import React, { Component, ReactElement } from 'react'
+import { StyleSheet, View, PanResponder, ViewStyle } from 'react-native'
 import { Icon } from '../Icon'
 import styles from './styles'
-import variables from '../../common/styles/variables'
 
-export interface Props {
-  value: number
+export interface RateProps {
+  style?: ViewStyle
+  value?: number
   maximum?: number
   icons?: {
-    emptyStar: JSX.Element
-    fullStar: JSX.Element
-    halfStar?: JSX.Element
+    empty: ReactElement<any>
+    full: ReactElement<any>
+    half?: ReactElement<any>
   }
-  starSize?: number
-  starColor?: string
-  marginOfStar?: number
-  style?: any
-  /**
-   * 只支持点击 不响应滑动
-   */
-  clickOnly?: boolean
-  /**
-   * 一旦开始选择就不可以可以取消选择
-   */
-  allowCancel?: boolean
-  /**
-   * 开启半星
-   */
-  enableHalfStar?: boolean
+  iconSize?: number
+  iconSpace?: number
+  enableHalf?: boolean // 开启半星
   onChange?: Function
-  onChangeMove?: Function
-}
-
-export interface State {
-  value: number
 }
 
 const rateStyles = StyleSheet.create(styles as any)
 
-export class Rate extends Component<Props, State> {
+export class Rate extends Component<RateProps, any> {
   static defaultProps = {
     maximum: 5,
     icons: {
-      emptyStar: <Icon type='star-o' size={variables.rateIconSize} tintColor={variables.rateIconColor} />,
-      fullStar: <Icon type='star' size={variables.rateIconSize} tintColor={variables.rateIconColor} />,
-      halfStar: <Icon type='star-half-o' size={variables.rateIconSize} tintColor={variables.rateIconColor} />
+      empty: <Icon type='star-o' />,
+      full: <Icon type='star' />,
+      half: <Icon type='star-half-o' />
     },
-    starSize: variables.rateIconSize,
-    marginOfStar: 4,
-    clickOnly: false,
-    allowCancel: true,
-    enableHalfStar: false
+    iconSize: 20,
+    iconSpace: 4,
+    enableHalf: true
   }
 
-  private viewOnly = true
-  private viewX = 0
   private panResponder = null
   private containerView = null
 
   constructor (p) {
     super(p)
-    this.state = {
-      value: p.value || 0
-    }
-
-    this.viewOnly = (p.onChange || p.onChangeMove) ? false : true
-
-    if (!this.viewOnly) {
-      this.createPanResponder()
-    }
+    this.createPanResponder()
   }
 
   componentDidMount () {
-    InteractionManager.runAfterInteractions(() => {
-      this.containerView && this.containerView.measure((ox, oy, width, height, px, py) => {
-        this.viewX = px
-      })
-    })
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.value > 0 && nextProps.value !== this.props.value) {
-      this.setState({ value: nextProps.value })
-    }
   }
 
   render () {
-    let extraProps = this.viewOnly ? {} : this.panResponder.panHandlers
-
     return (
       <View
         ref={c => { this.containerView = c }}
-        style={[rateStyles.warp, this.props.style]}
-        {...extraProps}
-        collapsable={false}
-      >
-        {this.getStars(this.state.value)}
+        style={[rateStyles.wrapper, this.props.style]}
+        collapsable={false}>
+        <View
+          collapsable={false}
+          style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 1 }}
+          {...this.panResponder.panHandlers}>
+        </View>
+        {this.renderIcons(this.props.value)}
       </View>
     )
   }
 
-  getStars (currentRating) {
-    const { icons: { halfStar, fullStar, emptyStar }, maximum, marginOfStar, starSize, starColor } = this.props
-    const stars = []
+  renderIcons (value) {
+    const { icons: { half, full, empty }, maximum, iconSpace, iconSize } = this.props
+    const ret = []
     for (let i = 0; i < maximum; i++) {
+      const marginRight = i === maximum - 1 ? 0 : iconSpace
       if (
-        halfStar &&
-        currentRating > i &&
-        currentRating < i + 1
+        half &&
+        value > i &&
+        value < i + 1
       ) {
-        const extraProps = { key: i, style: [{ marginRight: marginOfStar }, halfStar.props.style], size: starSize, tintColor: starColor }
-        stars.push(React.cloneElement(halfStar, extraProps))
-      } else if (currentRating >= i + 1) {
-        const extraProps = { key: i, style: [{ marginRight: marginOfStar }, fullStar.props.style], size: starSize, tintColor: starColor }
-        stars.push(React.cloneElement(fullStar, extraProps))
+        const tmpProps = { ...half.props, key: i, style: [{ marginRight }, half.props.style] }
+        if (half && half.type && (half.type as any).displayName === 'Icon') {
+          tmpProps.size = iconSize
+        }
+        ret.push(React.cloneElement(half, tmpProps))
+      } else if (value >= i + 1) {
+        const tmpProps = { ...full.props, key: i, style: [{ marginRight }, full.props.style] }
+        if (full && full.type && (full.type as any).displayName === 'Icon') {
+          tmpProps.size = iconSize
+        }
+        ret.push(React.cloneElement(full, tmpProps))
       } else {
-        const extraProps = { key: i, style: [{ marginRight: marginOfStar }, emptyStar.props.style], size: starSize, tintColor: starColor }
-        stars.push(React.cloneElement(emptyStar, extraProps))
+        const tmpProps = { ...empty.props, key: i, style: [{ marginRight }, empty.props.style] }
+        if (empty && empty.type && (empty.type as any).displayName === 'Icon') {
+          tmpProps.size = iconSize
+        }
+        ret.push(React.cloneElement(empty, tmpProps))
       }
     }
 
-    return stars
+    return ret
   }
 
-  round (value) {
-    const { icons: { halfStar }, enableHalfStar, maximum, clickOnly } = this.props
-    const inv = 1.0 / (clickOnly ? 1.0 : (halfStar ? 0.5 : 1.0))
-    let rating
-    if (halfStar && enableHalfStar) {
-      rating = value > Math.floor(value) + 0.5 ? Math.ceil(value) : Math.floor(value) + 0.5
-    } else {
-      rating = Math.ceil(value)
-    }
-    // 步长全部为 1 免得麻烦
-    // const { maximum } = this.props
-    // const rating = Math.ceil(value)
-    if (rating < 0) {
-      return 0
-    } else if (rating > maximum) {
-      return maximum
-    }
+  getValue (pageX): any {
+    const p = new Promise((resolve) => {
+      this.containerView && this.containerView.measure((ox, oy, width, height, px, py) => {
+        resolve(px)
+      })
+    })
+    return p.then((containerViewX: number) => {
+      const { iconSize, iconSpace, maximum, enableHalf } = this.props
+      const locationX = pageX - containerViewX
+      // console.log(pageX, containerViewX)
+      if (locationX <= 0) {
+        return 0
+      }
+      const unitWidth = iconSize + iconSpace
+      let value = Math.floor(locationX / unitWidth)
+      if (value >= maximum) {
+        return maximum
+      }
+      const rest = locationX - unitWidth * value
+      if (rest > 0 && rest < (iconSize / 2)) {
+        if (!enableHalf) {
+          value = value + 1
+        } else {
+          value = value + 0.5
+        }
+      }
 
-    return rating
+      if (rest > (iconSize / 2)) {
+        value = value + 1
+      }
+
+      return value
+    })
   }
 
-  calcValRating (event, starWidth) {
-    let value = this.round(
-      (event.nativeEvent.pageX - this.viewX) / starWidth
-    )
-    // 强制用户一旦选择不能在取消
-    if (!this.props.allowCancel && value < 1) {
-      value = 1
-    }
-
-    this.setState({ value })
-    return value
+  handleChange(value) {
+    this.props.onChange && this.props.onChange(value)
   }
 
   createPanResponder () {
-    const { starSize, clickOnly, onChange, onChangeMove, marginOfStar } = this.props
-    const starWidth = starSize + marginOfStar
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: () => true,
       onPanResponderGrant: (event, gesture) => {
-        const valueRating = this.calcValRating(event, starWidth)
-        if (clickOnly === true) {
-          onChange && onChange(valueRating)
-        }
+        this.getValue((event as any).nativeEvent.pageX).then((value) => {
+          this.handleChange(value)
+        })
       },
       onPanResponderMove: (event, gesture) => {
-        if (clickOnly === true) {
-          return
-        }
-        const valueRating = this.calcValRating(event, starWidth)
-        onChangeMove && onChangeMove(valueRating)
+        this.getValue((event as any).nativeEvent.pageX).then((value) => {
+          this.handleChange(value)
+        })
       },
       onPanResponderRelease: event => {
-        if (clickOnly === true) {
-          return
-        }
-        setTimeout(() => {
-          onChange && onChange(this.state.value)
-        }, 100)
-      }
+      },
     })
   }
 }

@@ -16,6 +16,10 @@ const screen = Dimensions.get('window')
 export { modalStyles }
 
 export interface ModalProps {
+  contentContainerStyle?: any
+  contentContainerPosition?: 'top' | 'left' | 'right' | 'bottom' | 'center' | ['top', 'left'] | ['top']
+    | ['top', 'right'] | ['left'] | ['center'] | ['right'] | ['bottom', 'left'] | ['bottom'] | ['bottom', 'right']
+
   cancelable: boolean
   backdropOpacity?: number
   backdropColor?: string
@@ -28,9 +32,6 @@ export interface ModalProps {
 
   animatedTranslateX?: number | null
   animatedTranslateY?: number | null
-
-  contentContainerPosition?: 'top' | 'center' | 'bottom'
-  contentContainerStyle?: any
 
   onOpen?: any
   onOpened?: any
@@ -77,34 +78,61 @@ export class Modal<
       closing: false
     }
 
-    this.init(props)
+    this.init(props, true)
   }
 
-  init (props) {
+  init (props, syncTag?: boolean) {
+    const contentContainerPositions = [
+      ['top', 'left'],
+      ['top'],
+      ['top', 'right'],
+      ['left'],
+      ['center'],
+      ['right'],
+      ['bottom', 'left'],
+      ['bottom'],
+      ['bottom', 'right']
+    ]
+
+    const contentContainerPosition = typeof(props.contentContainerPosition) === 'string' ? [props.contentContainerPosition] : props.contentContainerPosition
+    const propsContentContainerPositionValid = contentContainerPositions.some((item) => {
+      const str1 = (item as any).join()
+      const str2 = (item as any).reverse().join()
+      const str3 = contentContainerPosition.join()
+      if (str3 === str1 || str3 === str2) {
+        return true
+      }
+    })
+
+    if (!propsContentContainerPositionValid) {
+      throw new TypeError(`contentContainerPosition 参数 ${props.contentContainerPosition} 为无效值`)
+    }
+
     const data = {
-      animatedTranslateX: null,
-      animatedTranslateY: null
+      contentContainerPosition
     }
 
-    data.animatedTranslateX =
-      typeof props.animatedTranslateX === 'number'
-        ? props.animatedTranslateX - props.screenWidth / 2
-        : null
-    data.animatedTranslateY =
-      typeof props.animatedTranslateY === 'number'
-        ? props.animatedTranslateY - props.screenHeight / 2
-        : null
+    this.animated = new FadeAnimated({})
 
-    if (!this.animated) {
-      this.animated = new FadeAnimated({})
+    if (syncTag) {
+      this.state = {
+        ...this.state,
+        ...data
+      }
+    } else {
+      this.setState({
+        ...this.state,
+        ...data
+      })
     }
-    this.animated.setState('translateXList', [data.animatedTranslateX, null])
-    this.animated.setState('translateYList', [data.animatedTranslateY, null])
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.animatedTranslateY !== this.props.animatedTranslateY) {
-      this.init(nextProps)
+    if (
+      nextProps.animatedTranslateY !== this.props.animatedTranslateY ||
+      nextProps.contentContainerPosition !== this.props.contentContainerPosition
+    ) {
+      this.init(nextProps, false)
     }
   }
 
@@ -128,64 +156,105 @@ export class Modal<
     }
   }
 
+  handleLayout = (e: any) => {
+    const { x, y, width, height } = e.nativeEvent.layout
+    const { animatedTranslateX, animatedTranslateY } = this.props
+    let translateX = null
+    let translateY = null
+    const ret = []
+    if (animatedTranslateX != null) {
+      translateX = animatedTranslateX - (width / 2) - x
+      ret.push({
+        key: 'translateX',
+        value: translateX
+      })
+    }
+
+    if (animatedTranslateY != null) {
+      translateY = animatedTranslateY - (height / 2) - y
+      ret.push({
+        key: 'translateY',
+        value: translateY
+      })
+    }
+    this.animated.reset(ret)
+  }
+
   getContent (inner?) {
     const styles = modalStyles
     const tmp = inner == null ? this.props.children : inner
     const animatedState = this.animated ? this.animated.getState() : {}
-    const contentContainerPosition = this.props.contentContainerPosition === 'top' ? 'flex-start' : (
-      this.props.contentContainerPosition === 'bottom' ? 'flex-end' : 'center'
-    )
     const { offsetY, offsetX } = this.props
+    const { contentContainerPosition } = this.state
+
+    const alignItems = contentContainerPosition.indexOf('top') !== -1 ? 'flex-start' : (
+      contentContainerPosition.indexOf('bottom') !== -1 ? 'flex-end' : 'center'
+    )
+    const justifyContent = contentContainerPosition.indexOf('left') !== -1 ? 'flex-start' : (
+      contentContainerPosition.indexOf('right') !== -1 ? 'flex-end' : 'center'
+    )
 
     return (
       <View
-        style={[
-          styles.container,
-          {
-            top: offsetY,
-            left: offsetX,
-          },
-          {
-            alignItems: contentContainerPosition
-          }
-        ]}
-      >
-        <TouchableOpacity
+        style={{
+          position: 'absolute',
+          top: 0,
+          bottom: 0,
+          left: 0,
+          right: 0,
+        }}
+        collapsable={false}
+        pointerEvents={'box-none'}>
+        <View
           style={[
-            styles.backdrop,
+            styles.container,
             {
-              opacity: this.props.backdropOpacity,
-              backgroundColor: this.props.backdropColor
-            }
-          ]}
-          activeOpacity={this.props.backdropOpacity}
-          onPress={this.handleBackdropPress.bind(this)}
-        />
-
-        <Animated.View
-          style={[
-            styles.content,
-            this.props.contentContainerStyle,
-
+              top: offsetY,
+              left: offsetX,
+            },
             {
-              transform: [
-                { translateX: animatedState.translateX },
-                { translateY: animatedState.translateY }
-              ],
-              opacity: animatedState.opacity
+              justifyContent,
+              alignItems
             }
           ]}
         >
-          <Animated.View
+          <TouchableOpacity
             style={[
+              styles.backdrop,
               {
-                transform: [{ scale: animatedState.scale }]
+                opacity: this.props.backdropOpacity,
+                backgroundColor: this.props.backdropColor
               }
             ]}
-          >
-            {tmp || null}
+            activeOpacity={this.props.backdropOpacity}
+            onPress={this.handleBackdropPress.bind(this)}
+          />
+
+          <Animated.View
+            style={[
+              styles.content,
+              this.props.contentContainerStyle,
+
+              {
+                transform: [
+                  { translateX: animatedState.translateX },
+                  { translateY: animatedState.translateY }
+                ],
+                opacity: animatedState.opacity
+              }
+            ]}
+            onLayout={this.handleLayout}>
+            <Animated.View
+              style={[
+                {
+                  transform: [{ scale: animatedState.scale }]
+                }
+              ]}
+            >
+              {tmp || null}
+            </Animated.View>
           </Animated.View>
-        </Animated.View>
+        </View>
       </View>
     )
   }
@@ -220,10 +289,10 @@ export class Modal<
       })
   }
 
-  open (c: any, args: any[]) {
+  open (c?: any, args?: any) {
     if (this.modalState.opening || this.modalState.topviewId) {
       const msg = '不能重复打开'
-      // console.log(msg)
+      // console.log(msg)s
       return Promise.reject(msg)
     }
 

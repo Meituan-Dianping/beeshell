@@ -125,13 +125,14 @@ export default class SlideModalScreen extends Component<{}, any> {
             })
           }}
         >
-          指定位置，自定义拉动方向，全屏
+          指定位置，自定义滑动方向，全屏
         </Button>
 
         <SlideModal
           ref={c => {
             this.slideModal2 = c
           }}
+          backdropOpacity={0.3}
           screenHeight={screenHeight}
           offsetX={this.state.offsetX2}
           offsetY={this.state.offsetY2}
@@ -169,7 +170,7 @@ export default class SlideModalScreen extends Component<{}, any> {
             })
           }}
         >
-          指定位置、下拉、全屏
+          指定位置、下滑、全屏
         </Button>
 
         <SlideModal
@@ -212,7 +213,7 @@ export default class SlideModalScreen extends Component<{}, any> {
             })
           }}
         >
-          指定位置、左拉、局部
+          指定位置、左滑、局部
         </Button>
 
         <SlideModal
@@ -249,7 +250,7 @@ export default class SlideModalScreen extends Component<{}, any> {
             })
           }}
         >
-          指定位置、右拉
+          指定位置、右滑
         </Button>
 
         <SlideModal

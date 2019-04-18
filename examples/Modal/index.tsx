@@ -4,6 +4,17 @@ import { ScrollView, View, Text, StyleSheet } from 'react-native'
 import { Button, Modal } from '../../src/'
 import styles from '../common/styles'
 
+const contentContainerPositions = [
+  ['top', 'left'],
+  ['top'],
+  ['top', 'right'],
+  ['left'],
+  ['center'],
+  ['right'],
+  ['bottom', 'left'],
+  ['bottom'],
+  ['bottom', 'right']
+]
 
 export default class ModalScreen extends Component<{}, any> {
   [prpsName: string]: any
@@ -11,12 +22,24 @@ export default class ModalScreen extends Component<{}, any> {
   constructor (p) {
     super(p)
     this.state = {
+      contentContainerPositionIndex: 0,
       animatedTranslateX: undefined,
-      animatedTranslateY: undefined
+      animatedTranslateY: undefined,
+      foo: 0
     }
   }
 
+  componentDidMount () {
+    // setInterval(() => {
+    //   this.setState({
+    //     foo: this.state.foo + 1
+    //   })
+    // }, 1000)
+  }
+
   render () {
+    const contentContainerPosition = contentContainerPositions[this.state.contentContainerPositionIndex]
+
     return (
       <ScrollView
         style={styles.body}
@@ -45,7 +68,7 @@ export default class ModalScreen extends Component<{}, any> {
               justifyContent: 'center',
               borderRadius: 4
             }}>
-            <Text>自定义内容</Text>
+            <Text>自定义内容{this.state.foo || ''}</Text>
           </View>
         </Modal>
         <Button
@@ -71,36 +94,8 @@ export default class ModalScreen extends Component<{}, any> {
         </Modal>
 
         <Button
-          style={{ marginTop: 12 }}
-          size='sm'
-          onPress={() => {
-            setTimeout(() => {
-              this.setState({
-                containerPosition: this.state.containerPosition === 'top' ? 'bottom' : 'top'
-              })
-              this.modal4.open()
-            })
-          }}>
-          自定义展示位置
-        </Button>
-        <Modal
-          ref={c => {
-            this.modal4 = c
-          }}
-          cancelable={true}
-          contentContainerPosition={this.state.containerPosition}
-          contentContainerStyle={{
-            marginTop: this.state.containerPosition === 'top' ? 90 : null,
-            marginBottom: this.state.containerPosition === 'bottom' ? 90 : null,
-          }}>
-          <View style={{ width: 200, height: 100, backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center' }}>
-            <Text>位置：{this.state.containerPosition}</Text>
-          </View>
-        </Modal>
-
-        <Button
-          ref={(element) => {
-            this.btnEl = element
+          ref={(c) => {
+            this.btnEl = c
           }}
           style={{ marginTop: 12 }}
           size='sm'
@@ -110,25 +105,35 @@ export default class ModalScreen extends Component<{}, any> {
                 animatedTranslateX: px + width / 2,
                 animatedTranslateY: py + height / 2
               }, () => {
-                this.modal2.open()
+                this.modal4.open()
               })
             })
-          }}
-        >
-          自定义弹出位置
+          }}>
+          自定义展示位置与弹出位置
         </Button>
-
         <Modal
-          ref={(c) => { this.modal2 = c }}
+          ref={c => {
+            this.modal4 = c
+          }}
           animatedTranslateX={this.state.animatedTranslateX || undefined}
           animatedTranslateY={this.state.animatedTranslateY || undefined}
-          cancelable={true}>
-
+          cancelable={true}
+          contentContainerPosition={contentContainerPosition as any}
+          contentContainerStyle={{
+            marginTop: contentContainerPosition.indexOf('top') !== -1 ? 90 : null,
+            marginBottom: contentContainerPosition.indexOf('bottom') !== -1 ? 90 : null,
+            marginLeft: contentContainerPosition.indexOf('left') !== -1 ? 20 : null,
+            marginRight: contentContainerPosition.indexOf('right') !== -1 ? 20 : null
+          }}
+          onClosed={() => {
+            this.setState({
+              contentContainerPositionIndex: (this.state.contentContainerPositionIndex + 1) % contentContainerPositions.length
+            })
+          }}>
           <View style={{ width: 200, height: 100, backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center' }}>
-            <Text>自定义内容</Text>
+            <Text>位置：{contentContainerPosition.join(',')}</Text>
           </View>
         </Modal>
-
 
         <Button
           style={{ marginTop: 12 }}
@@ -139,7 +144,7 @@ export default class ModalScreen extends Component<{}, any> {
           自定义 offset
         </Button>
         <Modal
-          offsetY={100}
+          offsetY={300}
           offsetX={50}
           ref={c => {
             this.modalA = c

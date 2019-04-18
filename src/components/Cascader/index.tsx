@@ -11,21 +11,25 @@ import cascaderStyles from './styles'
 const styles = StyleSheet.create<any>(cascaderStyles)
 import { Icon } from '../Icon'
 import variables from '../../common/styles/variables'
+import Tree from '../../common/utils/Tree'
 
 export interface CascaderProps {
-  style: any
-  options: any[]
-  value: any[]
-  fieldKeys: any
-  proportion: number[]
-  onChange: Function
-  renderItem: Function
+  style?: any
+  data?: any[]
+  dataStructureType?: 'nested' | 'flattened'
+  value?: any[]
+  fieldKeys?: any
+  proportion?: number[]
+  isLeafNode?: Function
+  onChange?: Function
+  renderItem?: Function
 }
 
 export class Cascader extends Component<CascaderProps, any> {
   static displayName = 'Cascader'
   static defaultProps = {
-    options: [],
+    data: [],
+    dataStructureType: 'nested',
     value: [],
     fieldKeys: {},
     proportion: [ 2, 1, 1 ],
@@ -33,75 +37,236 @@ export class Cascader extends Component<CascaderProps, any> {
     renderItem: null
   }
 
+  static resetChecked (tree, item, checkType, checked, fieldKeys) {
+    let tmpTree = [
+      ...tree,
+    ]
+
+    if (checkType === 'checkbox') {
+      // TODO
+    }
+
+    if (checkType === 'radio') {
+      tmpTree = resetRadio(tmpTree, item, checked, fieldKeys)
+    }
+
+    return tmpTree
+
+
+    function resetRadio(tree, item, checked, fieldKeys) {
+      let tmpTree = [
+        ...tree
+      ]
+
+      tmpTree = tmpTree.map((treeItem) => {
+        if (treeItem[fieldKeys.idKey] === item[fieldKeys.idKey]) {
+          return {
+            ...treeItem,
+            [fieldKeys.checkedKey]: true
+          }
+        } else {
+          return {
+            ...treeItem,
+            [fieldKeys.checkedKey]: false
+          }
+        }
+      })
+      return tmpTree
+    }
+  }
+
+  static getCheckedInfo (tree, checkType, fieldKeys) {
+    const checkedValue = []
+    const checkedResult = []
+
+    if (checkType === 'checkbox') {
+      // TODO
+    }
+
+    if (checkType === 'radio') {
+      tree.some((treeItem) => {
+        if (treeItem[fieldKeys.checkedKey]) {
+          checkedValue.push(treeItem[fieldKeys.idKey])
+          return true
+        }
+        return false
+      })
+    }
+
+    checkedValue.forEach((valueItem, valueIndex) => {
+      const target = tree.filter((treeItem) => {
+        return treeItem[fieldKeys.idKey] === valueItem
+      })[0]
+      const ancestors = Cascader.recursiveAncestors(tree, target, fieldKeys)
+      ancestors.push(target)
+
+      checkedResult[valueIndex] = ancestors
+    })
+
+    return {
+      checkedValue,
+      checkedResult,
+    }
+  }
+
+  static recursiveAncestors (tree, item, fieldKeys, ret?) {
+    ret = ret || []
+    const parentItem = tree.filter((treeItem) => {
+      return treeItem[fieldKeys.idKey] === item[fieldKeys.pIdKey]
+    })[0]
+
+    if (parentItem) {
+      ret = ret.concat()
+      ret.unshift(parentItem)
+      return Cascader.recursiveAncestors(tree, parentItem, fieldKeys, ret)
+    } else {
+      return ret
+    }
+  }
+
   constructor (props) {
     super(props)
 
-    const { options, value } = this.props
-
     this.state = {
-      menu: this.getMenu(options, value)
+      ...this.state,
+      ...this.init(props)
     }
   }
 
-  getMenu(options, value) {
-    const fieldKeys = this.getFieldKeys()
-    const menu = [
-      [ ...options ]
+  init(props) {
+    const fieldKeys = this.getFieldKeys(props)
+    const { data, dataStructureType } = props
+    const value = props.value || []
+
+    let tree = new Tree({
+        type: dataStructureType,
+        ...fieldKeys,
+        data: data
+    }).getData()
+
+    /**
+     * 重置 checked 状态
+     */
+    value.forEach((valueItem) => {
+      const target = tree.filter((treeItem) => {
+        return treeItem[fieldKeys.idKey] === valueItem
+      })[0]
+      if (!target) {
+        console.log(`值${valueItem}在数据集合中不存在`)
+        return
+      }
+      tree = Cascader.resetChecked(tree, target, 'radio', true, fieldKeys)
+    })
+
+    /**
+     * 重置 active 状态
+     */
+    let activeItem
+    if (value[0] != null) {
+      activeItem = tree.filter((treeItem) => {
+        return treeItem[fieldKeys.idKey] === value[0]
+      })[0]
+    }
+    tree = this.resetActive(tree, activeItem, fieldKeys)
+    const menu = this.getMenu(tree, fieldKeys)
+
+    return {
+      tree,
+      menu,
+    }
+  }
+
+  resetActive(tree, activeItem, fieldKeys) {
+    if (!activeItem) {
+      return tree
+    }
+    let tmpTree = [
+      ...tree,
     ]
 
-    if (value && value.length) {
-      value.forEach((valueItem, valueIndex) => {
-        if (menu[valueIndex] && menu[valueIndex].length) {
-          menu[valueIndex].forEach((menuItem, menuIndex) => {
-            const tmpValue = menuItem[fieldKeys.valueKey]
-            if (tmpValue === valueItem) {
-              menuItem[fieldKeys.activeKey] = true
-              if (menuItem[fieldKeys.childrenKey] && menuItem[fieldKeys.childrenKey].length) {
-                menu.push(menuItem[fieldKeys.childrenKey])
-              }
-            } else {
-              menuItem[fieldKeys.activeKey] = false
-            }
+    tmpTree = tmpTree.map((treeItem) => {
+      return {
+        ...treeItem,
+        [fieldKeys.activeKey]: false
+      }
+    })
 
-            this.changeActiveStatus(menuItem[fieldKeys.childrenKey], false)
-          })
+    recursive(activeItem)
+
+    return tmpTree
+
+    function recursive(activeItem) {
+      tmpTree = tmpTree.map((treeItem) => {
+        if (treeItem[fieldKeys.idKey] === activeItem[fieldKeys.idKey]) {
+          return {
+            ...treeItem,
+            [fieldKeys.activeKey]: true
+          }
+        } else {
+          return treeItem
         }
       })
-    }
 
-    return menu
+      const parentItem = tmpTree.filter((treeItem) => {
+        return treeItem[fieldKeys.idKey] === activeItem[fieldKeys.pIdKey]
+      })[0]
+
+      if (parentItem) {
+        recursive(parentItem)
+      }
+    }
   }
 
-  changeActiveStatus(options, active) {
-    if (options && options.length) {
-      const fieldKeys = this.getFieldKeys()
-      options.forEach((item) => {
-        item[fieldKeys.activeKey] = active
+  getMenu(tree, fieldKeys) {
+    const menu = [
+      tree.filter((treeItem) => {
+        return treeItem[fieldKeys.pIdKey] == null
+      })
+    ]
 
-        this.changeActiveStatus(item[fieldKeys.childrenKey], active)
+    recursive(menu[0])
+
+    return menu
+
+    function recursive(list) {
+      list.some((item) => {
+        if (item[fieldKeys.activeKey]) {
+          const tmpList = tree.filter((treeItem) => {
+            return treeItem[fieldKeys.pIdKey] === item[fieldKeys.idKey]
+          })
+
+          if (tmpList && tmpList.length) {
+            menu.push(tmpList)
+            recursive(tmpList)
+          }
+          return true
+        }
+        return false
       })
     }
   }
 
-  getFieldKeys() {
-    const { fieldKeys } = this.props
+  getFieldKeys(props?) {
+    props = props || this.props
+    const { fieldKeys } = props
     return {
-      labelKey: fieldKeys['labelKey'] || 'label',
-      childrenKey: fieldKeys['childrenKey'] || 'children',
-      valueKey: fieldKeys['valueKey'] || 'value',
-      activeKey: fieldKeys['activeKey'] || 'active'
+      idKey: fieldKeys.idKey || 'id',
+      pIdKey: fieldKeys.pIdKey || 'pId',
+      labelKey: fieldKeys.labelKey || 'label',
+      childrenKey: fieldKeys.childrenKey || 'children',
+      activeKey: fieldKeys.activeKey || 'active',
+      checkedKey: fieldKeys.checkedKey || 'checked',
+      disabledKey: fieldKeys.disabledKey || 'disabled'
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (
       nextProps.value !== this.props.value ||
-      nextProps.options !== this.props.options
+      nextProps.data !== this.props.data
     ) {
-      const newMenu = this.getMenu(nextProps.options, nextProps.value)
-      // console.log('newMenu', newMenu)
       this.setState({
-        menu: newMenu
+        ...this.init(nextProps)
       })
     }
   }
@@ -109,13 +274,29 @@ export class Cascader extends Component<CascaderProps, any> {
   componentDidMount () {
   }
 
-  handlePressItem = (item, index, level, isAutoOpen = false) => {
+  handlePress = (item, index) => {
     const fieldKeys = this.getFieldKeys()
-    const { value } = this.props
-    const tmpValue = value.concat().splice(0, level)
-    tmpValue.push(item[fieldKeys.valueKey])
+    const { tree } = this.state
 
-    this.props.onChange && this.props.onChange(tmpValue)
+    if (item[fieldKeys.activeKey]) {
+      return
+    }
+
+    if (item[fieldKeys.disabledKey]) {
+      return
+    }
+
+    let tmpTree = this.resetActive(tree, item, fieldKeys)
+    tmpTree = Cascader.resetChecked(tmpTree, item, 'radio', true, fieldKeys)
+    const { checkedValue, checkedResult } = Cascader.getCheckedInfo(tmpTree, 'radio', fieldKeys)
+    const menu = this.getMenu(tmpTree, fieldKeys)
+
+    this.props.onChange && this.props.onChange(checkedValue, checkedResult)
+
+    this.setState({
+      tree: tmpTree,
+      menu,
+    })
   }
 
   renderMenuItem (menuItem, menuIndex, menu) {
@@ -129,29 +310,33 @@ export class Cascader extends Component<CascaderProps, any> {
     return (
       <View style={style} key={menuIndex}>
         <ScrollView>
-          {
+        {
             menuItem.map((item, index) => {
-              return this.renderItem(item, index, menuIndex)
+              return this.renderItem(item, index)
             })
-          }
+        }
         </ScrollView>
       </View>
     )
   }
 
-  // 渲染每一个选项
-  renderItem (item, index, level) {
+  renderItem (item, index) {
     const fieldKeys = this.getFieldKeys()
-    const hasChildren = item && item[fieldKeys.childrenKey] && item[fieldKeys.childrenKey].length ? true : false
+    const { tree } = this.state
+
+    const isLeafNode = this.props.isLeafNode
+        ? this.props.isLeafNode(item)
+        : !(item && item[fieldKeys.childrenKey] && item[fieldKeys.childrenKey].length)
+
     const active = item[fieldKeys.activeKey]
 
     return (
       <TouchableOpacity
         key={index}
-        onPress={this.handlePressItem.bind(this, item, index, level, false)}>
+        onPress={this.handlePress.bind(this, item, index)}>
 
         {
-          this.props.renderItem ? this.props.renderItem(item, index, level) :
+          this.props.renderItem ? this.props.renderItem(item, index) :
           <View
             style={[
               styles.item,
@@ -168,7 +353,7 @@ export class Cascader extends Component<CascaderProps, any> {
             </Text>
 
             {
-              hasChildren ? <Icon type={'caret-right'} size={variables.mtdFontSizeM} tintColor={variables.mtdGrayLighter} /> : null
+              !isLeafNode ? <Icon type={'caret-right'} size={variables.mtdFontSizeM} tintColor={variables.mtdGrayLighter} /> : null
             }
           </View>
         }
@@ -177,8 +362,9 @@ export class Cascader extends Component<CascaderProps, any> {
   }
 
   render () {
-    const { options, style } = this.props
+    const { style } = this.props
     const { menu } = this.state
+
     return (
       <View style={[styles.container, style]}>
         {

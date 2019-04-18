@@ -16,10 +16,18 @@ export default class RadioScreen extends Component<any, any> {
   constructor (props) {
     super(props)
     this.state = {
-      checkedValue: 1,
-      checkedValue2: 2,
-      checkedValue3: 3
+      valueA: 0,
+      valueB: 2,
+      valueC: 3
     }
+  }
+
+  componentDidMount () {
+    setTimeout(() => {
+      this.setState({
+        valueA: 1
+      })
+    }, 2000)
   }
 
   renderItem (checked, index, label) {
@@ -27,10 +35,11 @@ export default class RadioScreen extends Component<any, any> {
     return (
       <View style={{ paddingVertical: 15 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          { checked ? <Icon type='star' size={16} tintColor={color} /> : <View style={{ width: 16, height: 16 }}></View> }
+          { checked ? <Icon type='star' size={16} tintColor={color} /> : <Icon type='star-o' size={16} tintColor={color} /> }
           <Text style={{ fontSize: 14, marginLeft: 8, color: color }}>{label}</Text>
+          { index === 0 ? <Icon style={{ marginLeft: 5 }} type='question-circle' tintColor={variables.mtdGrayLighter} /> : null }
         </View>
-        { index === 2 ? <Text style={{ color: variables.mtdGrayLighter, marginLeft: 24, fontSize: 12, marginTop: 5 }}>该选项风险较大，请谨慎选择</Text> : null }
+        { index === 1 ? <Text style={{ color: variables.mtdGrayLighter, marginLeft: 24, fontSize: 12, marginTop: 5 }}>该选项风险较大，请谨慎选择</Text> : null }
       </View>
     )
   }
@@ -42,11 +51,11 @@ export default class RadioScreen extends Component<any, any> {
 
         <View style={[styles.panel, { paddingVertical: 0 }]}>
           <Radio
-            checkedValue={this.state.checkedValue}
+            value={this.state.valueA}
             onChange={(value) => {
               console.log(value)
               this.setState({
-                checkedValue: value
+                valueA: value
               })
             }}>
 
@@ -60,43 +69,60 @@ export default class RadioScreen extends Component<any, any> {
         <Text style={styles.header}>右边图标</Text>
         <View style={[styles.panel, { paddingVertical: 0 }]}>
           <Radio
-            checkedValue={this.state.checkedValue2}
+            value={this.state.valueB}
             onChange={(value) => {
               this.setState({
-                checkedValue2: value
+                valueB: value
               })
             }}
             iconPosition='right'>
-            <Radio.Item label='自配送' value={1} />
-            <Radio.Item label='美团专送（禁用）' value={2} disabled />
-            <Radio.Item label='混合配送' value={3} />
+            <Radio.Item label='选项一' value={1} />
+            <Radio.Item label='选项二（禁用）' value={2} disabled />
+            <Radio.Item label='选项三' value={3} />
           </Radio>
         </View>
 
-        <Text style={styles.header}>自定义选项</Text>
+        <Text style={styles.header}>自定义图标</Text>
         <View style={[styles.panel, { paddingVertical: 0 }]}>
           <Radio
-            checkedValue={this.state.checkedValue3}
+            value={this.state.valueC}
+            checkedIcon={<Icon type='star' size={20} tintColor={variables.mtdBrandPrimaryDark} />}
+            uncheckedIcon={<Icon type='star' size={20} tintColor={variables.mtdGrayLightest}}
             onChange={(value) => {
               this.setState({
-                checkedValue3: value
+                valueC: value
+              })
+            }}>
+            <Radio.Item value={1} label='选项一' />
+            <Radio.Item value={2} label='选项二'/>
+            <Radio.Item value={3} label='选项三' />
+          </Radio>
+        </View>
+
+        <Text style={styles.header}>自定义渲染项</Text>
+        <View style={[styles.panel, { paddingVertical: 0 }]}>
+          <Radio
+            value={this.state.valueD}
+            onChange={(value) => {
+              this.setState({
+                valueD: value
               })
             }}>
             <Radio.Item
               value={1}
-              label={(checked) => {
+              renderItem={(checked) => {
                 return this.renderItem(checked, 0, '选项一')
               }}
             />
             <Radio.Item
               value={2}
-              label={(checked) => {
+              renderItem={(checked) => {
                 return this.renderItem(checked, 1, '选项二')
               }}
             />
             <Radio.Item
               value={3}
-              label={(checked) => {
+              renderItem={(checked) => {
                 return this.renderItem(checked, 2, '选项三')
               }}
             />

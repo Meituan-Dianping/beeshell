@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, ScrollView, PixelRatio } from 'react-native'
+import { View, Text, ScrollView, PixelRatio, ViewStyle } from 'react-native'
 import variables from '../../common/styles/variables'
 import { range } from '../../common/utils'
 import scrollpickerStyles from './styles'
@@ -10,12 +10,12 @@ const px = 1 / PixelRatio.get()
 const DEFAULT_CONTAINER_HEIGHT = 1
 
 interface ListItem {
-  label: string | number,
+  label: string | number
   [propName: string]: any
 }
 
 export interface ScrollpickerProps {
-  style?: any
+  style?: ViewStyle
   list?: Array<Array<ListItem>> | any
   value?: number[]
   proportion?: number[]
@@ -48,7 +48,6 @@ export class Scrollpicker extends React.Component<ScrollpickerProps, Scrollpicke
     value: [],
     proportion: [2, 1, 1],
     offsetCount: 2,
-    fontSize: 14,
     onChange: null,
     renderItem: null
   }
@@ -373,10 +372,10 @@ export class Scrollpicker extends React.Component<ScrollpickerProps, Scrollpicke
                           this.targetItemHeight = Math.ceil(
                             e.nativeEvent.layout.height
                           )
-                          console.log(
-                            'OnLayout get target item height:',
-                            this.targetItemHeight
-                          )
+                          // console.log(
+                          //   'OnLayout get target item height:',
+                          //   this.targetItemHeight
+                          // )
                         }
                       }}
                     >

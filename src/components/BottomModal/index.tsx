@@ -3,7 +3,8 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
+  TextStyle
 } from 'react-native'
 import {
   SlideModal,
@@ -17,11 +18,19 @@ import bottomModalStyles from './styles'
 const screen = Dimensions.get('window')
 
 export interface BottomModalProps extends SlideModalProps {
-  title?: any
-  leftCallback?: Function
-  rightCallback?: Function
+  titleContainer?: any
+  title?: string
+  titleStyle?: TextStyle
+
   rightLabel?: any
+  rightLabelText?: string
+  rightLabelTextStyle?: TextStyle
+  rightCallback?: Function
+
   leftLabel?: any
+  leftLabelText?: string
+  leftLabelTextStyle?: TextStyle
+  leftCallback?: Function
 }
 
 export interface BottomModalState extends SlideModalState {}
@@ -29,14 +38,22 @@ export interface BottomModalState extends SlideModalState {}
 export class BottomModal extends SlideModal<BottomModalProps, BottomModalState> {
   static defaultProps = {
     ...SlideModal.defaultProps,
-    width: screen.width,
 
     cancelable: true,
+    screenWidth: screen.width,
+    titleContainer: null,
     title: '标题',
-    leftCallback: null,
+    titleStyle: {},
+
+    rightLabel: null,
+    rightLabelText: '完成',
+    rightLabelTextStyle: {},
     rightCallback: null,
-    leftLabel: '取消',
-    rightLabel: '完成'
+
+    leftLabel: null,
+    leftLabelText: '取消',
+    leftLabelTextStyle: {},
+    leftCallback: null,
   }
 
   constructor (props) {
@@ -45,61 +62,84 @@ export class BottomModal extends SlideModal<BottomModalProps, BottomModalState> 
 
   getHeader () {
     const styles = bottomModalStyles
-    const { title, leftCallback, rightCallback, rightLabel, leftLabel } = this.props
+    const {
+      titleContainer,
+      title,
+      titleStyle,
+      rightLabel,
+      rightLabelText,
+      rightLabelTextStyle,
+      rightCallback,
 
-    let confirmVel = rightLabel ? (
-      <TouchableOpacity
-        activeOpacity={1}
-        onPress={() => {
-          this.close().then(() => {
-            rightCallback && rightCallback()
-          })
-        }}
-      >
-        {
-          React.isValidElement(rightLabel) ? rightLabel :
-          <Text
-            style={[
-              styles.operator,
-              styleUtils.textRight,
-              styleUtils.textPrimaryDark,
-              styleUtils.textBold
-            ]}
-            numberOfLines={1}>
-            {rightLabel}
-          </Text>
-        }
-      </TouchableOpacity>
-    ) : null
+      leftLabel,
+      leftLabelText,
+      leftLabelTextStyle,
+      leftCallback
+    } = this.props
 
-    let cancelVel = leftLabel ? (
-      <TouchableOpacity
-        activeOpacity={1}
-        onPress={() => {
-          this.close().then(() => {
-            leftCallback && leftCallback()
-          })
-        }}
-      >
-        {
-          React.isValidElement(leftLabel) ? leftLabel :
-          <Text style={[styles.operator, styleUtils.textLeft]} numberOfLines={1}>
-            {leftLabel}
-          </Text>
-        }
-      </TouchableOpacity>
-    ) : null
+    let rightEl = null
+    if (rightLabel || rightLabelText) {
+      rightEl = (
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => {
+            this.close().then(() => {
+              rightCallback && rightCallback()
+            })
+          }}>
+          {
+            React.isValidElement(rightLabel) ? rightLabel :
+            <Text
+              style={[
+                styles.operator,
+                styleUtils.textRight,
+                styleUtils.textPrimaryDark,
+                styleUtils.textBold,
+                rightLabelTextStyle
+              ]}
+              numberOfLines={1}>
+              {rightLabelText}
+            </Text>
+          }
+        </TouchableOpacity>
+      )
+    }
+
+    let leftEl = null
+    if (leftLabel || leftLabelText) {
+      leftEl = (
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => {
+            this.close().then(() => {
+              leftCallback && leftCallback()
+            })
+          }}
+        >
+          {
+            React.isValidElement(leftLabel) ? leftLabel :
+            <Text style={[styles.operator, styleUtils.textLeft, leftLabelTextStyle]} numberOfLines={1}>
+              {leftLabelText}
+            </Text>
+          }
+        </TouchableOpacity>
+      )
+    }
+
+    let titleContainerEl = null
+    if (titleContainer || title) {
+      titleContainerEl = React.isValidElement(titleContainer) ? titleContainer : (
+        <Text style={[styles.title, titleStyle]}>{title}</Text>
+      )
+    }
 
     return (
       <View style={styles.header}>
-        <View style={styles.colSide}>{cancelVel}</View>
+        <View style={styles.colSide}>{leftEl}</View>
         <View style={styles.colMiddle}>
-          {
-            React.isValidElement(title) ? title :
-            <Text style={styles.title}>{title}</Text>
-          }
+          {titleContainerEl}
         </View>
-        <View style={styles.colSide}>{confirmVel}</View>
+        <View style={styles.colSide}>{rightEl}</View>
       </View>
     )
   }
@@ -111,7 +151,7 @@ export class BottomModal extends SlideModal<BottomModalProps, BottomModalState> 
   getContent () {
     const styles = bottomModalStyles
     const inner = (
-      <View style={[styles.container, { width: screen.width }]}>
+      <View style={[styles.container, { width: this.props.screenWidth }]}>
         {this.getHeader()}
 
         {/* TouchableOpacity 没设置高度时 onPress 有问题*/}

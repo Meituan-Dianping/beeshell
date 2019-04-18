@@ -3,7 +3,8 @@ import { Animated, Easing } from 'react-native'
 class CommonAnimated {
   state: any
   animated: any
-  constructor (props: any) {
+  constructor (props?: any) {
+    props = props || {}
     this.state = {
       opacityList: props.opacityList || [0, 1],
       duration: props.opacityList || 300,
@@ -35,13 +36,15 @@ class CommonAnimated {
 }
 
 export class FadeAnimated extends CommonAnimated {
-  constructor (props: any) {
-    super(props || {})
+  constructor (props?: any) {
+    props = props || {}
+    super(props)
     this.state = {
       ...this.state,
       scaleList: [0, 1],
       translateXList: [null, null],
-      translateYList: [null, null]
+      translateYList: [null, null],
+      ...props
     }
 
     this.state.opacity = new Animated.Value(
@@ -73,6 +76,21 @@ export class FadeAnimated extends CommonAnimated {
     return this.fade(false)
   }
 
+  reset (params: any) {
+    const ret = {}
+    params.forEach((paramItem: any) => {
+      const key = paramItem.key + 'List'
+      const tmp = this.state[key].concat()
+      tmp.splice(0, 1, paramItem.value)
+      ret[key] = tmp
+    })
+
+    this.state = {
+      ...this.state,
+      ...ret
+    }
+  }
+
   fade (tag: boolean) {
     this.stop()
     this.state.opacity.setValue(this.getPropertyValue('opacity', tag))
@@ -80,51 +98,67 @@ export class FadeAnimated extends CommonAnimated {
     this.state.translateX.setValue(this.getPropertyValue('translateX', tag))
     this.state.translateY.setValue(this.getPropertyValue('translateY', tag))
 
-    this.animated = Animated.parallel([
-      Animated.timing(this.state.opacity, {
-        toValue: this.getPropertyValue('opacity', !tag),
-        duration: this.state.duration,
-        easing: this.state.easing
-      }),
-
-      Animated.timing(this.state.scale, {
-        toValue: this.getPropertyValue('scale', !tag),
-        duration: this.state.duration,
-        easing: this.state.easing
-      }),
-
-      Animated.timing(this.state.translateX, {
-        toValue: this.getPropertyValue('translateX', !tag),
-        duration: this.state.duration,
-        easing: this.state.easing
-      }),
-
-      Animated.timing(this.state.translateY, {
-        toValue: this.getPropertyValue('translateY', !tag),
-        duration: this.state.duration,
-        easing: this.state.easing
+    return new Promise((resolve) => {
+      const invalid = ['translateXList', 'translateYList'].some((key) => {
+        return this.state[key][0] == null
       })
-    ])
+      if (invalid) {
+        setTimeout(() => {
+          resolve('pre animated end')
+          // console.log('pre animated end')
+        }, 100)
+      } else {
+        resolve('pre animated end')
+      }
+    }).then(() => {
+      this.state.translateX.setValue(this.getPropertyValue('translateX', tag))
+      this.state.translateY.setValue(this.getPropertyValue('translateY', tag))
 
-    return new Promise(resolve => {
-      this.animated.start(() => {
-        resolve('animated end')
+      this.animated = Animated.parallel([
+        Animated.timing(this.state.opacity, {
+          toValue: this.getPropertyValue('opacity', !tag),
+          duration: this.state.duration,
+          easing: this.state.easing
+        }),
+        Animated.timing(this.state.scale, {
+          toValue: this.getPropertyValue('scale', !tag),
+          duration: this.state.duration,
+          easing: this.state.easing
+        }),
+        Animated.timing(this.state.translateX, {
+          toValue: this.getPropertyValue('translateX', !tag),
+          duration: this.state.duration,
+          easing: this.state.easing
+        }),
+        Animated.timing(this.state.translateY, {
+          toValue: this.getPropertyValue('translateY', !tag),
+          duration: this.state.duration,
+          easing: this.state.easing
+        })
+      ])
+    }).then(() => {
+      return new Promise(resolve => {
+        this.animated.start(() => {
+          resolve('animated end')
+        })
+      }).catch(e => {
+        console.log(e)
       })
-    }).catch(e => {
-      console.log(e)
     })
   }
 }
 
 export class SlideAnimated extends CommonAnimated {
-  constructor (props: any) {
+  constructor (props?: any) {
+    props = props || {}
     super(props)
 
     this.state = {
       ...this.state,
-      ...props,
+      directionType: ['horizontal'],
       translateYList: [null, 0],
-      translateXList: [null, 0]
+      translateXList: [null, 0],
+      ...props,
     }
 
     this.state.opacity = new Animated.Value(

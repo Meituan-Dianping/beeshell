@@ -7,27 +7,26 @@ import {
   ViewStyle,
   RegisteredStyle
   } from 'react-native'
-import { CheckboxItemAllChecked } from './CheckboxItemAllChecked'
+import { CheckboxItemAllCheck } from './CheckboxItemAllCheck'
 import checkboxStyles from './styles'
 import variables from '../../common/styles/variables'
-import { CheckboxItem } from './CheckboxItem'
+import { Icon } from '../Icon'
 
-interface Props {
+interface CheckboxProps {
   style?: ViewStyle | RegisteredStyle<ViewStyle>,
-  checkedValue?: any[]
+  value?: any[]
   iconPosition?: 'left' | 'right'
   onChange?: Function
 
-  showAllChecked?: boolean
+  showAllCheck?: boolean
   children: ReactChild[] | ReactChild
-}
-
-interface State {
+  checkedIcon?: ReactElement<any>
+  uncheckedIcon?: ReactElement<any>
 }
 
 const styles = StyleSheet.create<any>(checkboxStyles)
 
-export default class Checkbox extends Component<Props, State> {
+export default class Checkbox extends Component<CheckboxProps, {}> {
   static displayName = 'Checkbox'
   static Item = null
 
@@ -36,10 +35,12 @@ export default class Checkbox extends Component<Props, State> {
   formItemContext = null
 
   static defaultProps = {
-    checkedValue: [],
-    showAllChecked: false,
+    value: [],
+    showAllCheck: false,
     onChange: () => { return },
     iconPosition: 'left',
+    checkedIcon: <Icon type={'check-circle'} size={variables.mtdFontSizeL} tintColor={variables.mtdBrandPrimaryDark} />,
+    uncheckedIcon: <View style={styles.uncheckedIcon}></View>
   }
 
   constructor (props) {
@@ -59,106 +60,103 @@ export default class Checkbox extends Component<Props, State> {
   componentWillReceiveProps (nextProps) {
   }
 
-  onChange = (value, checked, allCheckedTag?) => {
-    const { checkedValue } = this.props
-    let newCheckedValue = checkedValue.concat()
+  onChange = (itemValue, checked, allCheckedTag?) => {
+    const { value } = this.props
+    let tmpValue = value.concat()
 
     // 点击选项
     if (!allCheckedTag) {
-      const idx = checkedValue.indexOf(value)
+      const idx = value.indexOf(itemValue)
 
       if (checked) {
         if (idx > -1) {
           // donothing
         } else {
-          newCheckedValue.push(value)
+          tmpValue.push(itemValue)
         }
       } else {
         if (idx > -1) {
-          newCheckedValue.splice(idx, 1)
+          tmpValue.splice(idx, 1)
         }
       }
     } else {
       // 点击”全选“按钮
       if (checked === 1) {
-        newCheckedValue = []
+        tmpValue = []
       }
 
       if (checked === 3) {
-        newCheckedValue = this.childValueArray.concat()
+        tmpValue = this.childValueArray.concat()
       }
     }
 
-    this.props.onChange && this.props.onChange(newCheckedValue)
+    this.props.onChange && this.props.onChange(tmpValue)
   }
 
 
-  checkValueChecked (props) {
-    const { value } = props
-    const idx = this.props.checkedValue.indexOf(value)
+  validateChecked (childProps) {
+    const idx = this.props.value.indexOf(childProps.value)
     return idx > -1 ? true : false
   }
 
   getAllCheckedStatus() {
-    const { checkedValue } = this.props
-    if (checkedValue.length === 0) {
+    const { value } = this.props
+    if (value.length === 0) {
       return 1
     }
 
-    if (checkedValue.length < this.childCount) {
+    if (value.length < this.childCount) {
       return 2
     }
 
-    if (checkedValue.length >= this.childCount) {
+    if (value.length >= this.childCount) {
       return 3
     }
   }
 
   render () {
     const {
-      showAllChecked,
+      showAllCheck,
       iconPosition,
       children,
-      style
+      style,
+      checkedIcon,
+      uncheckedIcon
     } = this.props
 
     return (
-      <View style={[styles.container, style]}>
+      <View style={[styles.checkboxContainer, style]}>
         <View>
           {
-            showAllChecked ?
-            <View style={styles.allChecked}>
-              <CheckboxItemAllChecked
-                checkedStatus={this.getAllCheckedStatus()}
-                label='全选'
-                iconPosition={iconPosition}
-                onChange={this.onChange}
-              />
-            </View> : null
+            showAllCheck ? <CheckboxItemAllCheck
+              checkedStatus={this.getAllCheckedStatus()}
+              label='全选'
+              iconPosition={iconPosition}
+              onChange={this.onChange}
+              checkedIcon={checkedIcon}
+              uncheckedIcon={uncheckedIcon}
+            /> : null
           }
-          <View style={styles.children}>
-            {
-              React.Children.map(children, (child, index) => {
-                // 需要子组件自己定义了 displayName
-                if ((child as any).type.displayName === 'CheckboxItem') {
-                  const childProps = (child as any).props
-                  const checked = this.checkValueChecked(childProps)
-                  const {
-                    renderContent,
-                    renderIcon
-                   } = childProps
-                  return React.cloneElement((child as any), {
-                    key: index,
-                    checked,
-                    iconPosition,
-                    onChange: this.onChange
-                  })
-                } else {
-                  return React.cloneElement((child as any))
-                }
-              })
-            }
-          </View>
+          {
+            React.Children.map(children, (child, index) => {
+              // 需要子组件自己定义了 displayName
+              if ((child as any).type.displayName === 'CheckboxItem') {
+                const childProps = (child as any).props
+                const checked = this.validateChecked(childProps)
+
+                return React.cloneElement((child as any), {
+                  key: index,
+                  checked,
+                  iconPosition,
+                  onChange: this.onChange,
+                  checkedIcon,
+                  uncheckedIcon,
+                })
+              } else {
+                return React.cloneElement((child as any))
+              }
+            })
+          }
         </View>
       </View>
     )

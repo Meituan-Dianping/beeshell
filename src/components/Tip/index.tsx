@@ -40,7 +40,7 @@ export class Tip extends Modal<TipProps, any> {
     Tip.tipInstance = new Tip({
       ...Tip.defaultProps,
 
-      contentContainerPosition: position,
+      contentContainerPosition: position || Tip.defaultProps.contentContainerPosition,
       body: msg,
       cancelable: true,
       duration: Number(duration) || 2000,

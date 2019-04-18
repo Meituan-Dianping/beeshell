@@ -12,8 +12,8 @@ import {
 import styles from './styles'
 
 export interface ProgressProps {
-  style?: any
-  barStyle?: any
+  style?: ViewStyle
+  barStyle?: ViewStyle
   percent?: number
   easing?: boolean
   duration?: number
@@ -27,8 +27,8 @@ export class Progress extends Component<ProgressProps, any> {
     style: {},
     barStyle: {},
     percent: 0,
-    easing: false,
-    duration: 1000
+    easing: true,
+    duration: 300
   }
 
   constructor (props: ProgressProps) {

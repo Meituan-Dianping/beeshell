@@ -3,6 +3,7 @@ import { ScrollView, View, Text, StyleSheet, Dimensions, TouchableOpacity, SafeA
 
 import { Button, SlideModal, BottomModal, Icon } from '../../src/'
 import styles from '../common/styles'
+import variables from 'src/common/styles/variables'
 
 const screen = Dimensions.get('window')
 
@@ -67,21 +68,61 @@ export default class BottomModalScreen extends Component<{}, any> {
             this.bottomModal2.open()
           }}
         >
-          BottomModal 自定义标题与按钮
+          BottomModal 自定义标题与按钮样式
         </Button>
 
         <BottomModal
           ref={(c) => { this.bottomModal2 = c }}
-          title={
+          cancelable={true}
+          title='请选择'
+          titleStyle={{ color: variables.mtdBrandInfo }}
+          leftLabelText='失败'
+          leftLabelTextStyle={{ color: variables.mtdBrandDanger }}
+          rightLabelText='成功'
+          rightLabelTextStyle={{ color: variables.mtdBrandSuccess }}
+          rightCallback={() => {
+            console.log('confirm')
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: '#fff',
+              height: 300,
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            <Text>自定义内容</Text>
+          </View>
+        </BottomModal>
+
+        <Button
+          style={{ marginTop: 12 }}
+          size='sm'
+          onPress={() => {
+            this.bottomModalX.open()
+          }}
+        >
+          BottomModal 自定义渲染区域
+        </Button>
+
+        <BottomModal
+          ref={(c) => { this.bottomModalX = c }}
+          cancelable={true}
+          titleContainer={
             <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingVertical: 12 }}>
-              <Text style={{ fontSize: 16, marginRight: 5 }}>自定义标题</Text>
+              <Text style={{ fontSize: 16, marginRight: 5 }}>标题带图标</Text>
               <Icon type='question-circle' size={16}></Icon>
             </View>
           }
-          cancelable={true}
-          leftLabel={null}
           rightLabel={
-            <Text style={{ flex: 1, textAlign: 'right', marginRight: 15, marginTop: -2, fontSize: 30, color: '#aaa' }}>&times;</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <View>
+                <Text style={{ color: variables.mtdGrayDarker }}>我可以</Text>
+                <Text style={{ color: variables.mtdGrayDark, fontSize: 12 }}>没问题</Text>
+              </View>
+              <Text style={{ flex: 1, textAlign: 'right', marginRight: 15, marginTop: 0, fontSize: 25, color: variables.mtdGray }}>&times;</Text>
+            </View>
           }
           rightCallback={() => {
             console.log('confirm')
@@ -111,8 +152,7 @@ export default class BottomModalScreen extends Component<{}, any> {
 
         <SlideModal
           ref={(c) => { this.slideModal = c }}
-          cancelable={true}
-        >
+          cancelable={true}>
           <View
             style={{
               width: screen.width,
@@ -146,7 +186,7 @@ export default class BottomModalScreen extends Component<{}, any> {
               }}>
               <Text>自定义内容</Text>
             </View>
-            <Button style={{ marginVertical: 10 }} type='primary' reverse>我是按钮</Button>
+            <Button style={{ marginVertical: 10 }} type='primary'>我是按钮</Button>
           </View>
 
           <View

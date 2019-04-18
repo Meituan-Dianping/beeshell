@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import {
   View,
   Text,
   TouchableOpacity,
-  PixelRatio
+  PixelRatio,
+  TextStyle,
+  ViewStyle
 } from 'react-native'
 import { Modal, ModalProps } from '../Modal'
 import dialogStyles from './styles'
@@ -11,18 +13,31 @@ import variables from '../../common/styles/variables'
 const px = 1 / PixelRatio.get()
 
 interface Operation {
-  label: any
+  label?: ReactElement<any>
+  labelText?: string
+  labelTextStyle?: TextStyle
   type?: 'cancel' | 'confirm'
   onPress: Function
 }
 
 export interface DialogProps extends ModalProps {
+  title?: string
+  titleStyle?: TextStyle
   header?: any
+
+  bodyText?: string
+  bodyTextStyle?: TextStyle
   body?: any
+
+  cancelLabel?: any
+  cancelLabelText?: string
+  cancelLabelTextStyle?: TextStyle
   cancelCallback?: Function
-  cancelLabel?: string
+
+  confirmLabel?: any
+  confirmLabelText?: string
+  confirmLabelTextStyle?: TextStyle
   confirmCallback?: Function
-  confirmLabel?: string
 
   operationsLayout?: 'row' | 'column'
   operations?: Array<Operation>
@@ -36,18 +51,27 @@ export class Dialog extends Modal<DialogProps, any> {
       flex: 1,
       marginHorizontal: 40,
     },
+    title: '标题',
+    titleStyle: {},
+    header: null,
+    bodyText: '内容',
+    bodyTextStyle: {},
+    body: null,
 
-    header: '标题',
-    body: '内容',
     cancelable: true,
+
+    cancelLabel: null,
+    cancelLabelText: '取消',
+    cancelLabelTextStyle: {},
     cancelCallback: null,
-    cancelLabel: '取消',
+
+    confirmLabel: null,
+    confirmLabelText: '确定',
+    confirmLabelTextStyle: {},
     confirmCallback: null,
-    confirmLabel: '确认',
 
     operationsLayout: 'row',
     operations: null,
-    renderOperationItem: null
   }
 
   constructor (props) {
@@ -69,31 +93,25 @@ export class Dialog extends Modal<DialogProps, any> {
   }
 
   getHeader () {
-    const styles = dialogStyles
-    const { header } = this.props
+    const { header, title, titleStyle } = this.props
 
-    if (header == null) {
-      return null
-    }
-
-    if (React.isValidElement(header)) {
+    if (header && React.isValidElement(header)) {
       return header
     }
 
     return (
-      <View style={styles.header}>
-        <Text style={styles.title}>{header}</Text>
+      <View style={dialogStyles.header}>
+        <Text style={[dialogStyles.title, titleStyle]}>{title}</Text>
       </View>
     )
   }
 
   getBody () {
-    const styles = dialogStyles
-    const { body } = this.props
+    const { body, bodyText, bodyTextStyle } = this.props
 
     return React.isValidElement(body) ? body : (
-      <View style={styles.body}>
-        <Text style={styles.bodyText}>{String(body)}</Text>
+      <View style={dialogStyles.body}>
+        <Text style={[dialogStyles.bodyText, bodyTextStyle]}>{bodyText}</Text>
       </View>
     )
   }
@@ -101,10 +119,16 @@ export class Dialog extends Modal<DialogProps, any> {
   getFooter () {
     const styles = dialogStyles
     let {
-      cancelCallback,
       cancelLabel,
-      confirmCallback,
+      cancelLabelText,
+      cancelLabelTextStyle,
+      cancelCallback,
+
       confirmLabel,
+      confirmLabelText,
+      confirmLabelTextStyle,
+      confirmCallback,
+
       operationsLayout,
       operations,
     } = this.props
@@ -112,17 +136,21 @@ export class Dialog extends Modal<DialogProps, any> {
     operations = operations || []
 
     if (!operations.length) {
-      if (cancelLabel || cancelCallback) {
+      if (cancelLabel || cancelLabelText || cancelCallback) {
         operations.push({
           label: cancelLabel,
+          labelText: cancelLabelText,
+          labelTextStyle: cancelLabelTextStyle,
           type: 'cancel',
           onPress: cancelCallback
         })
       }
 
-      if (confirmLabel || confirmCallback) {
+      if (confirmLabel || confirmLabelText || confirmCallback) {
         operations.push({
           label: confirmLabel,
+          labelText: confirmLabelText,
+          labelTextStyle: confirmLabelTextStyle,
           type: 'confirm',
           onPress: confirmCallback
         })
@@ -149,15 +177,16 @@ export class Dialog extends Modal<DialogProps, any> {
             this.close()
           }}>
           {
-            React.isValidElement(item.label) ? item.label :
-            <View
-              style={[
-                item.type === 'cancel' ? styles.btnCancelWrapper : styles.btnConfirmWrapper
-              ]}>
-              <Text style={item.type === 'cancel' ? styles.btnCancelText : styles.btnConfirmText}>
-                {item.label}
-              </Text>
-            </View>
+            React.isValidElement(item.label) ? item.label : (item.labelText ?
+              <View
+                style={[
+                  item.type === 'cancel' ? styles.btnCancelWrapper : styles.btnConfirmWrapper
+                ]}>
+                <Text style={[item.type === 'cancel' ? styles.btnCancelText : styles.btnConfirmText, item.labelTextStyle]}>
+                  {item.labelText}
+                </Text>
+              </View> : null
+            )
           }
         </TouchableOpacity>
       )

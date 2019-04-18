@@ -3,10 +3,9 @@ import {
   FlatListProps,
   Text,
   StyleSheet,
-  Platform,
-  RefreshControl,
   View,
   ActivityIndicator,
+  ViewStyle,
 } from 'react-native'
 import React, { ReactElement } from 'react'
 import variables from '../../common/styles/variables'
@@ -20,20 +19,17 @@ const styles = StyleSheet.create({
 export interface LonglistProps extends FlatListProps<any> {
   data: Array<any>
   total?: number
-  renderItem: () => ReactElement<any>
-  renderFooter?: Function
   onEndReached?: any
-  onRefresh?: (pageNo?: number) => Promise<any>
-  hasRefreshControl?: boolean
+  onRefresh?: any
   initialNumToRender?: number
 }
 
 export class Longlist extends React.Component<LonglistProps, any> {
-  private pageNo = 1
-  flatList = null
+  flatList = null // 通过 flatList 对象，调用 FlatList 组件相关方法
 
   static defaultProps = {
-    hasRefreshControl: true,
+    total: 0,
+    data: [],
     initialNumToRender: 5
   }
 
@@ -46,16 +42,6 @@ export class Longlist extends React.Component<LonglistProps, any> {
     }
   }
 
-
-  componentWillReceiveProps(nexProps) {
-    // console.log(nexProps == this.props)
-  }
-
-  componentDidUpdate() {
-    // console.log('componentDidUpdate')
-  }
-
-
   onEndReached() {
     const { data, total } = this.props
     if (data && data.length && data.length >= total) {
@@ -66,14 +52,10 @@ export class Longlist extends React.Component<LonglistProps, any> {
       return
     }
 
-    const pageNo = this.pageNo + 1
     this.setState({
       loading: true,
     }, () => {
-      // console.log(`Load pageNo: ${pageNo} start.`)
-      this.props.onEndReached(pageNo).then(() => {
-        // console.log(`Load pageNo: ${pageNo} success.`)
-        this.pageNo = pageNo
+      this.props.onEndReached().then(() => {
         this.setState({
           loading: false
         })
@@ -86,14 +68,14 @@ export class Longlist extends React.Component<LonglistProps, any> {
   }
 
   onRefresh() {
-    const pageNo = 1
+    if (this.state.refreshing) {
+      return
+    }
+
     this.setState({
       refreshing: true
     }, () => {
-      // console.log(`Load pageNo: ${pageNo} start.`)
-      this.props.onRefresh(1).then(() => {
-        // console.log(`Load pageNo: ${pageNo} success.`)
-        this.pageNo = pageNo
+      this.props.onRefresh().then(() => {
         this.setState({
           refreshing: false,
         })
@@ -109,20 +91,6 @@ export class Longlist extends React.Component<LonglistProps, any> {
     const { data, total } = this.props
     const { loading } = this.state
 
-    let footer = null
-
-    if (this.props.renderFooter) {
-      footer = this.props.renderFooter(loading)
-    }
-
-    if (footer) {
-      return footer
-    }
-
-    if (data && data.length && data.length >= total) {
-      return <Text style={{ padding: variables.mtdHSpacingXL, color: variables.mtdGrayBase, textAlign: 'center' }}>无更多数据</Text>
-    }
-
     if (loading) {
       return (
         <View
@@ -135,23 +103,28 @@ export class Longlist extends React.Component<LonglistProps, any> {
         </View>
       )
     }
+
+    if (data && !data.length && total === 0) {
+      return <Text style={{ padding: variables.mtdHSpacingXL, color: variables.mtdGrayBase, textAlign: 'center' }}>无数据</Text>
+    }
+
+    if (data && data.length && data.length >= total) {
+      return <Text style={{ padding: variables.mtdHSpacingXL, color: variables.mtdGrayBase, textAlign: 'center' }}>无更多数据</Text>
+    }
+
     return null
   }
 
   render() {
-    const { refreshing, loading } = this.state
-    const { data, hasRefreshControl, total } = this.props
-
-    if (!data || !data.length) {
-      return null
-    }
+    const { refreshing } = this.state
+    const { onRefresh } = this.props
 
     const retProps = {
       ...this.props,
     } as any
 
-    if (!hasRefreshControl || loading) {
-      // delete retProps.refreshing
+    if (!onRefresh) {
+      delete retProps.refreshing
       delete retProps.onRefresh
     } else {
       retProps.refreshing = refreshing

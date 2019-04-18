@@ -5,10 +5,11 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
-  Dimensions
+  Dimensions,
+  ViewStyle
 } from 'react-native'
 
-import varibles from '../../common/styles/variables'
+import variables from '../../common/styles/variables'
 import pickerStyles from './styles'
 import { Icon } from '../Icon'
 import { SlideModal } from '../SlideModal'
@@ -16,11 +17,11 @@ import { SlideModal } from '../SlideModal'
 const screen = Dimensions.get('window')
 
 export interface PickerProps {
+  style?: ViewStyle
   label?: any
   disabled?: boolean,
-  style?: any,
   cancelable?: boolean
-  onPress?: Function
+  onToggle?: Function
 }
 
 export interface PickerState {
@@ -36,7 +37,7 @@ export class Picker extends React.Component<PickerProps, PickerState> {
     disabled: false,
     cancelable: true,
     style: {},
-    onPress: null
+    onToggle: null
   }
 
   constructor (props) {
@@ -47,38 +48,63 @@ export class Picker extends React.Component<PickerProps, PickerState> {
     }
   }
 
-  toggle = () => {
-    const { disabled, onPress } = this.props
+  handleToggle = (active: boolean) => {
+    const { disabled, onToggle } = this.props
     if (disabled) {
+      return Promise.reject(`Picker 属性 disabled 为 true 不能${active ? '打开' : '关闭'}`)
+    }
+    return new Promise((resolve) => {
+      this.setState({
+        active
+      }, () => {
+        onToggle && onToggle(active)
+        resolve(this.state.active)
+      })
+    })
+  }
+
+  handlePress = () => {
+    if (this.props.disabled) {
       return
     }
-    let { active } = this.state
-    active = !active
-    this.setState({
-      active
-    })
-    onPress && onPress(active)
 
-    if (active) {
-      this.open()
+    if (this.state.active) {
+      this.close().catch((e) => {
+        console.log(e)
+      })
     } else {
-      this.close()
+      this.open().catch((e) => {
+        console.log(e)
+      })
     }
   }
 
   close () {
-    return this.slideModal.close().catch((e) => {
-      // console.log(e)
-    })
+    if (this.props.disabled) {
+      return Promise.reject('Picker 属性 disabled 为 true 不能关闭')
+    }
+
+    return this.slideModal.close()
   }
 
   open () {
-    this.trigger.measure((fx, fy, width, height, px, py) => {
-      this.setState({
-        offsetY: py + height
-      }, () => {
-        this.slideModal.open().catch((e) => {
-          // console.log(e)
+    if (this.props.disabled) {
+      return Promise.reject('Picker 属性 disabled 为 true 不能打开')
+    }
+
+    return new Promise((resolve, reject) => {
+      this.trigger.measure((fx, fy, width, height, px, py) => {
+        this.setState({
+          offsetY: py + height
+        }, () => {
+          this.slideModal.open().then(() => {
+            return this.handleToggle(true)
+          }).then((active) => {
+            resolve(active)
+          }).catch((e) => {
+            // console.log(e)
+            reject(e)
+          })
         })
       })
     })
@@ -98,7 +124,7 @@ export class Picker extends React.Component<PickerProps, PickerState> {
     let fontColor = StyleSheet.flatten(pickerStyles.btnText).color
 
     if (active) {
-      fontColor = varibles.mtdBrandPrimaryDark
+      fontColor = variables.mtdBrandPrimaryDark
     }
 
     return (
@@ -111,8 +137,8 @@ export class Picker extends React.Component<PickerProps, PickerState> {
         ]}
         collapsable={false}>
         <TouchableOpacity
-          onPress={this.toggle}
-          activeOpacity={1}>
+          onPress={this.handlePress}
+          activeOpacity={disabled ? 1 : variables.mtdOpacity}>
 
           {
             typeof label === 'function' ? label(active) :
@@ -148,8 +174,8 @@ export class Picker extends React.Component<PickerProps, PickerState> {
           offsetY={offsetY}
           onClosed={() => {
             if (this.state.active) {
-              this.setState({
-                active: false
+              this.handleToggle(false).catch((e) => {
+                console.log(e)
               })
             }
           }}>

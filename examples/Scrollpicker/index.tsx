@@ -6,15 +6,18 @@ import {
   StyleSheet,
   SafeAreaView
 } from 'react-native'
-import { Scrollpicker, Datepicker, Button, Icon, BottomModal } from '../../src'
+import { Scrollpicker, Datepicker, Timepicker, Button, Icon, BottomModal } from '../../src'
 import variables from '../customTheme'
-
 import styles from '../common/styles'
 
-export default class ScrollpickerScreen extends React.Component {
+export default class ScrollpickerScreen extends React.Component<any, any> {
   [propName: string]: any
   constructor (props) {
     super(props)
+    this.state = {
+      time: '',
+      date: ''
+    }
   }
 
   renderSafeArea () {
@@ -38,29 +41,19 @@ export default class ScrollpickerScreen extends React.Component {
           style={{ marginTop: 12 }}
           type='default'
           onPress={() => {
-            this.bottomModal1.open()
+            this.bottomModalX.open()
           }}>
-          日期选择
+          Scrollpicker 基础
         </Button>
 
         <BottomModal
-          ref={(c) => { this.bottomModal1 = c }}
-          title='选择开始日期'
-          cancelable={true}
-          cancelCallback={() => {
-            console.log('cancel')
-          }}
-          confirmCallback={() => {
-            console.log('confirm')
-          }}
-        >
+          ref={(c) => { this.bottomModalX = c }}
+          title='请选择'
+          cancelable={true}>
           <View style={{ paddingVertical: 15 }}>
-            <Datepicker
-              style={{ paddingHorizontal: 50 }}
+            <Scrollpicker
+              style={{ paddingHorizontal: 0 }}
               proportion={[1, 1, 1]}
-              startYear={2010}
-              numberOfYears={10}
-              date='2016-03-30'
               onChange={(data) => {
                 console.log(data)
               }}
@@ -68,7 +61,6 @@ export default class ScrollpickerScreen extends React.Component {
           </View>
           { this.renderSafeArea() }
         </BottomModal>
-
         <Button
           size='sm'
           style={{ marginTop: 12 }}
@@ -76,19 +68,13 @@ export default class ScrollpickerScreen extends React.Component {
           onPress={() => {
             this.bottomModal2.open()
           }}>
-          开始时间
+          Scrollpicker 自定义数据源
         </Button>
 
         <BottomModal
           ref={(c) => { this.bottomModal2 = c }}
-          title='开始时间'
+          title='请选择'
           cancelable={true}
-          cancelCallback={() => {
-            console.log('cancel')
-          }}
-          confirmCallback={() => {
-            console.log('confirm')
-          }}
         >
           <View style={{ paddingVertical: 15 }}>
             <Scrollpicker
@@ -107,82 +93,6 @@ export default class ScrollpickerScreen extends React.Component {
           </View>
           { this.renderSafeArea() }
         </BottomModal>
-
-        <Button
-          size='sm'
-          style={{ marginTop: 12 }}
-          type='default'
-          onPress={() => {
-            this.bottomModal3.open()
-          }}>
-          有效期
-        </Button>
-
-        <BottomModal
-          ref={(c) => { this.bottomModal3 = c }}
-          title='有效期'
-          cancelable={true}
-          cancelCallback={() => {
-            console.log('cancel')
-          }}
-          confirmCallback={() => {
-            console.log('confirm')
-          }}
-        >
-          <View style={{ paddingVertical: 15 }}>
-            <Scrollpicker
-              value={[3]}
-              proportion={[1]}
-              list={[
-                ['永久有效', '2020 年', '2021 年', '2022 年', '2023 年']
-              ]}
-              onChange={(columnIndex, rowIndex) => {
-                console.log(columnIndex, rowIndex)
-              }}
-            />
-          </View>
-          { this.renderSafeArea() }
-        </BottomModal>
-
-        <Button
-          size='sm'
-          style={{ marginTop: 12 }}
-          type='default'
-          onPress={() => {
-            this.bottomModal4.open()
-          }}>
-          选择时间
-        </Button>
-
-        <BottomModal
-          ref={(c) => { this.bottomModal4 = c }}
-          title='选择时间'
-          cancelable={true}
-          cancelCallback={() => {
-            console.log('cancel')
-          }}
-          confirmCallback={() => {
-            console.log('confirm')
-          }}
-        >
-          <View style={{ paddingVertical: 15 }}>
-            <Scrollpicker
-              style={{ paddingHorizontal: 20 }}
-              value={[3, 1, 2]}
-              proportion={[2, 1, 1]}
-              list={[
-                ['10 月 14 日  周六', '10 月 15 日  周日', '10 月 16 日  今天', '10 月 17 日  周二', '10 月 18 日  周三'],
-                ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
-                ['00', '10', '20', '30', '40', '50']
-              ]}
-              onChange={(columnIndex, rowIndex) => {
-                console.log(columnIndex, rowIndex)
-              }}
-            />
-          </View>
-          { this.renderSafeArea() }
-        </BottomModal>
-
         <Button
           size='sm'
           style={{ marginTop: 12 }}
@@ -190,18 +100,12 @@ export default class ScrollpickerScreen extends React.Component {
           onPress={() => {
             this.bottomModal5.open()
           }}>
-          自定义选项
+          Scrollpicker 自定义渲染项
         </Button>
         <BottomModal
           ref={(c) => { this.bottomModal5 = c }}
           title='自定义选项'
           cancelable={true}
-          cancelCallback={() => {
-            console.log('cancel')
-          }}
-          confirmCallback={() => {
-            console.log('confirm')
-          }}
         >
           <Scrollpicker
             style={{ paddingHorizontal: 70 }}
@@ -233,6 +137,72 @@ export default class ScrollpickerScreen extends React.Component {
               console.log(columnIndex, rowIndex)
             }}
           />
+          { this.renderSafeArea() }
+        </BottomModal>
+
+        <Button
+          size='sm'
+          style={{ marginTop: 12 }}
+          type='default'
+          onPress={() => {
+            this.bottomModal1.open()
+          }}>
+          Datepicker 日期选择
+        </Button>
+
+        <BottomModal
+          ref={(c) => { this.bottomModal1 = c }}
+          title='请选择日期'
+          cancelable={true}>
+          <View style={{ paddingVertical: 15 }}>
+            <Datepicker
+              style={{ paddingHorizontal: 50 }}
+              proportion={[1, 1, 1]}
+              startYear={2010}
+              numberOfYears={10}
+              date={this.state.date}
+              onChange={(value) => {
+                console.log(value)
+                this.setState({
+                  date: value
+                })
+              }}
+            />
+          </View>
+          { this.renderSafeArea() }
+        </BottomModal>
+
+
+        <Button
+          size='sm'
+          style={{ marginTop: 12 }}
+          type='default'
+          onPress={() => {
+            this.bottomModalY.open()
+          }}>
+          Timepicker 时间选择
+        </Button>
+
+        <BottomModal
+          ref={(c) => { this.bottomModalY = c }}
+          title='请选择时间'
+          cancelable={true}>
+          <View style={{ paddingVertical: 15 }}>
+            <Timepicker
+              style={{ paddingHorizontal: 50 }}
+              proportion={[2, 1, 1]}
+              hourStep={3}
+              minuteStep={10}
+              secondStep={10}
+              value={this.state.time}
+              onChange={(value) => {
+                console.log(value)
+                this.setState({
+                  time: value
+                })
+              }}
+            />
+          </View>
           { this.renderSafeArea() }
         </BottomModal>
       </ScrollView>

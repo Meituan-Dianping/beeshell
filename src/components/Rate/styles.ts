@@ -1,7 +1,7 @@
 // import variables from '../../common/styles/variables'
 
 export default {
-  warp: {
+  wrapper: {
     flexDirection: 'row',
     alignItems: 'center'
   }

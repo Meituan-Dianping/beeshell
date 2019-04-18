@@ -5,95 +5,115 @@ import {
   StyleSheet,
   TouchableOpacity,
   ViewStyle,
-  RegisteredStyle
+  Animated
 } from 'react-native'
-import { Icon } from '../Icon'
 import checkboxItemStyle from './styles'
 import variables from '../../common/styles/variables'
+import { FadeAnimated } from '../../common/animations'
 
+const styles = StyleSheet.create<any>(checkboxItemStyle)
 enum ICON_POSITION {
   LEFT = 'left',
   RIGHT = 'right'
 }
 
 export interface CheckboxItemProps {
-  label?: Function | string,
+  style?: ViewStyle
+  label?: string
   value?: any | null | undefined
   disabled?: boolean
   checked?: boolean
   iconPosition?: 'left' | 'right'
   onChange?: Function
+  checkedIcon?: ReactElement<any>
+  uncheckedIcon?: ReactElement<any>
+  renderItem?: Function
 }
-
-
-const styles = StyleSheet.create<any>(checkboxItemStyle)
 
 export class CheckboxItem<T extends CheckboxItemProps, P > extends Component<T, any> {
   static displayName = 'CheckboxItem'
   static defaultProps = {
+    style: {},
     label: '选项',
     value: null,
     disabled: false,
     checked: false,
-    iconPosition: ICON_POSITION.LEFT
+    iconPosition: ICON_POSITION.LEFT,
+    checkedIcon: null
   }
+  animated: any
 
   constructor (props) {
     super(props)
     this.state = {
     }
+
+    if (variables.checkboxEnableAnimated) {
+      this.animated = new FadeAnimated({})
+    }
   }
 
   componentDidMount () {
+    this.toAnimated()
   }
 
   componentWillReceiveProps (nextProps) {
+    if (nextProps.checked !== this.props.checked) {
+      this.toAnimated()
+    }
   }
 
-  /**
-   * checkboxItem点击事件回调
-   * @returns
-   */
+  toAnimated () {
+    if (this.animated) {
+      this.animated.toIn()
+    }
+  }
+
   handlePress = () => {
     const { disabled, checked, value } = this.props
     if (this.props.disabled) {
       return
     }
 
+    this.toAnimated()
     this.props.onChange && this.props.onChange(value, !checked)
   }
 
-  renderStatusIcon = () => {
-    const { disabled, checked, iconPosition } = this.props
-    const styleArray: any[] = [styles.icon]
-    styleArray.push(styles.iconDefault)
-    if (checked) {
-      styleArray.push(styles.iconChecked)
-    }
+  renderIcon = () => {
+    const { checked, iconPosition, checkedIcon, uncheckedIcon } = this.props
+    const styleArray: any[] = []
+
     if (iconPosition === ICON_POSITION.LEFT) {
       styleArray.push(styles.iconLeftPosition)
     }
 
-    let iconView = null
-    if (checked) {
-      iconView = <View style={styles.iconView}><Icon type={'check'} size={variables.checkboxIconSize} tintColor={'#333'}/></View>
+    const iconView = checked ? checkedIcon : uncheckedIcon
+
+    let animatedStyle: any = {}
+    if (variables.radioEnableAnimated) {
+      animatedStyle = {
+        transform: [{ scale: this.animated.getState().scale }],
+        opacity: this.animated.getState().opacity
+      }
     }
 
     return (
       <View style={styleArray}>
-        {iconView}
+        <Animated.View style={animatedStyle}>
+          {iconView}
+        </Animated.View>
       </View>
     )
   }
 
-  renderLabelText () {
-    const { label, disabled, checked } = this.props
+  renderLabel () {
+    const { label, checked } = this.props
 
     return (
       <Text
         style={[
-          styles.labelText,
-          checked ? { color: variables.mtdBrandPrimaryDark } : null
+          styles.checkboxLabel,
+          checked ? { color: variables.mtdBrandPrimaryDark, fontWeight: 'bold' } : null
         ]}>
         {label}
       </Text>
@@ -101,12 +121,11 @@ export class CheckboxItem<T extends CheckboxItemProps, P > extends Component<T, 
   }
 
   render () {
-    const { disabled, iconPosition, checked, label } = this.props
+    const { style, disabled, iconPosition, checked, renderItem } = this.props
 
     return (
       <TouchableOpacity
         style={[
-          styles.container,
           {
             opacity: disabled ? variables.mtdOpacity : 1
           }
@@ -115,16 +134,15 @@ export class CheckboxItem<T extends CheckboxItemProps, P > extends Component<T, 
         activeOpacity={variables.mtdOpacity}>
 
         {
-          typeof label === 'function' ? (label as any).call(null, checked) :
+          typeof renderItem === 'function' ? renderItem(checked) :
           <View
             style={[
-              styles.touchContainer,
+              styles.checkboxItemContainer,
+              style,
               iconPosition === ICON_POSITION.RIGHT ? { flexDirection: 'row-reverse', justifyContent: 'space-between' } : null
             ]}>
-            {this.renderStatusIcon()}
-            <View>
-              {this.renderLabelText()}
-            </View>
+            {this.renderIcon()}
+            {this.renderLabel()}
           </View>
         }
       </TouchableOpacity>

@@ -1,26 +1,30 @@
-import React, { Component, ReactChild } from 'react'
+import React, { Component, ReactChild, ReactElement } from 'react'
 import { View } from 'react-native'
-import radioStyles from './radioStyles'
+import styles from './styles'
+import { Icon } from '../Icon'
+import variables from '../../common/styles/variables'
 
 interface RadioProps {
   style?: any
   iconPosition?: 'left' | 'right'
+  checkedIcon?: ReactElement<any>
+  uncheckedIcon?: ReactElement<any>
+  value?: any
   onChange?: Function
-  children?: ReactChild[]
-  checkedValue?: any
+  children?: ReactChild[] | ReactChild
 }
 
 export default class Radio extends Component<RadioProps> {
-  static Item = null
+  static Item?: any // 选项子元素
   static displayName = 'Radio'
   static defaultProps = {
     style: {},
-    checkedValue: undefined,
+    value: undefined,
     onChange: null,
-    iconPosition: 'left'
+    iconPosition: 'left',
+    checkedIcon: <Icon type='check' size={variables.mtdFontSizeM} tintColor={variables.mtdBrandPrimaryDark} />,
+    uncheckedIcon: <View style={{ width: variables.mtdFontSizeM, height: variables.mtdFontSizeM }}></View>
   }
-
-  formItemContext = null
 
   constructor (props) {
     super(props)
@@ -28,10 +32,6 @@ export default class Radio extends Component<RadioProps> {
 
   handleChange = (value) => {
     this.props.onChange && this.props.onChange(value)
-    // 通知Form.Item改变
-    if (this.formItemContext && this.formItemContext.emitValueChange) {
-      this.formItemContext.emitValueChange(value)
-    }
   }
 
   /**
@@ -39,7 +39,7 @@ export default class Radio extends Component<RadioProps> {
    */
   verifyChecked (props) {
     let { value } = props
-    return this.props.checkedValue === value ? true : false
+    return this.props.value === value ? true : false
   }
 
   renderChildren () {
@@ -51,7 +51,9 @@ export default class Radio extends Component<RadioProps> {
           key: index,
           iconPosition: this.props.iconPosition,
           checked,
-          onChange: this.handleChange
+          onChange: this.handleChange,
+          checkedIcon: this.props.checkedIcon,
+          uncheckedIcon: this.props.uncheckedIcon
         })
       } else {
         return React.cloneElement((child as any))
@@ -61,10 +63,8 @@ export default class Radio extends Component<RadioProps> {
 
   render () {
     return (
-      <View style={[radioStyles.container, this.props.style]}>
-        <View style={radioStyles.children}>
-          { this.renderChildren() }
-        </View>
+      <View style={[styles.radioContainer, this.props.style]}>
+        { this.renderChildren() }
       </View>
     )
   }

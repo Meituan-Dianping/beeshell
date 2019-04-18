@@ -16,13 +16,13 @@ import tabStyle from './styles'
 const styles = StyleSheet.create<any>(tabStyle)
 
 interface Props {
-  style?: any
-  optionItemContainerStyle?: any
+  style?: ViewStyle
+  optionItemContainerStyle?: ViewStyle
   activeColor?: string
-  value: number | string
+  value?: any
   options: any[]
   renderItem?: Function
-  onChange?: (value: any) => void
+  onChange?: Function
   scrollable?: boolean
 }
 
@@ -30,10 +30,10 @@ interface State {}
 
 export class Tab extends React.Component<Props, State> {
   static defaultProps = {
-    activeColor: variables.mtdGrayBase,
+    activeColor: variables.mtdGrayDarker,
     value: null,
     options: [],
-    onChange: () => { return },
+    onChange: null,
     scrollable: false,
   }
 
@@ -68,7 +68,7 @@ export class Tab extends React.Component<Props, State> {
       renderItem,
     } = this.props
     return options.map((item, index) => {
-      const selected = value === item.value
+      const active = value === item.value
       return (
           <TouchableOpacity
             style={[{ flex: 1 }, optionItemContainerStyle]}
@@ -78,13 +78,13 @@ export class Tab extends React.Component<Props, State> {
               if (item.disabled) {
                 return
               }
-              onChange(item.value)
+              onChange && onChange(item, index)
             }}>
             {
               renderItem ?
-              renderItem(item, index, selected) :
+              renderItem(item, index, active) :
               <View style={[styles.item]}>
-                { this.renderItemContent(item, index, selected) }
+                { this.renderItemContent(item, index, active) }
               </View>
             }
           </TouchableOpacity>
@@ -92,14 +92,14 @@ export class Tab extends React.Component<Props, State> {
     })
   }
 
-  renderItemContent = (item, index, selected) => {
+  renderItemContent = (item, index, active) => {
     return [
       <View key={index}>
         {
           <Text
             style={[
               styles.text,
-              selected ? { color : this.props.activeColor, fontWeight: 'bold' } : {},
+              active ? { color : this.props.activeColor, fontWeight: 'bold' } : {},
               item.disabled ? { color : variables.mtdGrayLighter } : {}
             ]}>
             {item.label}
@@ -110,7 +110,7 @@ export class Tab extends React.Component<Props, State> {
         key={index + 'l'}
         style={[
           styles.line,
-          selected ? { backgroundColor: this.props.activeColor } : {},
+          active ? { backgroundColor: this.props.activeColor } : {},
         ]}>
       </View>
     ]

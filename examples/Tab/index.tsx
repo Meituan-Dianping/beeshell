@@ -11,13 +11,9 @@ export default class TabScreen extends Component<any, any> {
     super(props)
     this.state = {
       value: 1,
-      value1: 1,
-      value2: 1,
-      value3: 1,
-      value4: 1,
-      value5: 2,
-      value6: 1,
-      value7: 1
+      valueA: 1,
+      valueC: 2,
+      valueX: 1
     }
   }
 
@@ -28,11 +24,11 @@ export default class TabScreen extends Component<any, any> {
   }
 
   getBgColor = (value) => {
-    return this.state.value7 === value ? { backgroundColor: '#111111' } : {}
+    return this.state.valueX === value ? { backgroundColor: '#111111' } : {}
   }
 
   getFontColor = (value) => {
-    return this.state.value7 === value ? { color: '#fff' } : { color: '#111' }
+    return this.state.valueX === value ? { color: '#fff' } : { color: '#111' }
   }
 
   render () {
@@ -43,64 +39,64 @@ export default class TabScreen extends Component<any, any> {
           value={this.state.value}
           options={[{
             value: 1,
-            label: '门店信息'
+            label: '全部'
           },
           {
             value: 2,
-            label: '商家详情'
+            label: '我关注的'
           },
           {
             value: 3,
-            label: '商家评价'
+            label: '我的粉丝'
           }]}
-          onChange={ value => this.handleChange('value', value) }
+          onChange={ item => this.handleChange('value', item.value) }
         />
 
         <Text style={styles.header}>左对齐</Text>
         <Tab
           optionItemContainerStyle={{ flex: null }}
-          value={this.state.value1}
+          value={this.state.valueA}
           options={[{
             value: 1,
-            label: '按商家展示'
+            label: '我关注的'
           },
           {
             value: 2,
-            label: '按任务展示'
+            label: '我的粉丝'
           }]}
-          onChange={ value => this.handleChange('value1', value) }
+          onChange={ item => this.handleChange('valueA', item.value) }
         />
 
         <Text style={styles.header}>横向可滚动</Text>
         <Tab
-          value={this.state.value5}
+          value={this.state.valueC}
           scrollable={true}
           options={[
             {
               value: 1,
-              label: '商家运营'
+              label: '选项一'
             }, {
               value: 2,
-              label: '工作要求'
+              label: '选项二'
             }, {
               value: 3,
-              label: '拉新培训'
+              label: '选项三'
             }, {
               value: 4,
-              label: '新签入驻'
+              label: '选项四'
             }, {
               value: 5,
-              label: '新签入驻1'
+              label: '选项五'
             }
           ]}
-          onChange={ value => this.handleChange('value5', value) }
+          onChange={ item => this.handleChange('valueC', item.value) }
         />
 
 
         <Text style={styles.header}>自定义选项</Text>
         <Tab
           optionItemContainerStyle={{ flex: null }}
-          value={this.state.value7}
+          value={this.state.valueX}
           options={[
             {
               value: 1,
@@ -136,7 +132,7 @@ export default class TabScreen extends Component<any, any> {
               </View>
             )
           }}
-          onChange={ value => this.handleChange('value7', value) }
+          onChange={ item => this.handleChange('valueX', item.value) }
         />
       </ScrollView>
     )

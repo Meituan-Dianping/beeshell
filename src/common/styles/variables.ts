@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native'
 const px = StyleSheet.hairlineWidth
 
-// 全局/品牌色
+// 品牌色
 const mtdBrandColors = {
   mtdBrandPrimary: '#FECB2E',
   mtdBrandPrimaryDark: '#FFA000',
@@ -12,10 +12,10 @@ const mtdBrandColors = {
 }
 // 灰度
 const mtdGrayColors = {
-  mtdGrayBase: '#111111',
-  mtdGrayDarker: '#333333',
-  mtdGrayDark: '#555555',
-  mtdGray: '#999999',
+  mtdGrayBase: '#111',    // 正文，主标题
+  mtdGrayDarker: '#333',  // 副标题
+  mtdGrayDark: '#555',    // 补充、提示信息
+  mtdGray: '#888',        // 取消按钮等
   mtdGrayLight: '#aaaaaa',
   mtdGrayLighter: '#cccccc',
   mtdGrayLightest: '#ebebeb'
@@ -25,7 +25,8 @@ const mtdFillColors = {
   mtdFillBase: '#ffffff',
   mtdFillGray: '#F5F5F5',
   mtdFillBody: '#F8F8F8',
-  mtdFillBackdrop: 'rgba(0, 0, 0, .3)'
+  mtdFillBackdrop: 'rgba(0, 0, 0, .3)',
+  mtdFillBackdropDark: 'rgba(0, 0, 0, 0.75)'
 }
 // 字体尺寸
 const mtdFontSize = {
@@ -67,16 +68,17 @@ const mtdRadius = {
 const mtdBorder = {
   mtdBorderWidth: 1 * px,
   mtdBorderColor: '#F5F5F5',
-  mtdBorderColorDark: '#e5e5e5'
+  mtdBorderColorDark: '#e5e5e5',
+  mtdBorderColorDarker: '#d5d5d5'
 }
 
 const mtdOpacity = 0.3
-
+const mtdEnableAnimated = true
 /**
  * Button 组件
  */
 const button = {
-  buttonBorderRadius: 0,
+  buttonBorderRadius: mtdRadius.mtdRadiusXS,
   buttonActiveOpacity: mtdOpacity,
 
   buttonLFontSize: mtdFontSize.mtdFontSizeXL,
@@ -116,11 +118,13 @@ const input = {
 }
 
 
-const radio = {}
-const radioItem = {
-  radioItemVSpacing: 18
+const radio = {
+  radioEnableAnimated: mtdEnableAnimated
 }
 
+const checkbox = {
+  checkboxEnableAnimated: mtdEnableAnimated
+}
 
 const slider = {
   sliderSlideHeight: 40,
@@ -131,29 +135,6 @@ const slider = {
   sliderMarkLineSize: 10,
   sliderSlideToolTip: 30,
   sliderSlideToolTipIconSize: 4
-}
-
-const checkbox = {
-  checkboxIconContainerSize: 18,
-  checkboxIconSize: 12
-}
-
-const rate = {
-  rateIconSize: 20,
-  rateIconColor: mtdBrandColors.mtdBrandPrimary
-}
-
-const carousel = {
-  carouselPaginationVSpacing: mtdSpacing.mtdVSpacingXL,
-  carouselPaginationHSpacing: mtdSpacing.mtdHSpacingL
-}
-
-const stepper = {
-  stepperOperatorSize: 30
-}
-
-const tab = {
-  tabActiveColor: mtdGrayColors.mtdGrayBase
 }
 
 const variables = {
@@ -171,13 +152,8 @@ const variables = {
   ...formItem,
   ...input,
   ...radio,
-  ...radioItem,
   ...checkbox,
   ...slider,
-  ...rate,
-  ...stepper,
-  ...carousel,
-  ...tab,
 }
 
 
@@ -190,5 +166,5 @@ function useTheme(args = {}) {
 export default variables
 
 export {
-    useTheme
+  useTheme
 }

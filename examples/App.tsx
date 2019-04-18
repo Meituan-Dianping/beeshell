@@ -14,14 +14,7 @@ import { withSafeArea } from '@mrn/react-native-safe-area-view'
 import { NavigationBar } from '../src'
 import { pageList } from './routers'
 
-interface MyProps {
-  navigation: NavigationScreenProp<NavigationState, NavigationParams>
-}
-interface MyState {
-  pageList: (any)[]
-}
-
-class Home extends Component<MyProps, MyState> {
+class Home extends Component<any, any> {
   constructor (p) {
     super(p)
     this.state = {
@@ -58,6 +51,11 @@ class Home extends Component<MyProps, MyState> {
         {
           label: '其他',
           key: 'other'
+        },
+
+        {
+          label: '基础工具',
+          key: 'base'
         }
       ]
     }
@@ -75,7 +73,7 @@ class Home extends Component<MyProps, MyState> {
 
   componentDidMount() {
     setTimeout(() => {
-      this.props.navigation.navigate('Tip')
+      this.props.navigation.navigate('Dropdown')
     }, 1000)
   }
 

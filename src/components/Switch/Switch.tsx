@@ -23,11 +23,7 @@ interface Props {
   value?: boolean,
   disabled?: boolean,
   rockerSize?: number,
-  rockerColor?: string,
-  rockerActiveColor?: string,
-  backgroundColor?: string,
-  backgroundActiveColor?: string,
-  backgroundDisabledColor?: string,
+  activeColor?: string,
   onChange?: (value: any) => void
 }
 
@@ -47,11 +43,7 @@ export default class Switch extends Component<Props, State> {
     value: false,
     disabled: false,
     rockerSize: 27,
-    rockerColor: variables.mtdFillBase,
-    rockerActiveColor: variables.mtdFillBase,
-    backgroundColor: variables.mtdFillBase,
-    backgroundActiveColor: variables.mtdBrandPrimary,
-    backgroundDisabledColor: variables.mtdFillBase
+    activeColor: variables.mtdBrandPrimary
   }
 
   offset: number
@@ -192,21 +184,15 @@ export default class Switch extends Component<Props, State> {
   getContainBaseStyle = () => {
     const { switchAnimation, alignItems, value } = this.state
     let {
-      backgroundColor,
-      backgroundActiveColor,
-      backgroundDisabledColor,
+      activeColor,
       width,
       height,
       disabled
     } = this.props
 
-    if (Platform.OS === 'android' && disabled) {
-      backgroundColor = backgroundDisabledColor
-    }
-
     const interpolatedBackgroundColor = switchAnimation.interpolate({
       inputRange: value ? [-this.offset, -1] : [1, this.offset],
-      outputRange: [backgroundColor, backgroundActiveColor],
+      outputRange: ['#fff', activeColor],
       extrapolate: 'clamp'
     })
 
@@ -225,14 +211,13 @@ export default class Switch extends Component<Props, State> {
     const { switchAnimation, handlerAnimation, value } = this.state
     const {
       height,
-      rockerSize,
-      rockerActiveColor,
-      rockerColor
+      rockerSize
     } = this.props
 
     const interpolatedCircleColor = switchAnimation.interpolate({
       inputRange: value ? [-this.offset, -1] : [1, this.offset],
-      outputRange: [rockerColor, rockerActiveColor],
+      // outputRange: [rockerColor, rockerActiveColor],
+      outputRange: ['#fff', '#fff'],
       extrapolate: 'clamp'
     })
 

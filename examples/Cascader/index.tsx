@@ -13,31 +13,29 @@ import {
 import { Cascader, BottomModal, Button, Icon } from '../../src/'
 import styles from '../common/styles'
 import variables from '../customTheme'
-import { optionsA, optionsD } from './demoData.js'
+import { optionsA, optionsX } from './demoData.js'
 
 export default class CascaderScreen extends Component<any, any> {
-  private bottomModalA = null
-  private bottomModalB = null
-  private bottomModalC = null
+  [propsName: string]: any
 
   constructor (props) {
     super(props)
     this.state = {
-      valueA: [ 'sweet', 'sweetie' ],
-
-      optionsB: []
+      valueA: ['sweetie'],
+      valueX: ['baiziwan'],
+      optionsB: [],
       valueB: [],
     }
   }
 
   componentDidMount() {
-    // setTimeout(() => {
-    //   this.setState({
-    //     valueA: [ 'sweet', 'icecream' ]
-    //   })
-    // }, 3000)
+    setTimeout(() => {
+      this.setState({
+        valueX: [ 'haidianqu' ]
+      })
+    }, 3000)
 
-    this.fetchData().then((data) => {
+    this.fetchData().then((data: any) => {
       this.setState({
         optionsB: data.list
       })
@@ -46,12 +44,7 @@ export default class CascaderScreen extends Component<any, any> {
     })
   }
 
-  handleChange () {
-
-  }
-
   handleChangeB = (value) => {
-    // console.log('value', value)
     const targetItem = this.getTargetItem(this.state.optionsB, value[value.length - 1])
     if (!targetItem) {
       console.log('error')
@@ -62,7 +55,7 @@ export default class CascaderScreen extends Component<any, any> {
         valueB: value
       })
     } else {
-      this.fetchData(value).then((data) => {
+      this.fetchData(value).then((data: any) => {
         let newOptionsB
         if (data && data.list && data.list.length) {
           targetItem.children = data.list
@@ -73,7 +66,7 @@ export default class CascaderScreen extends Component<any, any> {
         } else {
           newOptionsB = this.state.optionsB
         }
-        // console.log('newOptionsB', newOptionsB)
+
         this.setState({
           valueB: value,
           optionsB: newOptionsB
@@ -100,11 +93,10 @@ export default class CascaderScreen extends Component<any, any> {
         return true
       }
     })
-
     return targetItem
   }
 
-  fetchData(value) {
+  fetchData(value?) {
     value = value || []
     const length = value.length
     let parentValue
@@ -141,60 +133,7 @@ export default class CascaderScreen extends Component<any, any> {
     })
   }
 
-  // 随机两位字符
-  randomStr (length) {
-    let text = ''
-    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    for (let i = 0; i < length; i++) {
-      text += possible.charAt(Math.floor(Math.random() * possible.length))
-    }
-    return text
-  }
-
-  /**
-   * 异步请求 返回结果必须是个promise 对象
-   * @param {*} option 一个选中的项目
-   */
-  syncLoadData (option) {
-    console.log(option)
-    const result = []
-    return new Promise((resolve, reject) => {
-      // 这里做多返回4级菜单
-      if (option.level < 100 && option.label !== '全部') {
-        const nextLevel = option.level + 1
-        for (let index = 1; index < 7; index++) {
-          result.push({
-            name: `L${nextLevel}_${index}`,
-            value: 10 * nextLevel + index
-          })
-        }
-        setTimeout(() => {
-          resolve(result)
-        }, 200)
-      } else {
-        setTimeout(() => {
-          reject()
-        }, 200)
-      }
-    })
-  }
-
-  modOptions(options, labelKey, valueKey, childrenKey) {
-    if (options && options.length) {
-      options.forEach((item) => {
-        item[labelKey] = `${item[labelKey]}(${item[valueKey]})`
-        if (item[childrenKey] && item[childrenKey].length) {
-          this.modOptions(item[childrenKey], labelKey, valueKey, childrenKey)
-        }
-      })
-    }
-  }
-
-
   render () {
-    // const modOptionsA = JSON.parse(JSON.stringify(optionsA))
-    // this.modOptions(modOptionsA, 'label', 'value', 'children')
-
     return (
       <View
         style={[styles.body, styles.container]}>
@@ -203,28 +142,50 @@ export default class CascaderScreen extends Component<any, any> {
           style={{ marginTop: 12 }}
           size='sm'
           onPress={() => {
-            this.bottomModalA.open()
+            this.bottomModalX.open()
           }}>
-          基础
+          扁平数据结构
         </Button>
 
+        <BottomModal
+          ref={(c) => { this.bottomModalX = c }}
+          title='扁平数据结构'
+          cancelable={true}>
+          <Cascader
+            style={{ height: 200, marginBottom: 50 }}
+            data={optionsX}
+            dataStructureType='flattened'
+            value={this.state.valueX}
+            onChange={(value, info) => {
+              console.log(value, info)
+              this.setState({
+                valueX: value
+              })
+            }}
+          />
+        </BottomModal>
+
+        <Button
+          style={{ marginTop: 12 }}
+          size='sm'
+          onPress={() => {
+            this.bottomModalA.open()
+          }}>
+          嵌套数据结构
+        </Button>
 
         <BottomModal
           ref={(c) => { this.bottomModalA = c }}
-          title='基础'
-          cancelable={true}
-          leftCallback={() => {
-            console.log('cancel')
-          }}
-          rightCallback={() => {
-            console.log('confirm')
-          }}>
+          title='嵌套数据结构'
+          cancelable={true}>
           <Text style={{ padding: variables.mtdHSpacingXL }}>选中值：{String(this.state.valueA)}</Text>
           <Cascader
             style={{ height: 200, marginBottom: 50 }}
-            options={optionsA}
+            data={optionsA}
+            fieldKeys={{ idKey: 'value' }}
             value={this.state.valueA}
             onChange={(value) => {
+              console.log(value)
               this.setState({
                 valueA: value
               })
@@ -245,18 +206,12 @@ export default class CascaderScreen extends Component<any, any> {
         <BottomModal
           ref={(c) => { this.bottomModalC = c }}
           title='异步数据'
-          cancelable={true}
-          leftCallback={() => {
-            console.log('cancel')
-          }}
-          rightCallback={() => {
-            console.log('confirm')
-          }}>
-
+          cancelable={true}>
           <Cascader
             style={{ height: 200, marginBottom: 50 }}
             proportion={[1]}
-            options={this.state.optionsB}
+            fieldKeys={{ idKey: 'value' }}
+            data={this.state.optionsB}
             value={this.state.valueB}
             onChange={this.handleChangeB}
           />
@@ -276,17 +231,12 @@ export default class CascaderScreen extends Component<any, any> {
         <BottomModal
           ref={(c) => { this.bottomModalB = c }}
           title='自定义渲染项'
-          cancelable={true}
-          leftCallback={() => {
-            console.log('cancel')
-          }}
-          rightCallback={() => {
-            console.log('confirm')
-          }}>
+          cancelable={true}>
 
           <Cascader
             style={{ height: 200, marginBottom: 50 }}
-            options={optionsA}
+            data={optionsA}
+            fieldKeys={{ idKey: 'value' }}
             value={this.state.valueA}
             onChange={(value) => {
               this.setState({

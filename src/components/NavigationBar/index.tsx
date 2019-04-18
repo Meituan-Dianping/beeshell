@@ -14,7 +14,7 @@ import navigationBarStyles from './styles'
 import variables from '../../common/styles/variables'
 
 export interface NavigationBarProps {
-  style?: any
+  style?: ViewStyle
   proportion?: number[]
   title?: any
   backLabel?: any
@@ -67,7 +67,8 @@ export class NavigationBar extends Component<NavigationBarProps, any> {
             <View
               style={{
                 flexDirection: 'row',
-                minWidth: 30
+                minWidth: 30,
+                alignItems: 'center'
               }}>
               <Icon
                 type='angle-left'

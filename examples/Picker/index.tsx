@@ -31,6 +31,14 @@ export default class PickerScreen extends Component<{}, State> {
     }
   }
 
+  componentDidMount () {
+    setTimeout(() => {
+      this.picker1.open().then(() => {
+        console.log('opened')
+      })
+    })
+  }
+
   render () {
     return (
       <View
@@ -49,12 +57,12 @@ export default class PickerScreen extends Component<{}, State> {
               label='甜点饮品'
               disabled={false}
               cancelable={true}
-              onPress={(active) => {
+              onToggle={(active) => {
+                console.log(active)
                 if (active) {
                   this.picker2.close().catch((e) => {
                     // console.log(e)
                   })
-
                   this.picker3.close().catch((e) => {
                     // console.log(e)
                   })
@@ -116,7 +124,7 @@ export default class PickerScreen extends Component<{}, State> {
             }}
             disabled={false}
             cancelable={true}
-            onPress={(active) => {
+            onToggle={(active) => {
               if (active) {
                 this.picker1.close().catch((e) => {
                   // console.log(e)

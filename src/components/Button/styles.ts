@@ -10,7 +10,7 @@ const defaultWrapper = {
   paddingVertical: variables.mtdVSpacingM,
 
   borderWidth: StyleSheet.hairlineWidth,
-  borderColor: variables.mtdGray,
+  borderColor: variables.mtdBorderColorDarker,
   borderRadius: variables.buttonBorderRadius,
 
   backgroundColor: '#fff'

@@ -3,101 +3,156 @@ import { ScrollView, View, Text, StyleSheet } from 'react-native'
 import { Icon, Input, Form, Button, Checkbox, Switch, Radio } from '../../src'
 import styles from '../common/styles'
 import variables from '../customTheme'
+import validator from '../../src/common/utils/validator'
+
+function ruleName(value: any, targetValue: any) {
+  if (!value) {
+    return {
+      valid: false,
+      msg: '请输入姓名'
+    }
+  }
+  value = value.toLowerCase()
+  if (value === targetValue) {
+    return {
+      valid: true
+    }
+  } else {
+    return {
+      valid: false,
+      msg: '输入姓名无效'
+    }
+  }
+}
+
+function rulePhone(value: any) {
+  if (!value) {
+    return {
+      valid: false,
+      msg: '请输入手机号码'
+    }
+  }
+
+  if (/^\d{11}$/.test(value)) {
+    return {
+      valid: true,
+    }
+  } else {
+    return {
+      valid: false,
+      msg: '请输入手机号码无效'
+    }
+  }
+}
+
+const validate = validator.dispatch(
+  validator.register('name', (key, value, callback) => {
+    callback(ruleName(value, 'lulu'))
+  }),
+  validator.register('phone', (key, value, callback) => {
+    callback(rulePhone(value))
+  })
+)
+
 
 export default class FormScreen extends Component<{}, any> {
   form = null
   constructor (p) {
     super(p)
     this.state = {
-      model: {
+      filters: {
         deliveryTime: ['time_1'],
         name: 'bob.yao',
         store: '',
         email: '',
         phone: '',
-        needPackage: false
+        location: false
       },
-      rules: {
-        // 姓名
-        name: [
-          { type: 'string', required: true, pattern: /^\D*$/, message: '请填写姓名,不允许数字', trigger: 'change' },
-          { type: 'string', required: true, max: 8, min: 2, message: '姓名2-8字', trigger: 'change' }
-        ],
-        // 检查包装
-        needPackage (rule, value, callback, source, options) {
-          let errors = []
-          if (value !== true) {
-            errors.push(new Error('必须选中'))
-          }
-          callback(errors)
-        },
-        // 邮箱
-        email: [
-          { type: 'string', required: true, message: '请填写邮箱(加载时校验)', trigger: 'change' },
-          { type: 'email', required: true, message: '邮箱格式不正确', trigger: 'blur' }
-        ],
-        deliveryTime: [
-          { type: 'array', required: true, max: 2, min: 1, message: '送餐时间段必填, 而且不能多于2个', trigger: 'change' }
-        ]
-      }
+      validateResults: {}
     }
   }
 
-  handleDebounce = (val) => {
-    this.setState({
-      userInputValue: val
-    })
+  handleChangeFilter(...args) {
+    this.handleChangeFilterSync(...args) // 同步校验
+    // this.handleChangeFilterAsync(...args) // 异步校验
   }
 
-  handleNameChange = (name) => {
-    this.setState({
-      model: { ...this.state.model, name }
+  /**
+   * 同步校验
+   */
+  handleChangeFilterSync(key?, value?) {
+    let ret
+    validate(key, value, (tmp) => {
+      ret = tmp
     })
-  }
-
-  handlePhoneChange = (phone) => {
     this.setState({
-      model: { ...this.state.model, phone }
-    })
-  }
-
-  handleEmailChange = (email) => {
-    this.setState({
-      model: { ...this.state.model, email }
-    })
-  }
-
-  handleEmailBlur = (e) => {
-    console.log(e.target)
-    this.setState({
-      model: { ...this.state.model, email: e.target }
-    })
-  }
-
-  handleDeliveryChange = (deliveryTime) => {
-    console.log(deliveryTime)
-    this.setState({
-      model: { ...this.state.model, deliveryTime }
-    })
-  }
-
-  handlePackageChange = (needPackage) => {
-    this.setState({
-      model: { ...this.state.model, needPackage }
-    })
-  }
-
-  handlePress () {
-    this.form.validate((valid) => {
-      if (valid) {
-        console.log('校验成功')
-      } else {
-        console.log('校验失败')
+      filters: {
+        ...this.state.filters,
+        [key]: value
+      },
+      validateResults: {
+        ...this.state.validateResults,
+        [key]: ret
       }
+    })
+  }
+
+  /**
+   * 异步校验
+   */
+  handleChangeFilterAsync(key?, value?) {
+    validate(key, value, (ret) => {
+      this.setState({
+        validateResults: {
+          ...this.state.validateResults,
+          [key]: ret
+        }
+      })
+    })
+
+    this.setState({
+      filters: {
+        ...this.state.filters,
+        [key]: value
+      }
+    })
+  }
+
+  submitData = () => {
+    const { filters, validateResults } = this.state
+
+    const promiseArray = [];
+    ['name', 'phone'].forEach((key) => {
+      promiseArray.push(new Promise((resolve) => {
+        validate(key, filters[key], (ret) => {
+          resolve({
+            [key]: ret
+          })
+        })
+      }))
+    })
+    Promise.all(promiseArray).then((rets) => {
+      let tmp = {}
+      rets.forEach((retItem) => {
+        tmp = {
+          ...tmp,
+          ...retItem
+        }
+      })
+
+      this.setState({
+        validateResults: {
+          ...validateResults,
+          ...tmp
+        }
+      })
+    }).catch((e) => {
+      console.log(e)
     })
   }
 
   render () {
+    const { validateResults, filters } = this.state
     return (
       <ScrollView
         style={styles.body}>
@@ -106,7 +161,6 @@ export default class FormScreen extends Component<{}, any> {
           ref={(ref) => this.form = ref }>
           <Form.Item
             style={{ paddingVertical: 13 }}
-            prop='name'
             label={
               <View
                 style={{
@@ -121,30 +175,47 @@ export default class FormScreen extends Component<{}, any> {
               </View>
             }
             hasLine>
-            <Input value={this.state.model.name} placeholder='姓名' onChange={this.handleNameChange} />
+            <Input value={this.state.filters.name} placeholder='姓名' onChange={(value) => { this.handleChangeFilter('name', value) }} />
+            {
+              validateResults.name && !validateResults.name.valid ?
+              <Text style={{ color: variables.mtdBrandDanger }}>{validateResults.name.msg}</Text> : null
+            }
           </Form.Item>
-          <Form.Item prop='email' label='属性' hasLine>
+          <Form.Item style={{ paddingVertical: 13 }} label='手机号码' hasLine>
+            <Input placeholder='请填写手机号码' textAlign='right' value={this.state.filters.phone} onChange={(value) => { this.handleChangeFilter('phone', value) }} />
+            {
+              validateResults.phone && !validateResults.phone.valid ?
+              <Text style={{ color: variables.mtdBrandDanger }}>{validateResults.phone.msg}</Text> : null
+            }
+            <Text style={{ color: variables.mtdGrayLighter, fontSize: 12, marginTop: 4 }}>该信息非常重要，请认真填写</Text>
+          </Form.Item>
+          <Form.Item label='学校' hasLine>
             <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
               <Text style={{ color: variables.mtdGray }}>请点击选择</Text>
               <Icon type='angle-right' size={14} tintColor={variables.mtdGray}></Icon>
             </View>
           </Form.Item>
 
-          <Form.Item prop='phone' style={{ paddingVertical: 13 }} label='手机号码' hasLine>
-            <Input placeholder='请填写手机号码' textAlign='right' value={this.state.model.phone} onChange={this.handlePhoneChange} />
-            <Text style={{ color: variables.mtdGrayLighter, fontSize: 12, marginTop: 4 }}>该信息非常重要，请认真填写</Text>
-          </Form.Item>
-          <Form.Item prop='needPackage' label='是否开启定位' hasLine validateOnMount>
+          <Form.Item label='是否开启定位' hasLine>
             <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-              <Switch value={this.state.model.needPackage} onChange={this.handlePackageChange}/>
+              <Switch value={this.state.filters.location}
+                onChange={(value) => {
+                  this.setState({
+                    filters: {
+                      ...this.state.filters,
+                      location: value
+                    }
+                  })
+                }}
+              />
             </View>
           </Form.Item>
-          <Form.Item prop='deliveryTime' label='配送时间' hasLine>
+          <Form.Item label='配送时间' hasLine>
             <View></View>
             <Checkbox
               style={{ marginTop: 5 }}
-              checkedValue={this.state.model.deliveryTime}
-              onChange={this.handleDeliveryChange}
+              checkedValue={this.state.filters.deliveryTime}
+              onChange={null}
               iconPosition='right'>
               <Checkbox.Item label='上午' value='time_1' />
               <Checkbox.Item label='下午' value='time_2' />
@@ -155,7 +226,7 @@ export default class FormScreen extends Component<{}, any> {
           <Form.Item label='地址'>
             <View></View>
             <Radio
-              checkedValue={this.state.address || 1}
+              value={this.state.address || 1}
               onChange={(value) => {
                 this.setState({
                   address: value
@@ -171,11 +242,9 @@ export default class FormScreen extends Component<{}, any> {
         <View style={{ flexDirection: 'row', marginTop: 20, paddingHorizontal: 20 }}>
           <View style={{ flex: 1 }}>
             <Button
+              textColorInverse
               type='primary'
-              onPress={() => {
-                this.handlePress()
-              }}
-              reverse>
+              onPress={this.submitData}>
               保存
             </Button>
           </View>
