@@ -38,11 +38,6 @@ export default class InputScreen extends Component<{}, {}> {
   }
 
   componentDidMount () {
-    setTimeout(() => {
-      this.setState({
-        dynamicValue: 'Then I am wang'
-      })
-    }, 2000)
   }
 
   render () {
