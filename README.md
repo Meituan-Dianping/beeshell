@@ -12,7 +12,7 @@
 - Install with [mnpm](http://npm.sankuai.com/): `mnpm install @roo/roo-mobile-rn`
 
 ## Status
-[![mnpm version](https://img.shields.io/badge/mnpm-1.0.15-blue.svg?style=flat-square)](http://npm.sankuai.com/package/@roo/roo-mobile-rn)
+[![mnpm version](http://npm.sankuai.com/badge/v/@roo/roo-mobile-rn.svg?style=flat-square)](http://npm.sankuai.com/package/@roo/roo-mobile-rn)
 
 
 ## Feature
