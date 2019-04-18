@@ -6,12 +6,12 @@
 
 ### 全部引入
 ```js
-import { Progress } from '@roo/roo-mobile-rn';
+import { Progress } from 'beeshell';
 ```
 
 ### 按需引入
 ```js
-import { Progress } from '@roo/roo-mobile-rn/dist/components/Progress';
+import { Progress } from 'beeshell/dist/components/Progress';
 ```
 
 ## Examples

@@ -3,12 +3,12 @@ const px = StyleSheet.hairlineWidth
 
 // 品牌色
 const mtdBrandColors = {
-  mtdBrandPrimary: '#FECB2E',
+  mtdBrandPrimary: '#ffd800',
   mtdBrandPrimaryDark: '#FFA000',
-  mtdBrandSuccess: '#1CC678',
-  mtdBrandWarning: '#FF8C28',
-  mtdBrandDanger: '#FF5650',
-  mtdBrandInfo: '#4B88EB'
+  mtdBrandSuccess: '#61cb28',
+  mtdBrandWarning: '#ff8400',
+  mtdBrandDanger: '#f23244',
+  mtdBrandInfo: '#188afa'
 }
 // 灰度
 const mtdGrayColors = {

@@ -10,12 +10,12 @@ Modal、SlideModal 等弹框类组件，底层都依赖该组件，支持全屏�
 ### 全部引入
 
 ```js
-import { TopviewGetInstance } from '@roo/roo-mobile-rn';
+import { TopviewGetInstance } from 'beeshell';
 ```
 
 ### 按需引入
 ```js
-import { TopviewGetInstance } from '@roo/roo-mobile-rn/dist/components/Topview';
+import { TopviewGetInstance } from 'beeshell/dist/components/Topview';
 ```
 
 ## Examples
@@ -26,7 +26,7 @@ import { TopviewGetInstance } from '@roo/roo-mobile-rn/dist/components/Topview';
 [详细 Code](../../examples/Topview/index.tsx)
 
 ```js
-import { TopviewGetInstance } from '@roo/roo-mobile-rn';
+import { TopviewGetInstance } from 'beeshell';
 
 TopviewGetInstance().add(
   <View style={{ position: 'absolute', top: 0, left: 0 }} ><Text>自定义内容</Text></View>

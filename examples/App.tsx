@@ -180,7 +180,7 @@ let RootStack = createStackNavigator({
   Home: {
     screen: Home,
     navigationOptions: ({ navigation }) => ({
-      header: MakeHeader(navigation, 'roo-mobile-rn', null)
+      header: MakeHeader(navigation, 'beeshell', null)
     })
   },
   // 其余的展示页

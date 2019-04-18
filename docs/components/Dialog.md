@@ -5,12 +5,12 @@
 
 ### 全部引入
 ```js
-import { Dialog } from '@roo/roo-mobile-rn';
+import { Dialog } from 'beeshell';
 ```
 
 ### 单独引入
 ```js
-import Dialog from '@roo/roo-mobile-rn/dist/components/Dialog';
+import Dialog from 'beeshell/dist/components/Dialog';
 ```
 
 ## Examples
@@ -21,7 +21,7 @@ import Dialog from '@roo/roo-mobile-rn/dist/components/Dialog';
 [详细 Code](../../examples/Dialog/index.tsx)
 
 ```jsx
-import { Dialog } from '@roo/roo-mobile-rn';
+import { Dialog } from 'beeshell';
 
 <Dialog
   ref={(c) => {

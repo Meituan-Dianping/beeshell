@@ -6,12 +6,12 @@
 ### 全部引入
 
 ```js
-import { Button } from '@roo/roo-mobile-rn';
+import { Button } from 'beeshell';
 ```
 
 ### 按需引入
 ```js
-import { Button } from '@roo/roo-mobile-rn/dist/components/Button';
+import { Button } from 'beeshell/dist/components/Button';
 ```
 
 ## Examples
@@ -22,7 +22,7 @@ import { Button } from '@roo/roo-mobile-rn/dist/components/Button';
 [详细 Code](../../examples/Button/index.tsx)
 
 ```js
-import { Button } from '@roo/roo-mobile-rn';
+import { Button } from 'beeshell';
 
 <Button type="primary" size="md" textColorInverse>首选项 primary</Button>
 <Button type="primary" size="md">

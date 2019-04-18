@@ -6,12 +6,12 @@
 
 ### 全部引入
 ```
-import { Stepper } from '@roo/roo-mobile-rn';
+import { Stepper } from 'beeshell';
 ```
 
 ### 按需引入
 ```
-import Stepper from '@roo/roo-mobile-rn/dist/components/Stepper';
+import Stepper from 'beeshell/dist/components/Stepper';
 ```
 
 ## Examples

@@ -6,12 +6,12 @@
 
 ### 全部引入
 ```
-import { Tip } from '@roo/roo-mobile-rn';
+import { Tip } from 'beeshell';
 ```
 
 ### 按需引入
 ```
-import { Tip } from '@roo/roo-mobile-rn/dist/components/Tip';
+import { Tip } from 'beeshell/dist/components/Tip';
 ```
 
 ## Examples
@@ -22,7 +22,7 @@ import { Tip } from '@roo/roo-mobile-rn/dist/components/Tip';
 [详细 Code](../../examples/Tip/index.tsx)
 
 ```jsx
-import { Tip } from '@roo/roo-mobile-rn';
+import { Tip } from 'beeshell';
 
 // 方式一： API 调用
 Tip.show('提示信息！', 2000, 'center')

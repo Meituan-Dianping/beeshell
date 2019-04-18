@@ -7,7 +7,7 @@
 只支持按需引入。
 
 ```js
-import validator from '@roo/roo-mobile-rn/dist/common/utils/validator'
+import validator from 'beeshell/dist/common/utils/validator'
 ```
 
 ## Examples

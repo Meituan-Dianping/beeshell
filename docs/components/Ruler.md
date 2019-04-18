@@ -8,12 +8,12 @@
 ### 全部引入
 
 ```js
-import { Ruler } from '@roo/roo-mobile-rn';
+import { Ruler } from 'beeshell';
 ```
 
 ### 按需引入
 ```js
-import { Ruler } from '@roo/roo-mobile-rn/dist/modules/Ruler';
+import { Ruler } from 'beeshell/dist/modules/Ruler';
 ```
 
 ## Examples
@@ -41,7 +41,7 @@ import { Ruler } from '@roo/roo-mobile-rn/dist/modules/Ruler';
 [详细 Code](../../examples/Ruler/index.tsx)
 
 ```js
-import { Ruler } from '@roo/roo-mobile-rn';
+import { Ruler } from 'beeshell';
 <Ruler direction='vertical' />
 <Ruler direction='horizontal' />
 

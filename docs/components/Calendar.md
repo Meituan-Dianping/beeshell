@@ -6,12 +6,12 @@
 
 ### 全部引入
 ```
-import { Calendar } from '@roo/roo-mobile-rn';
+import { Calendar } from 'beeshell';
 ```
 ### 按需引入
 
 ```
-import { Calendar } from '@roo/roo-mobile-rn/dist/components/Calendar';
+import { Calendar } from 'beeshell/dist/components/Calendar';
 ```
 
 ## Examples
@@ -22,7 +22,7 @@ import { Calendar } from '@roo/roo-mobile-rn/dist/components/Calendar';
 [详细 Code](../../examples/Calendar/index.tsx)
 
 ```jsx
-import { Calendar } from '@roo/roo-mobile-rn';
+import { Calendar } from 'beeshell';
 
 <Calendar
   date={this.state.date}

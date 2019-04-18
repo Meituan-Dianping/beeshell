@@ -4,14 +4,14 @@
 module.exports = {
   main: 'examples/index.ts',
   biz: 'mrn',
-  name: 'roo-mobile-rn',
+  name: 'beeshell',
   platform: ['Android', 'iOS'],
   bundleDependencies: [
     '@mrn/mrn-base',
     '@mrn/mrn-common'
   ],
   debugger: {
-    moduleName: 'roo-mobile-rn',
+    moduleName: 'beeshell',
     initialProperties: {
       hideNavigationBar: true
     }

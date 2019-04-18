@@ -6,12 +6,12 @@
 ### 全部引入
 
 ```js
-import { TreeView } from '@roo/roo-mobile-rn';
+import { TreeView } from 'beeshell';
 ```
 
 ### 按需引入
 ```js
-import { TreeView } from '@roo/roo-mobile-rn/dist/components/TreeView';
+import { TreeView } from 'beeshell/dist/components/TreeView';
 ```
 
 ## Examples
@@ -22,7 +22,7 @@ import { TreeView } from '@roo/roo-mobile-rn/dist/components/TreeView';
 [详细 Code](../../examples/TreeView/index.tsx)
 
 ```js
-import { TreeView } from '@roo/roo-mobile-rn';
+import { TreeView } from 'beeshell';
 
 const nestedData = [
   {

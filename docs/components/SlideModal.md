@@ -7,12 +7,12 @@
 
 ### 全部引入
 ```js
-import { SlideModal } from '@roo/roo-mobile-rn';
+import { SlideModal } from 'beeshell';
 ```
 
 ### 按需引入
 ```js
-import SlideModal from '@roo/roo-mobile-rn/dist/components/SlideModal';
+import SlideModal from 'beeshell/dist/components/SlideModal';
 ```
 
 ## Examples
@@ -50,7 +50,7 @@ direction 与 align 属性配合使用。
 ## Code
 
 ```jsx
-import { SlideModal } from '@roo/roo-mobile-rn';
+import { SlideModal } from 'beeshell';
 
 <SlideModal
   ref={(c) => { this._slideModal = c; }}

@@ -6,12 +6,12 @@
 
 ### 全部引入
 ```js
-import { Badge } from '@roo/roo-mobile-rn';
+import { Badge } from 'beeshell';
 ```
 
 ### 按需引入
 ```js
-import { Badge } from '@roo/roo-mobile-rn/dist/components/Badge';
+import { Badge } from 'beeshell/dist/components/Badge';
 ```
 
 ## Examples

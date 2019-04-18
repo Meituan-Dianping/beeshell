@@ -6,12 +6,12 @@
 
 ### 全部引入
 ```js
-import { Longlist } from '@roo/roo-mobile-rn';
+import { Longlist } from 'beeshell';
 ```
 
 ### 按需引入
 ```js
-import Longlist from '@roo/roo-mobile-rn/dist/components/Longlist';
+import Longlist from 'beeshell/dist/components/Longlist';
 ```
 
 ## Examples
@@ -21,7 +21,7 @@ import Longlist from '@roo/roo-mobile-rn/dist/components/Longlist';
 [详细 Code](../../examples/Longlist/index.tsx)
 
 ```js
-import { Longlist } from '@roo/roo-mobile-rn';
+import { Longlist } from 'beeshell';
 
 <Longlist
   ref={(c) => {

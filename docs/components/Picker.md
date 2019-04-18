@@ -6,12 +6,12 @@
 
 ### 全部引入
 ```
-import { Picker } from '@roo/roo-mobile-rn';
+import { Picker } from 'beeshell';
 ```
 
 ### 按需引入
 ```
-import Picker from '@roo/roo-mobile-rn/dist/components/Picker';
+import Picker from 'beeshell/dist/components/Picker';
 ```
 
 ## Examples
@@ -22,7 +22,7 @@ import Picker from '@roo/roo-mobile-rn/dist/components/Picker';
 ## Code
 
 ```jsx
-import { Picker } from '@roo/roo-mobile-rn';
+import { Picker } from 'beeshell';
 
 <Picker
   ref={(c) => {

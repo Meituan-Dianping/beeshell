@@ -9,4 +9,4 @@ import App from './App'
 
 // 这里注册 mrnproject 只是举例，可以是全集团不冲突的任意名字
 // package.json 中 mrn.moduleName 必须与其保持一致
-AppRegistry.registerComponent('roo-mobile-rn', () => App)
+AppRegistry.registerComponent('beeshell', () => App)

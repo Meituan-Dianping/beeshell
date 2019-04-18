@@ -6,12 +6,12 @@
 
 ### 全部引入
 ```js
-import { Input } from '@roo/roo-mobile-rn';
+import { Input } from 'beeshell';
 ```
 
 ### 按需引入
 ```js
-import { Input } from '@roo/roo-mobile-rn/dist/components/Input';
+import { Input } from 'beeshell/dist/components/Input';
 ```
 
 ## Examples
@@ -29,7 +29,7 @@ import { Input } from '@roo/roo-mobile-rn/dist/components/Input';
 [详细 Code](../../examples/Input/index.tsx)
 
 ```jsx
-import { Input } from '@roo/roo-mobile-rn';
+import { Input } from 'beeshell';
 
 <Input
   textAlign='right'

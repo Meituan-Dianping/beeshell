@@ -6,12 +6,12 @@
 
 ### 全部引入
 ```
-import { Dropdown } from '@roo/roo-mobile-rn';
+import { Dropdown } from 'beeshell';
 ```
 
 ### 按需引入
 ```
-import { Dropdown } from '@roo/roo-mobile-rn/dist/modules/Dropdown';
+import { Dropdown } from 'beeshell/dist/modules/Dropdown';
 ```
 
 ## Examples
@@ -22,7 +22,7 @@ import { Dropdown } from '@roo/roo-mobile-rn/dist/modules/Dropdown';
 [详细 Code](../../examples/Dropdown/index.tsx)
 
 ```jsx
-import { Dropdown } from '@roo/roo-mobile-rn';
+import { Dropdown } from 'beeshell';
 
 <Dropdown
   ref={(c) => {

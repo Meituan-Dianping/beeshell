@@ -6,12 +6,12 @@
 
 ### 全部引入
 ```
-import { Cascader } from '@roo/roo-mobile-rn';
+import { Cascader } from 'beeshell';
 ```
 ### 按需引入
 
 ```
-import { Cascader } from '@roo/roo-mobile-rn/dist/components/Cascader';
+import { Cascader } from 'beeshell/dist/components/Cascader';
 ```
 
 ## Examples
@@ -24,7 +24,7 @@ import { Cascader } from '@roo/roo-mobile-rn/dist/components/Cascader';
 [详细 Code](../../examples/Cascader/index.tsx)
 
 ```jsx
-import { Cascader } from '@roo/roo-mobile-rn';
+import { Cascader } from 'beeshell';
 
 // 嵌套（字表表示法）表示的树形结构
 const nestData = [

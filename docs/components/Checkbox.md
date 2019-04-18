@@ -6,12 +6,12 @@
 
 ### 全部引入
 ```
-import { Checkbox } from '@roo/roo-mobile-rn';
+import { Checkbox } from 'beeshell';
 ```
 
 ### 按需引入
 ```
-import { Checkbox } from '@roo/roo-mobile-rn/dist/components/Checkbox';
+import { Checkbox } from 'beeshell/dist/components/Checkbox';
 ```
 
 ## Examples
@@ -22,7 +22,7 @@ import { Checkbox } from '@roo/roo-mobile-rn/dist/components/Checkbox';
 [详细 Code](../../examples/Checkbox/index.tsx)
 
 ```jsx
-import { Checkbox } from '@roo/roo-mobile-rn'
+import { Checkbox } from 'beeshell'
 
 <Checkbox
   value={this.state.value}

@@ -6,12 +6,12 @@
 
 ### 全部引入
 ```
-import { Popover } from '@roo/roo-mobile-rn';
+import { Popover } from 'beeshell';
 ```
 
 ### 按需引入
 ```
-import Popover from '@roo/roo-mobile-rn/dist/components/Popover';
+import Popover from 'beeshell/dist/components/Popover';
 ```
 
 ## Examples
@@ -22,7 +22,7 @@ import Popover from '@roo/roo-mobile-rn/dist/components/Popover';
 [详细 Code](../../examples/Popover/index.tsx)
 
 ```jsx
-import { Popover } from '@roo/roo-mobile-rn';
+import { Popover } from 'beeshell';
 
 <Popover
   ref={(c) => {
