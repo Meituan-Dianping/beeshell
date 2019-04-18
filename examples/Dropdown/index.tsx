@@ -14,20 +14,29 @@ export default class DropdownScreen extends Component<{}, any> {
     this.state = {
       value: 1,
       data: [
-        {
-          label: '我关注的',
-          value: 1
-        },
-        {
-          label: '离我最近',
-          value: 2
-        },
-        {
-          label: '综合评分最高的的的',
-          value: 3
-        }
       ]
     }
+  }
+
+  componentDidMount () {
+    setTimeout(() => {
+      this.setState({
+        data: [
+          {
+            label: '我关注的',
+            value: 1
+          },
+          {
+            label: '离我最近',
+            value: 2
+          },
+          {
+            label: '综合评分最高的的的',
+            value: 3
+          }
+        ]
+      })
+    }, 3000)
   }
 
   onChange = (value) => {

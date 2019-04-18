@@ -53,10 +53,6 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
   getContent () {
     const { data, value, onChange, checkedIcon, uncheckedIcon } = this.props
 
-    if (!data || !data.length) {
-      throw Error('Dropdown 组件请提供有效的 data 属性')
-    }
-
     return (
       <View
         style={[
