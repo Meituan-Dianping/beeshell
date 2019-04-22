@@ -3,7 +3,7 @@ docs_dir: .
 builder:
   name: mkdocs
   configure:
-    site_name: roo-mobile-rn
+    site_name: beeshell
     theme: material
     pages:
       - 开发指南: 
