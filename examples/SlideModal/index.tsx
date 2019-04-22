@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ScrollView, View, Text, StyleSheet, Dimensions, StatusBar, Platform } from 'react-native'
-import { Button, SlideModal, BottomModal } from '../../src/'
+import { Button, SlideModal, SlideModalProps, BottomModal } from '../../src/'
 import styles from '../common/styles'
 
 const screen = Dimensions.get('window')
@@ -55,7 +55,7 @@ const directonsWithAlign = [
   }
 ]
 
-export default class SlideModalScreen extends Component<{}, any> {
+export default class SlideModalScreen extends Component<any, any> {
   [propName: string]: any
 
   constructor (p) {
@@ -92,7 +92,7 @@ export default class SlideModalScreen extends Component<{}, any> {
           基础
         </Button>
 
-        <SlideModal
+        <SlideModal<SlideModalProps>
           ref={c => {
             this.slideModal = c
           }}
@@ -128,7 +128,7 @@ export default class SlideModalScreen extends Component<{}, any> {
           指定位置，自定义滑动方向，全屏
         </Button>
 
-        <SlideModal
+        <SlideModal<SlideModalProps>
           ref={c => {
             this.slideModal2 = c
           }}
@@ -173,7 +173,7 @@ export default class SlideModalScreen extends Component<{}, any> {
           指定位置、下滑、全屏
         </Button>
 
-        <SlideModal
+        <SlideModal<SlideModalProps>
           ref={c => {
             this.slideModal3 = c
           }}
@@ -216,7 +216,7 @@ export default class SlideModalScreen extends Component<{}, any> {
           指定位置、左滑、局部
         </Button>
 
-        <SlideModal
+        <SlideModal<SlideModalProps>
           ref={c => {
             this.slideModal4 = c
           }}
@@ -253,7 +253,7 @@ export default class SlideModalScreen extends Component<{}, any> {
           指定位置、右滑
         </Button>
 
-        <SlideModal
+        <SlideModal<SlideModalProps>
           ref={c => {
             this.slideModal5 = c
           }}
@@ -290,7 +290,7 @@ export default class SlideModalScreen extends Component<{}, any> {
           大风车
         </Button>
 
-        <SlideModal
+        <SlideModal<SlideModalProps>
           ref={c => {
             this.slideModalA = c
           }}
@@ -305,7 +305,7 @@ export default class SlideModalScreen extends Component<{}, any> {
           {contentEl}
         </SlideModal>
 
-        <SlideModal
+        <SlideModal<SlideModalProps>
           ref={c => {
             this.slideModalB = c
           }}
@@ -320,7 +320,7 @@ export default class SlideModalScreen extends Component<{}, any> {
           {contentEl}
         </SlideModal>
 
-        <SlideModal
+        <SlideModal<SlideModalProps>
           ref={c => {
             this.slideModalC = c
           }}
@@ -335,7 +335,7 @@ export default class SlideModalScreen extends Component<{}, any> {
           {contentEl}
         </SlideModal>
 
-        <SlideModal
+        <SlideModal<SlideModalProps>
           ref={c => {
             this.slideModalD = c
           }}

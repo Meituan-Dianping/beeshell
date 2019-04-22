@@ -16,6 +16,7 @@ import { Icon } from '../Icon'
 const styles = StyleSheet.create<any>(inputStyles)
 
 interface InputProps extends TextInputProps {
+  textAlign?: string
 }
 
 interface InputState {

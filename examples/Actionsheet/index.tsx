@@ -7,7 +7,7 @@ import styles from '../common/styles'
 
 const screen = Dimensions.get('window')
 
-export default class ActionsheetScreen extends Component<{}, any> {
+export default class ActionsheetScreen extends Component<any, any> {
   private actionsheet = null;
   [propName: string]: any
 
@@ -43,7 +43,7 @@ export default class ActionsheetScreen extends Component<{}, any> {
             ref={(c) => {
               this.actionsheet = c
             }}
-            header={'标题'}
+            header='标题'
             options={[
               { label: '选项一', value: '1' },
               '选项二',

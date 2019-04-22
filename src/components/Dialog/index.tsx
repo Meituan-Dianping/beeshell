@@ -43,7 +43,7 @@ export interface DialogProps extends ModalProps {
   operations?: Array<Operation>
 }
 
-export class Dialog extends Modal<DialogProps, any> {
+export class Dialog extends Modal<DialogProps> {
   static defaultProps = {
     ...Modal.defaultProps,
 

@@ -20,7 +20,7 @@ export interface TipProps extends ModalProps {
   duration?: number | null
 }
 
-export class Tip extends Modal<TipProps, any> {
+export class Tip extends Modal<TipProps> {
   static defaultProps = {
     ...Modal.defaultProps,
 

@@ -11,4 +11,4 @@ if (options[2] && options[2] === '--add') {
   delete pkgJSON.scripts.postinstall;
 }
 
-fs.writeFileSync(pkgPath, JSON.stringify(pkgJSON, null, 4), null, 'utf-8');
+fs.writeFileSync(pkgPath, JSON.stringify(pkgJSON, null, 2), null, 'utf-8');

@@ -20,8 +20,8 @@ export interface NavigationBarProps {
   backLabel?: any
   backCallback?: Function
   forwardLabel?: any
-  forwardCallback: Function
-  renderItem: Function
+  forwardCallback?: Function
+  renderItem?: Function
 }
 
 export class NavigationBar extends Component<NavigationBarProps, any> {

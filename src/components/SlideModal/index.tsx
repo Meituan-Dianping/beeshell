@@ -29,14 +29,9 @@ export interface SlideModalProps extends ModalProps {
   fullScreenPatch?: boolean[]
 }
 
-export interface SlideModalState {
-  directionType: 'vertical' | 'horizontal'
-}
-
 export class SlideModal<
   T extends SlideModalProps,
-  P extends SlideModalState
-> extends Modal<T, P> {
+> extends Modal<T> {
   static defaultProps = {
     ...Modal.defaultProps,
     cancelable: false,

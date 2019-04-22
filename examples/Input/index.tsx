@@ -5,7 +5,7 @@ import { Input, Form, Icon } from '../../src'
 import variables from '../customTheme'
 import styles from '../common/styles'
 
-export default class InputScreen extends Component<{}, {}> {
+export default class InputScreen extends Component<any, any> {
 
   constructor (p) {
     super(p)

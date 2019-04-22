@@ -20,7 +20,7 @@ export interface ModalProps {
   contentContainerPosition?: 'top' | 'left' | 'right' | 'bottom' | 'center' | ['top', 'left'] | ['top']
     | ['top', 'right'] | ['left'] | ['center'] | ['right'] | ['bottom', 'left'] | ['bottom'] | ['bottom', 'right']
 
-  cancelable: boolean
+  cancelable?: boolean
   backdropOpacity?: number
   backdropColor?: string
 
@@ -41,7 +41,6 @@ export interface ModalProps {
 
 export class Modal<
   T extends ModalProps,
-  P
 > extends React.Component<T, any> {
   animated: any
   modalState: any
@@ -71,6 +70,8 @@ export class Modal<
 
   constructor (props) {
     super(props)
+    this.state = {
+    }
 
     this.modalState = {
       topviewId: null,

@@ -87,7 +87,7 @@ export default class RadioScreen extends Component<any, any> {
           <Radio
             value={this.state.valueC}
             checkedIcon={<Icon type='star' size={20} tintColor={variables.mtdBrandPrimaryDark} />}
-            uncheckedIcon={<Icon type='star' size={20} tintColor={variables.mtdGrayLightest}}
+            uncheckedIcon={<Icon type='star' size={20} tintColor={variables.mtdGrayLightest} />}
             onChange={(value) => {
               this.setState({
                 valueC: value
