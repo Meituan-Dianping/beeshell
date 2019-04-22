@@ -1,0 +1,57 @@
+remove: false
+docs_dir: .
+builder:
+  name: mkdocs
+  configure:
+    site_name: roo-mobile-rn
+    theme: material
+    pages:
+      - 开发指南: 
+        - 介绍: index.md
+        - 更新日志: CHANGELOG.md
+      - 组件:
+        - 通用:
+            - Button 按钮: components/Button.md
+            - Icon 图标: components/Icon.md
+        - 导航:
+            - NavigationBar 导航条: components/NavigationBar.md
+        - 数据录入: 
+            - Form 表单: ./components/Form.md
+            - Input 输入框: ./components/Input.md
+            - Radio 单选: ./components/Radio.md
+            - Checkbox 多选: ./components/Checkbox.md
+            - Switch 开关: ./components/Switch.md
+            - Slider 滑块: ./components/Slider.md
+            - Rate 评分: ./components/Rate.md
+            - Stepper 计步器: ./components/Stepper.md
+            - Scrollpicker 滚动选择: ./components/Scrollpicker.md
+            - Datepicker 日期选择: ./components/Datepicker.md
+            - Timepicker 时间选择: ./components/Timepicker.md
+            - Calender 日历: ./components/Calendar.md
+            - Cascader 级联选择: ./components/Cascader.md
+        - 数据展示: 
+            - Progress 进度条: ./components/Progress.md
+            - Badge 徽章: ./components/Badge.md
+            - Tab 标签页: ./components/Tab.md
+            - Tag 标签: ./components/Tag.md
+            - TreeView 树形结构组件: ./components/TreeView.md
+            - Longlist 长列表: ./components/Longlist.md
+        - 操作反馈: 
+            - Modal 模态框: ./components/Modal.md
+            - Dialog 对话框: ./components/Dialog.md
+            - Tip 提示信息弹框: ./components/Tip.md
+            - SlideModal 滑动弹框: ./components/SlideModal.md
+            - ActionSheet 行动面板: ./components/Actionsheet.md
+            - BottomModal 半页弹框: ./components/BottomModal.md
+            - Popover 弹出框: ./components/Popover.md
+            - Picker 筛选器: ./components/Picker.md
+            - Topview 顶层视图: ./components/Topview.md
+        - 其他: 
+            - Dropdown 下拉菜单: ./components/Dropdown.md
+            - Ruler 刻度尺: ./components/Ruler.md
+      - 基础工具: 
+        - 定制主题: ./common/styles.md
+        - 动画: ./common/animations.md
+        - JS Utils: ./common/utils.md
+        - Form 校验: ./common/validator.md
+        - Tree 树形结构处理: ./common/Tree.md
