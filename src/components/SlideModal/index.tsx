@@ -5,12 +5,29 @@ import {
   StyleSheet,
   Animated,
 } from 'react-native'
-import { Modal, ModalProps, modalStyles } from '../Modal'
+import { Modal, ModalProps } from '../Modal'
 import { SlideAnimated } from '../../common/animations'
+import variables from '../../common/styles/variables'
 
 export const slideModalStyles = StyleSheet.create({
   container: {
-    ...StyleSheet.flatten(modalStyles.container)
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    overflow: 'hidden',
+  },
+  backdrop: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    backgroundColor: variables.mtdFillBackdrop
   },
   content: {
     position: 'absolute',
@@ -241,7 +258,7 @@ export class SlideModal<
   }
 
   getFullScreenPatch() {
-    const { cancelable, backdropColor, backdropOpacity, fullScreenPatch } = this.props
+    const { cancelable, backdropColor, fullScreenPatch } = this.props
     if (fullScreenPatch.length !== 3) {
       throw new TypeError(`fullScreenPatch 参数 ${fullScreenPatch} 为无效值`)
     }
@@ -262,7 +279,6 @@ export class SlideModal<
         rect: {
           ...rects[key],
           backgroundColor: backdropColor,
-          opacity: backdropOpacity
         }
       }
     })
@@ -285,17 +301,17 @@ export class SlideModal<
           top: 0,
           left: 0,
           width: screenWidth,
-          height: screenHeight
+          height: screenHeight,
         }}
         collapsable={false}
-        pointerEvents={'box-none'}>
+        pointerEvents='box-none'>
 
         {
           fullScreenPatch.map((patchItem, patchIndex) => {
             return (
               <TouchableOpacity
                 key={patchIndex}
-                activeOpacity={patchItem.rect.opacity}
+                activeOpacity={1}
                 style={{
                   position: 'absolute',
                   ...patchItem.rect
@@ -320,13 +336,12 @@ export class SlideModal<
           ]}>
           <TouchableOpacity
             style={[
-              modalStyles.backdrop,
+              slideModalStyles.backdrop,
               {
-                opacity: this.props.backdropOpacity,
                 backgroundColor: this.props.backdropColor
               }
             ]}
-            activeOpacity={this.props.backdropOpacity}
+            activeOpacity={1}
             onPress={() => {
               this.handleBackdropPress()
             }}

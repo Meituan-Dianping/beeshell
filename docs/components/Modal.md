@@ -47,8 +47,8 @@ this._modal.close()
 | contentContainerStyle | ViewStyle | false | {} | 内容容器样式 |
 | contentContainerPosition | any | false | 'center' | 内容容器位置，支持字符串与数组，例如：'top' 'center' ['top', 'left'] 等 |
 | cancelable | boolean | false | true | 点击蒙层是否消失 |
-| backdropOpacity | number | false | 0.3 | 蒙层透明度 |
-| backdropColor | string | false | '#000' | 蒙层颜色 |
+| scrollable | boolean | false | false | 内容超出屏幕是否可以滚动 |
+| backdropColor | string | false | 'rgba(0, 0, 0, 0.3)' | 蒙层颜色 |
 | screenWidth | number | false | screen.width | 屏幕宽度 |
 | screenHeight | number | false | screen.height | 屏幕高度 |
 | offsetX | number | false | 0 | X 轴偏移 |

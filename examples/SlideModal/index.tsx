@@ -132,7 +132,6 @@ export default class SlideModalScreen extends Component<any, any> {
           ref={c => {
             this.slideModal2 = c
           }}
-          backdropOpacity={0.3}
           screenHeight={screenHeight}
           offsetX={this.state.offsetX2}
           offsetY={this.state.offsetY2}

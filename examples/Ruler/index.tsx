@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { ScrollView, View, Text, StyleSheet, Dimensions, StatusBar } from 'react-native'
 
-import { Ruler, Button } from '../../src/'
+import { Ruler, Input } from '../../src/'
 import variables from '../customTheme'
 import styles from '../common/styles'
 
@@ -32,6 +32,7 @@ export default class RulerScreen extends Component<any, any> {
         <View style={{ marginLeft: 80 }}>
           <Text>{`RN screenWidth and screenHeight: ${screenWidth}, ${screenHeight}`}</Text>
           <Text>{`RN StatusBar currentHeight: ${StatusBarCurrentHeight}`}</Text>
+          <Input />
         </View>
       </View>
     )

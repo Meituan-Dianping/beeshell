@@ -29,7 +29,7 @@ export class Tip extends Modal<TipProps> {
       marginVertical: 90,
     },
     cancelable: true,
-    backdropOpacity: 0,
+    backdropColor: 'rgba(0, 0, 0, 0)',
     body: 'hello world',
     duration: null,
   }
