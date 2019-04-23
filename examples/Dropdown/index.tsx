@@ -36,7 +36,7 @@ export default class DropdownScreen extends Component<{}, any> {
           }
         ]
       })
-    }, 3000)
+    }, 300)
   }
 
   onChange = (value) => {
@@ -105,7 +105,7 @@ export default class DropdownScreen extends Component<{}, any> {
               this.slideModal2 = c
             }}
             offsetX={0}
-            style={{ width: screen.width }}
+            style={{ width: screen.width, height: 50 }}
             offsetY={this.state.offsetY2}
             cancelable={true}
             value={value}
