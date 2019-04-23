@@ -216,13 +216,6 @@ export class Modal<
         activeOpacity={1}
         onPress={this.handleBackdropPress.bind(this)}>
 
-        <TouchableOpacity
-          style={[
-            this.props.contentContainerStyle,
-          ]}
-          activeOpacity={1}
-          onLayout={this.handleLayout}>
-
           <Animated.View
             style={[
               styles.content,
@@ -232,19 +225,23 @@ export class Modal<
                   { translateY: animatedState.translateY }
                 ],
                 opacity: animatedState.opacity
-              }
-            ]}>
+              },
+              this.props.contentContainerStyle,
+            ]}
+            onLayout={this.handleLayout}>
             <Animated.View
               style={[
                 {
-                  transform: [{ scale: animatedState.scale }]
-                }
+                  transform: [{ scale: animatedState.scale }],
+                },
               ]}>
-              {tmp || null}
+              <TouchableOpacity
+                activeOpacity={1}>
+                {tmp || null}
+              </TouchableOpacity>
             </Animated.View>
           </Animated.View>
         </TouchableOpacity>
-      </TouchableOpacity>
     )
 
     return (

@@ -155,7 +155,7 @@ export default class ModalScreen extends Component<{}, any> {
           <View
             style={{
               width: 200,
-              // height: 100,
+              height: 100,
               backgroundColor: '#fff',
               alignItems: 'center',
               justifyContent: 'center',
