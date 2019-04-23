@@ -1,10 +1,10 @@
 import React, { ReactElement } from 'react'
 
 import {
-  View,
   ViewStyle,
+  ScrollView,
 } from 'react-native'
-import { SlideModal, SlideModalProps, SlideModalState } from '../../components/SlideModal'
+import { SlideModal, SlideModalProps } from '../../components/SlideModal'
 import { Radio } from '../../components/Radio'
 import dropdownStyles from './styles'
 
@@ -23,10 +23,7 @@ export interface DropdownProps extends SlideModalProps {
   onChange: Function
 }
 
-export interface DropdownState extends SlideModalState {
-}
-
-export class Dropdown extends React.Component<DropdownProps, DropdownState> {
+export class Dropdown extends React.Component<DropdownProps> {
   private slideModal = null
 
   static defaultProps = {
@@ -54,7 +51,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
     const { data, value, onChange, checkedIcon, uncheckedIcon } = this.props
 
     return (
-      <View
+      <ScrollView
         style={[
           dropdownStyles.container,
           this.props.style
@@ -80,7 +77,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
             })
           }
         </Radio>
-      </View>
+      </ScrollView>
     )
   }
 
@@ -90,7 +87,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
       direction === 'down' ? [true, false, false] : [false, false, true]
     )
     return (
-      <SlideModal
+      <SlideModal<SlideModalProps>
         ref={c => {
           this.slideModal = c
         }}

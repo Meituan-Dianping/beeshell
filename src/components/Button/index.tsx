@@ -34,8 +34,8 @@ const paddingMap = {
 }
 
 export interface ButtonProps {
-  style?: ViewStyle
-  textStyle?: TextStyle
+  style?: ViewStyle | ViewStyle[]
+  textStyle?: TextStyle | TextStyle[]
   textColorInverse?: boolean
   type?: 'default' | 'primary' | 'danger' | 'info' | 'success' | 'warning' | 'text'
   size?: 'sm' | 'md' | 'lg'
@@ -60,7 +60,7 @@ export class Button extends React.Component<ButtonProps, {}> {
     this.containerRef.measure.apply(null, args)
   }
 
-  onPressHandle () {
+  handlePress () {
     const { disabled, onPress } = this.props
     if (!disabled && typeof onPress === 'function') {
       return onPress()
@@ -87,7 +87,7 @@ export class Button extends React.Component<ButtonProps, {}> {
           style
         ]}
         disabled={disabled}
-        onPress={() => this.onPressHandle()}
+        onPress={() => this.handlePress()}
         activeOpacity={disabled ? 1 : (variables as any).buttonActiveOpacity}>
         {
           React.isValidElement(children) ? children : (

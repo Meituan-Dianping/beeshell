@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { ScrollView, View, Text, StyleSheet } from 'react-native'
 
-import { Button, Modal } from '../../src/'
+import { Button, Modal, ModalProps, Input } from '../../src/'
 import styles from '../common/styles'
 
 const contentContainerPositions = [
@@ -53,7 +53,7 @@ export default class ModalScreen extends Component<{}, any> {
           }}>
           基础
         </Button>
-        <Modal
+        <Modal<ModalProps>
           ref={c => {
             this.modal1 = c
           }}
@@ -62,7 +62,8 @@ export default class ModalScreen extends Component<{}, any> {
           <View
             style={{
               width: 200,
-              height: 100,
+              minHeight: 100,
+              padding: 20,
               backgroundColor: '#fff',
               alignItems: 'center',
               justifyContent: 'center',
@@ -79,7 +80,7 @@ export default class ModalScreen extends Component<{}, any> {
           }}>
           横向拉伸，水平外边距 40
         </Button>
-        <Modal
+        <Modal<ModalProps>
           ref={c => {
             this.modal3 = c
           }}
@@ -111,7 +112,7 @@ export default class ModalScreen extends Component<{}, any> {
           }}>
           自定义展示位置与弹出位置
         </Button>
-        <Modal
+        <Modal<ModalProps>
           ref={c => {
             this.modal4 = c
           }}
@@ -143,7 +144,7 @@ export default class ModalScreen extends Component<{}, any> {
           }}>
           自定义 offset
         </Button>
-        <Modal
+        <Modal<ModalProps>
           offsetY={300}
           offsetX={50}
           ref={c => {
@@ -161,6 +162,35 @@ export default class ModalScreen extends Component<{}, any> {
               borderRadius: 4
             }}>
             <Text>自定义内容</Text>
+          </View>
+        </Modal>
+
+        <Button
+          style={{ marginTop: 12 }}
+          size='sm'
+          onPress={() => {
+            this.modalX.open()
+          }}>
+          内容溢出可滚动
+        </Button>
+        <Modal<ModalProps>
+          ref={c => {
+            this.modalX = c
+          }}
+          scrollable={true}
+          contentContainerStyle={{ marginVertical: 150 }}
+          cancelable={true}>
+          <View
+            style={{
+              width: 200,
+              height: 1000,
+              backgroundColor: '#fff',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: 4
+            }}>
+            <Text>自定义内容</Text>
+            <Input />
           </View>
         </Modal>
       </ScrollView>

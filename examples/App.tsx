@@ -72,9 +72,9 @@ class Home extends Component<any, any> {
   }
 
   componentDidMount() {
-    // setTimeout(() => {
-    //   this.props.navigation.navigate('Tip')
-    // }, 1000)
+    setTimeout(() => {
+      this.props.navigation.navigate('Modal')
+    }, 1000)
   }
 
   gotoPage (item) {

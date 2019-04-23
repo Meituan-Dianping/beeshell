@@ -5,6 +5,6 @@
     </p>
 </p>
 
-[文档地址](./docs/index.md)
+[使用文档](./docs/index.md)
 
 [更新日志](./docs/CHANGELOG.md)
