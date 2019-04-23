@@ -94,5 +94,8 @@
     "preset": "@mrn/react-native",
     "verbose": true,
     "testEnvironment": "node"
+  },
+  "resolutions": {
+    "enzyme-adapter-utils": "1.10.1"
   }
 }

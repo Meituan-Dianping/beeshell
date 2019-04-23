@@ -14,6 +14,7 @@ yarn-error.log*
 *.sublime-workspace
 
 package-lock.json
+yarn.lock
 node_modules
 
 debugger_app/
