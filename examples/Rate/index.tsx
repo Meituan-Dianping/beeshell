@@ -15,7 +15,7 @@ const customIcons = {
 }
 
 
-export default class RateScreen extends Component<Props, State> {
+export default class RateScreen extends Component<any, any> {
   constructor (p) {
     super(p)
 
@@ -53,13 +53,13 @@ export default class RateScreen extends Component<Props, State> {
         <Text style={styles.header}>基础</Text>
         <View style={[styles.panel, { alignItems: 'center' }]}>
           <Text>value1: {this.state.value1}</Text>
-          <Rate value={this.state.value1} onChange={(value) => this.setState({ value1: value })} iconColor={variables.mtdBrandPrimaryDark} />
+          <Rate value={this.state.value1} onChange={(value) => this.setState({ value1: value })} />
         </View>
 
         <Text style={styles.header}>自定义图标大小、间距</Text>
         <View style={[styles.panel, { alignItems: 'center' }]}>
           <Text>value2: {this.state.value2}</Text>
-          <Rate value={this.state.value2} iconSize={40} enableHalf iconColor={variables.mtdBrandPrimaryDark} iconSpace={15} onChange={value => this.setState({ value2: value }) } />
+          <Rate value={this.state.value2} iconSize={40} enableHalf iconSpace={15} onChange={value => this.setState({ value2: value }) } />
         </View>
 
         <Text style={styles.header}>自定义图标</Text>
@@ -72,7 +72,6 @@ export default class RateScreen extends Component<Props, State> {
             iconSpace={80}
             iconSize={customIconSize}
             enableHalf={true}
-            clickOnly={false}
             onChange={(value) => {
               this.setState({ value3: value })
             }}

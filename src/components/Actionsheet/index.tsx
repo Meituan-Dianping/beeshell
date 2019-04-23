@@ -9,7 +9,7 @@ import {
   SafeAreaView
 } from 'react-native'
 
-import { SlideModal, SlideModalProps, SlideModalState } from '../SlideModal'
+import { SlideModal, SlideModalProps } from '../SlideModal'
 import actionsheetStyles from './styles'
 
 export { actionsheetStyles }
@@ -32,14 +32,7 @@ interface ActionsheetProps extends SlideModalProps {
   useSafeAreaView?: boolean
 }
 
-interface ActionsheetState extends SlideModalState {
-
-}
-
-export class Actionsheet<
-  T extends ActionsheetProps,
-  P extends ActionsheetState
-> extends SlideModal<T, P> {
+export class Actionsheet extends SlideModal<ActionsheetProps> {
   static defaultProps = {
     ...SlideModal.defaultProps,
 

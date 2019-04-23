@@ -8,8 +8,7 @@ import {
 } from 'react-native'
 import {
   SlideModal,
-  SlideModalProps,
-  SlideModalState
+  SlideModalProps
 } from '../SlideModal'
 
 import styleUtils from '../../common/styles/utils'
@@ -33,9 +32,7 @@ export interface BottomModalProps extends SlideModalProps {
   leftCallback?: Function
 }
 
-export interface BottomModalState extends SlideModalState {}
-
-export class BottomModal extends SlideModal<BottomModalProps, BottomModalState> {
+export class BottomModal extends SlideModal<BottomModalProps> {
   static defaultProps = {
     ...SlideModal.defaultProps,
 

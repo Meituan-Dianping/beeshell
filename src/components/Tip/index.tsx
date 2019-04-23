@@ -20,7 +20,7 @@ export interface TipProps extends ModalProps {
   duration?: number | null
 }
 
-export class Tip extends Modal<TipProps, any> {
+export class Tip extends Modal<TipProps> {
   static defaultProps = {
     ...Modal.defaultProps,
 
@@ -29,7 +29,7 @@ export class Tip extends Modal<TipProps, any> {
       marginVertical: 90,
     },
     cancelable: true,
-    backdropOpacity: 0,
+    backdropColor: 'rgba(0, 0, 0, 0)',
     body: 'hello world',
     duration: null,
   }

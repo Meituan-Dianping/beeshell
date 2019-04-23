@@ -20,7 +20,6 @@ const componentStyles = StyleSheet.create({
     marginBottom: 8,
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: variables.mtdGrayLighter
-    borderRadius: 2
   },
   title: {
     marginTop: 5,

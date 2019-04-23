@@ -5,23 +5,26 @@ import {
   TouchableOpacity,
   Animated,
   Dimensions,
-  StyleSheet
+  StyleSheet,
+  ScrollView
 } from 'react-native'
 import { TopviewGetInstance } from '../Topview'
 import { FadeAnimated } from '../../common/animations'
 import modalStyles from './styles'
+import variables from '../../common/styles/variables'
+
+export { modalStyles }
 
 const screen = Dimensions.get('window')
 
-export { modalStyles }
 
 export interface ModalProps {
   contentContainerStyle?: any
   contentContainerPosition?: 'top' | 'left' | 'right' | 'bottom' | 'center' | ['top', 'left'] | ['top']
     | ['top', 'right'] | ['left'] | ['center'] | ['right'] | ['bottom', 'left'] | ['bottom'] | ['bottom', 'right']
 
-  cancelable: boolean
-  backdropOpacity?: number
+  cancelable?: boolean
+  scrollable?: boolean
   backdropColor?: string
 
   screenWidth?: number
@@ -41,15 +44,14 @@ export interface ModalProps {
 
 export class Modal<
   T extends ModalProps,
-  P
 > extends React.Component<T, any> {
   animated: any
   modalState: any
 
   static defaultProps = {
     cancelable: true,
-    backdropOpacity: 0.3,
-    backdropColor: StyleSheet.flatten(modalStyles.backdrop).backgroundColor,
+    scrollable: false,
+    backdropColor: variables.mtdFillBackdrop,
 
     screenWidth: screen.width,
     screenHeight: screen.height,
@@ -71,6 +73,8 @@ export class Modal<
 
   constructor (props) {
     super(props)
+    this.state = {
+    }
 
     this.modalState = {
       topviewId: null,
@@ -184,7 +188,7 @@ export class Modal<
     const styles = modalStyles
     const tmp = inner == null ? this.props.children : inner
     const animatedState = this.animated ? this.animated.getState() : {}
-    const { offsetY, offsetX } = this.props
+    const { offsetY, offsetX, screenHeight, screenWidth } = this.props
     const { contentContainerPosition } = this.state
 
     const alignItems = contentContainerPosition.indexOf('top') !== -1 ? 'flex-start' : (
@@ -193,48 +197,35 @@ export class Modal<
     const justifyContent = contentContainerPosition.indexOf('left') !== -1 ? 'flex-start' : (
       contentContainerPosition.indexOf('right') !== -1 ? 'flex-end' : 'center'
     )
+    const contentWidth = screenWidth - offsetX
+    const contentHeight = screenHeight - offsetY
 
-    return (
-      <View
-        style={{
-          position: 'absolute',
-          top: 0,
-          bottom: 0,
-          left: 0,
-          right: 0,
-        }}
-        collapsable={false}
-        pointerEvents={'box-none'}>
-        <View
+    const innerView = (
+      <TouchableOpacity
+        style={[
+          styles.container,
+          styles.backdrop,
+          {
+            minHeight: contentHeight,
+            minWidth: contentWidth,
+            backgroundColor: this.props.backdropColor,
+            alignItems,
+            justifyContent
+          }
+        ]}
+        activeOpacity={1}
+        onPress={this.handleBackdropPress.bind(this)}>
+
+        <TouchableOpacity
           style={[
-            styles.container,
-            {
-              top: offsetY,
-              left: offsetX,
-            },
-            {
-              justifyContent,
-              alignItems
-            }
+            this.props.contentContainerStyle,
           ]}
-        >
-          <TouchableOpacity
-            style={[
-              styles.backdrop,
-              {
-                opacity: this.props.backdropOpacity,
-                backgroundColor: this.props.backdropColor
-              }
-            ]}
-            activeOpacity={this.props.backdropOpacity}
-            onPress={this.handleBackdropPress.bind(this)}
-          />
+          activeOpacity={1}
+          onLayout={this.handleLayout}>
 
           <Animated.View
             style={[
               styles.content,
-              this.props.contentContainerStyle,
-
               {
                 transform: [
                   { translateX: animatedState.translateX },
@@ -242,21 +233,51 @@ export class Modal<
                 ],
                 opacity: animatedState.opacity
               }
-            ]}
-            onLayout={this.handleLayout}>
+            ]}>
             <Animated.View
               style={[
                 {
                   transform: [{ scale: animatedState.scale }]
                 }
-              ]}
-            >
+              ]}>
               {tmp || null}
             </Animated.View>
           </Animated.View>
+        </TouchableOpacity>
+      </TouchableOpacity>
+    )
+
+    return (
+      <View
+        style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 }}
+        collapsable={false}
+        pointerEvents='box-none'>
+        <View
+          style={{
+            position: 'absolute',
+            top: offsetY,
+            left: offsetX,
+            width: contentWidth,
+            height: contentHeight,
+            flexDirection: 'column'
+          }}>
+          { this.renderInnerView(innerView) }
         </View>
       </View>
     )
+  }
+
+  renderInnerView (innerView) {
+    const style = { flex: 1 }
+    if (this.props.scrollable) {
+      return (
+        <ScrollView style={style}>{innerView}</ScrollView>
+      )
+    } else {
+      return (
+        <View style={style}>{innerView}</View>
+      )
+    }
   }
 
   close () {

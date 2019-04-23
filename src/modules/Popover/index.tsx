@@ -9,8 +9,7 @@ import {
 
 import {
   SlideModal,
-  SlideModalProps,
-  SlideModalState
+  SlideModalProps
 } from '../../components/SlideModal'
 
 import variables from '../../common/styles/variables'
@@ -18,9 +17,7 @@ import variables from '../../common/styles/variables'
 export interface PopoverProps extends SlideModalProps {
 }
 
-export interface PopoverState extends SlideModalState {}
-
-export class Popover extends SlideModal<PopoverProps, PopoverState> {
+export class Popover extends SlideModal<PopoverProps> {
   static defaultProps = {
     ...SlideModal.defaultProps,
 

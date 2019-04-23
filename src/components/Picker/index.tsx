@@ -12,7 +12,7 @@ import {
 import variables from '../../common/styles/variables'
 import pickerStyles from './styles'
 import { Icon } from '../Icon'
-import { SlideModal } from '../SlideModal'
+import { SlideModal, SlideModalProps } from '../SlideModal'
 
 const screen = Dimensions.get('window')
 
@@ -164,7 +164,7 @@ export class Picker extends React.Component<PickerProps, PickerState> {
           }
         </TouchableOpacity>
 
-        <SlideModal
+        <SlideModal<SlideModalProps>
           ref={c => {
             this.slideModal = c
           }}

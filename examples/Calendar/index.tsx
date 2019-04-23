@@ -5,7 +5,7 @@ import styles from '../common/styles'
 import variables from '../customTheme'
 
 
-export default class CalendarScreen extends Component<{}, {}> {
+export default class CalendarScreen extends Component<any, any> {
   constructor (p) {
     super(p)
     this.state = {

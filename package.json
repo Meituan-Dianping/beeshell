@@ -1,54 +1,98 @@
 {
-    "name": "@roo/roo-mobile-rn",
-    "version": "2.0.2",
-    "description": "",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "scripts": {
-        "start": "mrn start --appName meituan",
-        "test": "jest --coverage",
-        "lint": "tslint -p ./ -c ./tslint.json",
-        "tsc:examples": "rm -rf distExamples && tsc",
-        "tsc:src": "rm -rf dist && tsc -p ./src && rsync -rv --exclude=*.ts --exclude=*.tsx src/ dist/",
-        "prepublish": "npm run tsc:src && rsync -v scripts/roo-report.js dist/roo-report.js && node ./scripts/setPackageJSON.js --add",
-        "postpublish": "node ./scripts/setPackageJSON.js"
-    },
-    "files": [
-        "dist/**/*.{ts,js,png}"
-    ],
-    "license": "ISC",
-    "dependencies": {
-        "moment": "^2.24.0"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "npm run lint && npm run tsc:src"
-        }
-    },
-    "devDependencies": {
-        "@commitlint/cli": "^7.2.1",
-        "@commitlint/config-conventional": "^7.1.2",
-        "@mrn/babel-preset-mrn": "latest",
-        "@mrn/mrn-base": "latest",
-        "@mrn/mrn-cli": "latest",
-        "@mrn/mrn-common": "latest",
-        "@mrn/react-native-safe-area-view": "^0.11.0",
-        "@types/enzyme": "^3.1.9",
-        "@types/enzyme-adapter-react-16": "^1.0.2",
-        "@types/jest": "^23.0.0",
-        "axios": "^0.18.0",
-        "commitizen": "^3.0.5",
-        "cz-customizable": "5.2.0",
-        "enzyme": "^3.3.0",
-        "enzyme-adapter-react-16": "^1.1.1",
-        "husky": "^1.3.0",
-        "jest": "^23.0.0",
-        "jest-react-native": "^18.0.0",
-        "react-dom": "^16.3.1",
-        "ts-jest": "^22.4.2"
-    },
-    "repository": {
-        "type": "git",
-        "url": ""
+  "name": "@roo/roo-mobile-rn",
+  "version": "2.0.3",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "mrn start --appName meituan",
+    "test": "jest  --coverage",
+    "lint": "tslint -p ./ -c ./tslint.json",
+    "tsc:examples": "rm -rf distExamples && tsc",
+    "tsc:src": "rm -rf dist && tsc -p ./src && rsync -rv --exclude=*.ts --exclude=*.tsx src/ dist/",
+    "prepublishOnly": "npm run tsc:src && rsync -v scripts/roo-report.js dist/roo-report.js && node ./scripts/setPackageJSON.js --add",
+    "postpublish": "node ./scripts/setPackageJSON.js"
+  },
+  "files": [
+    "dist/**/*.{ts,js,png}"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.24.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm run tsc:src"
     }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^7.2.1",
+    "@commitlint/config-conventional": "^7.1.2",
+    "@mrn/babel-preset-mrn": "latest",
+    "@mrn/mrn-base": "latest",
+    "@mrn/mrn-cli": "latest",
+    "@mrn/mrn-common": "latest",
+    "@mrn/react-native-safe-area-view": "^0.11.0",
+    "@types/enzyme": "^3.1.9",
+    "@types/enzyme-adapter-react-16": "^1.0.2",
+    "@types/jest": "^23.0.0",
+    "axios": "^0.18.0",
+    "commitizen": "^3.0.5",
+    "cz-customizable": "5.2.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "husky": "^1.3.0",
+    "jest": "^23.0.0",
+    "jest-react-native": "^18.0.0",
+    "react-dom": "^16.3.1",
+    "ts-jest": "^22.4.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "useBabelrc": true
+      },
+      "NODE_ENV": "test"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-native-gifted-chat)/"
+    ],
+    "testMatch": [
+      "**/__test__/**/?(*.)+(spec|test).[tj]s?(x)"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "modulePaths": [
+      "./components",
+      "./node_modules"
+    ],
+    "setupFiles": [
+      "./node_modules/@mrn/react-native/jest/setup.js"
+    ],
+    "moduleNameMapper": {
+      ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "<rootDir>/node_modules/@mrn/react-native/jest/assetFileTransformer.js",
+      "^react-navigation$": "@mrn/react-navigation",
+      "^react-native$": "@mrn/react-native"
+    },
+    "preset": "@mrn/react-native",
+    "verbose": true,
+    "testEnvironment": "node"
+  }
 }

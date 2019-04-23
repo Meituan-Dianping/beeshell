@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { ScrollView, View, Text, StyleSheet, Dimensions, TouchableOpacity, SafeAreaView } from 'react-native'
 
-import { Button, SlideModal, BottomModal, Icon } from '../../src/'
+import { Button, SlideModal, SlideModalProps, BottomModal, Icon } from '../../src/'
 import styles from '../common/styles'
 import variables from 'src/common/styles/variables'
 
@@ -150,7 +150,7 @@ export default class BottomModalScreen extends Component<{}, any> {
           SlideModal 任意自定义
         </Button>
 
-        <SlideModal
+        <SlideModal<SlideModalProps>
           ref={(c) => { this.slideModal = c }}
           cancelable={true}>
           <View

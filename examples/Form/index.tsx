@@ -214,7 +214,7 @@ export default class FormScreen extends Component<{}, any> {
             <View></View>
             <Checkbox
               style={{ marginTop: 5 }}
-              checkedValue={this.state.filters.deliveryTime}
+              value={this.state.filters.deliveryTime}
               onChange={null}
               iconPosition='right'>
               <Checkbox.Item label='上午' value='time_1' />
