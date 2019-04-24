@@ -57,7 +57,7 @@ export default class ModalScreen extends Component<{}, any> {
           ref={c => {
             this.modal1 = c
           }}
-          cancelable={true}>
+          cancelable>
 
           <View
             style={{
@@ -84,7 +84,7 @@ export default class ModalScreen extends Component<{}, any> {
           ref={c => {
             this.modal3 = c
           }}
-          cancelable={true}
+          cancelable
           contentContainerStyle={{
             flex: 1,
             marginHorizontal: 40,
@@ -118,7 +118,7 @@ export default class ModalScreen extends Component<{}, any> {
           }}
           animatedTranslateX={this.state.animatedTranslateX || undefined}
           animatedTranslateY={this.state.animatedTranslateY || undefined}
-          cancelable={true}
+          cancelable
           contentContainerPosition={contentContainerPosition as any}
           contentContainerStyle={{
             marginTop: contentContainerPosition.indexOf('top') !== -1 ? 90 : null,
@@ -145,12 +145,13 @@ export default class ModalScreen extends Component<{}, any> {
           自定义 offset
         </Button>
         <Modal<ModalProps>
-          offsetY={300}
-          offsetX={50}
           ref={c => {
             this.modalA = c
           }}
-          cancelable={true}>
+          offsetY={300}
+          offsetX={50}
+          cancelable
+          scrollable>
 
           <View
             style={{
@@ -177,9 +178,9 @@ export default class ModalScreen extends Component<{}, any> {
           ref={c => {
             this.modalX = c
           }}
-          scrollable={true}
+          scrollable
           contentContainerStyle={{ marginVertical: 150 }}
-          cancelable={true}>
+          cancelable>
           <View
             style={{
               width: 200,

@@ -10,9 +10,6 @@ export default StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'center',
   },
-  backdrop: {
-    backgroundColor: variables.mtdFillBackdrop
-  },
   content: {
     flexDirection: 'column'
   }

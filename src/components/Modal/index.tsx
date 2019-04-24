@@ -188,7 +188,7 @@ export class Modal<
     const styles = modalStyles
     const tmp = inner == null ? this.props.children : inner
     const animatedState = this.animated ? this.animated.getState() : {}
-    const { offsetY, offsetX, screenHeight, screenWidth } = this.props
+    const { offsetY, offsetX, screenHeight, screenWidth, backdropColor } = this.props
     const { contentContainerPosition } = this.state
 
     const alignItems = contentContainerPosition.indexOf('top') !== -1 ? 'flex-start' : (
@@ -204,11 +204,11 @@ export class Modal<
       <TouchableOpacity
         style={[
           styles.container,
-          styles.backdrop,
           {
             minHeight: contentHeight,
             minWidth: contentWidth,
-            backgroundColor: this.props.backdropColor,
+            // backgroundColor: 'rgba(1, 2, 110, 0.5)',
+            backgroundColor: 'rgba(0, 0, 0, 0)',
             alignItems,
             justifyContent
           }
@@ -246,20 +246,16 @@ export class Modal<
 
     return (
       <View
-        style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 }}
-        collapsable={false}
-        pointerEvents='box-none'>
-        <View
-          style={{
-            position: 'absolute',
-            top: offsetY,
-            left: offsetX,
-            width: contentWidth,
-            height: contentHeight,
-            flexDirection: 'column'
-          }}>
-          { this.renderInnerView(innerView) }
-        </View>
+        style={{
+          position: 'absolute',
+          top: offsetY,
+          left: offsetX,
+          width: contentWidth,
+          height: contentHeight,
+          flexDirection: 'column',
+          backgroundColor: backdropColor
+        }}>
+        { this.renderInnerView(innerView) }
       </View>
     )
   }
