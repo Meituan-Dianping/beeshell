@@ -37,7 +37,7 @@ export default class TabScreen extends Component<any, any> {
         <Text style={styles.header}>基础</Text>
         <Tab
           value={this.state.value}
-          options={[{
+          data={[{
             value: 1,
             label: '全部'
           },
@@ -54,9 +54,9 @@ export default class TabScreen extends Component<any, any> {
 
         <Text style={styles.header}>左对齐</Text>
         <Tab
-          optionItemContainerStyle={{ flex: null }}
+          dataItemContainerStyle={{ flex: null }}
           value={this.state.valueA}
-          options={[{
+          data={[{
             value: 1,
             label: '我关注的'
           },
@@ -71,7 +71,7 @@ export default class TabScreen extends Component<any, any> {
         <Tab
           value={this.state.valueC}
           scrollable={true}
-          options={[
+          data={[
             {
               value: 1,
               label: '选项一'
@@ -95,9 +95,9 @@ export default class TabScreen extends Component<any, any> {
 
         <Text style={styles.header}>自定义选项</Text>
         <Tab
-          optionItemContainerStyle={{ flex: null }}
+          dataItemContainerStyle={{ flex: null }}
           value={this.state.valueX}
-          options={[
+          data={[
             {
               value: 1,
               label: '选项1'
