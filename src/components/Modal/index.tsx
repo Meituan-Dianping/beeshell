@@ -6,7 +6,8 @@ import {
   Animated,
   Dimensions,
   StyleSheet,
-  ScrollView
+  ScrollView,
+  ViewStyle
 } from 'react-native'
 import { TopviewGetInstance } from '../Topview'
 import { FadeAnimated } from '../../common/animations'
@@ -19,9 +20,8 @@ const screen = Dimensions.get('window')
 
 
 export interface ModalProps {
-  contentContainerStyle?: any
-  contentContainerPosition?: 'top' | 'left' | 'right' | 'bottom' | 'center' | ['top', 'left'] | ['top']
-    | ['top', 'right'] | ['left'] | ['center'] | ['right'] | ['bottom', 'left'] | ['bottom'] | ['bottom', 'right']
+  style?: ViewStyle | ViewStyle[]
+  containerStyle?: ViewStyle | ViewStyle[]
 
   cancelable?: boolean
   scrollable?: boolean
@@ -62,8 +62,8 @@ export class Modal<
     animatedTranslateX: null,
     animatedTranslateY: null,
 
-    contentContainerPosition: 'center',
-    contentContainerStyle:  {},
+    containerStyle:  {},
+    style: {},
 
     onOpen: null,
     onOpened: null,
@@ -86,34 +86,10 @@ export class Modal<
   }
 
   init (props, syncTag?: boolean) {
-    const contentContainerPositions = [
-      ['top', 'left'],
-      ['top'],
-      ['top', 'right'],
-      ['left'],
-      ['center'],
-      ['right'],
-      ['bottom', 'left'],
-      ['bottom'],
-      ['bottom', 'right']
-    ]
 
-    const contentContainerPosition = typeof(props.contentContainerPosition) === 'string' ? [props.contentContainerPosition] : props.contentContainerPosition
-    const propsContentContainerPositionValid = contentContainerPositions.some((item) => {
-      const str1 = (item as any).join()
-      const str2 = (item as any).reverse().join()
-      const str3 = contentContainerPosition.join()
-      if (str3 === str1 || str3 === str2) {
-        return true
-      }
-    })
-
-    if (!propsContentContainerPositionValid) {
-      throw new TypeError(`contentContainerPosition 参数 ${props.contentContainerPosition} 为无效值`)
-    }
-
-    const data = {
-      contentContainerPosition
+    const tmpState = {
+      containerStyle: props.containerStyle,
+      style: props.style,
     }
 
     this.animated = new FadeAnimated({})
@@ -121,20 +97,22 @@ export class Modal<
     if (syncTag) {
       this.state = {
         ...this.state,
-        ...data
+        ...tmpState
       }
     } else {
       this.setState({
         ...this.state,
-        ...data
+        ...tmpState
       })
     }
   }
 
   componentWillReceiveProps (nextProps) {
     if (
+      nextProps.animatedTranslateX !== this.props.animatedTranslateX ||
       nextProps.animatedTranslateY !== this.props.animatedTranslateY ||
-      nextProps.contentContainerPosition !== this.props.contentContainerPosition
+      nextProps.containerStyle !== this.props.containerStyle ||
+      nextProps.style !== this.props.style
     ) {
       this.init(nextProps, false)
     }
@@ -189,14 +167,7 @@ export class Modal<
     const tmp = inner == null ? this.props.children : inner
     const animatedState = this.animated ? this.animated.getState() : {}
     const { offsetY, offsetX, screenHeight, screenWidth, backdropColor } = this.props
-    const { contentContainerPosition } = this.state
 
-    const alignItems = contentContainerPosition.indexOf('top') !== -1 ? 'flex-start' : (
-      contentContainerPosition.indexOf('bottom') !== -1 ? 'flex-end' : 'center'
-    )
-    const justifyContent = contentContainerPosition.indexOf('left') !== -1 ? 'flex-start' : (
-      contentContainerPosition.indexOf('right') !== -1 ? 'flex-end' : 'center'
-    )
     const contentWidth = screenWidth - offsetX
     const contentHeight = screenHeight - offsetY
 
@@ -204,14 +175,13 @@ export class Modal<
       <TouchableOpacity
         style={[
           styles.container,
+          this.state.containerStyle,
           {
             minHeight: contentHeight,
             minWidth: contentWidth,
             // backgroundColor: 'rgba(1, 2, 110, 0.5)',
             backgroundColor: 'rgba(0, 0, 0, 0)',
-            alignItems,
-            justifyContent
-          }
+          },
         ]}
         activeOpacity={1}
         onPress={this.handleBackdropPress.bind(this)}>
@@ -226,7 +196,7 @@ export class Modal<
                 ],
                 opacity: animatedState.opacity
               },
-              this.props.contentContainerStyle,
+              this.state.style,
             ]}
             onLayout={this.handleLayout}>
             <Animated.View

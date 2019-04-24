@@ -48,6 +48,7 @@ this._tip.close()
 | ---- | ---- | ---- | ---- | ---- |
 | body | string/ReactElement | false | 'hello world' | 内容区域，支持字符串或者 ReactElement。可以通过提供一个 ReactElement 任意自定义  |
 | duration | number | false | null | 弹框存在时长，弹出后在 duration 指定的毫秒数后自动关闭，未指定则不会自动关闭 |
+| position | string/string[] | false | 'center' | 弹框展示位置，支持字符串与数组，例如：'top' 'center' ['top', 'left'] 等 |
 
 ### Methods
 
@@ -66,4 +67,4 @@ Tip.show('信息提示！')
 | msg | string | true | null | 展示文案 |
 | duration | number | false | 2000 | 在多少毫秒后自动消失 |
 | cancelable | boolean | false | true | 点击空白处是否关闭 |
-| position | string/string[] | false | 'center' | 展示位置，与 Modal 组件的 contentContainerPosition 属性一致，支持 'top' 'center' 'bottom' ['top', 'left'] 等 |
+| position | string/string[] | false | 'center' | 同上 |

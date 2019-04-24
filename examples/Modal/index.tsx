@@ -39,6 +39,12 @@ export default class ModalScreen extends Component<{}, any> {
 
   render () {
     const contentContainerPosition = contentContainerPositions[this.state.contentContainerPositionIndex]
+    const alignItems = contentContainerPosition.indexOf('top') !== -1 ? 'flex-start' : (
+      contentContainerPosition.indexOf('bottom') !== -1 ? 'flex-end' : 'center'
+    )
+    const justifyContent = contentContainerPosition.indexOf('left') !== -1 ? 'flex-start' : (
+      contentContainerPosition.indexOf('right') !== -1 ? 'flex-end' : 'center'
+    )
 
     return (
       <ScrollView
@@ -78,18 +84,18 @@ export default class ModalScreen extends Component<{}, any> {
           onPress={() => {
             this.modal3.open()
           }}>
-          横向拉伸，水平外边距 40
+          横向拉伸，水平外边距 40px
         </Button>
         <Modal<ModalProps>
           ref={c => {
             this.modal3 = c
           }}
           cancelable
-          contentContainerStyle={{
+          style={{
             flex: 1,
-            marginHorizontal: 40,
+            marginHorizontal: 40
           }}>
-          <View style={{ height: 100, backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center' }}>
+          <View style={{ minWidth: 100, height: 100, backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center' }}>
             <Text>自定义内容</Text>
           </View>
         </Modal>
@@ -119,8 +125,11 @@ export default class ModalScreen extends Component<{}, any> {
           animatedTranslateX={this.state.animatedTranslateX || undefined}
           animatedTranslateY={this.state.animatedTranslateY || undefined}
           cancelable
-          contentContainerPosition={contentContainerPosition as any}
-          contentContainerStyle={{
+          containerStyle={{
+            alignItems,
+            justifyContent,
+          }}
+          style={{
             marginTop: contentContainerPosition.indexOf('top') !== -1 ? 90 : null,
             marginBottom: contentContainerPosition.indexOf('bottom') !== -1 ? 90 : null,
             marginLeft: contentContainerPosition.indexOf('left') !== -1 ? 20 : null,
@@ -179,7 +188,7 @@ export default class ModalScreen extends Component<{}, any> {
             this.modalX = c
           }}
           scrollable
-          contentContainerStyle={{ marginVertical: 150 }}
+          containerStyle={{ marginVertical: 150 }}
           cancelable>
           <View
             style={{

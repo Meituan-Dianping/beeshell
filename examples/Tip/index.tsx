@@ -5,19 +5,30 @@ import { Button, Tip, Icon } from '../../src/'
 import variables from '../customTheme'
 import styles from '../common/styles'
 
+const positions = [
+  ['top', 'left'],
+  ['top'],
+  ['top', 'right'],
+  ['left'],
+  ['center'],
+  ['right'],
+  ['bottom', 'left'],
+  ['bottom'],
+  ['bottom', 'right']
+]
+
 export default class TipScreen extends Component<{}, any> {
   [propName: string]: any
 
   constructor (p) {
     super(p)
     this.state = {
-      count: 0,
-      animatedTranslateX: undefined,
-      animatedTranslateY: undefined
+      positionIndex: 0
     }
   }
   componentDidMount() {
-    Tip.show('API 调用方式：Tip.show', 3000, true, 'center')
+    Tip.show('API 调用方式：Tip.show', 3000, false, 'center')
+    Tip.show('API 调用方式，自定义位置', 2000, true, ['left', 'bottom'])
   }
   render () {
     return (
@@ -69,12 +80,7 @@ export default class TipScreen extends Component<{}, any> {
             type='primary'
             textColorInverse
             onPress={() => {
-              setTimeout(() => {
-                this.setState({
-                  containerPosition: this.state.containerPosition === 'top' ? 'bottom' : 'top'
-                })
-                this.tip2.open()
-              })
+              this.tip2.open()
             }}
           >
             自定义展示位置
@@ -82,10 +88,15 @@ export default class TipScreen extends Component<{}, any> {
 
           <Tip
             ref={(c) => { this.tip2 = c }}
-            body={`位置${this.state.containerPosition}`}
-            contentContainerPosition={this.state.containerPosition}
-            cancelable={true}>
-          </Tip>
+            body={`位置${positions[this.state.positionIndex]}`}
+            position={positions[this.state.positionIndex] as any}
+            cancelable={true}
+            onClosed={() => {
+              this.setState({
+                positionIndex: this.state.positionIndex + 1
+              })
+            }}
+          />
 
           <Button
             size='sm'
