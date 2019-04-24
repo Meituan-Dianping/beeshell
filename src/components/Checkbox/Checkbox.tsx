@@ -32,12 +32,11 @@ export default class Checkbox extends Component<CheckboxProps, {}> {
 
   childCount = 0
   childValueArray = []
-  formItemContext = null
 
   static defaultProps = {
     value: [],
     showAllCheck: false,
-    onChange: () => { return },
+    onChange: null,
     iconPosition: 'left',
     checkedIcon: <Icon type={'check-circle'} size={variables.mtdFontSizeL} tintColor={variables.mtdBrandPrimaryDark} />,
     uncheckedIcon: <View style={styles.uncheckedIcon}></View>
@@ -57,15 +56,12 @@ export default class Checkbox extends Component<CheckboxProps, {}> {
   componentDidMount () {
   }
 
-  componentWillReceiveProps (nextProps) {
-  }
-
-  onChange = (itemValue, checked, allCheckedTag?) => {
+  handleChange = (itemValue: any, checked: boolean | number, allCheckTag?: boolean) => {
     const { value } = this.props
     let tmpValue = value.concat()
 
     // 点击选项
-    if (!allCheckedTag) {
+    if (!allCheckTag) {
       const idx = value.indexOf(itemValue)
 
       if (checked) {
@@ -132,7 +128,7 @@ export default class Checkbox extends Component<CheckboxProps, {}> {
               checkedStatus={this.getAllCheckedStatus()}
               label='全选'
               iconPosition={iconPosition}
-              onChange={this.onChange}
+              onChange={this.handleChange}
               checkedIcon={checkedIcon}
               uncheckedIcon={uncheckedIcon}
             /> : null
@@ -148,7 +144,7 @@ export default class Checkbox extends Component<CheckboxProps, {}> {
                   key: index,
                   checked,
                   iconPosition,
-                  onChange: this.onChange,
+                  onChange: this.handleChange,
                   checkedIcon,
                   uncheckedIcon,
                 })

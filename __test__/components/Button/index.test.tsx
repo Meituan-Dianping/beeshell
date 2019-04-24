@@ -10,9 +10,7 @@ describe('Button', () => {
   test('it render base correctly', () => {
     let wrapper
     let instance
-    let props
-
-    props = {
+    let props: any = {
       onPress: jest.fn()
     }
     wrapper = shallow(
