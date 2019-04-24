@@ -73,7 +73,7 @@ class Home extends Component<any, any> {
 
   componentDidMount() {
     setTimeout(() => {
-      this.props.navigation.navigate('Tip')
+      this.props.navigation.navigate('Slider')
     }, 1000)
   }
 

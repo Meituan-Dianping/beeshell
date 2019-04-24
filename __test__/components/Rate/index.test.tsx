@@ -5,17 +5,6 @@ import { Rate, Icon } from '../../../src/'
 
 configure({ adapter: new Adapter() })
 
-const icons = {
-  emptyStar: <Icon type='star-o' tintColor='#efefef' />,
-  fullStar: <Icon type='star-o' tintColor='#4d73ff' />
-}
-
-const iconsAndHalfStar = {
-  emptyStar: <Icon type='star-o' tintColor='#efefef' />,
-  halfStar: <Icon type='star-half' tintColor='' />,
-  fullStar: <Icon type='star-o' tintColor='#4d73ff' />
-}
-
 describe('Rate', () => {
   test('it render base correctly', () => {
     let wrapper
