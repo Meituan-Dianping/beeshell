@@ -132,7 +132,7 @@ const topview = {
 
 const slider = {
   sliderSlideHeight: 40,
-  sliderSlideHeightForTip: 100,
+  sliderSlideHeightForTip: 70,
   sliderTrackHeight: 5,
   sliderThumbSize: 34,
   sliderMarkHeight: 40,
