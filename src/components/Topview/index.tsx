@@ -4,8 +4,9 @@ import {
   AppRegistry,
   View
 } from 'react-native'
+import variables from '../../common/styles/variables'
 
-let topview = null
+const topviewList = [] // 使用数组，解决因 jsbundle 切换导致的元素丢失的问题
 
 class Topview extends Component<any, {count: number, modelList: Array<any>}> {
   constructor (props) {
@@ -14,7 +15,15 @@ class Topview extends Component<any, {count: number, modelList: Array<any>}> {
       count: 0,
       modelList: []
     }
-    topview = this
+  }
+
+  componentDidMount () {
+    topviewList.push(this)
+  }
+
+  componentWillUnmount () {
+    const index = topviewList.indexOf(this)
+    topviewList.splice(index, 1)
   }
 
   add (c: ReactElement<any>, args?: any) {
@@ -113,6 +122,7 @@ class Topview extends Component<any, {count: number, modelList: Array<any>}> {
         <View
           style={{
             position: 'absolute',
+            zIndex: variables.topviewZIndex == null ? 1 : variables.topviewZIndex,
             top: 0,
             left: 0,
             right: 0,
@@ -161,7 +171,7 @@ AppRegistry.registerComponent = function (element, func) {
 }
 
 function getInstance () {
-  return topview
+  return topviewList[topviewList.length - 1]
 }
 
 export {
