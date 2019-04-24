@@ -127,12 +127,12 @@ const checkbox = {
 }
 
 const topview = {
-  topviewZIndex: 1
+  topviewZIndex: 100
 }
 
 const slider = {
   sliderSlideHeight: 40,
-  sliderSlideHeightForTip: 70,
+  sliderSlideHeightForMark: 70,
   sliderTrackHeight: 5,
   sliderThumbSize: 34,
   sliderMarkHeight: 40,
