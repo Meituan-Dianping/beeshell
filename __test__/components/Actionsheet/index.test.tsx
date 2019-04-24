@@ -15,7 +15,7 @@ describe('Actionsheet', () => {
     props = {
       heading: <View></View>,
       title: '1111',
-      options: [
+      data: [
         { text: '选项 1', value: '1' },
         { text: '选项 2', value: '2' },
         { text: '选项 3', value: '3' },
@@ -24,11 +24,11 @@ describe('Actionsheet', () => {
         { text: '选项 6', value: '6' }
       ],
 
-      confirmCallback: (item, index) => {
+      onPressConfirm: (item, index) => {
         expect(item).toEqual({ text: 1, value: 1 })
         expect(index).toEqual(1)
       },
-      cancelCallback: (item, index) => {
+      onPressCancel: (item, index) => {
         expect(item).toEqual(undefined)
       }
     }

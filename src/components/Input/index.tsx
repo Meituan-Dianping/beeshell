@@ -26,7 +26,7 @@ interface InputState {
 export class Input extends Component<InputProps, InputState> {
   static displayName = 'Input'
   static defaultProps = {
-    onChange: () => { return },
+    onChange: null,
     textAlign: 'left',
     placeholder: '请输入',
     placeholderTextColor: variables.mtdGrayLighter,
@@ -39,10 +39,7 @@ export class Input extends Component<InputProps, InputState> {
     value: ''
   }
 
-  debounce = null
-  debounceCallback = null
   delayIsEditing = null
-  formItemContext = null
 
   constructor (props) {
     super(props)
@@ -54,24 +51,12 @@ export class Input extends Component<InputProps, InputState> {
   }
 
   handleChange = (value) => {
-    if (this.props.onChange) {
-      this.props.onChange(value)
-    }
-
-    // 自动触发change类型校验
-    if (this.formItemContext && this.formItemContext.emitValueChange) {
-      this.formItemContext.emitValueChange(value)
-    }
+    this.props.onChange && this.props.onChange(value)
   }
 
   handleBlur = (e) => {
     if (this.props.onBlur) {
       this.props.onBlur(e)
-    }
-
-    // 自动触发blur类型校验
-    if (this.formItemContext && this.formItemContext.emitValueBlur) {
-      this.formItemContext.emitValueBlur(this.props.value)
     }
   }
 

@@ -44,7 +44,7 @@ export default class ActionsheetScreen extends Component<any, any> {
               this.actionsheet = c
             }}
             header='标题'
-            options={[
+            data={[
               { label: '选项一', value: '1' },
               '选项二',
               { label: '选项三', value: '3' },
@@ -53,10 +53,10 @@ export default class ActionsheetScreen extends Component<any, any> {
               { label: '选项六', value: '6' },
             ]}
             cancelable={true}
-            confirmCallback={item => {
+            onPressConfirm={item => {
               console.log(item)
             }}
-            cancelCallback={() => {
+            onPressCancel={() => {
               console.log('cancel')
             }}
           />
@@ -98,7 +98,7 @@ export default class ActionsheetScreen extends Component<any, any> {
                 <Icon type='question-circle'></Icon>
               </View>
             }
-            options={[
+            data={[
               {
                 text: '自定义选项一',
                 value: '1'
@@ -144,10 +144,10 @@ export default class ActionsheetScreen extends Component<any, any> {
                 </View>
               </TouchableOpacity>
             }
-            confirmCallback={item => {
+            onPressConfirm={item => {
               console.log(item)
             }}
-            cancelCallback={() => {
+            onPressCancel={() => {
               console.log('cancel')
             }}
           />

@@ -18,9 +18,9 @@ export interface NavigationBarProps {
   proportion?: number[]
   title?: any
   backLabel?: any
-  backCallback?: Function
+  onPressBack?: Function
   forwardLabel?: any
-  forwardCallback?: Function
+  onPressForward?: Function
   renderItem?: Function
 }
 
@@ -31,9 +31,9 @@ export class NavigationBar extends Component<NavigationBarProps, any> {
 
     title: '标题',
     backLabel: '返回',
-    backCallback: null,
+    onPressBack: null,
     forwardLabel: null,
-    forwardCallback: null,
+    onPressForward: null,
     renderItem: null
   }
 
@@ -42,7 +42,7 @@ export class NavigationBar extends Component<NavigationBarProps, any> {
   }
 
   renderItem(index) {
-    const { backLabel, backCallback, title, forwardLabel, forwardCallback } = this.props
+    const { backLabel, onPressBack, title, forwardLabel, onPressForward } = this.props
     const fontSize = variables.mtdFontSizeL
     const fontColor = variables.mtdGrayBase
 
@@ -59,7 +59,7 @@ export class NavigationBar extends Component<NavigationBarProps, any> {
             paddingHorizontal: variables.mtdHSpacingXL
           }}
           onPress={() => {
-            backCallback && backCallback()
+            onPressBack && onPressBack()
           }}>
 
           {
@@ -111,7 +111,7 @@ export class NavigationBar extends Component<NavigationBarProps, any> {
             paddingHorizontal: variables.mtdHSpacingXL
           }}
           onPress={() => {
-            forwardCallback && forwardCallback()
+            onPressForward && onPressForward()
           }}>
           {
             React.isValidElement(forwardLabel) ? forwardLabel :

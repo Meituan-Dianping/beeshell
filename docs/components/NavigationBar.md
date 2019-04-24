@@ -26,9 +26,9 @@ import { NavigationBar } from '@roo/roo-mobile-rn';
   title='标题'
   backLabel='返回'
   forwardLabel='下一步'
-  backCallback={() => {
+  onPressBack={() => {
   }}
-  forwardCallback={() => {
+  onPressForward={() => {
   }}
 />
 ```
@@ -42,7 +42,7 @@ import { NavigationBar } from '@roo/roo-mobile-rn';
 | title | any | false | '标题' | 中间区域展示内容，可以是字符串或者 ReactElement |
 | backLabel | any | false | '返回' | 左边区域展示内容，可以是字符串或者 ReactElement |
 | forwardLabel | any | false | '下一步' | 右边区域展示内容，可以是字符串或者 ReactElement |
-| backCallback | Function | false | null | 左边区域点击回调 |
-| forwardCallback | Function | false | null | 右边区域点击回调 |
+| onPressBack | Function | false | null | 左边区域点击回调 |
+| onPressForward | Function | false | null | 右边区域点击回调 |
 | proportion | number[] | false | [1, 2, 1] | 渲染区域布局占比 |
 | renderItem | Function | false | null | 自定义每个渲染区域 |

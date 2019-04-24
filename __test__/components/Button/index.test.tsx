@@ -13,16 +13,14 @@ describe('Button', () => {
     let props
 
     props = {
-      onPress: jest.fn(() => {
-        // console.log('press')
-      })
+      onPress: jest.fn()
     }
     wrapper = shallow(
       <Button { ...props }></Button>
     )
     instance = wrapper.instance()
     wrapper.find('TouchableOpacity').simulate('press')
-    expect(props.onPress).toBeCalledWith()
+    expect(props.onPress).toBeCalled()
 
     instance.containerRef = {
       measure: jest.fn((callback) => {
