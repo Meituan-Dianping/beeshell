@@ -36,18 +36,28 @@ export class Rate extends Component<RateProps, any> {
   private panResponder = null
   private containerView = null
 
-  constructor (p) {
-    super(p)
+  constructor (props) {
+    super(props)
     this.createPanResponder()
   }
 
-  componentDidMount () {
-  }
+  validateProps (props) {
+    const { value } = props
+    let tmpValue = value == null ? 0 : value
+    tmpValue = Number(tmpValue)
 
-  componentWillReceiveProps (nextProps) {
+    if (isNaN(tmpValue)) {
+      throw Error('Rate 组件请提供有效的 value 参数')
+    }
+
+    const integer = parseInt(tmpValue, 10)
+    if (tmpValue - integer !== 0 && tmpValue - integer !== 0.5) {
+      throw Error('Rate 组件请提供有效的 value 参数')
+    }
   }
 
   render () {
+    this.validateProps(this.props)
     return (
       <View
         ref={c => { this.containerView = c }}
