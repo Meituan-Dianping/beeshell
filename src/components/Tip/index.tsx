@@ -1,19 +1,11 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import {
     View,
     Text,
-    TouchableOpacity,
-    TouchableHighlight,
-    StyleSheet,
-    PixelRatio,
 } from 'react-native'
 import { Modal, ModalProps } from '../Modal'
 import tipStyles from './styles'
-import varibles from '../../common/styles/variables'
-
-const px = 1 / PixelRatio.get()
 
 export interface TipProps extends ModalProps {
   body?: any
