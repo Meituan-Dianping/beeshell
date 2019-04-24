@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 
 
+## [2.0.4] - 2019-04-24
+### Changed
+- Topview 解决多 jsbundle 切换导致元素丢失的问题，样式变量支持 zIndex 配置
+- Modal Android 平台兼容调整
+
 ## [2.0.3] - 2019-04-23
 ### Changed
 - Modal 系列支持 scrollable 属性，在内容溢出屏幕时可以滚动
