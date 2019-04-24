@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, View, Text, StyleSheet } from 'react-native'
+import { ScrollView, View, Text, StyleSheet, Animated } from 'react-native'
 
 import { Button, Modal, ModalProps, Input } from '../../src/'
 import styles from '../common/styles'
