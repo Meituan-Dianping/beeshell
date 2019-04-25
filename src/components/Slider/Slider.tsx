@@ -29,7 +29,6 @@ export interface SliderProps {
   disabled?: boolean
   step?: number
   marks?: any[]
-  renderMarkOptionItem?: Function
 
   trackColor?: string
   valueTrackColor?: string
@@ -41,7 +40,7 @@ export interface SliderProps {
 
   showTip?: boolean
   renderToolTip?: (value: any) => ReactElement<any>
-  renderThumb?: Function
+  renderThumb?: (isOther: any) => ReactElement<any>
 
   range?: boolean
   vertical?: boolean
@@ -436,7 +435,11 @@ export default class Slider extends PureComponent<SliderProps, State> {
     if (!isOther && !thumbImage) return
     if (isOther && !otherThumbImage) return
 
+    const { renderThumb } = this.props
     const { thumbSize } = this.state
+    if (typeof renderThumb === 'function') {
+      return renderThumb(isOther)
+    }
     return <Image style={[thumbSize, { borderRadius: this.getThumbOffset() / 2 }]} source={isOther ? otherThumbImage as ImageSourcePropType : thumbImage as ImageSourcePropType}/>
   }
 
@@ -444,7 +447,7 @@ export default class Slider extends PureComponent<SliderProps, State> {
    * 刻度模块的渲染
    */
   renderMarkView = () => {
-    const { step, marks, renderMarkOptionItem, min, max } = this.props
+    const { step, marks, min, max } = this.props
     if (!this.showStep()) {
       return null
     }
@@ -452,8 +455,8 @@ export default class Slider extends PureComponent<SliderProps, State> {
     let currStep = 0
     const markViewArr = []
     while (maxStep > currStep) {
-      if (renderMarkOptionItem) {
-        markViewArr.push(renderMarkOptionItem(marks[currStep], currStep))
+      if (React.isValidElement(marks[currStep])) {
+        markViewArr.push(marks[currStep])
       } else {
         markViewArr.push(
           <View key={currStep} style={styles.markItemView}>
