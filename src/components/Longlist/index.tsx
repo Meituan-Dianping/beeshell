@@ -42,8 +42,11 @@ export class Longlist extends React.Component<LonglistProps, any> {
     }
   }
 
-  onEndReached() {
-    const { data, total } = this.props
+  handleEndReached = () => {
+    const { data, total, onEndReached } = this.props
+    if (!onEndReached) {
+      return
+    }
     if (data && data.length && data.length >= total) {
       return
     }
@@ -55,7 +58,7 @@ export class Longlist extends React.Component<LonglistProps, any> {
     this.setState({
       loading: true,
     }, () => {
-      this.props.onEndReached().then(() => {
+      onEndReached().then(() => {
         this.setState({
           loading: false
         })
@@ -67,7 +70,7 @@ export class Longlist extends React.Component<LonglistProps, any> {
     })
   }
 
-  onRefresh() {
+  handleRefresh = () => {
     if (this.state.refreshing) {
       return
     }
@@ -128,7 +131,7 @@ export class Longlist extends React.Component<LonglistProps, any> {
       delete retProps.onRefresh
     } else {
       retProps.refreshing = refreshing
-      retProps.onRefresh = this.onRefresh.bind(this)
+      retProps.onRefresh = this.handleRefresh
     }
 
     return (
@@ -141,7 +144,7 @@ export class Longlist extends React.Component<LonglistProps, any> {
           return index.toString()
         }}
         initialNumToRender={this.props.initialNumToRender}
-        onEndReached={this.onEndReached.bind(this)}
+        onEndReached={this.handleEndReached}
         onEndReachedThreshold={0.1}
         ListFooterComponent={() => {
           return this.renderFooter()

@@ -73,7 +73,7 @@ class Home extends Component<any, any> {
 
   componentDidMount() {
     setTimeout(() => {
-      this.props.navigation.navigate('Tab')
+      this.props.navigation.navigate('Longlist')
     }, 1000)
   }
 
