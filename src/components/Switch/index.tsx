@@ -7,7 +7,8 @@ import {
   Easing,
   PanResponder,
   PanResponderInstance,
-  Platform
+  Platform,
+  ViewStyle
 } from 'react-native'
 
 const styles = StyleSheet.create<any>(switchStyles)
@@ -24,6 +25,7 @@ const rockerSizeMap = {
 }
 
 export interface SwitchProps {
+  style?: ViewStyle | ViewStyle[]
   value?: boolean
   disabled?: boolean
   rockerSize?: 'lg' | 'sm'
@@ -42,6 +44,7 @@ export interface SwitchState {
 export class Switch extends Component<SwitchProps, SwitchState> {
 
   static defaultProps = {
+    style: {},
     value: false,
     disabled: false,
     rockerSize: 'lg',
@@ -51,7 +54,6 @@ export class Switch extends Component<SwitchProps, SwitchState> {
   offset: number
   panResponder: PanResponderInstance
   disabledColor: string
-  formItemContext = null
 
   constructor (props) {
     super(props)
@@ -143,10 +145,6 @@ export class Switch extends Component<SwitchProps, SwitchState> {
           alignItems: toValue ? 'flex-end' : 'flex-start'
         }, () => {
           callback && callback(toValue)
-          // 通知Form.Item改变
-          if (this.formItemContext && this.formItemContext.emitValueChange) {
-            this.formItemContext.emitValueChange(toValue)
-          }
         })
         switchAnimation.setValue(toValue ? -1 : 1)
       })
@@ -250,7 +248,7 @@ export class Switch extends Component<SwitchProps, SwitchState> {
     return (
       <Animated.View
         {...this.panResponder.panHandlers}
-        style={[styles.container, this.getContainBaseStyle()]}>
+        style={[styles.container, this.getContainBaseStyle(), this.props.style]}>
           <Animated.View style={[this.getRockerBaseStyle(), {
             borderWidth: (Platform.OS === 'android' && Platform.Version < 21) ? 1 : 0
           },

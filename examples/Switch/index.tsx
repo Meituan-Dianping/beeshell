@@ -14,11 +14,11 @@ export default class SwitchScreen extends Component<{}, any> {
   }
 
   componentDidMount () {
-    setTimeout(() => {
-      this.setState({
-        valueA: false
-      })
-    }, 2000)
+    // setTimeout(() => {
+    //   this.setState({
+    //     valueA: false
+    //   })
+    // }, 2000)
   }
 
   onChange = (val) => {
@@ -31,7 +31,6 @@ export default class SwitchScreen extends Component<{}, any> {
         style={styles.body}>
         <Form>
           <Form.Item label='基础' hasLine>
-          <Text>{String(this.state.valueA)}</Text>
             <View style={{ alignItems: 'flex-end' }}>
               <Switch value={this.state.valueA} onChange={(value) => { this.setState({ valueA: value }) }}/>
             </View>
