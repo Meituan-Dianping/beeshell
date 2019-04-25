@@ -16,7 +16,8 @@ describe('Tip', () => {
       offsetX: 1,
       offsetY: 1,
       animatedTranslateX: 1,
-      animatedTranslateY: 2
+      animatedTranslateY: 2,
+      position: 'top'
     }
     wrapper = shallow(
       <Tip { ...props }>111</Tip>
@@ -25,5 +26,11 @@ describe('Tip', () => {
     instance.open()
     instance.close()
     instance.getContent()
+    instance.componentWillReceiveProps({
+      ...props,
+      position: 'left'
+    })
+    Tip.show('11', 200, true, ['top'])
+    Tip.hide()
   })
 })
