@@ -42,5 +42,11 @@ describe('SlideModal', () => {
       direction: ['left', 'up']
     })
     instance.getContent()
+
+    instance.handleLayout({
+      nativeEvent: {
+        layout: { width: 100, height: 100 }
+      }
+    })
   })
 })

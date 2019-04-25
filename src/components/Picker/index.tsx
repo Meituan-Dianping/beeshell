@@ -81,7 +81,11 @@ export class Picker extends React.Component<PickerProps, PickerState> {
 
   close () {
     if (this.props.disabled) {
-      return Promise.reject('Picker 属性 disabled 为 true 不能关闭')
+      return Promise.reject(new Error('Picker 组件 disabled 属性为 true，不能关闭'))
+    }
+
+    if (!this.slideModal) {
+      return Promise.reject(new Error('Picker 组件的 slideModal 属性不存在，无法关闭'))
     }
 
     return this.slideModal.close()
@@ -89,10 +93,13 @@ export class Picker extends React.Component<PickerProps, PickerState> {
 
   open () {
     if (this.props.disabled) {
-      return Promise.reject('Picker 属性 disabled 为 true 不能打开')
+      return Promise.reject(new Error('Picker 组件 disabled 属性为 true 不能打开'))
     }
 
     return new Promise((resolve, reject) => {
+      if (!this.trigger) {
+        return reject(new Error('Picker 组件的 trigger 属性不存在，无法打开'))
+      }
       this.trigger.measure((fx, fy, width, height, px, py) => {
         this.setState({
           offsetY: py + height

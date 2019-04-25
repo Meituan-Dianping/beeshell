@@ -64,7 +64,7 @@
 * [Dialog 对话框](./components/Dialog.md)
 * [Tip 提示信息弹框](./components/Tip.md)
 * [SlideModal 滑动弹框](./components/SlideModal.md)
-* [ActionSheet 行动面板](./components/Actionsheet.md)
+* [Actionsheet 行动面板](./components/Actionsheet.md)
 * [BottomModal 半页弹框](./components/BottomModal.md)
 * [Popover 弹出框](./components/Popover.md)
 * [Picker 筛选器](./components/Picker.md)
