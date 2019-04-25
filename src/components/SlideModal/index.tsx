@@ -288,7 +288,6 @@ export class SlideModal<
 
   getContent (inner?): any {
     const styles = slideModalStyles
-    const { directionType, direction } = this.state
     const { screenWidth, screenHeight } = this.props
     const tmp = inner == null ? this.props.children : inner
     const { contentContainerRect, contentRect } = this.getRects()
@@ -362,31 +361,33 @@ export class SlideModal<
                 opacity: this.animated.getState().opacity
               }
             ]}
-            onLayout={(e: any) => {
-              const { width, height } = e.nativeEvent.layout
-              const ret = []
-              directionType.forEach((directionTypeItem: any) => {
-                if (directionTypeItem === 'vertical') {
-                  ret.push({
-                    size: direction.indexOf('up') !== -1 ? height : -height,
-                    directionTypeItem,
-                  })
-                }
-
-                if (directionTypeItem === 'horizontal') {
-                  ret.push({
-                    size: direction.indexOf('right') !== -1 ? -width : width,
-                    directionTypeItem
-                  })
-                }
-              })
-              this.animated.reset(ret)
-            }}
-          >
+            onLayout={this.handleLayout}>
             {tmp || null}
           </Animated.View>
         </View>
       </View>
     )
+  }
+
+  handleLayout = (e: any) => {
+    const { directionType, direction } = this.state
+    const { width, height } = e.nativeEvent.layout
+    const ret = []
+    directionType.forEach((directionTypeItem: any) => {
+      if (directionTypeItem === 'vertical') {
+        ret.push({
+          size: direction.indexOf('up') !== -1 ? height : -height,
+          directionTypeItem,
+        })
+      }
+
+      if (directionTypeItem === 'horizontal') {
+        ret.push({
+          size: direction.indexOf('right') !== -1 ? -width : width,
+          directionTypeItem
+        })
+      }
+    })
+    this.animated.reset(ret)
   }
 }
