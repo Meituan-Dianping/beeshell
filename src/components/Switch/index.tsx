@@ -142,7 +142,7 @@ export class Switch extends Component<SwitchProps, SwitchState> {
           value: toValue,
           alignItems: toValue ? 'flex-end' : 'flex-start'
         }, () => {
-          callback(toValue)
+          callback && callback(toValue)
           // 通知Form.Item改变
           if (this.formItemContext && this.formItemContext.emitValueChange) {
             this.formItemContext.emitValueChange(toValue)
