@@ -343,7 +343,7 @@ export class SlideModal<
             ]}
             activeOpacity={1}
             onPress={() => {
-              this.handleBackdropPress()
+              this.handlePressBackdrop()
             }}
           />
 

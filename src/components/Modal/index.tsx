@@ -125,12 +125,12 @@ export class Modal<
   }
 
   componentDidUpdate (prevProps, prevState) {
-    if (this.modalState.topviewId) {
+    if (this.modalState.topviewId && TopviewGetInstance()) {
       TopviewGetInstance().replace(this.getContent(), this.modalState.topviewId)
     }
   }
 
-  handleBackdropPress () {
+  handlePressBackdrop = () => {
     if (this.props.cancelable) {
       this.close().catch(e => {
         return null
@@ -184,7 +184,7 @@ export class Modal<
           },
         ]}
         activeOpacity={1}
-        onPress={this.handleBackdropPress.bind(this)}>
+        onPress={this.handlePressBackdrop}>
 
           <Animated.View
             style={[
