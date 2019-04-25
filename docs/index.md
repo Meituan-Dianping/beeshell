@@ -34,6 +34,7 @@
 
 #### 导航
 * [NavigationBar 导航条](./components/NavigationBar.md)
+* [Dropdown 下拉菜单](./components/Dropdown.md)
 
 #### 数据录入
 * [Form 表单](./components/Form.md)
@@ -71,7 +72,6 @@
 * [Topview 顶层视图](./components/Topview.md)
 
 #### 其他
-* [Dropdown 下拉菜单](./components/Dropdown.md)
 * [Ruler 刻度尺](./components/Ruler.md)
 
 #### 复合组件（包含 Native 部分）
