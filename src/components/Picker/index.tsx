@@ -55,7 +55,7 @@ export class Picker extends React.Component<PickerProps, PickerState> {
   handleToggle = (active: boolean) => {
     const { disabled, onToggle } = this.props
     if (disabled) {
-      return Promise.reject(`Picker 属性 disabled 为 true 不能${active ? '打开' : '关闭'}`)
+      return Promise.reject(new Error(`Picker 属性 disabled 为 true 不能${active ? '打开' : '关闭'}`))
     }
     return new Promise((resolve) => {
       this.setState({

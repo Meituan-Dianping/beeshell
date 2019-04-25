@@ -23,13 +23,19 @@ describe('Picker', () => {
       })
     }
     instance.slideModal = {
-      open: jest.fn(),
-      close: jest.fn()
+      open: jest.fn(() => {
+        return Promise.resolve()
+      }),
+      close: jest.fn(() => {
+        return Promise.resolve()
+      })
     }
     instance.handleToggle()
     instance.handlePress()
     instance.open()
     instance.close()
     // instance.getContent()
+    instance.state.active = true
+    instance.handlePress()
   })
 })
