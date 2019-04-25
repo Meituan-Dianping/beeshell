@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 
 import {
   Text,
@@ -19,6 +19,8 @@ const screen = Dimensions.get('window')
 export interface PickerProps {
   style?: ViewStyle
   label?: any
+  activeIcon?: ReactElement<any>
+  unactiveIcon?: ReactElement<any>
   disabled?: boolean,
   cancelable?: boolean
   onToggle?: Function
@@ -34,6 +36,8 @@ export class Picker extends React.Component<PickerProps, PickerState> {
   private trigger = null
   static defaultProps = {
     label: '请选择',
+    activeIcon: <Icon type='caret-up' size={12} tintColor={variables.mtdBrandPrimaryDark} />,
+    unactiveIcon: <Icon type='caret-down' size={12} tintColor={variables.mtdGrayBase} />,
     disabled: false,
     cancelable: true,
     style: {},
@@ -117,11 +121,8 @@ export class Picker extends React.Component<PickerProps, PickerState> {
     })
   }
 
-  renderIcon (active, size, tintColor) {
-    size = size - 3
-    const type = active ? 'caret-up' : 'caret-down'
-
-    return <Icon type={type} size={size} tintColor={tintColor} />
+  renderIcon (active) {
+    return active ? this.props.activeIcon : this.props.unactiveIcon
   }
 
   render () {
@@ -161,12 +162,13 @@ export class Picker extends React.Component<PickerProps, PickerState> {
                   pickerStyles.btnText,
                   {
                     fontSize,
-                    color: fontColor
+                    color: fontColor,
+                    marginRight: 3
                   }
                 ]}>
                 {label}
               </Text>
-              { this.renderIcon(active, fontSize, fontColor) }
+              { this.renderIcon(active) }
             </View>
           }
         </TouchableOpacity>
