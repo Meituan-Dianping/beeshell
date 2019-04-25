@@ -37,8 +37,9 @@ export default class SwitchScreen extends Component<{}, any> {
           </Form.Item>
 
           <Form.Item label='禁用' hasLine>
-            <View style={{ alignItems: 'flex-end' }}>
-              <Switch disabled onChange={this.onChange}/>
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+              <Switch style={{ marginRight: 3 }} value disabled activeColor={variables.mtdGrayLight} />
+              <Switch value={false} disabled />
             </View>
           </Form.Item>
 

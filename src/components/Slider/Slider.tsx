@@ -13,12 +13,11 @@ import {
   RegisteredStyle
 } from 'react-native'
 import variables from '../../common/styles/variables'
-import sliderStyle from './styles'
+import sliderStyles from './styles'
 import Coord from './Coord'
 
 const thumbImage = require('./images/rectangle.png')
 const otherThumbImage = require('./images/rectangle.png')
-const sliderThumbSize = variables.sliderThumbSize
 
 export interface SliderProps {
   style?: ViewStyle | RegisteredStyle<ViewStyle>
@@ -28,22 +27,21 @@ export interface SliderProps {
   max?: number
   disabled?: boolean
   step?: number
-  marks?: any[]
+  marks?: any[] // 刻度
+  range?: boolean
+  vertical?: boolean
 
-  trackColor?: string
-  valueTrackColor?: string
-  rangeValueTrackColor?: string
-  disabledTrackColor?: string
-  sliderStyle?: any
+  trackWeight?: number // 滑轨粗细
+  thumbSize?: number
+  maxTrackColor?: string
+  minTrackColor?: string
+  midTrackColor?: string
 
   onChange?: (value: number | number []) => void
 
   showTip?: boolean
-  renderToolTip?: (value: any) => ReactElement<any>
+  renderTip?: (value: any) => ReactElement<any>
   renderThumb?: (isOther: any) => ReactElement<any>
-
-  range?: boolean
-  vertical?: boolean
 }
 
 interface State {
@@ -69,10 +67,11 @@ interface State {
   otherTip: string
 }
 
-const styles = StyleSheet.create<any>(sliderStyle)
+const styles = StyleSheet.create<any>(sliderStyles)
 
 export default class Slider extends PureComponent<SliderProps, State> {
-
+  oldValue: any
+  oldOtherValue: any
   panResponder: PanResponderInstance
   previousLeft: number
   otherPreviousLeft: number
@@ -84,13 +83,15 @@ export default class Slider extends PureComponent<SliderProps, State> {
     min: 0,
     max: 1,
     step: 0,
-    trackColor: variables.mtdFillBody,
-    valueTrackColor: variables.mtdBrandPrimary,
-    rangeValueTrackColor: variables.mtdBrandPrimaryDark,
-    disabledTrackColor: variables.mtdGrayLighter,
+
+    maxTrackColor:  variables.mtdFillGray,
+    minTrackColor: variables.mtdBrandPrimary,
+    midTrackColor: variables.mtdBrandDanger,
     range: false,
     vertical: false,
     showTip: false,
+    trackWeight: 5,
+    thumbSize: 30
   }
 
   constructor (props) {
@@ -98,8 +99,8 @@ export default class Slider extends PureComponent<SliderProps, State> {
     this.state = {
       containerSize: { width: 0, height: 0 },
       trackSize: { width: 0, height: 0 },
-      thumbSize: { width: sliderThumbSize, height: sliderThumbSize },
-      otherThumbSize: { width: sliderThumbSize, height: sliderThumbSize },
+      thumbSize: { width: props.thumbSize, height: props.thumbSize },
+      otherThumbSize: { width: props.thumbSize, height: props.thumbSize },
       value: new Animated.Value(this.getValueByProps()),
       otherValue: new Animated.Value(this.getValueByProps(true)),
       tip: `${this.getValueByProps()}`,
@@ -224,6 +225,8 @@ export default class Slider extends PureComponent<SliderProps, State> {
   }
 
   touchStart = (e: Object) => {
+    this.oldValue = (this.state.value as any).__getValue()
+    this.oldOtherValue = (this.state.otherValue as any).__getValue()
     return this.thumbTouchCheck(e)
   }
 
@@ -241,7 +244,13 @@ export default class Slider extends PureComponent<SliderProps, State> {
 
   touchEnd = (_: Object, gestureState: Object) => {
     this.scroll(gestureState)
-    this.triggerEvent('onChange')
+    if (this.oldValue !== this.getCurrentValue()) {
+      this.triggerEvent('onChange')
+    }
+
+    if (this.props.range && this.oldOtherValue !== this.getCurrentValue(true)) {
+      this.triggerEvent('onChange')
+    }
   }
 
   measureContainer = (x: Object) => {
@@ -446,8 +455,8 @@ export default class Slider extends PureComponent<SliderProps, State> {
   /**
    * 刻度模块的渲染
    */
-  renderMarkView = () => {
-    const { step, marks, min, max } = this.props
+  renderMarks = () => {
+    const { step, marks, min, max, thumbSize } = this.props
     if (!this.showStep()) {
       return null
     }
@@ -459,7 +468,7 @@ export default class Slider extends PureComponent<SliderProps, State> {
         markViewArr.push(marks[currStep])
       } else {
         markViewArr.push(
-          <View key={currStep} style={styles.markItemView}>
+          <View key={currStep} style={{ width: thumbSize, alignItems: 'center' }}>
             <Text style={styles.markItemText}>{marks[currStep]}</Text>
             <View style={styles.markItemLine}></View>
           </View>
@@ -480,21 +489,21 @@ export default class Slider extends PureComponent<SliderProps, State> {
    * 渲染滑块的toopTip提示
    */
   renderThumbToolTip = (isOther?: boolean) => {
-    const { showTip, renderToolTip } = this.props
+    const { showTip, renderTip } = this.props
     if (!showTip) {
       return
     }
     const { tip, otherTip } = this.state
     return (
-      <View style={[styles.toolTip, this.showAndroidTip ? { top: 0, marginTop: 0, height: 100 } : {}]}>
-        <View key={1} style={styles.toolTipTextContain}>
+      <View style={[styles.tip, this.showAndroidTip ? { top: 0, marginTop: 0, height: 100 } : {}]}>
+        <View key={1} style={styles.tipContent}>
           {
-            renderToolTip ? renderToolTip(isOther ? otherTip : tip)
+            renderTip ? renderTip(isOther ? otherTip : tip)
             :
-            <Text style={styles.toolTipText}>{isOther ? otherTip : tip}</Text>
+            <Text style={styles.tipText}>{isOther ? otherTip : tip}</Text>
           }
         </View>
-        <View key={2} style={styles.toolTipIcon}></View>
+        <View key={2} style={styles.tipIcon}></View>
       </View>
     )
   }
@@ -587,25 +596,25 @@ export default class Slider extends PureComponent<SliderProps, State> {
    * 假设滑块A,B
    */
   getTrackColor = (isOther?: boolean) => {
-    const { valueTrackColor, rangeValueTrackColor, disabledTrackColor, trackColor, range, vertical } = this.props
+    const { minTrackColor, midTrackColor, maxTrackColor, range, vertical } = this.props
     let activeColor = ''
     // 双滑块B
     if (isOther) {
       if (this.compareValue()) {
         if (vertical) {
-          // 纵向双滑块A>=B B => rangeValueTrackColor
-          activeColor = rangeValueTrackColor
+          // 纵向双滑块A>=B B => midTrackColor
+          activeColor = midTrackColor
         } else {
-          // 横向双滑块A>=B B => valueTrackColor
-          activeColor = valueTrackColor
+          // 横向双滑块A>=B B => minTrackColor
+          activeColor = minTrackColor
         }
       } else {
         if (vertical) {
           // 纵向双滑块A<B B => trackColor
-          activeColor = trackColor
+          activeColor = maxTrackColor
         } else {
-          // 横向双滑块A<B B => rangeValueTrackColor
-          activeColor = rangeValueTrackColor
+          // 横向双滑块A<B B => midTrackColor
+          activeColor = midTrackColor
         }
       }
     // 双滑块A
@@ -613,38 +622,38 @@ export default class Slider extends PureComponent<SliderProps, State> {
       if (this.compareValue()) {
         if (vertical) {
           // 纵向双滑块A<B A => trackColor
-          activeColor = trackColor
+          activeColor = maxTrackColor
         } else {
-          // 横向双滑块A<B A => rangeValueTrackColor
-          activeColor = rangeValueTrackColor
+          // 横向双滑块A<B A => midTrackColor
+          activeColor = midTrackColor
         }
       } else {
         if (vertical) {
-          // 纵向双滑块A>=B A => rangeValueTrackColor
-          activeColor = rangeValueTrackColor
+          // 纵向双滑块A>=B A => midTrackColor
+          activeColor = midTrackColor
         } else {
-          // 横向单滑块A>=B A => valueTrackColor
-          activeColor = valueTrackColor
+          // 横向单滑块A>=B A => minTrackColor
+          activeColor = minTrackColor
         }
       }
     // 单滑块
     } else {
       if (vertical) {
         // 纵向单滑块 A => trackColor
-        activeColor = trackColor
+        activeColor = maxTrackColor
       } else {
-        // 横向单滑块 A => valueTrackColor
-        activeColor = valueTrackColor
+        // 横向单滑块 A => minTrackColor
+        activeColor = minTrackColor
       }
     }
-    return [activeColor, disabledTrackColor]
+    return [activeColor]
   }
 
   /**
    * 默认滑块划过的滑轨
    */
   renderMinimumTrack = (isOther?: boolean) => {
-    const { disabled, range, vertical } = this.props
+    const { disabled, range, vertical, trackWeight } = this.props
     if (isOther && !range) return
 
     const { value, otherValue } = this.state
@@ -658,7 +667,7 @@ export default class Slider extends PureComponent<SliderProps, State> {
     const minimumTrackWidth = this.getThumbLeft(currValue.__getValue())
     // 滑轨颜色值设定
     const trackColors = this.getTrackColor(isOther)
-    minimumTrackColor = disabled ? trackColors[1] : trackColors[0]
+    minimumTrackColor = trackColors[0]
     const minimumTrackStyle: any = {
       position: 'absolute',
       backgroundColor: minimumTrackColor
@@ -666,10 +675,10 @@ export default class Slider extends PureComponent<SliderProps, State> {
     let trackStyle = null
     if (vertical) {
       minimumTrackStyle.height = minimumTrackWidth
-      minimumTrackStyle.width = variables.sliderTrackHeight
+      minimumTrackStyle.width = this.props.trackWeight
       trackStyle = { marginVertical: this.getThumbOffset(isOther) / 2 }
     } else {
-      minimumTrackStyle.height = variables.sliderTrackHeight
+      minimumTrackStyle.height = this.props.trackWeight
       minimumTrackStyle.width = minimumTrackWidth
       trackStyle = { marginHorizontal: this.getThumbOffset(isOther) / 2 }
     }
@@ -677,49 +686,25 @@ export default class Slider extends PureComponent<SliderProps, State> {
       <Animated.View
         key={currKey}
         renderToHardwareTextureAndroid
-        style={[styles.track, minimumTrackStyle, trackStyle]}
+        style={[{ borderRadius: trackWeight / 2 }, minimumTrackStyle, trackStyle]}
       />
     )
   }
 
-  /**
-   * 额外的容器样式处理
-   */
-  getSliderContainerStyle = () => {
-    const { vertical } = this.props
-    const style: any = { flex: 1 }
-    if (vertical) {
-      style.flexDirection = 'column'
-      style.alignItems = 'center'
-    } else {
-      style.justifyContent = 'center'
-    }
-    return style
-  }
-
-  getContainStyle = () => {
-    const { vertical } = this.props
-    const containStyle: any = { flex: 1 }
-    if (vertical) {
-      containStyle.width = variables.sliderSlideHeight
-      containStyle.flexDirection = 'row'
-    } else {
-      containStyle.height = variables.sliderSlideHeight
-      if (this.showStep()) {
-        containStyle.height = variables.sliderSlideHeightForMark
-      }
-    }
-    return containStyle
-  }
-
   getTrackStyle = () => {
-    const { range, vertical, trackColor, valueTrackColor } = this.props
-    const trackStyle: any = { backgroundColor: trackColor }
+    const { range, vertical, maxTrackColor, minTrackColor, trackWeight, thumbSize } = this.props
+    const trackStyle: any = { backgroundColor: maxTrackColor }
     let marginArr = [ 'marginLeft', 'marginRight', 'marginHorizontal', 'height' ]
+    const rest = thumbSize - trackWeight
+    const spacing = rest > 0 ? Math.ceil(rest / 2) : 0
     if (vertical) {
       marginArr = [ 'marginTop', 'marginBottom', 'marginVertical', 'width' ]
       trackStyle.flex = 1
-      trackStyle.backgroundColor = valueTrackColor
+      trackStyle.alignItems = 'flex-start'
+      trackStyle.backgroundColor = minTrackColor
+      trackStyle.marginHorizontal = spacing
+    } else {
+      trackStyle.marginVertical = spacing
     }
     // 样式处理
     if (range) {
@@ -728,17 +713,17 @@ export default class Slider extends PureComponent<SliderProps, State> {
     } else {
       trackStyle[marginArr[2]] = this.getThumbOffset() / 2
     }
-    trackStyle[marginArr[3]] = variables.sliderTrackHeight
+    trackStyle[marginArr[3]] = this.props.trackWeight
     return trackStyle
   }
 
   renderTracks = () => {
-    const { vertical } = this.props
+    const { vertical, trackWeight } = this.props
     const trackStyle: any = this.getTrackStyle()
     // 如果value > oldValue，则代表两个滑块滑动位置互换，则更新渲染层级
     let tracks = [
       <View
-        style={[ styles.track, trackStyle ]}
+        style={[ { borderRadius: trackWeight / 2 }, trackStyle ]}
         onLayout={this.measureTrack}
       />
     ]
@@ -754,17 +739,20 @@ export default class Slider extends PureComponent<SliderProps, State> {
   }
 
   render () {
-    const { style, sliderStyle } = this.props
-    const sliderContainerStyle: any = this.getSliderContainerStyle()
+    const { style, vertical } = this.props
 
     return (
-      <View style={[this.getContainStyle(), style]}>
-        {this.renderMarkView()}
+      <View
+        style={[
+          { flexDirection: vertical ? 'row' : 'column' },
+          style
+        ]}>
+        {this.renderMarks()}
         <View
-          style={[
-            sliderContainerStyle,
-            sliderStyle,
-          ]}
+          style={{
+            alignItems: vertical ? 'center' : undefined,
+            justifyContent: vertical ? undefined : 'center'
+          }}
           onLayout={this.measureContainer}
         >
           {this.renderTracks()}
@@ -773,8 +761,7 @@ export default class Slider extends PureComponent<SliderProps, State> {
           <View
             renderToHardwareTextureAndroid
             style={styles.touchArea}
-            {...this.panResponder.panHandlers}
-          >
+            {...this.panResponder.panHandlers}>
           </View>
         </View>
       </View>

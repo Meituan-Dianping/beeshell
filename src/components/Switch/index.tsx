@@ -183,9 +183,8 @@ export class Switch extends Component<SwitchProps, SwitchState> {
 
   getContainBaseStyle = () => {
     const { switchAnimation, alignItems, value } = this.state
-    let {
-      activeColor,
-      disabled
+    const {
+      activeColor
     } = this.props
 
     const interpolatedBackgroundColor = switchAnimation.interpolate({

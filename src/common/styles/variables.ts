@@ -131,14 +131,6 @@ const topview = {
 }
 
 const slider = {
-  sliderSlideHeight: 40,
-  sliderSlideHeightForMark: 70,
-  sliderTrackHeight: 5,
-  sliderThumbSize: 34,
-  sliderMarkHeight: 40,
-  sliderMarkLineSize: 10,
-  sliderSlideToolTip: 30,
-  sliderSlideToolTipIconSize: 4
 }
 
 const variables = {
