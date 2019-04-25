@@ -9,7 +9,16 @@ export default class SwitchScreen extends Component<{}, any> {
   constructor (p) {
     super(p)
     this.state = {
+      valueA: true
     }
+  }
+
+  componentDidMount () {
+    setTimeout(() => {
+      this.setState({
+        valueA: false
+      })
+    }, 2000)
   }
 
   onChange = (val) => {
@@ -22,8 +31,9 @@ export default class SwitchScreen extends Component<{}, any> {
         style={styles.body}>
         <Form>
           <Form.Item label='基础' hasLine>
+          <Text>{String(this.state.valueA)}</Text>
             <View style={{ alignItems: 'flex-end' }}>
-              <Switch value={true} onChange={this.onChange}/>
+              <Switch value={this.state.valueA} onChange={(value) => { this.setState({ valueA: value }) }}/>
             </View>
           </Form.Item>
 
@@ -35,7 +45,7 @@ export default class SwitchScreen extends Component<{}, any> {
 
           <Form.Item label='自定义'>
             <View style={{ alignItems: 'flex-end' }}>
-              <Switch onChange={this.onChange} rockerSize={20}/>
+              <Switch onChange={this.onChange} rockerSize='sm' />
             </View>
           </Form.Item>
         </Form>
