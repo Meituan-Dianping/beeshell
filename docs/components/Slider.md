@@ -6,12 +6,12 @@
 ### 全部引入
 
 ```js
-import { Slider } from '@roo/roo-mobile-rn';
+import { Slider } from 'beeshell';
 ```
 
 ### 按需引入
 ```js
-import { Slider } from '@roo/roo-mobile-rn/dist/components/Slider';
+import { Slider } from 'beeshell/dist/components/Slider';
 ```
 
 ## Examples
@@ -22,7 +22,7 @@ import { Slider } from '@roo/roo-mobile-rn/dist/components/Slider';
 [详细 Code](../../examples/Slider/index.tsx)
 
 ```js
-import { Slider } from '@roo/roo-mobile-rn';
+import { Slider } from 'beeshell';
 
 <Slider
   range

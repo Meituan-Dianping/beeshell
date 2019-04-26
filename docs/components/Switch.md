@@ -6,12 +6,12 @@
 ### 全部引入
 
 ```js
-import { Switch } from '@roo/roo-mobile-rn';
+import { Switch } from 'beeshell';
 ```
 
 ### 按需引入
 ```js
-import { Switch } from '@roo/roo-mobile-rn/dist/components/Switch';
+import { Switch } from 'beeshell/dist/components/Switch';
 ```
 
 ## Examples
@@ -22,7 +22,7 @@ import { Switch } from '@roo/roo-mobile-rn/dist/components/Switch';
 [详细 Code](../../examples/Switch/index.tsx)
 
 ```js
-import { Switch } from '@roo/roo-mobile-rn';
+import { Switch } from 'beeshell';
 
 <Switch value={this.state.valueA} onChange={(value) => { this.setState({ valueA: value }) }}/>
 
