@@ -72,7 +72,7 @@ export default class SliderScreen extends Component<any, any> {
           />
         </View>
 
-        <Text style={styles.header}>双滑块、自定义颜色</Text>
+        <Text style={styles.header}>双滑块、自定义颜色、粗细</Text>
         <View style={[styles.panel]}>
           <Slider
             range
@@ -80,6 +80,7 @@ export default class SliderScreen extends Component<any, any> {
             minTrackColor={variables.mtdGrayLightest}
             midTrackColor={this.state.disabled ? variables.mtdGrayLighter : variables.mtdBrandDanger}
             max={1500}
+            trackWeight={20}
             value={this.state.valueX}
             disabled={this.state.disabled}
             showTip={true}
