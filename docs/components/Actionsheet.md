@@ -29,7 +29,7 @@ import { Actionsheet } from 'beeshell';
 <Actionsheet
   ref={(c) => { this._actionsheet = c; }}
   header='选择品类'
-  options={[
+  data={[
     {
       label: '选项1',
       value: '1'
@@ -44,10 +44,10 @@ import { Actionsheet } from 'beeshell';
     },
   ]}
   cancelable={false}
-  confirmCallback={(item) => {
+  onPressConfirm={(item) => {
     console.log('confirm');
   }}
-  cancelCallback={() => {
+  onPressCancel={() => {
     console.log('cancel')
   }}>
 </Actionsheet>
@@ -66,10 +66,10 @@ this._actionsheet.close()
 | ---- | ---- | ---- | ---- | ---- |
 | header | string/ReactElement | false | '标题' | 头部，是字符串时代表标题文案，是 ReactElement 时代表头部渲染区域 |
 | footer | string/ReactElement | false | '取消' | 底部按钮，是字符串时代表按钮文案，是 ReactE 时代表按钮渲染区域 |
-| options | Array | true | [] | 数据源，数组中是对象，必须有 label 属性用于展示 |
+| data | Array | true | [] | 数据源，数组中是对象，必须有 label 属性用于展示 |
 | maxShowNum | number | false | null | 最多显示多少项，如果设置该值，超过后列表将变为可滚动 |
 | cancelable | boolean | false | true | 点击蒙层是否消失 |
 | useSafeAreaView | boolean | false | false | 是否开启安全区域，兼容 iPhoneX |
 | renderItem | Function | false | null | 自定义渲染项。参数包括数据项，数据项索引，返回一个 ReactElement |
-| cancelCallback | Function | false | null | 取消按钮点击回调 |
-| confirmCallback | Function | false | null | 点击某项回调。参数为数据项和索引 |
+| onPressCancel | Function | false | null | 取消按钮点击回调 |
+| onPressConfirm | Function | false | null | 点击某项回调。参数为数据项和索引 |

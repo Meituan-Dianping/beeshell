@@ -17,10 +17,11 @@ const styles = StyleSheet.create<any>(tabStyle)
 
 interface Props {
   style?: ViewStyle
-  optionItemContainerStyle?: ViewStyle
+  dataItemContainerStyle?: ViewStyle
+  dataItemStyle?: ViewStyle
   activeColor?: string
   value?: any
-  options: any[]
+  data?: any[]
   renderItem?: Function
   onChange?: Function
   scrollable?: boolean
@@ -32,14 +33,14 @@ export class Tab extends React.Component<Props, State> {
   static defaultProps = {
     activeColor: variables.mtdGrayDarker,
     value: null,
-    options: [],
+    data: [],
     onChange: null,
     scrollable: false,
   }
 
   renderContent () {
     const { scrollable } = this.props
-    const itemVels = this.getItemVels()
+    const itemViews = this.getItemViews()
     return (
       <View style={[styles.container]}>
         {
@@ -47,31 +48,32 @@ export class Tab extends React.Component<Props, State> {
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}>
-            <View style={[styles.scrollWrapper]}>
-              {itemVels}
+            <View style={[styles.content]}>
+              {itemViews}
             </View>
           </ScrollView> :
-          <View style={[styles.scrollWrapper]}>
-            {itemVels}
+          <View style={[styles.content]}>
+            {itemViews}
           </View>
         }
       </View>
     )
   }
 
-  getItemVels () {
+  getItemViews () {
     const {
-      optionItemContainerStyle,
+      dataItemContainerStyle,
+      dataItemStyle,
       value,
-      options = [],
+      data = [],
       onChange,
       renderItem,
     } = this.props
-    return options.map((item, index) => {
+    return data.map((item, index) => {
       const active = value === item.value
       return (
           <TouchableOpacity
-            style={[{ flex: 1 }, optionItemContainerStyle]}
+            style={[{ flex: 1 }, dataItemContainerStyle]}
             key={index}
             activeOpacity={1}
             onPress={() => {
@@ -83,7 +85,7 @@ export class Tab extends React.Component<Props, State> {
             {
               renderItem ?
               renderItem(item, index, active) :
-              <View style={[styles.item]}>
+              <View style={[styles.item, dataItemStyle]}>
                 { this.renderItemContent(item, index, active) }
               </View>
             }

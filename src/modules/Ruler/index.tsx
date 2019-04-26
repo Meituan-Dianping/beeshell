@@ -31,7 +31,7 @@ export class Ruler extends Component<RulerProps, any> {
     if (this.state.topviewId) {
       return
     }
-    TopviewGetInstance().add(this.renderFullScreenView()).then((id) => {
+    TopviewGetInstance() && TopviewGetInstance().add(this.renderFullScreenView()).then((id) => {
       this.setState({
         topviewId: id
       })
@@ -39,7 +39,7 @@ export class Ruler extends Component<RulerProps, any> {
   }
 
   componentWillUnmount () {
-    TopviewGetInstance().remove(this.state.topviewId)
+    TopviewGetInstance() && TopviewGetInstance().remove(this.state.topviewId)
   }
 
   renderFullScreenView () {

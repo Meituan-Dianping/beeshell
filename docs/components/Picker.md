@@ -60,6 +60,8 @@ import { Picker } from 'beeshell';
 | ---- | ---- | ---- | ---- | ---- |
 | style | ViewStyle | false | {} | 样式 |
 | label | string/Function | false | '请选择' | 按钮展示内容，是字符串时代表按钮文案，是函数时需要返回一个 ReactElement，代表渲染区域，函数参数为 active，表示打开、关闭状态  |
+| activeIcon | ReactElement | false | `<Icon type='caret-up' size={12} tintColor={variables.mtdBrandPrimaryDark} />` | 激活图标 |
+| unactiveIcon | ReactElement | false | `<Icon type='caret-down' size={12} tintColor={variables.mtdGrayBase} />` | 未激活图标 |
 | disabled | boolean | false | false | 是否可以打开或者关闭 |
 | cancelable | boolean | false | true | 点击蒙层是否关闭 |
 | onToggle | Function | false | null | 激活状态切换回调，参数为 active 表示激活状态 |

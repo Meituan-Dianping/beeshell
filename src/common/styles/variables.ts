@@ -126,15 +126,11 @@ const checkbox = {
   checkboxEnableAnimated: mtdEnableAnimated
 }
 
+const topview = {
+  topviewZIndex: 100
+}
+
 const slider = {
-  sliderSlideHeight: 40,
-  sliderSlideHeightForTip: 100,
-  sliderTrackHeight: 5,
-  sliderThumbSize: 34,
-  sliderMarkHeight: 40,
-  sliderMarkLineSize: 10,
-  sliderSlideToolTip: 30,
-  sliderSlideToolTipIconSize: 4
 }
 
 const variables = {
@@ -154,6 +150,7 @@ const variables = {
   ...radio,
   ...checkbox,
   ...slider,
+  ...topview
 }
 
 

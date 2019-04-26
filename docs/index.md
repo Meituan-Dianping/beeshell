@@ -48,6 +48,7 @@
 
 #### 导航
 * [NavigationBar 导航条](./components/NavigationBar.md)
+* [Dropdown 下拉菜单](./components/Dropdown.md)
 
 #### 数据录入
 * [Form 表单](./components/Form.md)
@@ -78,14 +79,13 @@
 * [Dialog 对话框](./components/Dialog.md)
 * [Tip 提示信息弹框](./components/Tip.md)
 * [SlideModal 滑动弹框](./components/SlideModal.md)
-* [ActionSheet 行动面板](./components/Actionsheet.md)
+* [Actionsheet 行动面板](./components/Actionsheet.md)
 * [BottomModal 半页弹框](./components/BottomModal.md)
 * [Popover 弹出框](./components/Popover.md)
 * [Picker 筛选器](./components/Picker.md)
 * [Topview 顶层视图](./components/Topview.md)
 
 #### 其他
-* [Dropdown 下拉菜单](./components/Dropdown.md)
 * [Ruler 刻度尺](./components/Ruler.md)
 
 #### 复合组件（包含 Native 部分）

@@ -13,42 +13,35 @@ import {
   RegisteredStyle
 } from 'react-native'
 import variables from '../../common/styles/variables'
-import sliderStyle from './styles'
+import sliderStyles from './styles'
 import Coord from './Coord'
 
-const minTrackDisabledColor = variables.mtdGrayLighter
-const thumbTouchSize = {
-  width: 34,
-  height: 34
-}
 const thumbImage = require('./images/rectangle.png')
 const otherThumbImage = require('./images/rectangle.png')
 
 export interface SliderProps {
   style?: ViewStyle | RegisteredStyle<ViewStyle>
 
-  value?: number
-  otherValue?: number
-  minValue?: number
-  maxValue?: number
+  value?: number | number[]
+  min?: number
+  max?: number
   disabled?: boolean
   step?: number
-  markOtptions?: any[]
-  renderMarkOptionItem?: Function
+  marks?: any[] // 刻度
+  range?: boolean
+  vertical?: boolean
 
+  trackWeight?: number // 滑轨粗细
+  thumbSize?: number
   maxTrackColor?: string
   minTrackColor?: string
-  rangeMinTrackColor?: string
+  midTrackColor?: string
 
   onChange?: (value: number | number []) => void
-  onStart?: (value: number | number []) => void
-  onEnd?: (value: number | number []) => void
 
   showTip?: boolean
-  renderToolTip?: (value: any) => ReactElement<any>
-  renderThumb?: Function
-
-  isRange?: boolean
+  renderTip?: (value: any) => ReactElement<any>
+  renderThumb?: (isOther: any) => ReactElement<any>
 }
 
 interface State {
@@ -74,10 +67,11 @@ interface State {
   otherTip: string
 }
 
-const styles = StyleSheet.create<any>(sliderStyle)
+const styles = StyleSheet.create<any>(sliderStyles)
 
 export default class Slider extends PureComponent<SliderProps, State> {
-
+  oldValue: any
+  oldOtherValue: any
   panResponder: PanResponderInstance
   previousLeft: number
   otherPreviousLeft: number
@@ -86,16 +80,18 @@ export default class Slider extends PureComponent<SliderProps, State> {
 
   static defaultProps = {
     value: 0,
-    minValue: 0,
-    maxValue: 1,
+    min: 0,
+    max: 1,
     step: 0,
-    maxTrackColor: variables.mtdFillBody,
-    minTrackColor: variables.mtdBrandPrimary,
-    rangeMinTrackColor: variables.mtdFillBody,
 
-    isRange: false,
-    otherValue: 0,
+    maxTrackColor:  variables.mtdFillGray,
+    minTrackColor: variables.mtdBrandPrimary,
+    midTrackColor: variables.mtdBrandDanger,
+    range: false,
+    vertical: false,
     showTip: false,
+    trackWeight: 5,
+    thumbSize: 30
   }
 
   constructor (props) {
@@ -103,12 +99,12 @@ export default class Slider extends PureComponent<SliderProps, State> {
     this.state = {
       containerSize: { width: 0, height: 0 },
       trackSize: { width: 0, height: 0 },
-      thumbSize: { width: 0, height: 0 },
-      otherThumbSize: { width: 0, height: 0 },
-      value: new Animated.Value(this.props.value),
-      otherValue: new Animated.Value(this.props.otherValue),
-      tip: `${this.props.value}`,
-      otherTip: `${this.props.otherValue}`
+      thumbSize: { width: props.thumbSize, height: props.thumbSize },
+      otherThumbSize: { width: props.thumbSize, height: props.thumbSize },
+      value: new Animated.Value(this.getValueByProps()),
+      otherValue: new Animated.Value(this.getValueByProps(true)),
+      tip: `${this.getValueByProps()}`,
+      otherTip: `${this.getValueByProps(true)}`
     }
     this.isOther = false
     this.showAndroidTip = this.props.showTip && Platform.OS === 'android'
@@ -127,23 +123,46 @@ export default class Slider extends PureComponent<SliderProps, State> {
   }
 
   componentWillReceiveProps (nextProps) {
-    const newValue = nextProps.value
-    const newOtherValue = nextProps.otherValue
+    let newValue = 0
+    let newOtherValue = 0
+    const { range } = this.props
+    if (range && nextProps.value instanceof Array) {
+      newValue = nextProps.value[0]
+      newOtherValue = nextProps.value[1]
+    } else {
+      newValue = nextProps.value
+    }
 
-    if (this.props.value !== newValue) {
+    if (this.getValueByProps() !== newValue) {
       this.setCurrentValue(newValue)
     }
-    const { isRange } = nextProps
-    if (isRange && this.props.otherValue !== newOtherValue) {
-      this.setCurrentValue(newOtherValue, isRange)
+    if (range && this.getValueByProps(true) !== newOtherValue) {
+      this.setCurrentValue(newOtherValue, range)
     }
   }
 
+  /**
+   * 通过props获取滑块对应的value值
+   */
+  getValueByProps = (isOther?: boolean) => {
+    const { value, range } = this.props
+    if (range && value instanceof Array) {
+      if (isOther) {
+        return value[1]
+      }
+      return value[0]
+    }
+    return value as number
+  }
+
+  /**
+   * 判断用户触控的区域是否在滑块上
+   */
   thumbTouchCheck = (e: any) => {
     const nativeEvent = e.nativeEvent
-    const { isRange } = this.props
-    if (isRange) {
-      const otherThumbCoord = this.getThumbCoord(isRange)
+    const { range } = this.props
+    if (range) {
+      const otherThumbCoord = this.getThumbCoord(range)
       const otherCheckResult = otherThumbCoord.contain(
         nativeEvent.locationX,
         nativeEvent.locationY
@@ -166,86 +185,72 @@ export default class Slider extends PureComponent<SliderProps, State> {
   }
 
   getThumbCoord = (isOther?: boolean) => {
-    const state = this.state
-    const props = this.props
-    const touchOverflowSize = this.getTouchOverflowSize(isOther)
-    let thumbSize = state.thumbSize
+    const { thumbSize, otherThumbSize, containerSize } = this.state
+    let currThumb = thumbSize
     if (isOther) {
-      thumbSize = state.otherThumbSize
+      currThumb = otherThumbSize
     }
-
+    const { vertical } = this.props
+    let x = null
+    let y = null
+    if (vertical) {
+      x = (containerSize.width - currThumb.width) / 2
+      y = this.getThumbLeft(this.getCurrentValue(isOther))
+    } else {
+      x = this.getThumbLeft(this.getCurrentValue(isOther))
+      y = (containerSize.height - currThumb.height) / 2
+    }
     return new Coord(
-      touchOverflowSize.width / 2 +
-        this.getThumbLeft(this.getCurrentValue(isOther), isOther) +
-        (thumbSize.width - thumbTouchSize.width) / 2,
-      touchOverflowSize.height / 2 +
-        (state.containerSize.height - thumbTouchSize.height) / 2,
-      thumbTouchSize.width,
-      thumbTouchSize.height
+      x,
+      y,
+      currThumb.width,
+      currThumb.height,
     )
   }
 
+  /**
+   * 滚动状态响应
+   */
+  scroll = (gestureState: Object) => {
+    if (this.props.disabled) {
+      return
+    }
+    if (this.isOther) {
+      const isOtherValue = this.getValue(gestureState, this.isOther)
+      this.setCurrentValue(isOtherValue, this.isOther)
+    } else {
+      const value = this.getValue(gestureState)
+      this.setCurrentValue(value)
+    }
+  }
+
   touchStart = (e: Object) => {
+    this.oldValue = (this.state.value as any).__getValue()
+    this.oldOtherValue = (this.state.otherValue as any).__getValue()
     return this.thumbTouchCheck(e)
   }
 
   pressStart = () => {
     if (this.isOther) {
-      this.otherPreviousLeft = this.getThumbLeft(this.getCurrentValue(this.isOther), this.isOther)
+      this.otherPreviousLeft = this.getThumbLeft(this.getCurrentValue(this.isOther))
     } else {
       this.previousLeft = this.getThumbLeft(this.getCurrentValue())
     }
-    this.triggerEvent('onStart')
   }
 
   lastMove = (_: Object, gestureState: Object) => {
-    if (this.props.disabled) {
-      return
-    }
-    if (this.isOther) {
-      const value = this.getCurrentValue()
-      const isOtherValue = this.getValue(gestureState, this.isOther)
-      if (value > isOtherValue) {
-        return
-      }
-      this.setCurrentValue(isOtherValue, this.isOther)
-    } else {
-      const value = this.getValue(gestureState)
-      const { isRange } = this.props
-      if (isRange) {
-        const isOtherValue = this.getCurrentValue(true)
-        if (value > isOtherValue) {
-          return
-        }
-      }
-      this.setCurrentValue(value)
-    }
-    this.triggerEvent('onChange')
+    this.scroll(gestureState)
   }
 
-  touchEnd = (e: Object, gestureState: Object) => {
-    if (this.props.disabled) {
-      return
+  touchEnd = (_: Object, gestureState: Object) => {
+    this.scroll(gestureState)
+    if (this.oldValue !== this.getCurrentValue()) {
+      this.triggerEvent('onChange')
     }
-    if (this.isOther) {
-      const value = this.getCurrentValue()
-      const isOtherValue = this.getValue(gestureState, this.isOther)
-      if (value > isOtherValue) {
-        return
-      }
-      this.setCurrentValue(isOtherValue, this.isOther)
-    } else {
-      const value = this.getValue(gestureState)
-      const { isRange } = this.props
-      if (isRange) {
-        const isOtherValue = this.getCurrentValue(true)
-        if (value > isOtherValue) {
-          return
-        }
-      }
-      this.setCurrentValue(value)
+
+    if (this.props.range && this.oldOtherValue !== this.getCurrentValue(true)) {
+      this.triggerEvent('onChange')
     }
-    this.triggerEvent('onEnd')
   }
 
   measureContainer = (x: Object) => {
@@ -276,7 +281,6 @@ export default class Slider extends PureComponent<SliderProps, State> {
     ) {
       return
     }
-
     const newState: any = {
       [name]: size
     }
@@ -285,60 +289,115 @@ export default class Slider extends PureComponent<SliderProps, State> {
     this.setState(newState)
   }
 
-  getRatio = (value: number) =>
-    (value - this.props.minValue) /
-    (this.props.maxValue - this.props.minValue)
-
-  getThumbLeft = (value: number, isOther?: boolean) => {
-    const nonRtlRatio = this.getRatio(value)
-    const ratio = nonRtlRatio
-    let thumbWidth = this.state.thumbSize.width
-    if (isOther) {
-      thumbWidth = this.state.otherThumbSize.width
+  /**
+   * 获取可滑动长度
+   */
+  getScrollLength = () => {
+    const { vertical } = this.props
+    const { trackSize } = this.state
+    if (vertical) {
+      return trackSize.height
+    } else {
+      return trackSize.width
     }
+  }
+
+  /**
+   * 获取滑块的坐标的宽度
+   * 如果是横向slider则取width,纵向取height
+   */
+  getThumbOffset = (isOther?: boolean) => {
+    const { vertical } = this.props
+    const { thumbSize, otherThumbSize } = this.state
+    if (vertical && isOther) {
+      return otherThumbSize.height
+    } else if (!vertical && isOther) {
+      return otherThumbSize.width
+    } else if (vertical && !isOther) {
+      return thumbSize.height
+    } else if (!vertical && !isOther) {
+      return thumbSize.height
+    }
+  }
+
+  /**
+   * 获取当前value值所占的百分比
+   */
+  getRatio = (value: number) => {
+    const { min, max } = this.props
+    return (value - min) / (max - min)
+  }
+
+  /**
+   * 滑块在滑动轴上的偏移量
+   * value => x
+   */
+  getThumbLeft = (value: number) => {
+    const { vertical } = this.props
+    let ratio = this.getRatio(value)
+    if (vertical) {
+      ratio = 1 - ratio
+    }
+    const scrollLength = this.getScrollLength()
     return (
-      ratio * (this.state.containerSize.width - thumbWidth)
+      ratio * scrollLength
     )
   }
 
+  /**
+   * 互斥prop
+   * 刻度属性只有正在非纵向轴、非双滑块下才生效
+   */
+  showStep = () => {
+    const { vertical, step, marks, range } = this.props
+    if (!range && !vertical && step && marks) {
+      return true
+    }
+    return false
+  }
+
+  /**
+   * 获取滑动位置所对应的value值，和getThumbLeft方法对应
+   * x => value
+   */
   getValue = (gestureState: Object, isOther?: boolean) => {
-    let thumbSize = this.state.thumbSize
     let previousLeft = this.previousLeft
     if (isOther) {
-      thumbSize = this.state.otherThumbSize
       previousLeft = this.otherPreviousLeft
     }
-    const length = this.state.containerSize.width - thumbSize.width
-    const thumbLeft = previousLeft + (gestureState as any).dx
-
-    const nonRtlRatio = thumbLeft / length
-    const ratio = nonRtlRatio
-
-    if (this.props.step) {
+    const scrollLength = this.getScrollLength()
+    const { step, min, max, vertical } = this.props
+    let thumbLeft = null
+    if (vertical) {
+      thumbLeft = previousLeft + (gestureState as any).dy
+    } else {
+      thumbLeft = previousLeft + (gestureState as any).dx
+    }
+    let ratio = thumbLeft / scrollLength
+    if (vertical) {
+      ratio = 1 - ratio
+    }
+    if (this.showStep()) {
       return Math.max(
-        this.props.minValue,
+        min,
         Math.min(
-          this.props.maxValue,
-          this.props.minValue +
-            Math.round(
-              ratio *
-                (this.props.maxValue - this.props.minValue) /
-                this.props.step
-            ) *
-              this.props.step
+          max,
+          min + Math.round(ratio * (max - min) / step) * step
         )
       )
     }
     return Math.max(
-      this.props.minValue,
+      min,
       Math.min(
-        this.props.maxValue,
-        ratio * (this.props.maxValue - this.props.minValue) +
-          this.props.minValue
+        max,
+        ratio * (max - min) + min
       )
     )
   }
 
+  /**
+   * 获取滑块的value值
+   */
   getCurrentValue = (isOther?: boolean) => {
     let value: any = this.state.value
     if (isOther) {
@@ -361,12 +420,16 @@ export default class Slider extends PureComponent<SliderProps, State> {
     }
   }
 
-  triggerEvent = event => {
+  triggerEvent = (event) => {
     if (this.props[event]) {
-      const args = [Math.round(this.getCurrentValue())]
-      const { isRange } = this.props
-      if (isRange) {
-        args.push(Math.round(this.getCurrentValue(isRange)))
+      let args = [Math.round(this.getCurrentValue())]
+      const { range } = this.props
+      if (range) {
+        if (this.compareValue()) {
+          args.unshift(Math.round(this.getCurrentValue(range)))
+        } else {
+          args.push(Math.round(this.getCurrentValue(range)))
+        }
         this.props[event](args)
       } else {
         this.props[event](args[0])
@@ -374,74 +437,39 @@ export default class Slider extends PureComponent<SliderProps, State> {
     }
   }
 
-  getTouchOverflowSize = (isOther: boolean) => {
-    const state = this.state
-    const props = this.props
-    let thumbSize = state.thumbSize
-
-    if (isOther) {
-      thumbSize = state.otherThumbSize
-    }
-
-    const size: any = {}
-    size.width = Math.max(
-      0,
-      thumbTouchSize.width - thumbSize.width
-    )
-    size.height = Math.max(
-      0,
-      thumbTouchSize.height - state.containerSize.height
-    )
-
-    return size
-  }
-
-  getTouchOverflowStyle = (isOther?: boolean) => {
-    const { width, height } = this.getTouchOverflowSize(isOther)
-
-    const touchOverflowStyle: any = {}
-    if (width !== undefined && height !== undefined) {
-      const verticalMargin = -height / 2
-      touchOverflowStyle.marginTop = verticalMargin
-      touchOverflowStyle.marginBottom = verticalMargin
-
-      const horizontalMargin = -width / 2
-      touchOverflowStyle.marginLeft = horizontalMargin
-      touchOverflowStyle.marginRight = horizontalMargin
-    }
-
-    return touchOverflowStyle
-  }
-
   /**
    * 默认滑块的的滑块图片渲染
    */
   renderThumbImage = (isOther?: boolean) => {
     if (!isOther && !thumbImage) return
-
     if (isOther && !otherThumbImage) return
 
-    return <Image style={[thumbTouchSize, { borderRadius: thumbTouchSize.width / 2 }]} source={isOther ? otherThumbImage as ImageSourcePropType : thumbImage as ImageSourcePropType}/>
+    const { renderThumb } = this.props
+    const { thumbSize } = this.state
+    if (typeof renderThumb === 'function') {
+      return renderThumb(isOther)
+    }
+    return <Image style={[thumbSize, { borderRadius: this.getThumbOffset() / 2 }]} source={isOther ? otherThumbImage as ImageSourcePropType : thumbImage as ImageSourcePropType}/>
   }
 
   /**
    * 刻度模块的渲染
    */
-  renderMarkView = () => {
-    const { step, markOtptions, renderMarkOptionItem, minValue, maxValue } = this.props
-    if (!step || !markOtptions) {
+  renderMarks = () => {
+    const { step, marks, min, max, thumbSize } = this.props
+    if (!this.showStep()) {
       return null
     }
-    const maxStep = Math.ceil(Math.abs((maxValue - minValue) / step)) + 1
+    const maxStep = Math.ceil(Math.abs((max - min) / step)) + 1
     let currStep = 0
     const markViewArr = []
     while (maxStep > currStep) {
-      if (renderMarkOptionItem) {
-        markViewArr.push(renderMarkOptionItem(markOtptions[currStep], currStep))
+      if (React.isValidElement(marks[currStep])) {
+        markViewArr.push(marks[currStep])
       } else {
         markViewArr.push(
-          <View key={currStep} style={styles.markItemView}>
-            <Text style={styles.markItemText}>{markOtptions[currStep]}</Text>
+          <View key={currStep} style={{ width: thumbSize, alignItems: 'center' }}>
+            <Text style={styles.markItemText}>{marks[currStep]}</Text>
             <View style={styles.markItemLine}></View>
           </View>
         )
@@ -461,275 +489,279 @@ export default class Slider extends PureComponent<SliderProps, State> {
    * 渲染滑块的toopTip提示
    */
   renderThumbToolTip = (isOther?: boolean) => {
-    const { showTip, renderToolTip } = this.props
+    const { showTip, renderTip } = this.props
     if (!showTip) {
       return
     }
     const { tip, otherTip } = this.state
     return (
-      <View style={[styles.toolTip, this.showAndroidTip ? { top: 0, marginTop: 0, height: 100 } : {}]}>
-        {
-          renderToolTip ? renderToolTip(isOther ? otherTip : tip)
-          :
-            [
-              <View key={1} style={styles.toolTipTextContain}>
-                <Text style={styles.toolTipText}>{isOther ? otherTip : tip}</Text>
-              </View>,
-              <View key={2} style={styles.toolTipIcon}></View>
-            ]
-        }
+      <View style={[styles.tip, this.showAndroidTip ? { top: 0, marginTop: 0, height: 100 } : {}]}>
+        <View key={1} style={styles.tipContent}>
+          {
+            renderTip ? renderTip(isOther ? otherTip : tip)
+            :
+            <Text style={styles.tipText}>{isOther ? otherTip : tip}</Text>
+          }
+        </View>
+        <View key={2} style={styles.tipIcon}></View>
       </View>
     )
   }
 
   /**
-   * 默认滑块的渲染
+   * 滑动的起始和结束x值
    */
-  renderThumb = () => {
-    const {
-      minValue,
-      maxValue,
-    } = this.props
-    const {
-      value,
-      containerSize,
-      thumbSize
-    } = this.state
+  getScrollRange = () => {
+    const scrollLength = this.getScrollLength()
+    return [0, scrollLength]
+  }
 
-    const thumbLeft = value.interpolate({
-      inputRange: [minValue, maxValue],
-      outputRange: [-1, containerSize.width - thumbSize.width + 1]
-    })
+  /**
+   * 滑块渲染
+   */
+  renderThumb = (isOther?: boolean) => {
+    const { vertical, range } = this.props
+    if (isOther && !range) return
 
-    const thumBg = thumbImage ? {} : {}
+    const { value, otherValue, thumbSize, otherThumbSize } = this.state
+    let currValue = value
+    let currThumb = thumbSize
+    let measureFn = this.measureThumb
+    if (isOther) {
+      currValue = otherValue
+      currThumb = otherThumbSize
+      measureFn = this.measureOtherThumb
+    }
+
+    const thumbLeft = this.getThumbLeft((currValue as any).__getValue())
+    let thumbStyle: any = {
+      transform: [{ translateX: thumbLeft }, { translateY: 0 }],
+      alignItems: 'center',
+      borderRadius: this.getThumbOffset(isOther) / 2,
+    }
+    if (vertical) {
+      thumbStyle.transform = [{ translateX: 0 }, { translateY: thumbLeft }]
+    }
 
     if (this.showAndroidTip) {
       return (
         <Animated.View
-          onLayout={this.measureThumb}
+          onLayout={measureFn}
           renderToHardwareTextureAndroid
           style={[
             styles.thumb,
-            {
-              transform: [{ translateX: thumbLeft }, { translateY: 0 }],
-              height: variables.sliderSlideHeightForTip,
-              alignItems: 'center',
-              justifyContent: 'center'
-            }
+            thumbStyle,
           ]}
         >
-          {this.renderThumbToolTip()}
+          {this.renderThumbToolTip(isOther)}
           <View
             style={[
-              thumBg,
-              thumbTouchSize,
-              { borderRadius: thumbTouchSize.width / 2 }
+              currThumb,
+              { borderRadius: this.getThumbOffset(isOther) / 2 }
             ]}
           >
-            {this.renderThumbImage()}
+            {this.renderThumbImage(isOther)}
           </View>
         </Animated.View>
       )
     }
     return (
       <Animated.View
-        onLayout={this.measureThumb}
+        onLayout={measureFn}
         renderToHardwareTextureAndroid
         style={[
-          thumBg,
           styles.thumb,
-          thumbTouchSize,
-          { borderRadius: thumbTouchSize.width / 2 },
-          {
-            transform: [{ translateX: thumbLeft }, { translateY: 0 }]
-          }
+          currThumb,
+          thumbStyle,
         ]}
       >
-        {this.renderThumbToolTip()}
-        {this.renderThumbImage()}
+        {this.renderThumbToolTip(isOther)}
+        {this.renderThumbImage(isOther)}
       </Animated.View>
     )
   }
 
   /**
-   * 双滑块模式下，另一个滑块的渲染
+   * 两个滑块值比较，滑块A的值是否大于B
    */
-  renderOtherThumb = () => {
-    const {
-      minValue,
-      maxValue,
-      isRange,
-    } = this.props
+  compareValue = () => {
+    const { range } = this.props
+    return range && this.getCurrentValue() >= this.getCurrentValue(true)
+  }
 
-    if (!isRange) {
-      return
+  /**
+   * 滑轨色值计算
+   * 双滑块模式下，需要根据两个滑块的值大小结果互换色值
+   * 垂直滑块模式下，因为滑块的渲染是从顶部计算的，所以滑块需要使用反向色值来实现从底部滑动的效果
+   * 假设滑块A,B
+   */
+  getTrackColor = (isOther?: boolean) => {
+    const { minTrackColor, midTrackColor, maxTrackColor, range, vertical } = this.props
+    let activeColor = ''
+    // 双滑块B
+    if (isOther) {
+      if (this.compareValue()) {
+        if (vertical) {
+          // 纵向双滑块A>=B B => midTrackColor
+          activeColor = midTrackColor
+        } else {
+          // 横向双滑块A>=B B => minTrackColor
+          activeColor = minTrackColor
+        }
+      } else {
+        if (vertical) {
+          // 纵向双滑块A<B B => trackColor
+          activeColor = maxTrackColor
+        } else {
+          // 横向双滑块A<B B => midTrackColor
+          activeColor = midTrackColor
+        }
+      }
+    // 双滑块A
+    } else if (range) {
+      if (this.compareValue()) {
+        if (vertical) {
+          // 纵向双滑块A<B A => trackColor
+          activeColor = maxTrackColor
+        } else {
+          // 横向双滑块A<B A => midTrackColor
+          activeColor = midTrackColor
+        }
+      } else {
+        if (vertical) {
+          // 纵向双滑块A>=B A => midTrackColor
+          activeColor = midTrackColor
+        } else {
+          // 横向单滑块A>=B A => minTrackColor
+          activeColor = minTrackColor
+        }
+      }
+    // 单滑块
+    } else {
+      if (vertical) {
+        // 纵向单滑块 A => trackColor
+        activeColor = maxTrackColor
+      } else {
+        // 横向单滑块 A => minTrackColor
+        activeColor = minTrackColor
+      }
     }
-
-    const {
-      otherValue,
-      containerSize,
-      otherThumbSize
-    } = this.state
-
-    const thumBg = thumbImage ? {} : {}
-
-    const otherThumbRight = otherValue.interpolate({
-      inputRange: [minValue, maxValue],
-      outputRange: [-1, containerSize.width - otherThumbSize.width + 1]
-    })
-
-    if (this.showAndroidTip) {
-      return (
-        <Animated.View
-          onLayout={this.measureOtherThumb}
-          renderToHardwareTextureAndroid
-          style={[
-            styles.thumb,
-            {
-              transform: [{ translateX: otherThumbRight }, { translateY: 0 }],
-              height: variables.sliderSlideHeightForTip,
-              alignItems: 'center',
-              justifyContent: 'center'
-            }
-          ]}
-        >
-          {this.renderThumbToolTip(true)}
-          <View
-            style={[
-              thumBg,
-              thumbTouchSize,
-              { borderRadius: thumbTouchSize.width / 2 }
-            ]}
-          >
-            {this.renderThumbImage()}
-          </View>
-        </Animated.View>
-      )
-    }
-
-    return (
-      <Animated.View
-        onLayout={this.measureOtherThumb}
-        renderToHardwareTextureAndroid
-        style={[
-          thumBg,
-          styles.thumb,
-          {
-            transform: [{ translateX: otherThumbRight }, { translateY: 0 }]
-          }
-        ]}
-      >
-        {this.renderThumbToolTip(true)}
-        {this.renderThumbImage()}
-      </Animated.View>
-    )
+    return [activeColor]
   }
 
   /**
    * 默认滑块划过的滑轨
    */
-  renderMinimumTrack = () => {
-    const {
-      minValue,
-      maxValue,
-      minTrackColor,
-      rangeMinTrackColor,
-      disabled,
-      isRange
-    } = this.props
-    const {
-      value,
-      containerSize,
-      thumbSize
-    } = this.state
-    const minimumTrackWidth = value.interpolate({
-      inputRange: [minValue, maxValue],
-      outputRange: [0, containerSize.width - thumbSize.width]
-    })
-    const minimumTrackColor = isRange ? rangeMinTrackColor : (disabled ? minTrackDisabledColor : minTrackColor)
-    const minimumTrackStyle = {
+  renderMinimumTrack = (isOther?: boolean) => {
+    const { disabled, range, vertical, trackWeight } = this.props
+    if (isOther && !range) return
+
+    const { value, otherValue } = this.state
+    let currValue: any = value
+    let minimumTrackColor = null
+    let currKey = 'minTrack'
+    if (isOther) {
+      currValue = otherValue
+      currKey = 'otherMinTrack'
+    }
+    const minimumTrackWidth = this.getThumbLeft(currValue.__getValue())
+    // 滑轨颜色值设定
+    const trackColors = this.getTrackColor(isOther)
+    minimumTrackColor = trackColors[0]
+    const minimumTrackStyle: any = {
       position: 'absolute',
-      width: Animated.add(minimumTrackWidth, thumbSize.width / 2),
       backgroundColor: minimumTrackColor
+    }
+    let trackStyle = null
+    if (vertical) {
+      minimumTrackStyle.height = minimumTrackWidth
+      minimumTrackStyle.width = this.props.trackWeight
+      trackStyle = { marginVertical: this.getThumbOffset(isOther) / 2 }
+    } else {
+      minimumTrackStyle.height = this.props.trackWeight
+      minimumTrackStyle.width = minimumTrackWidth
+      trackStyle = { marginHorizontal: this.getThumbOffset(isOther) / 2 }
     }
     return (
       <Animated.View
+        key={currKey}
         renderToHardwareTextureAndroid
-        style={[styles.track, minimumTrackStyle]}
+        style={[{ borderRadius: trackWeight / 2 }, minimumTrackStyle, trackStyle]}
       />
     )
   }
 
-  /**
-   * 双滑轨模式下，另一个滑块划过的滑轨
-   */
-  renderOtherMinimumTrack = () => {
-    const {
-      minValue,
-      maxValue,
-      minTrackColor,
-      disabled
-    } = this.props
-    const {
-      otherValue,
-      containerSize,
-      otherThumbSize
-    } = this.state
-    const minimumTrackWidth = otherValue.interpolate({
-      inputRange: [minValue, maxValue],
-      outputRange: [0, containerSize.width - otherThumbSize.width]
-    })
-    const minimumTrackColor = disabled ? minTrackDisabledColor : minTrackColor
-    const minimumTrackStyle = {
-      position: 'absolute',
-      width: Animated.add(minimumTrackWidth, otherThumbSize.width / 2),
-      backgroundColor: minimumTrackColor
+  getTrackStyle = () => {
+    const { range, vertical, maxTrackColor, minTrackColor, trackWeight, thumbSize } = this.props
+    const trackStyle: any = { backgroundColor: maxTrackColor }
+    let marginArr = [ 'marginLeft', 'marginRight', 'marginHorizontal', 'height' ]
+    const rest = thumbSize - trackWeight
+    const spacing = rest > 0 ? Math.ceil(rest / 2) : 0
+    if (vertical) {
+      marginArr = [ 'marginTop', 'marginBottom', 'marginVertical', 'width' ]
+      trackStyle.flex = 1
+      trackStyle.alignItems = 'flex-start'
+      trackStyle.backgroundColor = minTrackColor
+      trackStyle.marginHorizontal = spacing
+    } else {
+      trackStyle.marginVertical = spacing
     }
-    return (
-      <Animated.View
-        renderToHardwareTextureAndroid
-        style={[styles.track, minimumTrackStyle]}
+    // 样式处理
+    if (range) {
+      trackStyle[marginArr[0]] = this.getThumbOffset() / 2
+      trackStyle[marginArr[1]] = this.getThumbOffset(true) / 2
+    } else {
+      trackStyle[marginArr[2]] = this.getThumbOffset() / 2
+    }
+    trackStyle[marginArr[3]] = this.props.trackWeight
+    return trackStyle
+  }
+
+  renderTracks = () => {
+    const { vertical, trackWeight } = this.props
+    const trackStyle: any = this.getTrackStyle()
+    // 如果value > oldValue，则代表两个滑块滑动位置互换，则更新渲染层级
+    let tracks = [
+      <View
+        style={[ { borderRadius: trackWeight / 2 }, trackStyle ]}
+        onLayout={this.measureTrack}
       />
-    )
+    ]
+    // vertical的值和this.compareValue()值相同时，次滑块轴在底层，反之主滑块轴在底层
+    if (vertical === this.compareValue()) {
+      tracks.push(this.renderMinimumTrack(true))
+      tracks.push(this.renderMinimumTrack())
+    } else {
+      tracks.push(this.renderMinimumTrack())
+      tracks.push(this.renderMinimumTrack(true))
+    }
+    return tracks
   }
 
   render () {
-    const {
-      maxTrackColor,
-      style,
-      showTip,
-      renderThumb
-    } = this.props
-
-    const touchOverflowStyle = this.getTouchOverflowStyle()
+    const { style, vertical } = this.props
 
     return (
-      <View style={style}>
-        {this.renderMarkView()}
+      <View
+        style={[
+          { flexDirection: vertical ? 'row' : 'column' },
+          style
+        ]}>
+        {this.renderMarks()}
         <View
-          style={[
-            styles.silderContainer,
-            showTip ? { height: variables.sliderSlideHeightForTip } : {}
-          ]}
+          style={{
+            alignItems: vertical ? 'center' : undefined,
+            justifyContent: vertical ? undefined : 'center'
+          }}
           onLayout={this.measureContainer}
         >
-          <View
-            style={[
-              styles.track,
-              { backgroundColor: maxTrackColor },
-            ]}
-            renderToHardwareTextureAndroid
-            onLayout={this.measureTrack}
-          />
-          {this.renderOtherMinimumTrack()}
-          {this.renderMinimumTrack()}
+          {this.renderTracks()}
           {this.renderThumb()}
-          {this.renderOtherThumb()}
+          {this.renderThumb(true)}
           <View
             renderToHardwareTextureAndroid
-            style={[styles.touchArea, touchOverflowStyle]}
-            {...this.panResponder.panHandlers}
-          >
+            style={styles.touchArea}
+            {...this.panResponder.panHandlers}>
           </View>
         </View>
       </View>

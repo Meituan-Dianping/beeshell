@@ -32,10 +32,10 @@ export default class NavigationBarScreen extends Component<{}, {}> {
           title='标题'
           backLabel='返回'
           forwardLabel='下一步'
-          backCallback={() => {
+          onPressBack={() => {
             this.handlePress('返回')
           }}
-          forwardCallback={() => {
+          onPressForward={() => {
             this.handlePress('下一步')
           }}>
         </NavigationBar>

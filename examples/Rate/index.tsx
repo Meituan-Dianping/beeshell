@@ -29,16 +29,9 @@ export default class RateScreen extends Component<any, any> {
   componentDidMount () {
     setTimeout(() => {
       this.setState({
-        value1: 0
+        value1: 1
       })
     }, 2000)
-
-    // 动态修改 exampleIcons
-    // setTimeout(() => {
-    //   this.setState({
-    //     exampleIcons: iconsCDN
-    //   })
-    // }, 1000)
   }
 
   rateChange (val) {

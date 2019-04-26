@@ -73,7 +73,7 @@ class Home extends Component<any, any> {
 
   componentDidMount() {
     setTimeout(() => {
-      this.props.navigation.navigate('Modal')
+      this.props.navigation.navigate('Slider')
     }, 1000)
   }
 
@@ -169,7 +169,7 @@ function MakeHeader (navigation, title, backLabel) {
     <NavigationBar
       title={title}
       backLabel={backLabel}
-      backCallback={() => {
+      onPressBack={() => {
         navigation.back()
       }} />
   )

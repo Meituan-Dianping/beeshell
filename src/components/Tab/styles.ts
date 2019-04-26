@@ -5,7 +5,7 @@ export default {
     backgroundColor: variables.mtdFillBase
   },
 
-  scrollWrapper: {
+  content: {
     flexDirection: 'row'
   },
 

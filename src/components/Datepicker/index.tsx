@@ -4,12 +4,11 @@ import { noop } from '../../common/utils/fns'
 import { Scrollpicker, ScrollpickerProps } from '../Scrollpicker'
 
 export interface DatepickerProps extends ScrollpickerProps {
-  startYear?: number,
-  proportion?: number[],
-  numberOfYears?: number,
-  date?: string | null | undefined,
-  onChange?: Function,
-  contentPaddingHorizontal?: number
+  startYear?: number
+  proportion?: number[]
+  numberOfYears?: number
+  date?: string | null | undefined
+  onChange?: Function
 }
 
 export class Datepicker extends React.Component<DatepickerProps, any> {
@@ -18,8 +17,7 @@ export class Datepicker extends React.Component<DatepickerProps, any> {
     numberOfYears: 10,
     date: undefined,
     onChange: noop,
-    proportion: [2, 1, 1],
-    contentPaddingHorizontal: 0
+    proportion: [2, 1, 1]
   }
 
   constructor (props) {
@@ -125,12 +123,8 @@ export class Datepicker extends React.Component<DatepickerProps, any> {
     return days
   }
 
-  // componentDidMount() {}
-
   componentWillReceiveProps (nextProps) {
-    // console.log('componentWillReceiveProps', nextProps == this.props);
-
-    if (nextProps !== this.props) {
+    if (nextProps.date !== this.props) {
       this.setState({
         ...this.initialize(nextProps)
       })
@@ -162,7 +156,7 @@ export class Datepicker extends React.Component<DatepickerProps, any> {
     })
   }
 
-  onChange (index1, index2) {
+  handleChange = (index1, index2) => {
     const { list, value } = this.state
 
     let newList = [...list]
@@ -227,7 +221,7 @@ export class Datepicker extends React.Component<DatepickerProps, any> {
         {...this.props}
         list={viewList}
         value={value}
-        onChange={this.onChange.bind(this)}
+        onChange={this.handleChange}
       />
     )
   }

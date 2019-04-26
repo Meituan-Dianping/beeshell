@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 
 import {
   Text,
@@ -19,6 +19,8 @@ const screen = Dimensions.get('window')
 export interface PickerProps {
   style?: ViewStyle
   label?: any
+  activeIcon?: ReactElement<any>
+  unactiveIcon?: ReactElement<any>
   disabled?: boolean,
   cancelable?: boolean
   onToggle?: Function
@@ -34,6 +36,8 @@ export class Picker extends React.Component<PickerProps, PickerState> {
   private trigger = null
   static defaultProps = {
     label: '请选择',
+    activeIcon: <Icon type='caret-up' size={12} tintColor={variables.mtdBrandPrimaryDark} />,
+    unactiveIcon: <Icon type='caret-down' size={12} tintColor={variables.mtdGrayBase} />,
     disabled: false,
     cancelable: true,
     style: {},
@@ -51,7 +55,7 @@ export class Picker extends React.Component<PickerProps, PickerState> {
   handleToggle = (active: boolean) => {
     const { disabled, onToggle } = this.props
     if (disabled) {
-      return Promise.reject(`Picker 属性 disabled 为 true 不能${active ? '打开' : '关闭'}`)
+      return Promise.reject(new Error(`Picker 属性 disabled 为 true 不能${active ? '打开' : '关闭'}`))
     }
     return new Promise((resolve) => {
       this.setState({
@@ -81,7 +85,11 @@ export class Picker extends React.Component<PickerProps, PickerState> {
 
   close () {
     if (this.props.disabled) {
-      return Promise.reject('Picker 属性 disabled 为 true 不能关闭')
+      return Promise.reject(new Error('Picker 组件 disabled 属性为 true，不能关闭'))
+    }
+
+    if (!this.slideModal) {
+      return Promise.reject(new Error('Picker 组件的 slideModal 属性不存在，无法关闭'))
     }
 
     return this.slideModal.close()
@@ -89,10 +97,13 @@ export class Picker extends React.Component<PickerProps, PickerState> {
 
   open () {
     if (this.props.disabled) {
-      return Promise.reject('Picker 属性 disabled 为 true 不能打开')
+      return Promise.reject(new Error('Picker 组件 disabled 属性为 true 不能打开'))
     }
 
     return new Promise((resolve, reject) => {
+      if (!this.trigger) {
+        return reject(new Error('Picker 组件的 trigger 属性不存在，无法打开'))
+      }
       this.trigger.measure((fx, fy, width, height, px, py) => {
         this.setState({
           offsetY: py + height
@@ -110,11 +121,8 @@ export class Picker extends React.Component<PickerProps, PickerState> {
     })
   }
 
-  renderIcon (active, size, tintColor) {
-    size = size - 3
-    const type = active ? 'caret-up' : 'caret-down'
-
-    return <Icon type={type} size={size} tintColor={tintColor} />
+  renderIcon (active) {
+    return active ? this.props.activeIcon : this.props.unactiveIcon
   }
 
   render () {
@@ -154,12 +162,13 @@ export class Picker extends React.Component<PickerProps, PickerState> {
                   pickerStyles.btnText,
                   {
                     fontSize,
-                    color: fontColor
+                    color: fontColor,
+                    marginRight: 3
                   }
                 ]}>
                 {label}
               </Text>
-              { this.renderIcon(active, fontSize, fontColor) }
+              { this.renderIcon(active) }
             </View>
           }
         </TouchableOpacity>

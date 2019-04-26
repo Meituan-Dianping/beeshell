@@ -16,7 +16,7 @@ export { actionsheetStyles }
 
 const screen = Dimensions.get('window')
 
-interface OptionItem {
+interface DataItem {
   label: string
   [propName: string]: any
 }
@@ -24,11 +24,11 @@ interface OptionItem {
 interface ActionsheetProps extends SlideModalProps {
   header?: any
   footer?: any
-  options?: OptionItem[] | any
+  data?: DataItem[] | any
   maxShowNum?: number | null | undefined
   renderItem?: Function
-  cancelCallback?: Function
-  confirmCallback?: Function
+  onPressCancel?: Function
+  onPressConfirm?: Function
   useSafeAreaView?: boolean
 }
 
@@ -42,10 +42,10 @@ export class Actionsheet extends SlideModal<ActionsheetProps> {
     footer: '取消',
 
     useSafeAreaView: true,
-
+    data: [],
     renderItem: null,
-    cancelCallback: null,
-    confirmCallback: null
+    onPressCancel: null,
+    onPressConfirm: null
   }
 
   constructor (props) {
@@ -64,7 +64,7 @@ export class Actionsheet extends SlideModal<ActionsheetProps> {
   }
 
   getBody () {
-    const { options, maxShowNum, renderItem } = this.props
+    const { data, maxShowNum, renderItem } = this.props
     const styles = actionsheetStyles
     return (
       <ScrollView
@@ -74,8 +74,8 @@ export class Actionsheet extends SlideModal<ActionsheetProps> {
         ]}
         alwaysBounceVertical={maxShowNum != null}
       >
-        {options.map((item, index) => {
-          const tmpStyle = index === options.length - 1 ? { borderBottomWidth: 0 } : {}
+        {data.map((item, index) => {
+          const tmpStyle = index === data.length - 1 ? { borderBottomWidth: 0 } : {}
           return (
             <TouchableOpacity
               key={index}
@@ -101,8 +101,8 @@ export class Actionsheet extends SlideModal<ActionsheetProps> {
     )
   }
 
-  handlePress (type, item?, index?) {
-    const callbackName = type + 'Callback'
+  handlePress (type: string, item?, index?) {
+    const callbackName = 'onPress' + type.slice(0, 1).toUpperCase() + type.slice(1)
     this.close().then(() => {
       this.props[callbackName] && this.props[callbackName](item, index)
     }).catch((e) => {

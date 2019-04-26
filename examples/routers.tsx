@@ -235,8 +235,8 @@ export const pageList = [
   {
     screen: Dropdown,
     key: 'Dropdown',
-    label: '下拉选择',
-    group: 'other'
+    label: '下拉菜单',
+    group: 'navigation'
   },
 
   {
