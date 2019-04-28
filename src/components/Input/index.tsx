@@ -145,7 +145,7 @@ export class Input extends Component<InputProps, InputState> {
               this.handleChange('')
             }}>
             <Icon
-              type={'times-circle'}
+              source={require(`../../common/images/icons/times-circle.png`)}
               size={15}
             />
           </TouchableOpacity> : null

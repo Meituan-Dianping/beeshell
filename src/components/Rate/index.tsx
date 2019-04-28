@@ -2,11 +2,12 @@ import React, { Component, ReactElement } from 'react'
 import { StyleSheet, View, PanResponder, ViewStyle } from 'react-native'
 import { Icon } from '../Icon'
 import styles from './styles'
+import variables from '../../common/styles/variables'
 
 export interface RateProps {
   style?: ViewStyle
   value?: number
-  maximum?: number
+  total?: number
   icons?: {
     empty: ReactElement<any>
     full: ReactElement<any>
@@ -14,6 +15,7 @@ export interface RateProps {
   }
   iconSize?: number
   iconSpace?: number
+  iconColor?: string
   enableHalf?: boolean // 开启半星
   onChange?: Function
 }
@@ -22,15 +24,16 @@ const rateStyles = StyleSheet.create(styles as any)
 
 export class Rate extends Component<RateProps, any> {
   static defaultProps = {
-    maximum: 5,
+    total: 5,
     icons: {
-      empty: <Icon type='star-o' />,
-      full: <Icon type='star' />,
-      half: <Icon type='star-half-o' />
+      empty: <Icon source={require(`../../common/images/icons/star-o.png`)} />,
+      full: <Icon source={require(`../../common/images/icons/star.png`)} />,
+      half: <Icon source={require(`../../common/images/icons/star-half-o.png`)} />
     },
     iconSize: 20,
     iconSpace: 4,
-    enableHalf: true
+    enableHalf: true,
+    iconColor: variables.mtdBrandPrimaryDark
   }
 
   private panResponder = null
@@ -74,10 +77,10 @@ export class Rate extends Component<RateProps, any> {
   }
 
   renderIcons (value) {
-    const { icons: { half, full, empty }, maximum, iconSpace, iconSize } = this.props
+    const { icons: { half, full, empty }, total, iconSpace, iconSize, iconColor } = this.props
     const ret = []
-    for (let i = 0; i < maximum; i++) {
-      const marginRight = i === maximum - 1 ? 0 : iconSpace
+    for (let i = 0; i < total; i++) {
+      const marginRight = i === total - 1 ? 0 : iconSpace
       if (
         half &&
         value > i &&
@@ -86,18 +89,21 @@ export class Rate extends Component<RateProps, any> {
         const tmpProps = { ...half.props, key: i, style: [{ marginRight }, half.props.style] }
         if (half && half.type && (half.type as any).displayName === 'Icon') {
           tmpProps.size = iconSize
+          tmpProps.tintColor = iconColor
         }
         ret.push(React.cloneElement(half, tmpProps))
       } else if (value >= i + 1) {
         const tmpProps = { ...full.props, key: i, style: [{ marginRight }, full.props.style] }
         if (full && full.type && (full.type as any).displayName === 'Icon') {
           tmpProps.size = iconSize
+          tmpProps.tintColor = iconColor
         }
         ret.push(React.cloneElement(full, tmpProps))
       } else {
         const tmpProps = { ...empty.props, key: i, style: [{ marginRight }, empty.props.style] }
         if (empty && empty.type && (empty.type as any).displayName === 'Icon') {
           tmpProps.size = iconSize
+          tmpProps.tintColor = iconColor
         }
         ret.push(React.cloneElement(empty, tmpProps))
       }
@@ -113,7 +119,7 @@ export class Rate extends Component<RateProps, any> {
       })
     })
     return p.then((containerViewX: number) => {
-      const { iconSize, iconSpace, maximum, enableHalf } = this.props
+      const { iconSize, iconSpace, total, enableHalf } = this.props
       const locationX = pageX - containerViewX
       // console.log(pageX, containerViewX)
       if (locationX <= 0) {
@@ -121,8 +127,8 @@ export class Rate extends Component<RateProps, any> {
       }
       const unitWidth = iconSize + iconSpace
       let value = Math.floor(locationX / unitWidth)
-      if (value >= maximum) {
-        return maximum
+      if (value >= total) {
+        return total
       }
       const rest = locationX - unitWidth * value
       if (rest > 0 && rest < (iconSize / 2)) {

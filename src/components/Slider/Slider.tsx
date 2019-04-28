@@ -495,7 +495,11 @@ export default class Slider extends PureComponent<SliderProps, State> {
     }
     const { tip, otherTip } = this.state
     return (
-      <View style={[styles.tip, this.showAndroidTip ? { top: 0, marginTop: 0, height: 100 } : {}]}>
+      <View
+        style={[
+          styles.tip,
+          // this.showAndroidTip ? { top: 0, marginTop: 0, height: 100 } : {}
+        ]}>
         <View key={1} style={styles.tipContent}>
           {
             renderTip ? renderTip(isOther ? otherTip : tip)

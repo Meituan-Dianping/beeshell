@@ -36,6 +36,8 @@ import Popover from './Popover'
 import TreeView from './TreeView'
 import Ruler from './Ruler'
 import Topview from './Topview'
+import Demo1Screen from './Demo1Screen'
+import Demo2Screen from './Demo2Screen'
 
 console.disableYellowBox = true
 
@@ -266,4 +268,16 @@ export const pageList = [
     label: '刻度尺',
     group: 'other'
   },
+  {
+    screen: Demo1Screen,
+    key: 'Demo1Screen',
+    label: 'Buttons',
+    group: 'demo'
+  },
+  {
+    screen: Demo2Screen,
+    key: 'Demo2Screen',
+    label: 'Form',
+    group: 'demo'
+  }
 ]

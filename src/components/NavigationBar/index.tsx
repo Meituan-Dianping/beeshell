@@ -71,7 +71,7 @@ export class NavigationBar extends Component<NavigationBarProps, any> {
                 alignItems: 'center'
               }}>
               <Icon
-                type='angle-left'
+                source={require(`../../common/images/icons/angle-left.png`)}
                 size={fontSize}
                 tintColor={fontColor}>
               </Icon>

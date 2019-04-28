@@ -59,7 +59,7 @@ export default class RateScreen extends Component<any, any> {
         <View style={[styles.panel, { alignItems: 'center' }]}>
           <Text>value3: {this.state.value3 || 0}</Text>
           <Rate
-            maximum={3}
+            total={3}
             value={this.state.value3 || 0}
             icons={customIcons}
             iconSpace={80}

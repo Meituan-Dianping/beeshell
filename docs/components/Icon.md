@@ -39,3 +39,4 @@ import { Icon } from '@roo/roo-mobile-rn'
 | type | string | true | 'caret-down' | 图标类型 |
 | size | number | false | 20 | 图标大小 |
 | tintColor | string | false | brandPrimaryDark 的色值 | 图标颜色，注意只支持 iOS 平台 |
+| source | ImageSourcePropType | false | null | 自定义图片 |

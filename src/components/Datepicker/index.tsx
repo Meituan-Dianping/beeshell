@@ -15,7 +15,7 @@ export class Datepicker extends React.Component<DatepickerProps, any> {
   static defaultProps = {
     startYear: 2018,
     numberOfYears: 10,
-    date: undefined,
+    date: 'undefined',
     onChange: noop,
     proportion: [2, 1, 1]
   }
@@ -68,6 +68,9 @@ export class Datepicker extends React.Component<DatepickerProps, any> {
   }
 
   getDateInputByString (param) {
+    if (!param) {
+      return null
+    }
     let input = param.split('-')
     if (input.length !== 3) {
       return null

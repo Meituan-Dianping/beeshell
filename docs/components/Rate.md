@@ -24,7 +24,7 @@ import Rate from '@roo/roo-mobile-rn/dist/components/Rate';
 import { Rate } from '@roo/roo-mobile-rn'
 
 <Rate
-  maximum={3}
+  total={3}
   value={1}
   iconSize={20}
   iconSpace={80}
@@ -42,7 +42,7 @@ import { Rate } from '@roo/roo-mobile-rn'
 | ---- | ---- | ---- | ---- | ---- |
 | style | ViewStyle | false | {} | 自定义样式 |
 | value | number | false | 0 | 分数 |
-| maximum | number | false | 5 | 最大值 |
+| total | number | false | 5 | 总分数 |
 | icons | object | false | {} | 图标元素集合 { empty: ReactElement, full: ReactElement, half?: ReactElement }  |
 | iconSize | number| true | 20 | 图标的尺寸 |
 | iconSpace | number| true | 4 | 图标的间隔 |

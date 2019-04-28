@@ -116,7 +116,8 @@ export default class TipScreen extends Component<{}, any> {
               <View>
                 <ActivityIndicator size='small' color='#fff' />
                 <Text style={{ color: '#fff', textAlign: 'center', marginTop: 10 }}>加载中...</Text>
-              </View>}
+              </View>
+            }
             cancelable={true}>
           </Tip>
         </View>

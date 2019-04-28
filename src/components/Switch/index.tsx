@@ -14,7 +14,7 @@ import {
 const styles = StyleSheet.create<any>(switchStyles)
 
 const SCALE = 6 / 5
-const borderColor = variables.mtdGrayLightest
+const borderColor = '#c5c5c5'
 const defaultShadowColor = variables.mtdGray
 const disabledShadowColor = variables.mtdGrayLightest
 const switchWidth = 50
@@ -53,7 +53,7 @@ export class Switch extends Component<SwitchProps, SwitchState> {
 
   offset: number
   panResponder: PanResponderInstance
-  disabledColor: string
+  shadowColor: string
 
   constructor (props) {
     super(props)
@@ -68,7 +68,6 @@ export class Switch extends Component<SwitchProps, SwitchState> {
     }
 
     this.offset = switchWidth - switchHeight + 1
-    this.disabledColor = disabled ? disabledShadowColor : defaultShadowColor
   }
 
   componentWillReceiveProps (nextProps) {
@@ -198,7 +197,7 @@ export class Switch extends Component<SwitchProps, SwitchState> {
       height: switchHeight,
       alignItems,
       borderRadius: switchHeight / 2,
-      borderWidth: 1,
+      borderWidth: StyleSheet.hairlineWidth,
       borderColor,
       backgroundColor: interpolatedBackgroundColor
     }
@@ -207,7 +206,8 @@ export class Switch extends Component<SwitchProps, SwitchState> {
   getRockerBaseStyle = () => {
     const { switchAnimation, handlerAnimation, value } = this.state
     const {
-      rockerSize
+      rockerSize,
+      disabled
     } = this.props
 
     const interpolatedCircleColor = switchAnimation.interpolate({
@@ -223,21 +223,18 @@ export class Switch extends Component<SwitchProps, SwitchState> {
       extrapolate: 'clamp'
     })
 
-    const { disabled } = this.props
-    const rockerBorderColor = disabled ? disabledShadowColor : borderColor
-
     return {
       backgroundColor: interpolatedCircleColor,
       width: handlerAnimation,
       height: rockerSizeMap[rockerSize],
       marginHorizontal: (switchHeight - rockerSizeMap[rockerSize]) / 2 - 1,
       borderRadius: switchHeight / 2,
-      shadowColor: this.disabledColor,
+      shadowColor: disabled ? disabledShadowColor : defaultShadowColor,
       shadowOffset: { h : 2, w : 2 },
       shadowRadius: 2,
       shadowOpacity: 0.8,
       transform: [{ translateX: interpolatedTranslateX }],
-      borderColor: rockerBorderColor
+      borderColor: disabled ? disabledShadowColor : borderColor
     }
   }
 
@@ -249,7 +246,7 @@ export class Switch extends Component<SwitchProps, SwitchState> {
         {...this.panResponder.panHandlers}
         style={[styles.container, this.getContainBaseStyle(), this.props.style]}>
           <Animated.View style={[this.getRockerBaseStyle(), {
-            borderWidth: (Platform.OS === 'android' && Platform.Version < 21) ? 1 : 0
+            borderWidth: (Platform.OS === 'android' && Platform.Version < 21) ? StyleSheet.hairlineWidth : 0
           },
             (Platform.OS === 'android' && Platform.Version >= 21) ? { elevation } : {}
           ]}

@@ -10,6 +10,7 @@ import {
   NavigationParams
 } from '@mrn/react-navigation'
 
+// @ts-ignore
 import { withSafeArea } from '@mrn/react-native-safe-area-view'
 import { NavigationBar } from '../src'
 import { pageList } from './routers'
@@ -56,6 +57,11 @@ class Home extends Component<any, any> {
         {
           label: '基础工具',
           key: 'base'
+        },
+
+        {
+          label: '演示',
+          key: 'demo'
         }
       ]
     }
@@ -73,7 +79,7 @@ class Home extends Component<any, any> {
 
   componentDidMount() {
     setTimeout(() => {
-      this.props.navigation.navigate('Slider')
+      this.props.navigation.navigate('Demo2Screen')
     }, 1000)
   }
 
@@ -167,11 +173,13 @@ class Home extends Component<any, any> {
 function MakeHeader (navigation, title, backLabel) {
   return (
     <NavigationBar
+      style={{ borderBottomColor: variables.mtdBorderColorDark, borderBottomWidth: StyleSheet.hairlineWidth }}
       title={title}
       backLabel={backLabel}
       onPressBack={() => {
         navigation.back()
-      }} />
+      }}
+    />
   )
 }
 
@@ -187,7 +195,7 @@ let RootStack = createStackNavigator({
   ...pageList.reduce((res, item) => {
     res[item.key] = {
       navigationOptions: ({ navigation }) => ({
-        header: MakeHeader(navigation, item.key, '')
+        header: MakeHeader(navigation, item.label, '')
       }),
       ...item
     }
