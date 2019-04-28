@@ -48,7 +48,7 @@ export class Switch extends Component<SwitchProps, SwitchState> {
     value: false,
     disabled: false,
     rockerSize: 'lg',
-    activeColor: variables.mtdBrandPrimary
+    activeColor: variables.mtdBrandPrimaryDark
   }
 
   offset: number

@@ -52,8 +52,6 @@ export default class Demo2Screen extends Component<{}, any> {
           <Form.Item label='是否接收消息' hasLine>
             <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
               <Switch value={true} rockerSize='sm' activeColor={variables.mtdBrandPrimaryDark} />
-              <Switch value={true} rockerSize='lg' activeColor={variables.mtdBrandPrimaryDark} />
-              <Switch value={false} disabled rockerSize='lg' activeColor={variables.mtdBrandPrimaryDark} />
             </View>
           </Form.Item>
           <Form.Item label='配送评分' hasLine>
@@ -71,7 +69,7 @@ export default class Demo2Screen extends Component<{}, any> {
             </Checkbox>
           </Form.Item>
           <Form.Item label='配送价格' hasLine>
-            <Slider range min={0} max={20} value={[3, 17]} onChange={(value) => { console.log(value) }} showTip minTrackColor={variables.mtdFillGray} midTrackColor={variables.mtdBrandInfo} maxTrackColor={variables.mtdFillGray} />
+            <Slider range min={0} max={20} value={[3, 17]} onChange={(value) => { console.log(value) }} showTip minTrackColor={variables.mtdFillGray} midTrackColor={variables.mtdBrandPrimaryDark} maxTrackColor={variables.mtdFillGray} />
           </Form.Item>
           <Form.Item label='日期' hasLine>
             <TouchableOpacity
