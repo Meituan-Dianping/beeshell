@@ -20,7 +20,7 @@ const componentStyles = StyleSheet.create({
   }
 })
 
-export default class ButtonScreen extends Component<{}, {}> {
+export default class ButtonScreen extends Component<{}, any> {
   constructor (p) {
     super(p)
     this.state = {
@@ -35,7 +35,18 @@ export default class ButtonScreen extends Component<{}, {}> {
         <Text style={styles.header}>预定义样式</Text>
         <View style={styles.panel}>
           <View style={componentStyles.row}>
-            <Button style={[componentStyles.spacingH, componentStyles.spacingV]} type='default' size='sm'>默认 default</Button>
+            <Button
+              testID='btn1'
+              style={[componentStyles.spacingH, componentStyles.spacingV]}
+              type='default'
+              size='sm'
+              onPress={() => {
+                this.setState({
+                  count: this.state.count + 1
+                })
+              }}>
+              默认 default
+            </Button>
             <Button style={[componentStyles.spacingH, componentStyles.spacingV]} type='primary' size='sm' textColorInverse>首选项 primary</Button>
             <Button style={[componentStyles.spacingH, componentStyles.spacingV]} type='success' size='sm'>成功 success</Button>
             <Button style={[componentStyles.spacingH, componentStyles.spacingV]} type='info' size='sm'>一般信息 info</Button>
@@ -43,6 +54,7 @@ export default class ButtonScreen extends Component<{}, {}> {
             <Button style={[componentStyles.spacingH, componentStyles.spacingV]} type='danger' size='sm'>危险 danger</Button>
             <Button type='text' size='sm'>纯文本 text</Button>
           </View>
+          {this.state.count ? <Text testID='text'>点击了按钮 {this.state.count}</Text> : null}
         </View>
 
         <Text style={styles.header}>尺寸</Text>

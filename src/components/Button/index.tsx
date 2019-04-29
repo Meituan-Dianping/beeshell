@@ -34,6 +34,7 @@ const paddingMap = {
 }
 
 export interface ButtonProps {
+  testID?: string
   style?: ViewStyle | ViewStyle[]
   textStyle?: TextStyle | TextStyle[]
   textColorInverse?: boolean
@@ -68,7 +69,7 @@ export class Button extends React.Component<ButtonProps, {}> {
   }
 
   render () {
-    const { type, disabled, style, textStyle, size , children, textColorInverse } = this.props
+    const { type, disabled, style, textStyle, size , children, textColorInverse, testID } = this.props
 
     const styleWrapper = buttonStyles[type + 'Wrapper'] || buttonStyles.defaultWrapper
     const styleText = buttonStyles[type + 'Text'] || buttonStyles.defaultText
@@ -77,6 +78,7 @@ export class Button extends React.Component<ButtonProps, {}> {
 
     return (
       <TouchableOpacity
+        testID={testID}
         ref={c => (this.containerRef = c)}
         style={[
           styleWrapper,
