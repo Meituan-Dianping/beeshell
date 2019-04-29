@@ -2,9 +2,11 @@ import React from 'react'
 import { shallow, configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import { SlideModal } from '../../../src/'
+import '../Topview/TopviewGetInstance.test.ts'
 
 configure({ adapter: new Adapter() })
 jest.mock('InteractionManager')
+jest.useFakeTimers()
 
 describe('SlideModal', () => {
   test('it render base correctly', () => {
@@ -24,6 +26,7 @@ describe('SlideModal', () => {
     )
     instance = wrapper.instance()
     instance.open()
+    jest.runAllTimers()
     instance.close()
     instance.getContent()
     instance.componentWillReceiveProps({

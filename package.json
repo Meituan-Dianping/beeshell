@@ -19,7 +19,6 @@
   ],
   "license": "ISC",
   "dependencies": {
-    "detox": "^12.4.0",
     "moment": "^2.24.0"
   },
   "husky": {
@@ -28,6 +27,7 @@
     }
   },
   "devDependencies": {
+    "detox": "^12.4.0",
     "@commitlint/cli": "^7.2.1",
     "@commitlint/config-conventional": "^7.1.2",
     "@mrn/babel-preset-mrn": "latest",
