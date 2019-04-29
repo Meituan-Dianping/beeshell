@@ -14,6 +14,7 @@ interface OptionItem {
 }
 
 export interface DropdownProps extends SlideModalProps {
+  testID?: string
   style?: ViewStyle
   direction?: 'up' | 'down'
   data: Array<OptionItem>

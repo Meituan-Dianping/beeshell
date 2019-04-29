@@ -14,6 +14,7 @@ import navigationBarStyles from './styles'
 import variables from '../../common/styles/variables'
 
 export interface NavigationBarProps {
+  testID?: string
   style?: ViewStyle
   proportion?: number[]
   title?: any
@@ -52,6 +53,7 @@ export class NavigationBar extends Component<NavigationBarProps, any> {
       }
       return (
         <TouchableOpacity
+          testID='back'
           style={{
             flexDirection: 'row',
             alignItems: 'center',
@@ -71,7 +73,7 @@ export class NavigationBar extends Component<NavigationBarProps, any> {
                 alignItems: 'center'
               }}>
               <Icon
-                type='angle-left'
+                source={require(`../../common/images/icons/angle-left.png`)}
                 size={fontSize}
                 tintColor={fontColor}>
               </Icon>
@@ -103,6 +105,7 @@ export class NavigationBar extends Component<NavigationBarProps, any> {
     if (index === 2) {
       return forwardLabel == null ? null : (
         <TouchableOpacity
+          testID='forward'
           style={{
             flexDirection: 'row',
             justifyContent: 'flex-end',
@@ -130,13 +133,14 @@ export class NavigationBar extends Component<NavigationBarProps, any> {
 
   render() {
     const {
+      testID,
       style,
       proportion,
       renderItem
     } = this.props
 
     return (
-      <View style={[navigationBarStyles.wrapper, style]}>
+      <View testID={testID} style={[navigationBarStyles.wrapper, style]}>
         {
           proportion.map((item, index) => {
             return (

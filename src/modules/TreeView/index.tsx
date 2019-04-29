@@ -24,8 +24,8 @@ export class TreeView extends React.Component<TreeViewProps, any> {
 
   static defaultProps = {
     style: {},
-    activeIcon: <Icon type='caret-down' tintColor={variables.mtdGrayBase}></Icon>,
-    unactiveIcon: <Icon type='caret-right' tintColor={variables.mtdGrayBase}></Icon>,
+    activeIcon: <Icon source={require(`../../common/images/icons/caret-down.png`)} tintColor={variables.mtdGrayBase}></Icon>,
+    unactiveIcon: <Icon source={require(`../../common/images/icons/caret-right.png`)} tintColor={variables.mtdGrayBase}></Icon>,
     data: [],
     dataStructureType: 'nested',
     fieldKeys: {}

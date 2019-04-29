@@ -12,7 +12,7 @@ import { NavigationBar } from '../../src'
 import variables from '../customTheme'
 import styles from '../common/styles'
 
-export default class NavigationBarScreen extends Component<{}, {}> {
+export default class NavigationBarScreen extends Component<{}, any> {
 
   constructor (p) {
     super(p)
@@ -20,7 +20,9 @@ export default class NavigationBarScreen extends Component<{}, {}> {
   }
 
   handlePress (msg) {
-    alert(msg)
+    this.setState({
+      msg
+    })
   }
 
   render () {
@@ -29,6 +31,7 @@ export default class NavigationBarScreen extends Component<{}, {}> {
         style={styles.body}>
         <Text style={styles.header}>基础</Text>
         <NavigationBar
+          testID='nav1'
           title='标题'
           backLabel='返回'
           forwardLabel='下一步'
@@ -39,6 +42,11 @@ export default class NavigationBarScreen extends Component<{}, {}> {
             this.handlePress('下一步')
           }}>
         </NavigationBar>
+        {
+          this.state.msg ? <Text testID='text' style={{ margin: 5, textAlign: 'center' }}>
+            点击了“{this.state.msg}”按钮
+          </Text> : null
+        }
       </ScrollView>
     )
   }

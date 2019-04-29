@@ -36,8 +36,8 @@ export class Picker extends React.Component<PickerProps, PickerState> {
   private trigger = null
   static defaultProps = {
     label: '请选择',
-    activeIcon: <Icon type='caret-up' size={12} tintColor={variables.mtdBrandPrimaryDark} />,
-    unactiveIcon: <Icon type='caret-down' size={12} tintColor={variables.mtdGrayBase} />,
+    activeIcon: <Icon source={require(`../../common/images/icons/caret-up.png`)} size={12} tintColor={variables.mtdBrandPrimaryDark} />,
+    unactiveIcon: <Icon source={require(`../../common/images/icons/caret-down.png`)} size={12} tintColor={variables.mtdGrayBase} />,
     disabled: false,
     cancelable: true,
     style: {},

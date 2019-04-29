@@ -38,7 +38,7 @@ export default class Checkbox extends Component<CheckboxProps, {}> {
     showAllCheck: false,
     onChange: null,
     iconPosition: 'left',
-    checkedIcon: <Icon type={'check-circle'} size={variables.mtdFontSizeL} tintColor={variables.mtdBrandPrimaryDark} />,
+    checkedIcon: <Icon source={require(`../../common/images/icons/check-circle.png`)} size={variables.mtdFontSizeL} tintColor={variables.mtdBrandPrimaryDark} />,
     uncheckedIcon: <View style={styles.uncheckedIcon}></View>
   }
 

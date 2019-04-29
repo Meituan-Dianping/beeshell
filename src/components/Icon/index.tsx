@@ -1,7 +1,8 @@
 import React from 'react'
 import {
   Image,
-  ImageStyle
+  ImageStyle,
+  ImageSourcePropType
 } from 'react-native'
 import variables from '../../common/styles/variables'
 
@@ -10,6 +11,7 @@ export interface IconProps {
   type?: string
   size?: number | null | undefined
   tintColor?: string | null | undefined // Android 平台无效
+  source?: ImageSourcePropType
 }
 
 export class Icon extends React.Component<IconProps, any> {
@@ -18,11 +20,12 @@ export class Icon extends React.Component<IconProps, any> {
     type: 'caret-down',
     size: 14,
     style: {},
-    tintColor: variables.mtdBrandPrimaryDark
+    tintColor: variables.mtdBrandPrimaryDark,
+    source: null
   }
 
   render () {
-    let { type, size, style, tintColor } = this.props
+    let { type, size, style, tintColor, source } = this.props
 
     const mainStyle = {
       tintColor,
@@ -35,7 +38,9 @@ export class Icon extends React.Component<IconProps, any> {
       delete mainStyle.height
     }
 
-    const source = require(`../../common/images/icons/${type}.png`)
+    if (!source) {
+      source = require(`../../common/images/icons/${type}.png`)
+    }
 
     return (
       <Image

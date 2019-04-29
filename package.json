@@ -6,7 +6,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "start": "mrn start --appName meituan",
-    "test": "jest --coverage",
+    "test": "jest  --coverage",
+    "e2e": "detox test",
     "lint": "tslint -p ./ -c ./tslint.json",
     "tsc:examples": "rm -rf distExamples && tsc",
     "tsc:src": "rm -rf dist && tsc -p ./src && rsync -rv --exclude=*.ts --exclude=*.tsx src/ dist/",
@@ -17,6 +18,7 @@
   ],
   "license": "ISC",
   "dependencies": {
+    "detox": "^12.4.0",
     "moment": "^2.24.0"
   },
   "husky": {
@@ -93,6 +95,16 @@
     "preset": "@mrn/react-native",
     "verbose": true,
     "testEnvironment": "node"
+  },
+  "detox": {
+    "test-runner": "jest",
+    "configurations": {
+      "ios.sim.debug": {
+        "binaryPath": "/Users/wangxiaolong/Downloads/imeituan.app",
+        "type": "ios.simulator",
+        "name": "iPhone X"
+      }
+    }
   },
   "resolutions": {
     "enzyme-adapter-utils": "1.10.1"

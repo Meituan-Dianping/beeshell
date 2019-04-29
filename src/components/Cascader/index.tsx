@@ -353,7 +353,7 @@ export class Cascader extends Component<CascaderProps, any> {
             </Text>
 
             {
-              !isLeafNode ? <Icon type={'caret-right'} size={variables.mtdFontSizeM} tintColor={variables.mtdGrayLighter} /> : null
+              !isLeafNode ? <Icon source={require(`../../common/images/icons/caret-right.png`)} size={variables.mtdFontSizeM} tintColor={variables.mtdGrayLighter} /> : null
             }
           </View>
         }

@@ -22,7 +22,7 @@ export default class Radio extends Component<RadioProps> {
     value: undefined,
     onChange: null,
     iconPosition: 'left',
-    checkedIcon: <Icon type='check' size={variables.mtdFontSizeM} tintColor={variables.mtdBrandPrimaryDark} />,
+    checkedIcon: <Icon source={require(`../../common/images/icons/check.png`)} size={variables.mtdFontSizeM} tintColor={variables.mtdBrandPrimaryDark} />,
     uncheckedIcon: <View style={{ width: variables.mtdFontSizeM, height: variables.mtdFontSizeM }}></View>
   }
 

@@ -10,6 +10,7 @@ import {
   NavigationParams
 } from '@mrn/react-navigation'
 
+// @ts-ignore
 import { withSafeArea } from '@mrn/react-native-safe-area-view'
 import { NavigationBar } from '../src'
 import { pageList } from './routers'
@@ -56,6 +57,11 @@ class Home extends Component<any, any> {
         {
           label: '基础工具',
           key: 'base'
+        },
+
+        {
+          label: '演示',
+          key: 'demo'
         }
       ]
     }
@@ -72,9 +78,9 @@ class Home extends Component<any, any> {
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      this.props.navigation.navigate('Slider')
-    }, 1000)
+    // setTimeout(() => {
+    //   this.props.navigation.navigate('NavigationBar')
+    // }, 1000)
   }
 
   gotoPage (item) {
@@ -88,6 +94,7 @@ class Home extends Component<any, any> {
     const isLast = index === section.data.length - 1
     return (
       <TouchableOpacity
+        testID={item.key}
         onPress={() => {
           this.gotoPage(item)
         }}>
@@ -164,14 +171,17 @@ class Home extends Component<any, any> {
   }
 }
 
-function MakeHeader (navigation, title, backLabel) {
+function MakeHeader (navigation, title, backLabel, item?) {
   return (
     <NavigationBar
+      testID={item ? `navigationBar${item.key}` : undefined}
+      style={{ borderBottomColor: variables.mtdBorderColorDark, borderBottomWidth: StyleSheet.hairlineWidth }}
       title={title}
       backLabel={backLabel}
       onPressBack={() => {
         navigation.back()
-      }} />
+      }}
+    />
   )
 }
 
@@ -187,7 +197,7 @@ let RootStack = createStackNavigator({
   ...pageList.reduce((res, item) => {
     res[item.key] = {
       navigationOptions: ({ navigation }) => ({
-        header: MakeHeader(navigation, item.key, '')
+        header: MakeHeader(navigation, item.label, '', item)
       }),
       ...item
     }
