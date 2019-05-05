@@ -38,6 +38,7 @@ import Ruler from './Ruler'
 import Topview from './Topview'
 import Demo1Screen from './Demo1Screen'
 import Demo2Screen from './Demo2Screen'
+import Demo3Screen from './Demo3Screen'
 
 console.disableYellowBox = true
 
@@ -278,6 +279,13 @@ export const pageList = [
     screen: Demo2Screen,
     key: 'Demo2Screen',
     label: 'Form',
+    group: 'demo'
+  },
+
+  {
+    screen: Demo3Screen,
+    key: 'Demo3Screen',
+    label: 'Theme',
     group: 'demo'
   }
 ]
