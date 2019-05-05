@@ -31,7 +31,7 @@ export class Tag extends React.Component<TagProps, {}> {
 
     const styleWrapper = tagStyles[type + 'Wrapper'] || tagStyles.defaultWrapper
     const styleText = tagStyles[type + 'Text'] || tagStyles.defaultText
-    const reverseStyle = textColorInverse && type !== 'default' ? { color: variables.mtdGrayDarker } : {}
+    const reverseStyle = textColorInverse && type !== 'default' ? { color: variables.mtdGrayBase } : {}
 
     return (
       <View
