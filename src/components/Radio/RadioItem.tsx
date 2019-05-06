@@ -44,18 +44,12 @@ export default class RadioItem extends Component<RadioItemProps> {
   }
 
   componentDidMount () {
-    this.toAnimated()
+    this.animated && this.animated.toIn()
   }
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.checked !== this.props.checked) {
-      this.toAnimated()
-    }
-  }
-
-  toAnimated () {
-    if (this.animated) {
-      this.animated.toIn()
+      this.animated && this.animated.toIn()
     }
   }
 
@@ -71,7 +65,7 @@ export default class RadioItem extends Component<RadioItemProps> {
       return
     }
 
-    this.toAnimated()
+    this.animated && this.animated.toIn()
     this.props.onChange && this.props.onChange(value)
   }
 

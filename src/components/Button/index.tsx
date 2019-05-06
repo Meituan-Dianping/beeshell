@@ -46,7 +46,7 @@ export interface ButtonProps {
   onPress?: Function
 }
 
-export class Button extends React.Component<ButtonProps, {}> {
+export class Button extends React.Component<ButtonProps, any> {
   private containerRef = null
   private animated = null
 
@@ -62,10 +62,22 @@ export class Button extends React.Component<ButtonProps, {}> {
 
   constructor(props) {
     super(props)
+    this.state = {
+      buttonWidth: 0,
+    }
 
     if (variables.buttonEnableAnimated) {
-      this.animated = new FadeAnimated({})
+      this.animated = new FadeAnimated({
+        scaleList: [0, 1],
+
+        opacityList: [1, 0],
+        opacityDuration: 1000,
+      })
     }
+  }
+
+  componentDidMount () {
+
   }
 
   measure (...args) {
@@ -74,9 +86,21 @@ export class Button extends React.Component<ButtonProps, {}> {
 
   handlePress () {
     const { disabled, onPress } = this.props
-    if (!disabled && typeof onPress === 'function') {
-      return onPress()
+    if (disabled) {
+      return
     }
+    this.animated && this.animated.toIn()
+
+    if (typeof onPress === 'function') {
+      onPress()
+    }
+  }
+
+  handleLayout = (e) => {
+    const { width } = e.nativeEvent.layout
+    this.setState({
+      buttonWidth: width
+    })
   }
 
   render () {
@@ -87,6 +111,13 @@ export class Button extends React.Component<ButtonProps, {}> {
 
     const inverseStyle = textColorInverse && type !== 'default' && type !== 'text' ? { color: variables.mtdGrayBase } : {}
 
+    let animatedStyle: any = {}
+    if (this.animated) {
+      animatedStyle = {
+        transform: [{ scale: this.animated.getState().scale }],
+        opacity: this.animated.getState().opacity
+      }
+    }
     return (
       <TouchableOpacity
         testID={testID}
@@ -101,7 +132,9 @@ export class Button extends React.Component<ButtonProps, {}> {
         ]}
         disabled={disabled}
         onPress={() => this.handlePress()}
-        activeOpacity={disabled ? 1 : (variables as any).buttonActiveOpacity}>
+        activeOpacity={disabled ? 1 : (variables as any).buttonActiveOpacity}
+        onLayout={this.handleLayout}>
+
         {
           React.isValidElement(children) ? children : (
             <Text
@@ -116,6 +149,20 @@ export class Button extends React.Component<ButtonProps, {}> {
             >{children}</Text>
           )
         }
+        <Animated.View
+          style={[
+            {
+              position: 'absolute',
+              zIndex: -1,
+              width: this.state.buttonWidth,
+              height: this.state.buttonWidth,
+              borderRadius: this.state.buttonWidth,
+              backgroundColor: 'rgba(0, 0, 0, 0.1)',
+              opacity: 0,
+            },
+            animatedStyle
+          ]}>
+        </Animated.View>
       </TouchableOpacity>
     )
   }

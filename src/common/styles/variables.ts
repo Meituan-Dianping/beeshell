@@ -1,5 +1,4 @@
-import { StyleSheet } from 'react-native'
-const px = StyleSheet.hairlineWidth
+import { StyleSheet, Platform } from 'react-native'
 
 // 品牌色
 const mtdBrandColors = {
@@ -66,7 +65,7 @@ const mtdRadius = {
   mtdRadiusL: 8
 }
 const mtdBorder = {
-  mtdBorderWidth: 1 * px,
+  mtdBorderWidth: StyleSheet.hairlineWidth,
   mtdBorderColor: '#F5F5F5',
   mtdBorderColorDark: '#e5e5e5',
   mtdBorderColorDarker: '#d5d5d5'
@@ -78,7 +77,7 @@ const mtdEnableAnimated = true
  * Button 组件
  */
 const button = {
-  buttonEnableAnimated: mtdEnableAnimated,
+  buttonEnableAnimated: Platform.OS === 'ios',
   buttonBorderRadius: mtdRadius.mtdRadiusXS,
   buttonActiveOpacity: mtdOpacity,
 
@@ -147,6 +146,7 @@ const variables = {
   ...mtdRadius,
   ...mtdBorder,
   mtdOpacity,
+  mtdEnableAnimated,
 
   ...button,
   ...form,
