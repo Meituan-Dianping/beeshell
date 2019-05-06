@@ -148,7 +148,7 @@ export class BottomModal extends SlideModal<BottomModalProps> {
   getContent () {
     const styles = bottomModalStyles
     const inner = (
-      <View style={[styles.container, { width: this.props.screenWidth }]}>
+      <View style={[styles.container, { width: this.props.screenWidth }, this.props.style]}>
         {this.getHeader()}
 
         {/* TouchableOpacity 没设置高度时 onPress 有问题*/}

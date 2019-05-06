@@ -55,3 +55,4 @@ builder:
         - JS Utils: ./common/utils.md
         - Form 校验: ./common/validator.md
         - Tree 树形结构处理: ./common/Tree.md
+      - 推广: popularize.md
