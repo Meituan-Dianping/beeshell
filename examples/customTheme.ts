@@ -14,9 +14,8 @@ const customTheme = {
   // mtdBrandPrimaryDark: '#563d7c',
   // mtdRadiusXS: 30,
   // buttonBorderRadius: 30,
-
-//   mtdBrandPrimary: '#f23244',
-//   mtdBrandPrimaryDark: '#f23244',
+  // mtdBrandPrimary: '#f23244',
+  // mtdBrandPrimaryDark: '#f23244',
 
 }
 
