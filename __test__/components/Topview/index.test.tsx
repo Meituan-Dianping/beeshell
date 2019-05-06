@@ -6,6 +6,7 @@ import { View } from 'react-native'
 
 configure({ adapter: new Adapter() })
 jest.mock('InteractionManager')
+jest.useFakeTimers()
 
 describe('Topview', () => {
   test('it render base correctly', () => {
@@ -19,8 +20,11 @@ describe('Topview', () => {
     )
     instance = TopviewGetInstance()
     instance.add(<View></View>)
+    jest.runAllTimers()
     instance.replace(<View></View>, 1)
+    jest.runAllTimers()
     instance.remove(1)
+    jest.runAllTimers()
     instance.componentWillUnmount()
   })
 })

@@ -122,38 +122,36 @@ export default class Checkbox extends Component<CheckboxProps, {}> {
 
     return (
       <View style={[styles.checkboxContainer, style]}>
-        <View>
-          {
-            showAllCheck ? <CheckboxItemAllCheck
-              checkedStatus={this.getAllCheckedStatus()}
-              label='全选'
-              iconPosition={iconPosition}
-              onChange={this.handleChange}
-              checkedIcon={checkedIcon}
-              uncheckedIcon={uncheckedIcon}
-            /> : null
-          }
-          {
-            React.Children.map(children, (child, index) => {
-              // 需要子组件自己定义了 displayName
-              if ((child as any).type.displayName === 'CheckboxItem') {
-                const childProps = (child as any).props
-                const checked = this.validateChecked(childProps)
+        {
+          showAllCheck ? <CheckboxItemAllCheck
+            checkedStatus={this.getAllCheckedStatus()}
+            label='全选'
+            iconPosition={iconPosition}
+            onChange={this.handleChange}
+            checkedIcon={checkedIcon}
+            uncheckedIcon={uncheckedIcon}
+          /> : null
+        }
+        {
+          React.Children.map(children, (child, index) => {
+            // 需要子组件自己定义了 displayName
+            if ((child as any).type.displayName === 'CheckboxItem') {
+              const childProps = (child as any).props
+              const checked = this.validateChecked(childProps)
 
-                return React.cloneElement((child as any), {
-                  key: index,
-                  checked,
-                  iconPosition,
-                  onChange: this.handleChange,
-                  checkedIcon,
-                  uncheckedIcon,
-                })
-              } else {
-                return React.cloneElement((child as any))
-              }
-            })
-          }
-        </View>
+              return React.cloneElement((child as any), {
+                key: index,
+                checked,
+                iconPosition,
+                onChange: this.handleChange,
+                checkedIcon,
+                uncheckedIcon,
+              })
+            } else {
+              return React.cloneElement((child as any))
+            }
+          })
+        }
       </View>
     )
   }

@@ -2,9 +2,11 @@ import React from 'react'
 import { shallow, configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import { Modal } from '../../../src/'
+import '../Topview/TopviewGetInstance.test.ts'
 
 configure({ adapter: new Adapter() })
 jest.mock('InteractionManager')
+jest.useFakeTimers()
 
 describe('Modal', () => {
   test('it render base correctly', () => {
@@ -22,10 +24,11 @@ describe('Modal', () => {
       <Modal { ...props }>111</Modal>
     )
     instance = wrapper.instance()
-    instance.modalState.topviewId = 1
     instance.open()
+    jest.runAllTimers()
+    instance.componentDidUpdate()
     instance.close()
-    instance.getContent()
+    jest.runAllTimers()
     instance.handlePressBackdrop()
     instance.handleLayout({
       nativeEvent: {

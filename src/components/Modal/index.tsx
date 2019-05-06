@@ -257,20 +257,19 @@ export class Modal<
         ...this.modalState
       })
 
-    return this.animated
-      .toOut()
-      .then(() => {
-        return TopviewGetInstance().remove(this.modalState.topviewId)
-      })
-      .then(() => {
-        this.modalState.closing = false
-        this.modalState.topviewId = null
+    return this.animated.toOut().then(() => {
+      return TopviewGetInstance().remove(this.modalState.topviewId)
+    }).then(() => {
+      this.modalState.closing = false
+      this.modalState.topviewId = null
 
-        this.props.onClosed &&
-          this.props.onClosed({
-            ...this.modalState
-          })
-      })
+      this.props.onClosed &&
+        this.props.onClosed({
+          ...this.modalState
+        })
+    }).catch((e) => {
+      console.log(e)
+    })
   }
 
   open (c?: any, args?: any) {

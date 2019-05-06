@@ -78,9 +78,9 @@ class Home extends Component<any, any> {
   }
 
   componentDidMount() {
-    // setTimeout(() => {
-    //   this.props.navigation.navigate('NavigationBar')
-    // }, 1000)
+    setTimeout(() => {
+      this.props.navigation.navigate('Demo3Screen')
+    }, 1000)
   }
 
   gotoPage (item) {

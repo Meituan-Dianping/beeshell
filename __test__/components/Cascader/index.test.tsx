@@ -25,5 +25,20 @@ describe('Cascader', () => {
     Cascader.recursiveAncestors(props.data, props.data[1], fieldKeys)
     instance.handlePress(props.data[0], 0)
     instance.componentWillReceiveProps(props)
+
+    props = {
+      ...props,
+      dataStructureType: 'nested',
+      data: [
+        {
+          label: '北京', id: 'beijing',
+          children: [
+            { label: '朝阳区', id: 'chaoyangqu' }
+          ]
+        },
+      ]
+    }
+
+    wrapper = shallow(<Cascader { ...props } />)
   })
 })

@@ -34,7 +34,7 @@ describe('e2e test', () => {
     await element(by.id('back').withAncestor(by.id('nav1'))).tap()
     await expect(element(by.id('text'))).toBeVisible()
     await element(by.id('forward').withAncestor(by.id('nav1'))).tap()
-    await element(by.id('back').withAncestor(by.id('navigationBarNavigation'))).tap()
+    await element(by.id('back').withAncestor(by.id('navigationBarNavigationBar'))).tap()
 
   })
 })
