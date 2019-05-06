@@ -78,6 +78,7 @@ const mtdEnableAnimated = true
  * Button 组件
  */
 const button = {
+  buttonEnableAnimated: mtdEnableAnimated,
   buttonBorderRadius: mtdRadius.mtdRadiusXS,
   buttonActiveOpacity: mtdOpacity,
 

@@ -39,6 +39,7 @@ import Topview from './Topview'
 import Demo1Screen from './Demo1Screen'
 import Demo2Screen from './Demo2Screen'
 import Demo3Screen from './Demo3Screen'
+import Demo4Screen from './Demo4Screen'
 
 console.disableYellowBox = true
 
@@ -286,6 +287,13 @@ export const pageList = [
     screen: Demo3Screen,
     key: 'Demo3Screen',
     label: 'Theme',
+    group: 'demo'
+  },
+
+  {
+    screen: Demo4Screen,
+    key: 'Demo4Screen',
+    label: 'Animated',
     group: 'demo'
   }
 ]

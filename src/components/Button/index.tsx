@@ -4,13 +4,14 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Animated,
   ViewStyle,
   TextStyle
 } from 'react-native'
 import buttonStyles from './styles'
 export { buttonStyles }
 import variables from '../../common/styles/variables'
-
+import { FadeAnimated } from '../../common/animations'
 
 const fontSizeMap = {
   lg: variables.buttonLFontSize,
@@ -47,6 +48,8 @@ export interface ButtonProps {
 
 export class Button extends React.Component<ButtonProps, {}> {
   private containerRef = null
+  private animated = null
+
   static defaultProps = {
     style: {},
     textStyle: {},
@@ -55,6 +58,14 @@ export class Button extends React.Component<ButtonProps, {}> {
     size: 'md',
     disabled: false,
     onPress: null,
+  }
+
+  constructor(props) {
+    super(props)
+
+    if (variables.buttonEnableAnimated) {
+      this.animated = new FadeAnimated({})
+    }
   }
 
   measure (...args) {
