@@ -23,11 +23,11 @@ export default class RadioScreen extends Component<any, any> {
   }
 
   componentDidMount () {
-    setTimeout(() => {
-      this.setState({
-        valueA: 1
-      })
-    }, 2000)
+    // setTimeout(() => {
+    //   this.setState({
+    //     valueA: 1
+    //   })
+    // }, 2000)
   }
 
   renderItem (checked, index, label) {
@@ -47,8 +47,7 @@ export default class RadioScreen extends Component<any, any> {
   render () {
     return (
       <ScrollView style={styles.body}>
-        <Text style={styles.header}>左边图标</Text>
-
+        <Text style={styles.header}>基础</Text>
         <View style={[styles.panel, { paddingVertical: 0 }]}>
           <Radio
             value={this.state.valueA}
@@ -64,7 +63,24 @@ export default class RadioScreen extends Component<any, any> {
             <Radio.Item label='选项C' value={2} />
           </Radio>
         </View>
-        <View style={{ marginTop: 10 }}></View>
+
+        <Text style={styles.header}>横向布局</Text>
+        <View style={[styles.panel, { paddingVertical: 0 }]}>
+          <Radio
+            style={{ flexDirection: 'row' }}
+            value={this.state.valueA}
+            onChange={(value) => {
+              console.log(value)
+              this.setState({
+                valueA: value
+              })
+            }}>
+
+            <Radio.Item style={{ marginRight: 12 }} label='选项A' value={0} />
+            <Radio.Item style={{ marginRight: 12 }} label='选项B' value={1} />
+            <Radio.Item label='选项C' value={2} />
+          </Radio>
+        </View>
 
         <Text style={styles.header}>右边图标</Text>
         <View style={[styles.panel, { paddingVertical: 0 }]}>

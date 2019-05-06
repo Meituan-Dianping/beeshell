@@ -133,6 +133,10 @@ const topview = {
 const slider = {
 }
 
+const dropdown = {
+  dropdownEnableAnimated: mtdEnableAnimated
+}
+
 const variables = {
   ...mtdBrandColors,
   ...mtdGrayColors,
@@ -150,7 +154,8 @@ const variables = {
   ...radio,
   ...checkbox,
   ...slider,
-  ...topview
+  ...topview,
+  ...dropdown
 }
 
 

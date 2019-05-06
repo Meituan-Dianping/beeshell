@@ -79,7 +79,7 @@ class Home extends Component<any, any> {
 
   componentDidMount() {
     setTimeout(() => {
-      this.props.navigation.navigate('Demo3Screen')
+      this.props.navigation.navigate('Dropdown')
     }, 1000)
   }
 

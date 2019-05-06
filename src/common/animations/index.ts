@@ -7,7 +7,7 @@ class CommonAnimated {
     props = props || {}
     this.state = {
       opacityList: props.opacityList || [0, 1],
-      duration: props.opacityList || 300,
+      duration: props.duration || 300,
       easing: props.easing || Easing.elastic(0.8)
     }
   }

@@ -3,10 +3,13 @@ import React, { ReactElement } from 'react'
 import {
   ViewStyle,
   ScrollView,
+  Animated
 } from 'react-native'
 import { SlideModal, SlideModalProps } from '../../components/SlideModal'
 import { Radio } from '../../components/Radio'
 import dropdownStyles from './styles'
+import variables from '../../common/styles/variables'
+import { SlideAnimated } from '../../common/animations'
 
 interface OptionItem {
   label: string,
@@ -26,6 +29,7 @@ export interface DropdownProps extends SlideModalProps {
 
 export class Dropdown extends React.Component<DropdownProps> {
   private slideModal = null
+  private animated = null
 
   static defaultProps = {
     ...SlideModal.defaultProps,
@@ -37,19 +41,41 @@ export class Dropdown extends React.Component<DropdownProps> {
 
   constructor (props) {
     super(props)
+
+    if (variables.dropdownEnableAnimated) {
+      this.animated = new SlideAnimated({
+        directionType: ['vertical'],
+        duration: 1000,
+        translateYList: [
+          props.direction === 'down' ? -20 : 20,
+          0,
+        ]
+      })
+    }
   }
 
   open () {
-    this.slideModal.open()
+    this.animated && this.animated.toIn()
+    return this.slideModal.open()
   }
 
   close () {
-    this.slideModal.close()
+    return this.slideModal.close()
   }
-  // componentDidMount () {}
 
   getContent () {
     const { data, value, onChange, checkedIcon, uncheckedIcon } = this.props
+
+    let animatedStyle: any = {}
+    if (this.animated) {
+      animatedStyle = {
+        transform: [
+          { translateX: this.animated.getState().translateX },
+          { translateY: this.animated.getState().translateY }
+        ],
+        opacity: this.animated.getState().opacity
+      }
+    }
 
     return (
       <ScrollView
@@ -57,27 +83,29 @@ export class Dropdown extends React.Component<DropdownProps> {
           dropdownStyles.container,
           this.props.style
         ]}>
-        <Radio
-          checkedIcon={checkedIcon}
-          uncheckedIcon={uncheckedIcon}
-          value={value}
-          onChange={(value) => {
-            this.slideModal.close()
-            onChange(value)
-          }}>
+        <Animated.View style={animatedStyle}>
+          <Radio
+            checkedIcon={checkedIcon}
+            uncheckedIcon={uncheckedIcon}
+            value={value}
+            onChange={(value) => {
+              this.slideModal.close()
+              onChange(value)
+            }}>
 
-          {
-            data.map((item, index) => {
-              return (
-                <Radio.Item
-                  key={index}
-                  label={item.label}
-                  value={item.value}>
-                </Radio.Item>
-              )
-            })
-          }
-        </Radio>
+            {
+              data.map((item, index) => {
+                return (
+                  <Radio.Item
+                    key={index}
+                    label={item.label}
+                    value={item.value}>
+                  </Radio.Item>
+                )
+              })
+            }
+          </Radio>
+        </Animated.View>
       </ScrollView>
     )
   }
@@ -96,8 +124,7 @@ export class Dropdown extends React.Component<DropdownProps> {
         direction={this.props.direction}
         offsetX={this.props.offsetX}
         offsetY={this.props.offsetY}
-        cancelable={true}
-      >
+        cancelable={true}>
         { this.getContent() }
       </SlideModal>
     )

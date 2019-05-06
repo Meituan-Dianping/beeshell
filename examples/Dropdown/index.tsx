@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ScrollView, View, StyleSheet, Dimensions, Text } from 'react-native'
-import { Button, Dropdown } from '../../src/'
+import { Button, Dropdown, Icon } from '../../src/'
 import styles from '../common/styles'
 import variables from '../customTheme'
 
@@ -107,7 +107,7 @@ export default class DropdownScreen extends Component<{}, any> {
               this.slideModal2 = c
             }}
             offsetX={0}
-            style={{ width: screen.width, height: 50 }}
+            style={{ width: screen.width, height: 80 }}
             offsetY={this.state.offsetY2}
             cancelable={true}
             value={value}
@@ -139,7 +139,7 @@ export default class DropdownScreen extends Component<{}, any> {
             ref={c => {
               this.slideModal3 = c
             }}
-            checkedIcon={<Text>&times;</Text>}
+            checkedIcon={<Icon type='star'></Icon>}
             offsetX={this.state.offsetX3}
             offsetY={this.state.offsetY3}
             direction='up'
