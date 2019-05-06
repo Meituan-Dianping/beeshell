@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.0.5] - 2019-05-06
+### Changed
+- 多个组件属性名调整，属性名规范化
 
 ## [2.0.4] - 2019-04-24
 ### Changed
