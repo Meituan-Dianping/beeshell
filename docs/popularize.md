@@ -2,13 +2,16 @@
 
 ## 引言
 
-2018 9 月开源，11 月内部发起 rn 组件库建设，旨在提供全集团共用的 rn 组件库，对 UI 统一、架构设计、易用性、扩展性提出更高要求
+2018 9 月开源，11 月内部发起 rn 组件库建设，旨在提供公司级共用的 RN 组件库，对 UI 统一、架构设计、易用性、扩展性提出更高要求
+
+新版 beeshell 的效果图如下：
 
 ![image](../images/popularize/demo.jpeg)
 
+
 ## 系统设计升级
 
-xxxxx
+xxxxxxxxx
 
 ![image](../images/popularize/framework.jpeg)
 
@@ -102,10 +105,21 @@ Button 组件使用 FadeAnimated 类实现动画，动效如下图所示：
 
 ![image](../images/popularize/animatedButton.gif)
 
+Modal 组件使用 FadeAnimated 类实现动画，动效如下图所示：
 
-在 RN 中，英文以及数组的
+![image](../images/popularize/animatedModal.gif)
+
+Dropdown 组件使用 SlideAnimated 类实现动画，动效如下图所示：
+
+![image](../images/popularize/animatedDropdown.gif)
+
+
+综上所述，beeshell 通过样式和动效两个方面进行 UI 一致性的优化。样式一致性的保证，主要通过定义全局性的主题变量，供所有组件使用，同时，提供了自定义主题变量的接口，可以实现一键换肤。动效的一致性，一方面，依赖主题变量中定义的动画开关变量，主要考虑到一些低端 Android 机器的性能问题，用户可以选择性关闭某个组件的动画，另一方面，依赖组件库的良好分层设计，将动画类独立实现，可以很方便的集成到任意组件中。
+
+一键换肤的效果如下图所示：
 
 ![image](../images/popularize/theme.jpeg)
+
 ### 定制化能力分级设计
 ### 功能丰富强大
 ### 易用性
