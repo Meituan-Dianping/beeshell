@@ -9,7 +9,7 @@ import variables from '../../common/styles/variables'
 export interface IconProps {
   style?: ImageStyle
   type?: string
-  size?: number | null | undefined
+  size?: number | string | null | undefined
   tintColor?: string | null | undefined // Android 平台无效
   source?: ImageSourcePropType
 }

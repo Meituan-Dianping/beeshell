@@ -15,7 +15,7 @@ export default {
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: variables.mtdHSpacingXL,
-    paddingVertical: variables.mtdVSpacingXXXL
+    paddingVertical: variables.mtdVSpacingX3L
   },
   itemText: {
     fontSize: variables.mtdFontSizeM,

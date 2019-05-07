@@ -17,12 +17,12 @@ import variables from '../../common/styles/variables'
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: variables.mtdVSpacingXXXXL,
+    paddingVertical: variables.mtdVSpacingX4L,
     backgroundColor: '#fff',
   },
 
   header: {
-    paddingBottom: variables.mtdVSpacingXXL,
+    paddingBottom: variables.mtdVSpacingX2L,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

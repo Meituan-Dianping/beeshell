@@ -125,14 +125,14 @@ export class Button extends React.Component<ButtonProps, any> {
         style={[
           styleWrapper,
           {
-            opacity: disabled ? (variables as any).buttonActiveOpacity : 1,
+            opacity: disabled ? variables.buttonActiveOpacity : 1,
             ...(paddingMap[size] || paddingMap['md'])
           },
           style
         ]}
         disabled={disabled}
         onPress={() => this.handlePress()}
-        activeOpacity={disabled ? 1 : (variables as any).buttonActiveOpacity}
+        activeOpacity={disabled ? 1 : variables.buttonActiveOpacity}
         onLayout={this.handleLayout}>
 
         {

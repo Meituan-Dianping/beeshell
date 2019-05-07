@@ -53,20 +53,22 @@ export class FormItem extends Component<FormItemProps, FormItemState> {
     return (
       <View>
         <View style={[styles.formItem, this.props.style]}>
-          <View style={styles.container}>
-            {
-              React.isValidElement(this.props.label) ? this.props.label :
-              <View style={[styles.label, { width: this.props.labelWidth }]}>
-                <Text style={styles.labelText}>
-                  {this.props.label}
-                </Text>
-              </View>
-            }
+          {
+            this.props.label && <View style={styles.container}>
+              {
+                React.isValidElement(this.props.label) ? this.props.label :
+                <View style={[styles.label, { width: this.props.labelWidth }]}>
+                  <Text style={styles.labelText}>
+                    {this.props.label}
+                  </Text>
+                </View>
+              }
 
-            <View style={[styles.control]}>
-              {children[0]}
+              <View style={[styles.control]}>
+                {children[0]}
+              </View>
             </View>
-          </View>
+          }
 
           {
             [].slice.call(children, 1).length ? <View style={styles.others}>

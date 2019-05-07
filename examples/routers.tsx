@@ -281,7 +281,7 @@ export const pageList = [
     screen: Demo2Screen,
     key: 'Demo2Screen',
     label: 'Form',
-    title: 'Form',
+    title: '个人信息',
     group: 'demo'
   },
 

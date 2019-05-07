@@ -16,7 +16,8 @@ export default StyleSheet.create({
     paddingHorizontal: variables.mtdHSpacingXL,
     paddingVertical: variables.mtdVSpacingL,
     backgroundColor: variables.mtdFillBody,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: variables.mtdGrayDark
   },
   panel: {
     paddingHorizontal: variables.mtdHSpacingXL,
