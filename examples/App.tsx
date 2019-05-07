@@ -245,7 +245,7 @@ let TabNavigator = createBottomTabNavigator(
         const { routeName } = navigation.state
 
         return (
-          <Text style={{ fontSize: 12, color: tintColor, textAlign: 'center' }}>
+          <Text style={{ fontSize: 12, color: tintColor, marginBottom: 5, textAlign: 'center' }}>
             {tabNavigatorConfigs[routeName].label}
           </Text>
         )

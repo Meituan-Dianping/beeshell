@@ -84,6 +84,7 @@ beeshell 的字体尺寸集，是基于 12、14、16、20 和 28 的排版比例
 
 边线（边框）部分，需要统一元素的边框宽度、颜色和圆角，边线虽然对 UI 风格的影响较小，但是不可或缺。beeshell 使用的边框宽度为一个物理像素，使用 RN 提供的 `StyleSheet.hairlineWidth` 接口实现；定义了三种灰度的边框颜色；主要使用 2px 的圆角。
 
+样式的一致性，还涉及到图标、布局等内容，这里不做详细介绍，如有需要可以参考 MATERIAL DESIGN。 
 
 #### 动效一致性
 
@@ -121,6 +122,60 @@ Dropdown 组件使用 SlideAnimated 类实现动画，动效如下图所示：
 ![image](./images/popularize/theme.jpeg)
 
 ### 定制化能力分级设计
+
+要开发全公司共用的组件库，需要满足酒旅、外卖 C 端、外卖 B 端以及外卖 M 端等等业务需求，这对定制化能力提出了更高的要求。为了进一步增强组件的定制化能力，同时，避免属性的无节制增加，进而导致组件难以维护，我们设计了分级的策略。这里以 BottomModal 为例来详细说明，如下图所示：
+
+![image](./images/popularize/customize.jpeg)
+
+#### 第一级定制化，定制主题变量
+
+”完成“文本的颜色，使用的是主题变量定义的品牌主色（Brand Primary Dark），beeshell 默认的品牌主色为黄色。通过组件库提供的自定义主题变量的接口，可以修改品牌主色的色值，进而修改了”完成“文本的颜色。修改品牌主色，影响范围很大，所有组件的色彩风格统一变化，如果我只想把文本的颜色改成红色，但是并不想修改品牌主色，应该如何定制呢？可以使用第二级定制化。
+
+#### 第二级定制化，提供定制属性
+
+这里提供 labelText 和 labelTextStyle 属性，代码实现为 `<Text style={this.props.labelTextStyle}>{this.props.labelText || '完成'}</Text>`。
+
+labelText 用于定制文案，将 labelTextStyle 整体暴露出来，而不是只暴露颜色单个属性，这样的好处有两点：
+
+- 开发者都熟悉 style 这个名称与用法，但并不知道 xxxColor 是什么，组件更加易用。
+- style 不仅可以定制 color，还支持 fontSize、fontWeight 等属性，定制能力更强。
+
+到这里，产品又想出了一个性化需求，要在 label 这个区域放两行文字、一个图标。
+
+![image](./images/popularize/x1.png)
+
+这个需求虽然比较新（恶）颖（心），但是难不倒我的，可以使用第三级。
+
+#### 第三级定制化，开放渲染区域
+
+提供 labe 属性，属性值为一个 ReactElement，任意定制 UI，实现效果如下：
+
+![image](./images/popularize/customize3.jpeg)
+
+到这里，足以应付一个产品的需求了，突然有一天，来了一个新产品，提了一个新需求：标题和按钮左右布局，不要头部区域的底部边框。
+
+![image](./images/popularize/x2.png)
+
+我觉得产品的需求，还是挺合理的，虽然心里有一百个不乐意，然后我使出了第四级。
+
+#### 第四级定制化，继承/组合基类
+
+在 beeshell 1.0 的开源推广文章中也有讲到过，我们在组件库开发之初，对常见组件，进行了全面的梳理，在比较细的粒度，对组件进行拆分，以继承的方式，层层依赖，功能渐进式增强，实现各个组件。这样使得开发者，可以在任意层级上继承、组合组件，进行定制化开发，下文详细介绍。
+
+首先，组件库实现一个 SlideModal 组件，这是一个比较底层的组件，功能少，定制化能力极强，支持滑动动画，内容可以任意定制。实现效果如下：
+
+![image](./images/popularize/customize4-1.gif)
+
+然后，组件库实现了 BottomModal 组件，继承 SlideModal，固定弹出方向为底部弹出，横向全屏，纵向内容自适应，功能增强，定制化能力减弱。实现效果如下：
+
+![image](./images/popularize/customize4-2.gif)
+
+最后，需要开发者，继承或者组合使用 SlideMdoal，开发一个新的组件。新组件的实现效果如下：
+
+![image](./images/popularize/customize4-3.gif)
+
+这里，我使用了组合的方式实现，也可以参考 BottomModal，使用继承的方式实现，轻松搞定产品的需求。
+
 ### 功能丰富强大
 ### 易用性
 ### 功能边界清晰
@@ -142,4 +197,5 @@ mrn
 
 # 参考资料
 
+- beeshell 1.0 开源推广文章：xxxx
 - MATERIAL DESIGN：https://material.io/
