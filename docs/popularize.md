@@ -6,14 +6,14 @@
 
 新版 beeshell 的效果图如下：
 
-![image](../images/popularize/demo.jpeg)
+![image](./images/popularize/demo.jpeg)
 
 
 ## 系统设计升级
 
 xxxxxxxxx
 
-![image](../images/popularize/framework.jpeg)
+![image](./images/popularize/framework.jpeg)
 
 业务 -> 组件库（mtd->roo->beeshell） -> mrn/rn -> iOS/Android
 
@@ -37,24 +37,24 @@ UI 风格的一致性，包括样式一致性和动效一致性。
 
 品牌主色应该是应用中出现最频繁的颜色，通常用来强调 UI 中的关键部分的颜色。beeshell 的品牌主色色值为 `#fecb2e`，如下图所示：
 
-![image](../images/popularize/primary.png)
+![image](./images/popularize/primary.png)
 
 有时，一个品牌主色并不能够支撑所有的应用场景，此时，可以通过加深或者变浅主色的方式，再增加几个色值，beeshell 的品牌主色还包括一个加深的色值 `#ffa000`，用于某些组件的激活状态，如下图所示：
 
-![image](../images/popularize/primaryDark.png)
+![image](./images/popularize/primaryDark.png)
 
 *色彩：品牌功能色*
 
 功能色的内容与使用场景如下图所示：
 
-![image](../images/popularize/function.jpeg)
+![image](./images/popularize/function.jpeg)
 
 
 *色彩：中性色*
 
 中性色（灰度）的内容与使用场景如下图所示：
 
-![image](../images/popularize/gray.jpeg)
+![image](./images/popularize/gray.jpeg)
 
 然后，介绍排版，排版包括字体、间距、边线。
 
@@ -62,13 +62,13 @@ UI 风格的一致性，包括样式一致性和动效一致性。
 
 beeshell 的字体尺寸集，是基于 12、14、16、20 和 28 的排版比例，如下图所示：
 
-![image](../images/popularize/fontSize.jpeg)
+![image](./images/popularize/fontSize.jpeg)
 
 对于字重，只使用正常 `normal` 和加粗`bold` 两种，避免了因为不同字体家族，对字重的支持范围不同，而导致视觉差异。
 
 除了字体尺寸和字重，影响排版的还有字体行高。为了达到适当的可读性和阅读流畅性，字体行高，需要根据字体的大小和粗细来设定。经过测试，RN 应用在默认情况下， 行高约等于字体大小乘以 1.2，如下图所示：
 
-![image](../images/popularize/lineHeight.jpeg)
+![image](./images/popularize/lineHeight.jpeg)
 
 > 注意：对于中文字体，行高与字体尺寸的比例并不是 1.2。
 
@@ -78,7 +78,7 @@ beeshell 的字体尺寸集，是基于 12、14、16、20 和 28 的排版比例
 
 对于同一个 APP，间距应该在一个合适的范围取值，通过定义『小号间距』、『中号间距』、『大号间距』等来划分信息层次。beeshell 的 Button 组件，有三种尺寸，实现如下图所示：
 
-![image](../images/popularize/spacing.jpeg)
+![image](./images/popularize/spacing.jpeg)
 
 *排版：边线*
 
@@ -103,22 +103,22 @@ beeshell 将逐渐在所有的组件集成这两种动画，保证动效的一�
 
 Button 组件使用 FadeAnimated 类实现动画，动效如下图所示：
 
-![image](../images/popularize/animatedButton.gif)
+![image](./images/popularize/animatedButton.gif)
 
 Modal 组件使用 FadeAnimated 类实现动画，动效如下图所示：
 
-![image](../images/popularize/animatedModal.gif)
+![image](./images/popularize/animatedModal.gif)
 
 Dropdown 组件使用 SlideAnimated 类实现动画，动效如下图所示：
 
-![image](../images/popularize/animatedDropdown.gif)
+![image](./images/popularize/animatedDropdown.gif)
 
 
 综上所述，beeshell 通过样式和动效两个方面进行 UI 一致性的优化。样式一致性的保证，主要通过定义全局性的主题变量，供所有组件使用，同时，提供了自定义主题变量的接口，可以实现一键换肤。动效的一致性，一方面，依赖主题变量中定义的动画开关变量，主要考虑到一些低端 Android 机器的性能问题，用户可以选择性关闭某个组件的动画，另一方面，依赖组件库的良好分层设计，将动画类独立实现，可以很方便的集成到任意组件中。
 
 一键换肤的效果如下图所示：
 
-![image](../images/popularize/theme.jpeg)
+![image](./images/popularize/theme.jpeg)
 
 ### 定制化能力分级设计
 ### 功能丰富强大
