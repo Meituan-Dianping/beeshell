@@ -26,7 +26,7 @@ import { Icon } from '@roo/roo-mobile-rn/dist/components/Icon';
 ```jsx
 import { Icon } from '@roo/roo-mobile-rn'
 
-<Icon type='caret-down' size={14} tintColor='#FECB2E' />
+<Icon type='angle-down' size={14} tintColor='#FECB2E' />
 <Icon type='times-circle-o' size={20} tintColor='red' />
 ```
 
@@ -36,7 +36,7 @@ import { Icon } from '@roo/roo-mobile-rn'
 | Name | Type | Required | Default | Description |
 | ---- | ---- | ---- | ---- | ---- |
 | style | ImageStyle | false | {} | 样式 |
-| type | string | true | 'caret-down' | 图标类型 |
+| type | string | true | 'angle-down' | 图标类型 |
 | size | number | false | 20 | 图标大小 |
 | tintColor | string | false | brandPrimaryDark 的色值 | 图标颜色，注意只支持 iOS 平台 |
 | source | ImageSourcePropType | false | null | 自定义图片 |

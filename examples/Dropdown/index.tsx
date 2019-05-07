@@ -39,7 +39,7 @@ export default class DropdownScreen extends Component<{}, any> {
     }, 300)
   }
 
-  onChange = (value) => {
+  handleChange = (value) => {
     this.setState({
       value: value
     })
@@ -79,7 +79,7 @@ export default class DropdownScreen extends Component<{}, any> {
             cancelable={true}
             value={value}
             data={data}
-            onChange={this.onChange}
+            onChange={this.handleChange}
           />
 
           <Button
@@ -112,7 +112,7 @@ export default class DropdownScreen extends Component<{}, any> {
             cancelable={true}
             value={value}
             data={data}
-            onChange={this.onChange}
+            onChange={this.handleChange}
           />
 
           <Button
@@ -146,7 +146,7 @@ export default class DropdownScreen extends Component<{}, any> {
             cancelable={true}
             value={value}
             data={data}
-            onChange={this.onChange}
+            onChange={this.handleChange}
           />
         </View>
       </ScrollView>

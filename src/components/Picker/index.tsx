@@ -20,7 +20,7 @@ export interface PickerProps {
   style?: ViewStyle
   label?: any
   activeIcon?: ReactElement<any>
-  unactiveIcon?: ReactElement<any>
+  inactiveIcon?: ReactElement<any>
   disabled?: boolean,
   cancelable?: boolean
   onToggle?: Function
@@ -36,8 +36,8 @@ export class Picker extends React.Component<PickerProps, PickerState> {
   private trigger = null
   static defaultProps = {
     label: '请选择',
-    activeIcon: <Icon source={require(`../../common/images/icons/caret-up.png`)} size={12} tintColor={variables.mtdBrandPrimaryDark} />,
-    unactiveIcon: <Icon source={require(`../../common/images/icons/caret-down.png`)} size={12} tintColor={variables.mtdGrayBase} />,
+    activeIcon: <Icon source={require(`../../common/images/icons/angle-up.png`)} size={12} tintColor={variables.mtdBrandPrimaryDark} />,
+    inactiveIcon: <Icon source={require(`../../common/images/icons/angle-down.png`)} size={12} tintColor={variables.mtdGrayBase} />,
     disabled: false,
     cancelable: true,
     style: {},
@@ -122,7 +122,7 @@ export class Picker extends React.Component<PickerProps, PickerState> {
   }
 
   renderIcon (active) {
-    return active ? this.props.activeIcon : this.props.unactiveIcon
+    return active ? this.props.activeIcon : this.props.inactiveIcon
   }
 
   render () {

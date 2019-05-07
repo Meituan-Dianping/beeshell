@@ -254,7 +254,7 @@ export default class CascaderScreen extends Component<any, any> {
                   <View style={{ flexDirection: 'row' }} >
                     {icon}<Text style={{ color }}>{item.label}</Text>
                   </View>
-                  { hasChildren ? <Icon type='caret-right' size={14} tintColor={color}></Icon> : null }
+                  { hasChildren ? <Icon type='angle-right' size={14} tintColor={color}></Icon> : null }
                 </View>
               )
             }}

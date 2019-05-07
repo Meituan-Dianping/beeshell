@@ -31,7 +31,7 @@ export default {
   line: {
     marginLeft: variables.mtdHSpacingL,
     height: StyleSheet.hairlineWidth,
-    backgroundColor: variables.mtdGrayLightest
+    backgroundColor: variables.mtdBorderColorDark
   },
 
   formItem: {

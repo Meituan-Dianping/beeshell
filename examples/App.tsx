@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
-import { StyleSheet, TouchableOpacity, View, Text, SectionList } from '@mrn/react-native'
+import { StyleSheet, TouchableOpacity, View, Text, SectionList, SafeAreaView, StatusBar } from '@mrn/react-native'
 import styles from './common/styles'
 import variables from './customTheme'
+import { Icon } from '../src/'
 
 import {
   createStackNavigator,
   NavigationScreenProp,
   NavigationState,
-  NavigationParams
+  NavigationParams,
+  createBottomTabNavigator
 } from '@mrn/react-navigation'
 
 // @ts-ignore
@@ -79,7 +81,7 @@ class Home extends Component<any, any> {
 
   componentDidMount() {
     setTimeout(() => {
-      this.props.navigation.navigate('Button')
+      // this.props.navigation.navigate('Form')
     }, 1000)
   }
 
@@ -121,7 +123,7 @@ class Home extends Component<any, any> {
               color: variables.mtdGrayBase,
               // fontSize: 14
             }}>
-              {item.label} - {item.key}
+              {item.key} - {item.label}
           </Text>
         </View>
         {
@@ -163,15 +165,12 @@ class Home extends Component<any, any> {
           renderSectionHeader={this.renderSectionHeader}
           renderItem={this.renderSectionListItem}>
         </SectionList>
-        <View style={{}}>
-          <Text style={{}}></Text>
-        </View>
       </View>
     )
   }
 }
 
-function MakeHeader (navigation, title, backLabel, item?) {
+function makeHeader (navigation, title, backLabel, item?) {
   return (
     <NavigationBar
       testID={item ? `navigationBar${item.key}` : undefined}
@@ -185,19 +184,19 @@ function MakeHeader (navigation, title, backLabel, item?) {
   )
 }
 
-let RootStack = createStackNavigator({
+const HomeStack = createStackNavigator({
   // 首页
   Home: {
     screen: Home,
     navigationOptions: ({ navigation }) => ({
-      header: MakeHeader(navigation, 'roo-mobile-rn', null)
+      header: makeHeader(navigation, 'roo-mobile-rn 组件库', null)
     })
   },
   // 其余的展示页
   ...pageList.reduce((res, item) => {
     res[item.key] = {
       navigationOptions: ({ navigation }) => ({
-        header: MakeHeader(navigation, item.label, '', item)
+        header: makeHeader(navigation, item.title || `${item.key} ${item.label}`, '', item)
       }),
       ...item
     }
@@ -207,10 +206,76 @@ let RootStack = createStackNavigator({
   useDowngrade: false // 是否使用降级，默认true，使用 debug 功能时请关闭
 })
 
+
+const tabNavigatorConfigs = {
+  Home: {
+    screen: HomeStack,
+    icon: 'home-o',
+    label: '首页'
+  },
+  Work: {
+    screen: () => { return null },
+    icon: 'th-large-o',
+    label: '工作台'
+  },
+  Personal: {
+    screen: () => { return null },
+    icon: 'user-o',
+    label: '我的'
+  },
+  Config: {
+    screen: () => { return null },
+    icon: 'cog-o',
+    label: '配置'
+  }
+}
+
+let TabNavigator = createBottomTabNavigator(
+  {
+    ...tabNavigatorConfigs
+  },
+  {
+    navigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, tintColor }) => {
+        const { routeName } = navigation.state
+        return <Icon type={tabNavigatorConfigs[routeName].icon} size={18} tintColor={tintColor} />
+      },
+
+      tabBarLabel: ({ focused, tintColor }) => {
+        const { routeName } = navigation.state
+
+        return (
+          <Text style={{ fontSize: 12, color: tintColor, textAlign: 'center' }}>
+            {tabNavigatorConfigs[routeName].label}
+          </Text>
+        )
+      }
+    }),
+    tabBarOptions: {
+      activeTintColor: variables.mtdBrandPrimaryDark,
+      inactiveTintColor: variables.mtdGray,
+      style: {
+        height: 45,
+        borderTopColor: variables.mtdBorderColorDarker,
+        backgroundColor: '#fff',
+      },
+    },
+  }
+)
+
 // 在调试模式下进行热更新
 if (process.env.NODE_ENV !== 'production') {
   const { hot } = require('react-hot-loader')
-  RootStack = hot(module)(RootStack)
+  TabNavigator = hot(module)(TabNavigator)
 }
 
-export default withSafeArea()(RootStack)
+export default class App extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, backgroundColor: '#fff' }}>
+        <SafeAreaView style={{ backgroundColor: '#fff' }} />
+        <TabNavigator />
+      </View>
+    )
+  }
+}

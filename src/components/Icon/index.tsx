@@ -17,7 +17,7 @@ export interface IconProps {
 export class Icon extends React.Component<IconProps, any> {
   static displayName = 'Icon'
   static defaultProps = {
-    type: 'caret-down',
+    type: 'angle-down',
     size: 14,
     style: {},
     tintColor: variables.mtdBrandPrimaryDark,

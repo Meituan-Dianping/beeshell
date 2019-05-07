@@ -64,8 +64,8 @@ const flattenedData = [
 | Name | Type | Required | Default | Description |
 | ---- | ---- | ---- | ---- | ---- |
 | style | ViewStyle | false | {} | 按钮样式 |
-| activeIcon | ReactElement | false | <Icon type='caret-down' /> | 激活状态图标 |
-| unActiveIcon | ReactElement | false | <Icon type='caret-right' /> | 未激活状态图标 |
+| activeIcon | ReactElement | false | <Icon type='angle-down' /> | 激活状态图标 |
+| inactiveIcon | ReactElement | false | <Icon type='angle-right' /> | 未激活状态图标 |
 | data | any[] | false | [] | 数据源，支持嵌套和扁平的树形结构 |
 | dataStructureType | string | false | 'nested' | 数据结构类型，支持 'nested' 'flattened' |
 | fieldKeys | any | false | {} | 数据项的 key 自定义，包括 idKey pIdKey childrenKey activeKey |

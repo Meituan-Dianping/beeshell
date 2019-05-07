@@ -15,7 +15,7 @@ const componentStyles = StyleSheet.create({
   },
   content: {
     alignItems: 'center',
-    width: 108,
+    width: 110,
     padding: 8,
     marginBottom: 8,
     borderWidth: StyleSheet.hairlineWidth,
@@ -23,7 +23,7 @@ const componentStyles = StyleSheet.create({
   },
   title: {
     marginTop: 5,
-    fontSize: 12,
+    fontSize: 10,
     color: '#666'
   }
 })
@@ -47,18 +47,32 @@ export default class IconScreen extends Component<{}, State> {
         contentContainerStyle={styles.container}>
         <View style={componentStyles.panel}>
           <View style={componentStyles.content}>
-            <Icon size={20} type='caret-down' tintColor={variables.mtdGrayBase} />
-            <Text style={componentStyles.title}>caret-down</Text>
+            <Icon size={20} type='angle-up' tintColor={variables.mtdGrayBase} />
+            <Text style={componentStyles.title}>angle-up</Text>
+          </View>
+          <View style={componentStyles.content}>
+            <Icon size={20} type='angle-down' tintColor={variables.mtdGrayBase} />
+            <Text style={componentStyles.title}>angle-down</Text>
           </View>
 
           <View style={componentStyles.content}>
-            <Icon size={20} type='caret-right' tintColor={variables.mtdGrayBase} />
-            <Text style={componentStyles.title}>caret-right</Text>
+            <Icon size={20} type='angle-left' tintColor={variables.mtdGrayBase} />
+            <Text style={componentStyles.title}>angle-left</Text>
           </View>
 
           <View style={componentStyles.content}>
-            <Icon size={20} type='caret-up' tintColor={variables.mtdGrayBase} />
-            <Text style={componentStyles.title}>caret-up</Text>
+            <Icon size={20} type='angle-right' tintColor={variables.mtdGrayBase} />
+            <Text style={componentStyles.title}>angle-right</Text>
+          </View>
+
+          <View style={componentStyles.content}>
+            <Icon size={20} type='angle-double-left' tintColor={variables.mtdGrayBase} />
+            <Text style={componentStyles.title}>angle-double-left</Text>
+          </View>
+
+          <View style={componentStyles.content}>
+            <Icon size={20} type='angle-double-right' tintColor={variables.mtdGrayBase} />
+            <Text style={componentStyles.title}>angle-double-right</Text>
           </View>
           <View style={componentStyles.content}>
             <Icon size={20} type='check' tintColor={variables.mtdGrayBase} />
@@ -70,9 +84,10 @@ export default class IconScreen extends Component<{}, State> {
             <Text style={componentStyles.title}>check-circle</Text>
           </View>
 
+
           <View style={componentStyles.content}>
-            <Icon size={20} type='circle-o' tintColor={variables.mtdGrayBase} />
-            <Text style={componentStyles.title}>circle-o</Text>
+            <Icon size={20} type='plus' tintColor={variables.mtdGrayBase} />
+            <Text style={componentStyles.title}>plus</Text>
           </View>
 
           <View style={componentStyles.content}>
@@ -81,13 +96,28 @@ export default class IconScreen extends Component<{}, State> {
           </View>
 
           <View style={componentStyles.content}>
+            <Icon size={20} type='plus-square-o' tintColor={variables.mtdGrayBase} />
+            <Text style={componentStyles.title}>plus-square-o</Text>
+          </View>
+
+          <View style={componentStyles.content}>
             <Icon size={20} type='question-circle' tintColor={variables.mtdGrayBase}/>
             <Text style={componentStyles.title}>question-circle</Text>
           </View>
 
           <View style={componentStyles.content}>
-            <Icon size={20} type='chevron-left' tintColor={variables.mtdGrayBase} />
-            <Text style={componentStyles.title}>chevron-left</Text>
+            <Icon size={20} type='question-circle-o' tintColor={variables.mtdGrayBase}/>
+            <Text style={componentStyles.title}>question-circle-o</Text>
+          </View>
+
+          <View style={componentStyles.content}>
+            <Icon size={20} type='angle-left' tintColor={variables.mtdGrayBase} />
+            <Text style={componentStyles.title}>angle-left</Text>
+          </View>
+
+          <View style={componentStyles.content}>
+            <Icon size={20} type='angle-right' tintColor={variables.mtdGrayBase} />
+            <Text style={componentStyles.title}>angle-right</Text>
           </View>
 
           <View style={componentStyles.content}>
@@ -111,11 +141,6 @@ export default class IconScreen extends Component<{}, State> {
           </View>
 
           <View style={componentStyles.content}>
-            <Icon size={20} type='map-marker' tintColor={variables.mtdGrayBase} />
-            <Text style={componentStyles.title}>map-marker</Text>
-          </View>
-
-          <View style={componentStyles.content}>
             <Icon size={20} type='star' tintColor={variables.mtdGrayBase} />
             <Text style={componentStyles.title}>star</Text>
           </View>
@@ -136,13 +161,28 @@ export default class IconScreen extends Component<{}, State> {
           </View>
 
           <View style={componentStyles.content}>
-            <Icon size={20} type='share-square-o' tintColor={variables.mtdGrayBase} />
-            <Text style={componentStyles.title}>share-square-o</Text>
+            <Icon size={20} type='ellipsis-h' tintColor={variables.mtdGrayBase} />
+            <Text style={componentStyles.title}>ellipsis-h</Text>
           </View>
 
           <View style={componentStyles.content}>
-            <Icon size={20} type='ellipsis-h' tintColor={variables.mtdGrayBase} />
-            <Text style={componentStyles.title}>ellipsis-h</Text>
+            <Icon size={20} type='user-o' tintColor={variables.mtdGrayBase} />
+            <Text style={componentStyles.title}>user-o</Text>
+          </View>
+
+          <View style={componentStyles.content}>
+            <Icon size={20} type='users-o' tintColor={variables.mtdGrayBase} />
+            <Text style={componentStyles.title}>users-o</Text>
+          </View>
+
+          <View style={componentStyles.content}>
+            <Icon size={20} type='camera-o' tintColor={variables.mtdGrayBase} />
+            <Text style={componentStyles.title}>camera-o</Text>
+          </View>
+
+          <View style={componentStyles.content}>
+            <Icon size={20} type='edit-o' tintColor={variables.mtdGrayBase} />
+            <Text style={componentStyles.title}>edit-o</Text>
           </View>
 
           {/*<View style={componentStyles.content}>
