@@ -13,7 +13,7 @@ import treeViewStyles from './styles'
 export interface TreeViewProps {
   style?: ViewStyle
   activeIcon?: ReactElement<any>
-  unactiveIcon?: ReactElement<any>
+  inactiveIcon?: ReactElement<any>
   data?: any[]
   dataStructureType?: string
   fieldKeys?: any
@@ -24,8 +24,8 @@ export class TreeView extends React.Component<TreeViewProps, any> {
 
   static defaultProps = {
     style: {},
-    activeIcon: <Icon source={require(`../../common/images/icons/caret-down.png`)} tintColor={variables.mtdGrayBase}></Icon>,
-    unactiveIcon: <Icon source={require(`../../common/images/icons/caret-right.png`)} tintColor={variables.mtdGrayBase}></Icon>,
+    activeIcon: <Icon source={require(`../../common/images/icons/angle-down.png`)} tintColor={variables.mtdGrayBase}></Icon>,
+    inactiveIcon: <Icon source={require(`../../common/images/icons/angle-right.png`)} tintColor={variables.mtdGrayBase}></Icon>,
     data: [],
     dataStructureType: 'nested',
     fieldKeys: {}
@@ -91,7 +91,7 @@ export class TreeView extends React.Component<TreeViewProps, any> {
 
   renderItem (data?, level?) {
     const { tree } = this.state
-    const { activeIcon, unactiveIcon } = this.props
+    const { activeIcon, inactiveIcon } = this.props
     const fieldKeys = this.getFieldKeys()
     if (!data) {
       data = tree.filter((item) => {
@@ -120,7 +120,7 @@ export class TreeView extends React.Component<TreeViewProps, any> {
                   onPress={this.handlePress.bind(this, item)}>
                   {
                     children.length && <View style={treeViewStyles.itemIcon}>
-                      {item[fieldKeys.activeKey] ? activeIcon : unactiveIcon}
+                      {item[fieldKeys.activeKey] ? activeIcon : inactiveIcon}
                     </View>
                   }
                   <Text style={[treeViewStyles.itemText]}>{item[fieldKeys.labelKey]}</Text>

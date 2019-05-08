@@ -199,7 +199,7 @@ export class Dialog extends Modal<DialogProps> {
               style={{
                 flex: 1,
                 [operationsLayout === 'column' ? 'height' : 'width']: 1 * px,
-                backgroundColor: variables.mtdBorderColor
+                backgroundColor: variables.mtdBorderColorDark
               }}
             />
           </View>

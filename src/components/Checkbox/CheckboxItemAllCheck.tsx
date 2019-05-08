@@ -36,7 +36,7 @@ export class CheckboxItemAllCheck extends CheckboxItem<CheckboxItemAllCheckProps
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.checkedStatus !== this.props.checkedStatus) {
-      this.toAnimated()
+      this.animated && this.animated.toIn()
     }
   }
 
@@ -53,7 +53,7 @@ export class CheckboxItemAllCheck extends CheckboxItem<CheckboxItemAllCheckProps
     if (checkedStatus === 3) {
       tmp = 1
     }
-    this.toAnimated()
+    this.animated && this.animated.toIn()
     this.props.onChange && this.props.onChange(null, tmp, true)
   }
 

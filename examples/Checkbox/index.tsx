@@ -22,10 +22,9 @@ export default class CheckboxScreen extends Component<{}, any> {
     return (
       <ScrollView
         style={styles.body}>
-        <Text style={styles.header}>左边图标</Text>
-        <View>
+        <Text style={styles.header}>基础</Text>
+        <View style={[styles.panel, { paddingVertical: 0 }]}>
           <Checkbox
-            style={{ paddingHorizontal: variables.mtdHSpacingXL }}
             value={this.state.address}
             onChange={(value) => {
               this.setState({
@@ -39,7 +38,22 @@ export default class CheckboxScreen extends Component<{}, any> {
           </Checkbox>
         </View>
 
-
+        <Text style={styles.header}>横向布局</Text>
+        <View style={[styles.panel, { paddingVertical: 0 }]}>
+          <Checkbox
+            style={{ flexDirection: 'row' }}
+            value={this.state.address}
+            onChange={(value) => {
+              this.setState({
+                address: value
+              })
+            }}
+            iconPosition='left'>
+            <Checkbox.Item style={{ marginRight: 12 }} label='北京' value='v1' />
+            <Checkbox.Item style={{ marginRight: 12 }} label='上海' value='v2' />
+            <Checkbox.Item label='深圳（禁用）' value='v4' disabled={true}/>
+          </Checkbox>
+        </View>
         <Text style={styles.header}>右边图标</Text>
         <Checkbox
           style={{ paddingHorizontal: variables.mtdHSpacingXL }}

@@ -29,7 +29,7 @@ export default class Demo3Screen extends Component<{}, any> {
       <ScrollView
         style={styles.body}>
         <Tab
-          activeColor={variables.mtdBrandPrimary}
+          activeColor={variables.mtdGrayBase}
           value={this.state.tabValue}
           data={[
             { label: 'Tab 1', value: 1 },

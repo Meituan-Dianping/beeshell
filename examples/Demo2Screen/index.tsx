@@ -21,8 +21,27 @@ export default class Demo2Screen extends Component<{}, any> {
     return (
       <ScrollView
         style={styles.body}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', padding: 10, backgroundColor: variables.mtdBrandSuccessLight }}>
+          <Icon type='check-circle' tintColor={variables.mtdBrandSuccessDark} />
+          <Text style={{ marginLeft: 5, color: variables.mtdBrandSuccessDark }}>审核通过</Text>
+        </View>
         <Text style={styles.header}>基本信息</Text>
         <Form>
+          <Form.Item label='' hasLine>
+            <View></View>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+              <View
+                style={{
+                  width: 50, height: 50, padding: 10, borderRadius: 50, backgroundColor: variables.mtdFillBody, alignItems: 'center', justifyContent: 'center'
+                }}>
+                <Icon size='100%' type='camera-o' tintColor={variables.mtdGrayBase} />
+              </View>
+              <View style={{ flexDirection: 'row' }}>
+                <Text style={{ color: variables.mtdGray }}>请上传头像</Text>
+                <Icon type='angle-right' tintColor={variables.mtdGray} />
+              </View>
+            </View>
+          </Form.Item>
           <Form.Item
             style={{ paddingVertical: 13 }}
             label={
@@ -39,37 +58,48 @@ export default class Demo2Screen extends Component<{}, any> {
               </View>
             }
             hasLine>
-            <Input textAlign='right' value={'Lulu'} placeholder='姓名' onChange={(value) => { this.handleChangeFilter('name', value) }} />
+            <Input textAlign='right' value={'Lulu.Sycay Andeab'} placeholder='姓名' onChange={(value) => { this.handleChangeFilter('name', value) }} />
             {/* <Text style={{ color: variables.mtdBrandDanger }}>{'请输入姓名'}</Text> */}
           </Form.Item>
-          <Form.Item style={{ paddingVertical: 13 }} label='手机号码' hasLine>
-            <Input placeholder='请填写手机号码' textAlign='right' value={'13333333333'} onChange={(value) => { this.handleChangeFilter('phone', value) }} />
-            <Text style={{ color: variables.mtdGrayLighter, fontSize: 12, marginTop: 4 }}>该信息非常重要，请认真填写</Text>
-          </Form.Item>
-        </Form>
-        <Text style={styles.header}>配送信息</Text>
-        <Form>
           <Form.Item label='是否接收消息' hasLine>
             <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
               <Switch value={true} rockerSize='sm' activeColor={variables.mtdBrandPrimaryDark} />
             </View>
           </Form.Item>
+          <Form.Item style={{ paddingVertical: 13 }} label='手机号码' hasLine>
+            <Input placeholder='请填写手机号码' textAlign='right' value={'13333333333'} onChange={(value) => { this.handleChangeFilter('phone', value) }} />
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 4 }}>
+              <Icon type='exclamation-circle-o' tintColor={variables.mtdGrayLighter} />
+              <Text style={{ color: variables.mtdGrayLighter, fontSize: 12 }}>该信息非常重要，请认真填写</Text>
+            </View>
+          </Form.Item>
+        </Form>
+        <Text style={styles.header}>配送信息</Text>
+        <Form>
           <Form.Item label='配送评分' hasLine>
-            <Rate value={this.state.score} iconColor={variables.mtdBrandPrimaryDark} onChange={(value) => { this.setState({ score: value }) }}></Rate>
+            <View style={{ alignItems: 'flex-end' }}>
+              <Rate value={this.state.score} iconColor={variables.mtdBrandPrimaryDark} onChange={(value) => { this.setState({ score: value }) }}></Rate>
+            </View>
           </Form.Item>
-          <Form.Item label='配送时间' hasLine>
-            <View></View>
-            <Checkbox
-              style={{ marginTop: 5 }}
-              value={['time_1', 'time_2']}
-              onChange={null}
-              iconPosition='left'>
-              <Checkbox.Item label='上午' value='time_1' />
-              <Checkbox.Item label='下午' value='time_2' />
-            </Checkbox>
-          </Form.Item>
-          <Form.Item label='配送价格' hasLine>
-            <Slider range min={0} max={20} value={[3, 17]} onChange={(value) => { console.log(value) }} showTip minTrackColor={variables.mtdFillGray} midTrackColor={variables.mtdBrandPrimaryDark} maxTrackColor={variables.mtdFillGray} />
+          <Form.Item
+            style={{ paddingVertical: 0 }}
+            label={
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Icon style={{ marginRight: 5 }} type='clock-o' tintColor={variables.mtdGrayBase} />
+                <Text>配送时间</Text>
+              </View>
+            }
+            hasLine>
+            <View style={{ alignItems: 'flex-end' }}>
+              <Checkbox
+                style={{ flexDirection: 'row' }}
+                value={['time_1', 'time_2']}
+                onChange={null}
+                iconPosition='left'>
+                <Checkbox.Item style={{ marginRight: 5 }} label='上午' value='time_1' />
+                <Checkbox.Item label='下午' value='time_2' />
+              </Checkbox>
+            </View>
           </Form.Item>
           <Form.Item label='日期' hasLine>
             <TouchableOpacity
@@ -91,14 +121,14 @@ export default class Demo2Screen extends Component<{}, any> {
           <View style={{ height: 50 }}></View>
         </BottomModal>
 
-        <View style={{ flexDirection: 'row', marginTop: 20, paddingHorizontal: 20 }}>
-          <View style={{ flex: 1 }}>
-            <Button
-              textColorInverse
-              type='primary'>
-              保存
-            </Button>
-          </View>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, paddingHorizontal: 20 }}>
+          <Button type='default'>上一步</Button>
+          <Button textColorInverse type='primary'>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Text style={{ fontSize: 16, marginRight: 5, color: variables.mtdGrayBase }}>保存</Text>
+              <Icon type='external-link' tintColor={variables.mtdGrayBase} />
+            </View>
+          </Button>
         </View>
       </ScrollView >
     )

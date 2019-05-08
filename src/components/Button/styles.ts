@@ -13,7 +13,8 @@ const defaultWrapper = {
   borderColor: variables.mtdBorderColorDarker,
   borderRadius: variables.buttonBorderRadius,
 
-  backgroundColor: '#fff'
+  backgroundColor: '#fff',
+  overflow: 'hidden'
 }
 
 const defaultText = {

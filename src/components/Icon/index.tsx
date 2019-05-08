@@ -9,7 +9,7 @@ import variables from '../../common/styles/variables'
 export interface IconProps {
   style?: ImageStyle
   type?: string
-  size?: number | null | undefined
+  size?: number | string | null | undefined
   tintColor?: string | null | undefined // Android 平台无效
   source?: ImageSourcePropType
 }
@@ -17,7 +17,7 @@ export interface IconProps {
 export class Icon extends React.Component<IconProps, any> {
   static displayName = 'Icon'
   static defaultProps = {
-    type: 'caret-down',
+    type: 'angle-down',
     size: 14,
     style: {},
     tintColor: variables.mtdBrandPrimaryDark,

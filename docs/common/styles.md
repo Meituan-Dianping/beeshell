@@ -81,17 +81,17 @@ mtdFontSizeS: 12,
 mtdFontSizeM: 14,
 mtdFontSizeL: 16,
 mtdFontSizeXL: 18,
-mtdFontSizeXXL: 20,
-mtdFontSizeXXXL: 22,
-mtdFontSizeXXXXL: 24,
-mtdFontSizeXXXXXL: 28
+mtdFontSizeX2L: 20,
+mtdFontSizeX3L: 22,
+mtdFontSizeX4L: 24,
+mtdFontSizeX5L: 28
 
 // 水平间距
 mtdHSpacingS: 4,
 mtdHSpacingM: 8,
 mtdHSpacingL: 12,
 mtdHSpacingXL: 16,
-mtdHSpacingXXL: 20,
+mtdHSpacingX2L: 20,
 
 // 垂直间距
 mtdVSpacingXS: 2,
@@ -99,9 +99,9 @@ mtdVSpacingS: 4,
 mtdVSpacingM: 8,
 mtdVSpacingL: 10,
 mtdVSpacingXL: 12,
-mtdVSpacingXXL: 16,
-mtdVSpacingXXXL: 18,
-mtdVSpacingXXXXL: 20
+mtdVSpacingX2L: 16,
+mtdVSpacingX3L: 18,
+mtdVSpacingX4L: 20
 
 // 圆角
 mtdRadiusXS: 2,

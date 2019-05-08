@@ -53,6 +53,8 @@ export default class ModalScreen extends Component<{}, any> {
 
         <Button
           style={{ marginTop: 12 }}
+          type='primary'
+          textColorInverse
           size='sm'
           onPress={() => {
             this.modal1.open()
@@ -80,6 +82,8 @@ export default class ModalScreen extends Component<{}, any> {
         </Modal>
         <Button
           style={{ marginTop: 12 }}
+          type='primary'
+          textColorInverse
           size='sm'
           onPress={() => {
             this.modal3.open()
@@ -105,6 +109,8 @@ export default class ModalScreen extends Component<{}, any> {
             this.btnEl = c
           }}
           style={{ marginTop: 12 }}
+          type='primary'
+          textColorInverse
           size='sm'
           onPress={() => {
             this.btnEl.measure((fx, fy, width, height, px, py) => {
@@ -147,6 +153,8 @@ export default class ModalScreen extends Component<{}, any> {
 
         <Button
           style={{ marginTop: 12 }}
+          type='primary'
+          textColorInverse
           size='sm'
           onPress={() => {
             this.modalA.open()
@@ -177,6 +185,8 @@ export default class ModalScreen extends Component<{}, any> {
 
         <Button
           style={{ marginTop: 12 }}
+          type='primary'
+          textColorInverse
           size='sm'
           onPress={() => {
             this.modalX.open()
@@ -188,7 +198,7 @@ export default class ModalScreen extends Component<{}, any> {
             this.modalX = c
           }}
           scrollable
-          containerStyle={{ marginVertical: 150 }}
+          style={{ marginVertical: 150 }}
           cancelable>
           <View
             style={{

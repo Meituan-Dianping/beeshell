@@ -38,7 +38,7 @@ export default StyleSheet.create({
   },
 
   itemText: {
-    paddingVertical: variables.mtdVSpacingXXL,
+    paddingVertical: variables.mtdVSpacingX2L,
     paddingHorizontal: variables.mtdHSpacingXL,
 
     fontSize: variables.mtdFontSizeL,

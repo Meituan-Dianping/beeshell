@@ -7,7 +7,7 @@ class CommonAnimated {
     props = props || {}
     this.state = {
       opacityList: props.opacityList || [0, 1],
-      duration: props.opacityList || 300,
+      duration: props.duration || 300,
       easing: props.easing || Easing.elastic(0.8)
     }
   }
@@ -44,7 +44,7 @@ export class FadeAnimated extends CommonAnimated {
       scaleList: [0, 1],
       translateXList: [null, null],
       translateYList: [null, null],
-      ...props
+      ...props,
     }
 
     this.state.opacity = new Animated.Value(
@@ -117,12 +117,12 @@ export class FadeAnimated extends CommonAnimated {
       this.animated = Animated.parallel([
         Animated.timing(this.state.opacity, {
           toValue: this.getPropertyValue('opacity', !tag),
-          duration: this.state.duration,
+          duration: this.state.opacityDuration || this.state.duration,
           easing: this.state.easing
         }),
         Animated.timing(this.state.scale, {
           toValue: this.getPropertyValue('scale', !tag),
-          duration: this.state.duration,
+          duration: this.state.scaleDuration || this.state.duration,
           easing: this.state.easing
         }),
         Animated.timing(this.state.translateX, {

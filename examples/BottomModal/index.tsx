@@ -187,13 +187,13 @@ export default class BottomModalScreen extends Component<{}, any> {
               <Text>自定义内容</Text>
             </View>
             <Button style={{ marginVertical: 10 }} type='primary'>我是按钮</Button>
-          </View>
 
-          <View
-            style={{ maxHeight: 30 }}>
-            <SafeAreaView style={{ flex: 1 }}>
-              <View style={{ height: 60 }}></View>
-            </SafeAreaView>
+            <View
+              style={{ maxHeight: 30 }}>
+              <SafeAreaView style={{ flex: 1 }}>
+                <View style={{ height: 60 }}></View>
+              </SafeAreaView>
+            </View>
           </View>
         </SlideModal>
       </ScrollView>
