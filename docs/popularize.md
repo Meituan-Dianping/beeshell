@@ -1,22 +1,23 @@
-# beeshell 2.0
+# React Native 组件库 beeshell 升级 2.0
 
 ## 引言
 
-2018 9 月开源，11 月内部发起 rn 组件库建设，旨在提供公司级共用的 RN 组件库，对 UI 统一、架构设计、易用性、扩展性提出更高要求
+随着 React Native（以下简称 RN） 技术在公司的全面推广，各个业务方都出现了对 RN 组件库的诉求。公司内部发起了 RN 组件库建设，旨在提供公司级共用的 RN 组件库。如何提供一套通用的组件库，来有效的支撑包括外卖、酒旅以及其他事业部的所有业务需求？这对组件库的架构设计、UI 一致性、易用性、扩展性提出了更高的要求。因为我们团队在开发 beeshell 1.0 时积累了宝贵的经验，所以被邀请加入到公司级 RN 组件库的项目共建中，在开发完公司级组件库后，我们将共建的成果贡献出来，在服务社区的同时，也想借助社区的力量进一步完善组件库。
 
-新版 beeshell 的效果图如下：
+beeshell 2.0 的效果图如下：
 
 ![image](./images/popularize/demo.jpeg)
 
-
 ## 系统设计升级
 
-xxxxxxxxx
+### 架构
 
 ![image](./images/popularize/framework.jpeg)
 
-业务 -> 组件库（mtd->roo->beeshell） -> mrn/rn -> iOS/Android
 
+### 协作模式
+
+![image](./images/popularize/cooperation.jpeg)
 
 ## 方案实现优化
 ### UI 风格一致性
@@ -179,19 +180,21 @@ labelText 用于定制文案，将 labelTextStyle 整体暴露出来，而不是
 通过四级定制化的能力，轻松搞定所有的产品的需求。
 
 ### 功能丰富强大
+
+
 ### 易用性
 ### 功能边界清晰
 
 
 # 测试
-在 1.0 已经继承了黑盒测试、白盒测试，在 2.0 我们集成了灰盒测试
+在 beeshell 1.0 已经继承了黑盒测试、白盒测试，在 beeshell 2.0 我们集成了灰盒测试
 
 什么是灰盒测试？xxxx
 
-效果图
 
 # 开发调试
-mrn
+
+MRN
 
 #未来规划
 50+
