@@ -1,6 +1,15 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+[![mnpm version](http://npm.sankuai.com/badge/v/@roo/roo-mobile-rn.svg?style=flat-square)](http://npm.sankuai.com/package/@roo/roo-mobile-rn)
+
+
+## [2.0.6] - 2019-05-08
+### Changed
+- Button 动画实现，不支持 Android 平台
+- 图标 png 文件替换
+- Form.Item 实现优化，防止空 View 占据空间
+
 ## [2.0.5] - 2019-05-06
 ### Changed
 - 多个组件属性名调整，属性名规范化
