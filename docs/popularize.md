@@ -6,18 +6,18 @@
 
 beeshell 2.0 的效果图如下：
 
-![image](./images/popularize/demo.jpeg)
+![image](./images/popularize/rendering.png)
 
 ## 系统设计升级
 
 ### 架构
 
-![image](./images/popularize/framework.jpeg)
+![image](./images/popularize/framework.png)
 
 
 ### 协作模式
 
-![image](./images/popularize/cooperation.jpeg)
+![image](./images/popularize/cooperation.png)
 
 ## 方案实现优化
 ### UI 风格一致性
@@ -48,14 +48,14 @@ UI 风格的一致性，包括样式一致性和动效一致性。
 
 功能色的内容与使用场景如下图所示：
 
-![image](./images/popularize/function.jpeg)
+![image](./images/popularize/function.png)
 
 
 *色彩：中性色*
 
 中性色（灰度）的内容与使用场景如下图所示：
 
-![image](./images/popularize/gray.jpeg)
+![image](./images/popularize/gray.png)
 
 然后，介绍排版，排版包括字体、间距、边线。
 
@@ -63,13 +63,13 @@ UI 风格的一致性，包括样式一致性和动效一致性。
 
 beeshell 的字体尺寸集，是基于 12、14、16、20 和 28 的排版比例，如下图所示：
 
-![image](./images/popularize/fontSize.jpeg)
+![image](./images/popularize/fontSize.png)
 
 对于字重，只使用正常 `normal` 和加粗`bold` 两种，避免了因为不同字体家族，对字重的支持范围不同，而导致视觉差异。
 
 除了字体尺寸和字重，影响排版的还有字体行高。为了达到适当的可读性和阅读流畅性，字体行高，需要根据字体的大小和粗细来设定。经过测试，RN 应用在默认情况下， 行高约等于字体大小乘以 1.2，如下图所示：
 
-![image](./images/popularize/lineHeight.jpeg)
+![image](./images/popularize/lineHeight.png)
 
 > 注意：对于中文字体，行高与字体尺寸的比例并不是 1.2。
 
@@ -79,7 +79,7 @@ beeshell 的字体尺寸集，是基于 12、14、16、20 和 28 的排版比例
 
 对于同一个 APP，间距应该在一个合适的范围取值，通过定义『小号间距』、『中号间距』、『大号间距』等来划分信息层次。beeshell 的 Button 组件，有三种尺寸，实现如下图所示：
 
-![image](./images/popularize/spacing.jpeg)
+![image](./images/popularize/spacing.png)
 
 *排版：边线*
 
@@ -120,13 +120,13 @@ Dropdown 组件使用 SlideAnimated 类实现动画，动效如下图所示：
 
 一键换肤的效果如下图所示：
 
-![image](./images/popularize/theme.jpeg)
+![image](./images/popularize/theme.png)
 
 ### 定制化能力分级设计
 
 要开发全公司共用的组件库，需要满足酒旅、外卖 C 端、外卖 B 端以及外卖 M 端等等业务需求，这对定制化能力提出了更高的要求。为了进一步增强组件的定制化能力，同时，避免属性的无节制增加，进而导致组件难以维护，我们设计了分级的策略。这里以 BottomModal 为例来详细说明，如下图所示：
 
-![image](./images/popularize/customize.jpeg)
+![image](./images/popularize/customize.png)
 
 #### 第一级定制化，定制主题变量
 
@@ -151,7 +151,7 @@ labelText 用于定制文案，将 labelTextStyle 整体暴露出来，而不是
 
 提供 labe 属性，属性值为一个 ReactElement，任意定制 UI，实现效果如下：
 
-![image](./images/popularize/customize3.jpeg)
+![image](./images/popularize/customize3.png)
 
 到这里，足以应付一个产品的需求了，突然有一天，来了一个新产品，提了一个新需求：标题和按钮左右布局，不要头部区域的底部边框。
 
@@ -180,6 +180,39 @@ labelText 用于定制文案，将 labelTextStyle 整体暴露出来，而不是
 通过四级定制化的能力，轻松搞定所有的产品的需求。
 
 ### 功能丰富强大
+
+功能丰富强大，通过两个方面体现：一个是组件数量丰富，一个是单个组件的能力强大。
+
+beeshell 目前已提供的功能有 38（组件 33、基础工具 5）个，并且详细规划了另外的 15+ 组件，会陆续开源，在组件数量上有极大优势，同时，支持功能的全部引入和按需引入，可以避免打包过多无用代码。
+
+单个组件应该具备哪些能力？对于常见的组件，我们参考业界的标杆项目，与其保持一样的能力，例如，antd 的 Slider 组件，支持横向和纵向滑动，beeshell 也会支持。对于业务下沉组件，都通过了多个业务场景的验证，组件的稳定性、支撑业务的能力都无可挑剔。我们通过参考标杆、多业务场景验证来保证组件的强大能力。
+
+#### 组件能力展示
+
+SlideModal 滑动弹框组件，支持 12 个滑动方向，支持 4 个触控区域，组件实现原理分析如下图所示：
+
+![image](./images/popularize/principleSlideModal.png)
+
+实现 SlideModal 有几个难点：
+
+- 固定定位（position fixed），即相对屏幕来定位。
+- 动画开始位置与方向
+- 屏幕的局部与全部覆盖
+
+在 RN 中并没有固定定位的概念，这使得相对屏幕来定位难以实现，要实现弹框交互，就必须解决固定定位的难题。beeshell 采取在根元素添加一个兄弟节点（RootSiblings）的方式，实现了 Topview 组件，Topview 实例（图 12 的红色部分）在初始化后，会覆盖在所有页面元素的上方，其 zIndex 可以自定义，默认值为 100，同时实例只是作为布局容器，并不会阻断交互，基于 pointerEvents 属性实现。SlideModal 作为 Topview 实例的子元素，进行展示、布局与交互，图 12 红色部分之上的部分就是 SlideModal 组件，包含 4 个触控区域以及弹框内容区域。
+
+动画的开始位置，通过提供 offsetX 和 offsetY 属性即可，但在指定开始位置后，滑动的方向情况比较多，一共有 12 方向，如下图所示：
+
+![image](./images/popularize/directionSlideModal.png)
+
+在一个区域中有 3 个方向，4 个区域共 12 个方向。
+
+内容区域的 Z 方向向下一层，是触控区域 1（结合图 12 和 13 理解），也就是我们常说的遮罩（Backdrop），通常要求在点击遮罩时关闭弹框。然而，对于触控区域 2、3、4，是否有遮罩层，则要根据应用场景来定，所以，SlideModal 提供了相关属性可以分别定制这三个区域的交互行为。如果设置三个区域都有遮罩层，则屏幕全部覆盖，无法与弹框之下的元素交互，否则屏幕局部覆盖，在没有遮罩的区域可以击穿弹框。SlideModal 的效果图如下：
+
+![image](./images/popularize/renderingSlideModal.gif)
+
+
+除了 SlideModal 还有其他功能强大的组件，如：Slider 滑块组件，支持纵向和横向滑动；Rate 评分组件，实现一套滑动评分的机制，支持定制任意图标元素。由于篇幅有限，在此不再赘述。
 
 
 ### 易用性
