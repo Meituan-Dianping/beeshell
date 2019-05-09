@@ -7,7 +7,7 @@
   "scripts": {
     "start": "mrn start --appName meituan",
     "test": "jest  --coverage",
-    "e2e": "detox test",
+    "e2e": "detox test --detectOpenHandles",
     "lint": "tslint -p ./ -c ./tslint.json",
     "tsc:examples": "rm -rf distExamples && tsc",
     "tsc:src": "rm -rf dist && tsc -p ./src && rsync -rv --exclude=*.ts --exclude=*.tsx src/ dist/",

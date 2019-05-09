@@ -97,6 +97,7 @@ export class Dropdown extends React.Component<DropdownProps> {
               data.map((item, index) => {
                 return (
                   <Radio.Item
+                    testID={item.testID}
                     key={index}
                     label={item.label}
                     value={item.value}>

@@ -24,11 +24,12 @@ export default class DropdownScreen extends Component<{}, any> {
         data: [
           {
             label: '我关注的',
-            value: 1
+            value: 1,
           },
           {
             label: '离我最近',
-            value: 2
+            value: 2,
+            testID: 'o1'
           },
           {
             label: '综合评分最高的的的',
