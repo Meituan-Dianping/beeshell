@@ -1,10 +1,24 @@
-# React Native 组件库 beeshell 升级 2.0
+---
+layout: post
+title: beeshell —— React Native 组件库升级 2.0
+author: wangxiaolong11@meituan.com
+nick: 小龙, 成健
+date: 2019-05-09 20:11
+status: publish
+comments: true
+summary: 基于 React Native 的企业级移动应用的基础组件库，beeshell 的开源推广文章，从系统设计、方案实现、质量保证、规划几个方面对组件库进行全面介绍。
+tags: [前端, 大零售, 开源, 移动, 稳定性, 跨平台, Android, iOS, React Native, React]
+---
+
+# beeshell —— React Native 组件库升级 2.0
+
+![image](./images/popularize/logo.png)
 
 ## 引言
 
-随着 React Native（以下简称 RN） 技术在公司的全面推广，各个业务方都出现了对 RN 组件库的诉求。公司内部发起了 RN 组件库建设，旨在提供公司级共用的 RN 组件库。如何提供一套通用的组件库，来有效的支撑包括外卖、酒旅以及其他事业部的所有业务需求？这对组件库的架构设计、UI 一致性、易用性、扩展性提出了更高的要求。因为我们团队在开发 beeshell 1.0 时积累了宝贵的经验，所以被邀请加入到公司级 RN 组件库的项目共建中，在开发完公司级组件库后，我们将共建的成果贡献出来，在服务社区的同时，也想借助社区的力量进一步完善组件库。
+随着 React Native（以下简称 RN） 技术在公司的全面推广，各个业务方陆续出现了对 RN 组件库的诉求。在 2018 年 11 月，公司内部发起了 RN 组件库建设，旨在提供公司级共用的组件库。如何提供一套通用的组件库，来有效的支撑包括外卖、酒旅以及其他事业部的所有业务需求？这对组件库的架构设计、UI 一致性、易用性、扩展性提出了更高的要求。因为我们团队在开源 beeshell 1.0（建议阅读[1.0 版本推广文章](https://tech.meituan.com/2018/09/27/waimai-beeshell-popularize.html)）时，积累了丰富的经验，所以作为外卖侧的代表，加入到公司级 RN 组件库的项目共建中。在完成公司级组件库的开发后，我们将共建的成果贡献出来，在服务社区的同时，也想借助社区的力量进一步完善组件库。
 
-beeshell 2.0 的效果图如下：
+beeshell 2.0 效果图如下：
 
 ![image](./images/popularize/rendering.png)
 
@@ -14,10 +28,32 @@ beeshell 2.0 的效果图如下：
 
 ![image](./images/popularize/framework.png)
 
+组件库的架构整体分成四层：
+
+**第一层，业务层。完成业务功能。**
+
+**第二层，组件库体系。**
+
+整个组件库体系包含三个项目（版本）：MTD 公司通用版本、Roo 外卖定制版本和 beeshell 开源版本。三个版本之间通过 Git Fork 建立依赖关系，源码级的依赖更利于组件的定制化扩展。
+
+- MTD 的关注点是通用性、扩展性、稳定性，所以提供的是基础的、通用的组件。
+- Roo 是对 MTD 的继承与扩展，增强组件功能，定制了外卖业务的 UI 风格，同时增加了业务组件，关注功能性、一致性、业务性。
+- beeshell（准确的说是 2.0 版本）是对 Roo 的继承与扩展，基本与 Roo 一致，去掉了部分业务组件，关注易用性、一致性、稳定性。
+
+这样设计的原因，是因为组件如果通用性、扩展性强，则功能性、易用性势必较差，然而，我们对公司级组件库的特性要求是：既要通用、稳定，又要扩展性强、功能强大。如何将两个互相矛盾的方面整合？我们使用了 **关注点分离** 的思维方法，将组件库需要支持的特性合理的分解，分别仔细研究特性的不同侧面（关注点），最后综合各个方面的结果，合成整体的解决方案。
+
+对于用户，可以根据自己的业务情况，酌情选择组件库，不同版本的相同组件，底层依赖与实现都是一致的。
+
+**第三层，RN 层。**
+
+这一层新增了 MRN，MRN 是美团对 RN 的二次封装。
+
+**第四层，系统层。支持 iOS/Android 平台。**
 
 ### 协作模式
 
 ![image](./images/popularize/cooperation.png)
+
 
 ## 方案实现优化
 ### UI 风格一致性
@@ -270,7 +306,19 @@ SlideModal 效果图如下：
 50+
 100+
 
+
+## 开源相关
+
+### Git 地址
+
+[beeshell](https://github.com/Meituan-Dianping/beeshell)
+
+### 核心贡献者
+
+[小龙](https://github.com/wxlworkhard)，泽楠，轶超，宋鹏，[孟谦](https://github.com/mactive)
+
+
 ## 参考资料
 
-- beeshell 1.0 开源推广文章：xxxx
-- MATERIAL DESIGN：https://material.io/
+- [beeshell 1.0 开源推广文章](https://tech.meituan.com/2018/09/27/waimai-beeshell-popularize.html)
+- [MATERIAL DESIGN](https://material.io/)
