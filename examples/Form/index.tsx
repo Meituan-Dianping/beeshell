@@ -164,6 +164,7 @@ export default class FormScreen extends Component<{}, any> {
     const { validateResults, filters } = this.state
     return (
       <ScrollView
+        testID='scroller'
         style={styles.body}>
         <Text style={styles.header}>基本信息</Text>
         <Form
@@ -209,6 +210,7 @@ export default class FormScreen extends Component<{}, any> {
               <Text style={{ color: variables.mtdGray, marginRight: 5 }}>{filters.date ? filters.date : ' 请点击选择'}</Text>
               {
                 filters.date ? <TouchableOpacity
+                  testID='dateRemoveIcon'
                   onPress={() => {
                     this.setState({
                       filters: {
@@ -226,7 +228,9 @@ export default class FormScreen extends Component<{}, any> {
 
           <Form.Item label='是否开启定位' hasLine>
             <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-              <Switch value={this.state.filters.location}
+              <Switch
+                testID='location'
+                value={this.state.filters.location}
                 onChange={(value) => {
                   this.setState({
                     filters: {
@@ -262,8 +266,8 @@ export default class FormScreen extends Component<{}, any> {
               }}
               style={{ marginTop: 5 }}
               iconPosition='right'>
-              <Radio.Item label='北京' value={1} />
-              <Radio.Item label='上海' value={2} />
+              <Radio.Item testID='r1' label='北京' value={1} />
+              <Radio.Item testID='r2' label='上海' value={2} />
             </Radio>
           </Form.Item>
         </Form>

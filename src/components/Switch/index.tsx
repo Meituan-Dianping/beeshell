@@ -25,6 +25,7 @@ const rockerSizeMap = {
 }
 
 export interface SwitchProps {
+  testID?: string
   style?: ViewStyle | ViewStyle[]
   value?: boolean
   disabled?: boolean
@@ -243,6 +244,7 @@ export class Switch extends Component<SwitchProps, SwitchState> {
     const elevation = disabled ? 1 : 5
     return (
       <Animated.View
+        testID={this.props.testID}
         {...this.panResponder.panHandlers}
         style={[styles.container, this.getContainBaseStyle(), this.props.style]}>
           <Animated.View style={[this.getRockerBaseStyle(), {
