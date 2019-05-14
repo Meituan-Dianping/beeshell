@@ -189,7 +189,7 @@ const HomeStack = createStackNavigator({
   Home: {
     screen: Home,
     navigationOptions: ({ navigation }) => ({
-      header: makeHeader(navigation, 'roo-mobile-rn 组件库', null)
+      header: makeHeader(navigation, 'beeshell 组件库', null)
     })
   },
   // 其余的展示页
