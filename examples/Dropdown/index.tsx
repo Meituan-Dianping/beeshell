@@ -53,7 +53,7 @@ export default class DropdownScreen extends Component<{}, any> {
         style={styles.body}>
         <View style={styles.container}>
           <Button
-            testID='btn1'
+            testID='a1'
             style={{ marginTop: 12 }}
             size='sm'
             ref={(c) => {

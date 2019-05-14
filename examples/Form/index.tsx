@@ -274,6 +274,7 @@ export default class FormScreen extends Component<{}, any> {
         <View style={{ flexDirection: 'row', marginTop: 20, paddingHorizontal: 20 }}>
           <View style={{ flex: 1 }}>
             <Button
+              testID='submit'
               textColorInverse
               type='primary'
               onPress={this.submitData}>
