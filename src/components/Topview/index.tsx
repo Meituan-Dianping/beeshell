@@ -53,14 +53,16 @@ class Topview extends Component<any, {count: number, modelList: Array<any>}> {
       setTimeout(() => {
         let { modelList, count } = this.state
         let index = null
-        modelList.some((item, i) => {
+        const matched = modelList.some((item, i) => {
           /* tslint:disable:triple-equals */
           if (item.id == id) {
             index = i
             return true
+          } else {
+            return false
           }
         })
-        if (index == null) {
+        if (!matched) {
           return resolve()
         }
 

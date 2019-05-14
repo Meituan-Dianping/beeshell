@@ -18,3 +18,5 @@ yarn.lock
 node_modules
 
 debugger_app/
+
+.scannerwork/

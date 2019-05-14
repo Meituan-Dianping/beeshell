@@ -117,9 +117,7 @@ export class Tip extends Modal<TipProps> {
     const { body } = this.props
     let tmp = c == null ? body : c
 
-    if (React.isValidElement(tmp)) {
-      tmp = tmp
-    } else {
+    if (!React.isValidElement(tmp)) {
       tmp = <Text style={tipStyles.info}>{String(tmp)}</Text>
     }
 

@@ -1,7 +1,7 @@
 
 function dispatch(...funcs: Function[]) {
   return function (...args) {
-    funcs.some((item) => {
+    return funcs.some((item) => {
       const ret = item.apply(this, args)
       return ret
     })
