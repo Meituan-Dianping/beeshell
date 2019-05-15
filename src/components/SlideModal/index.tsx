@@ -334,6 +334,7 @@ export class SlideModal<
             }
           ]}>
           <TouchableOpacity
+            testID='backdrop'
             style={[
               slideModalStyles.backdrop,
               {

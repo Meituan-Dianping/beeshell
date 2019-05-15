@@ -13,6 +13,7 @@ import styleUtils from '../../common/styles/utils'
 import { FadeAnimated } from '../../common/animations'
 
 interface RadioItemProps {
+  testID?: string
   style?: ViewStyle
   label?: string
   value: any
@@ -106,10 +107,11 @@ export default class RadioItem extends Component<RadioItemProps> {
   }
 
   render () {
-    const { disabled, checked, iconPosition, style, renderItem } = this.props
+    const { testID, disabled, checked, iconPosition, style, renderItem } = this.props
 
     return (
       <TouchableOpacity
+        testID={testID}
         style={[
           style,
           {

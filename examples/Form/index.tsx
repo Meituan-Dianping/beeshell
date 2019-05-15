@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { ScrollView, View, Text, StyleSheet } from 'react-native'
-import { Icon, Input, Form, Button, Checkbox, Switch, Radio } from '../../src'
+import { ScrollView, View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { Icon, Input, Form, Button, Checkbox, Switch, Radio, BottomModal, Datepicker } from '../../src'
+import renderSafeArea from '../../src/common/utils/renderSafeArea'
 import styles from '../common/styles'
 import variables from '../customTheme'
 import validator from '../../src/common/utils/validator'
+import momnet from 'moment'
 
 function ruleName(value: any, targetValue: any) {
   if (!value) {
@@ -56,20 +58,27 @@ const validate = validator.dispatch(
 
 
 export default class FormScreen extends Component<{}, any> {
-  form = null
+  [propName: string]: any
+
   constructor (p) {
     super(p)
     this.state = {
       filters: {
         deliveryTime: ['time_1'],
-        name: 'bob.yao',
+        name: 'Lulu.cc',
         store: '',
         email: '',
         phone: '',
-        location: false
+        location: false,
+        date: null
       },
-      validateResults: {}
+      validateResults: {},
     }
+    // @ts-ignore
+    this.state.tmpDateDefault = momnet().format('YYYY-MM-DD')
+
+    // @ts-ignore
+    this.state.tmpDate = this.state.filters.date
   }
 
   handleChangeFilter(...args) {
@@ -155,9 +164,11 @@ export default class FormScreen extends Component<{}, any> {
     const { validateResults, filters } = this.state
     return (
       <ScrollView
+        testID='scroller'
         style={styles.body}>
         <Text style={styles.header}>基本信息</Text>
         <Form
+          testID='form'
           ref={(ref) => this.form = ref }>
           <Form.Item
             style={{ paddingVertical: 13 }}
@@ -175,30 +186,51 @@ export default class FormScreen extends Component<{}, any> {
               </View>
             }
             hasLine>
-            <Input value={this.state.filters.name} placeholder='姓名' onChange={(value) => { this.handleChangeFilter('name', value) }} />
+            <Input testID='name' value={this.state.filters.name} placeholder='姓名' onChange={(value) => { this.handleChangeFilter('name', value) }} />
             {
               validateResults.name && !validateResults.name.valid ?
-              <Text style={{ color: variables.mtdBrandDanger }}>{validateResults.name.msg}</Text> : null
+              <Text testID='nameInfo' style={{ color: variables.mtdBrandDanger }}>{validateResults.name.msg}</Text> : null
             }
           </Form.Item>
           <Form.Item style={{ paddingVertical: 13 }} label='手机号码' hasLine>
-            <Input placeholder='请填写手机号码' textAlign='right' value={this.state.filters.phone} onChange={(value) => { this.handleChangeFilter('phone', value) }} />
+            <Input testID='phone' placeholder='请填写手机号码' textAlign='right' value={this.state.filters.phone} onChange={(value) => { this.handleChangeFilter('phone', value) }} />
             {
               validateResults.phone && !validateResults.phone.valid ?
-              <Text style={{ color: variables.mtdBrandDanger }}>{validateResults.phone.msg}</Text> : null
+              <Text testID='phoneInfo' style={{ color: variables.mtdBrandDanger }}>{validateResults.phone.msg}</Text> : null
             }
             <Text style={{ color: variables.mtdGrayLighter, fontSize: 12, marginTop: 4 }}>该信息非常重要，请认真填写</Text>
           </Form.Item>
-          <Form.Item label='学校' hasLine>
-            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-              <Text style={{ color: variables.mtdGray }}>请点击选择</Text>
-              <Icon type='angle-right' size={14} tintColor={variables.mtdGray}></Icon>
-            </View>
+          <Form.Item style={{ paddingVertical: 0 }} label='日期' hasLine>
+            <TouchableOpacity
+              style={{ paddingVertical: variables.mtdVSpacingX3L, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}
+              testID='date'
+              onPress={() => {
+                this._dateModal.open()
+              }}>
+              <Text style={{ color: variables.mtdGray, marginRight: 5 }}>{filters.date ? filters.date : ' 请点击选择'}</Text>
+              {
+                filters.date ? <TouchableOpacity
+                  testID='dateRemoveIcon'
+                  onPress={() => {
+                    this.setState({
+                      filters: {
+                        ...this.state.filters,
+                        date: null
+                      },
+                      tmpDate: null
+                    })
+                  }}>
+                  <Icon type='trash-o' tintColor={variables.mtdBrandDanger} />
+                </TouchableOpacity> : <Icon type='angle-right' size={14} tintColor={variables.mtdGray} />
+              }
+            </TouchableOpacity>
           </Form.Item>
 
           <Form.Item label='是否开启定位' hasLine>
             <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-              <Switch value={this.state.filters.location}
+              <Switch
+                testID='location'
+                value={this.state.filters.location}
                 onChange={(value) => {
                   this.setState({
                     filters: {
@@ -234,14 +266,15 @@ export default class FormScreen extends Component<{}, any> {
               }}
               style={{ marginTop: 5 }}
               iconPosition='right'>
-              <Radio.Item label='北京' value={1} />
-              <Radio.Item label='上海' value={2} />
+              <Radio.Item testID='r1' label='北京' value={1} />
+              <Radio.Item testID='r2' label='上海' value={2} />
             </Radio>
           </Form.Item>
         </Form>
         <View style={{ flexDirection: 'row', marginTop: 20, paddingHorizontal: 20 }}>
           <View style={{ flex: 1 }}>
             <Button
+              testID='submit'
               textColorInverse
               type='primary'
               onPress={this.submitData}>
@@ -249,6 +282,43 @@ export default class FormScreen extends Component<{}, any> {
             </Button>
           </View>
         </View>
+
+
+        <BottomModal
+          ref={(c) => { this._dateModal = c }}
+          title='请选择日期'
+          cancelable={true}
+          rightCallback={() => {
+            this.setState({
+              filters: {
+                ...this.state.filters,
+                date: this.state.tmpDate || this.state.tmpDateDefault
+              }
+            })
+          }}
+          onClosed={() => {
+            setTimeout(() => {
+              this.setState({
+                tmpDate: this.state.filters.date || this.state.tmpDateDefault
+              })
+            })
+          }}>
+          <View style={{ paddingVertical: 15 }}>
+            <Datepicker
+              style={{ paddingHorizontal: 50 }}
+              proportion={[1, 1, 1]}
+              startYear={2010}
+              numberOfYears={10}
+              date={this.state.tmpDate || this.state.tmpDateDefault}
+              onChange={(value) => {
+                this.setState({
+                  tmpDate: value
+                })
+              }}
+            />
+          </View>
+          { renderSafeArea() }
+        </BottomModal>
       </ScrollView >
     )
   }

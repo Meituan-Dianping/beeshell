@@ -10,6 +10,7 @@ import { FormItem } from './FormItem'
 const styles = StyleSheet.create<any>(formStyles)
 
 export interface FormProps {
+  testID?: string
   style?: ViewStyle
 }
 
@@ -29,7 +30,7 @@ export class Form extends Component<FormProps, FormState> {
 
   render () {
     return (
-      <View style={[styles.form, this.props.style]}>
+      <View testID={this.props.testID} style={[styles.form, this.props.style]}>
         {this.props.children}
       </View>
     )

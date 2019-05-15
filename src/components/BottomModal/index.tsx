@@ -17,6 +17,7 @@ import bottomModalStyles from './styles'
 const screen = Dimensions.get('window')
 
 export interface BottomModalProps extends SlideModalProps {
+  testID?: string
   titleContainer?: any
   title?: string
   titleStyle?: TextStyle
@@ -78,6 +79,7 @@ export class BottomModal extends SlideModal<BottomModalProps> {
     if (rightLabel || rightLabelText) {
       rightEl = (
         <TouchableOpacity
+          testID='right'
           activeOpacity={1}
           onPress={() => {
             this.close().then(() => {
@@ -106,6 +108,7 @@ export class BottomModal extends SlideModal<BottomModalProps> {
     if (leftLabel || leftLabelText) {
       leftEl = (
         <TouchableOpacity
+          testID='left'
           activeOpacity={1}
           onPress={() => {
             this.close().then(() => {
@@ -148,7 +151,7 @@ export class BottomModal extends SlideModal<BottomModalProps> {
   getContent () {
     const styles = bottomModalStyles
     const inner = (
-      <View style={[styles.container, { width: this.props.screenWidth }, this.props.style]}>
+      <View testID={this.props.testID} style={[styles.container, { width: this.props.screenWidth }, this.props.style]}>
         {this.getHeader()}
 
         {/* TouchableOpacity 没设置高度时 onPress 有问题*/}
