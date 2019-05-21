@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 [![mnpm version](http://npm.sankuai.com/badge/v/@roo/roo-mobile-rn.svg?style=flat-square)](http://npm.sankuai.com/package/@roo/roo-mobile-rn)
 
 
+## [2.0.7] - 2019-05-21
+### Changed
+- Tab 支持横向换行
+- trash 图标替换
+
 ## [2.0.6] - 2019-05-08
 ### Changed
 - Button 动画实现，不支持 Android 平台
