@@ -52,8 +52,9 @@ import Tab from '@roo/roo-mobile-rn/dist/components/Tab';
 | Name | Type | Required | Default | Description |
 | ---- | ---- | ---- | ---- | ---- |
 | style | ViewStyle | false | {} | 样式 |
-| dataItemContainerStyle | ViewStyle | false | {} | 每一项的容器样式 |
-| dataItemStyle | ViewStyle | false | {} | 每一项的样式 |
+| dataContainerStyle | ViewStyle | false | {} | 数据源容器的样式 |
+| dataItemContainerStyle | ViewStyle | false | {} | 数据源每一项的容器样式 |
+| dataItemStyle | ViewStyle | false | {} | 数据源每一项的样式 |
 | activeColor | string | false | variables.mtdGrayDarker | 激活状态颜色 |
 | data | Array | true | [] | 数据源，数组元素为对象，必须包含 label 和 value 属性 |
 | value | any | false | null | 激活项的值，与数据源某项的 value 相等 |

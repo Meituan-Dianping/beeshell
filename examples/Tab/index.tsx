@@ -56,15 +56,47 @@ export default class TabScreen extends Component<any, any> {
         <Tab
           dataItemContainerStyle={{ flex: null }}
           value={this.state.valueA}
-          data={[{
-            value: 1,
-            label: '我关注的'
-          },
-          {
-            value: 2,
-            label: '我的粉丝'
-          }]}
+          data={[
+            {
+              value: 1,
+              label: '我关注的'
+            },
+            {
+              value: 2,
+              label: '我的粉丝'
+            }
+          ]}
           onChange={ item => this.handleChange('valueA', item.value) }
+        />
+
+        <Text style={styles.header}>横向换行</Text>
+        <Tab
+          dataContainerStyle={{ flexWrap: 'wrap' }}
+          dataItemContainerStyle={{ flex: null }}
+          value={this.state.valueU || 1}
+          data={[
+            {
+              value: 1,
+              label: '我关注的'
+            },
+            {
+              value: 2,
+              label: '我的粉丝'
+            },
+            {
+              value: 3,
+              label: '我喜欢的'
+            },
+            {
+              value: 4,
+              label: '我重视的'
+            },
+            {
+              value: 5,
+              label: '我不感兴趣的'
+            }
+          ]}
+          onChange={ item => this.handleChange('valueU', item.value) }
         />
 
         <Text style={styles.header}>横向可滚动</Text>

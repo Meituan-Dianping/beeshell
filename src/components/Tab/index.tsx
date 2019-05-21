@@ -17,6 +17,7 @@ const styles = StyleSheet.create<any>(tabStyle)
 
 interface Props {
   style?: ViewStyle
+  dataContainerStyle?: ViewStyle
   dataItemContainerStyle?: ViewStyle
   dataItemStyle?: ViewStyle
   activeColor?: string
@@ -31,33 +32,11 @@ interface State {}
 
 export class Tab extends React.Component<Props, State> {
   static defaultProps = {
-    activeColor: variables.mtdGrayDarker,
+    activeColor: variables.mtdGrayBase,
     value: null,
     data: [],
     onChange: null,
     scrollable: false,
-  }
-
-  renderContent () {
-    const { scrollable } = this.props
-    const itemViews = this.getItemViews()
-    return (
-      <View style={[styles.container]}>
-        {
-          scrollable ?
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}>
-            <View style={[styles.content]}>
-              {itemViews}
-            </View>
-          </ScrollView> :
-          <View style={[styles.content]}>
-            {itemViews}
-          </View>
-        }
-      </View>
-    )
   }
 
   getItemViews () {
@@ -119,6 +98,25 @@ export class Tab extends React.Component<Props, State> {
   }
 
   render () {
-    return this.renderContent()
+    const { scrollable, style, dataContainerStyle } = this.props
+    const itemViews = this.getItemViews()
+
+    return (
+      <View style={[styles.container, style]}>
+        {
+          scrollable ?
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}>
+            <View style={[styles.content, dataContainerStyle]}>
+              {itemViews}
+            </View>
+          </ScrollView> :
+          <View style={[styles.content, dataContainerStyle]}>
+            {itemViews}
+          </View>
+        }
+      </View>
+    )
   }
 }
