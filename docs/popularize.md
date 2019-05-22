@@ -12,7 +12,7 @@ tags: [前端, 大零售, 开源, 移动, 稳定性, 跨平台, Android, iOS, Re
 
 # beeshell —— React Native 组件库升级 2.0
 
-![image](./images/popularize/logo.png)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_logo.png)
 
 ## 引言
 
@@ -26,13 +26,13 @@ tags: [前端, 大零售, 开源, 移动, 稳定性, 跨平台, Android, iOS, Re
 
 beeshell 2.0 效果图如下：
 
-![image](./images/popularize/rendering.png)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_rendering.png)
 
 ## 系统设计升级
 
 ### 协作模式
 
-![image](./images/popularize/cooperation.png)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_cooperation.png)
 
 整个组件库体系包含三个项目（版本）：MTD 公司通用版本、Roo 外卖定制版本和 beeshell 开源版本。三个版本之间通过 Git Fork 建立依赖关系，源码级的依赖更利于组件的定制化扩展。
 
@@ -56,7 +56,7 @@ beeshell 2.0 效果图如下：
 
 ### 架构
 
-![image](./images/popularize/framework.png)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_framework.png)
 
 组件库的架构整体分成四层，包括业务层、组件库体系、RN 层、系统层。本文只介绍下第二层与第三层：
 
@@ -88,7 +88,7 @@ beeshell 2.0 效果图如下：
 
 beeshell 延用了 Roo（袋鼠 UI）的 UI 设计规范，其内容涵盖了 PC 端与移动端、Web 平台与 RN 平台，对 UI 与交互给出了详细的视觉规范，旨在保证外卖事业部，产品的 UI 一致性。UI 规范的技术实现方式如下：
 
-![image](./images/popularize/rooTheme.png)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_rooTheme.png)
 
 Roo Theme 向下实现了 UI 规范具体内容，向上输出组件样式类、主题变量、样式工具等，供各个组件库以及业务方使用。
 
@@ -110,24 +110,24 @@ UI 风格的一致性，具体包括样式一致性和动效一致性。下文�
 
 品牌主色应该是应用中出现最频繁的颜色，通常用来强调 UI 中的关键部分的颜色。beeshell 的品牌主色色值为 `#ffd800`，如下图所示：
 
-![image](./images/popularize/primary.png)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_primary.png)
 
 有时，一个品牌主色并不能够支撑所有的应用场景，此时，可以通过加深或者变浅主色的方式，再增加几个色值，beeshell 的品牌主色还包括一个加深的色值 `#ffa000`，用于某些组件的激活状态，如下图所示：
 
-![image](./images/popularize/primaryDark.png)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_primaryDark.png)
 
 *色彩：品牌功能色*
 
 功能色的内容与使用场景如下图所示：
 
-![image](./images/popularize/function.png)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_function.png)
 
 
 *色彩：中性色*
 
 中性色（灰度）的内容与使用场景如下图所示：
 
-![image](./images/popularize/gray.png)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_gray.png)
 
 然后，介绍排版，排版包括字体、间距、边线。
 
@@ -135,13 +135,13 @@ UI 风格的一致性，具体包括样式一致性和动效一致性。下文�
 
 beeshell 的字体尺寸（Font Size）集，是基于 12、14、16、20 和 28 的排版比例，如下图所示：
 
-![image](./images/popularize/fontSize.png)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_fontSize.png)
 
 对于字重（Font Weight），只使用正常 `normal` 和加粗`bold` 两种，避免了因为不同字体家族（Font Family），对字重的支持范围不同，而导致视觉差异。
 
 除了字体尺寸和字重，影响排版的还有字体行高（Line Height）。为了达到适当的可读性和阅读流畅性，字体行高，需要根据字体的大小和粗细来设定。经过测试，RN 应用在默认情况下，行高约等于字体大小乘以 1.2，如下图所示：
 
-![image](./images/popularize/lineHeight.png)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_lineHeight.png)
 
 > 注意：对于中文字体，字体尺寸与行高的比例并不是 1:1.2。
 
@@ -151,7 +151,7 @@ beeshell 的字体尺寸（Font Size）集，是基于 12、14、16、20 和 28 
 
 对于同一个 APP，间距应该在一个合适的范围取值，可以通过定义『小号间距』、『中号间距』、『大号间距』等来划分信息层次。例如 beeshell 的 Button 组件，有三种尺寸。实现效果如下图所示：
 
-![image](./images/popularize/spacing.png)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_spacing.png)
 
 *排版：边线*
 
@@ -177,15 +177,15 @@ beeshell 将逐渐在所有的组件集成这两种动画，保证动效的一�
 
 Button 组件使用 FadeAnimated 类实现动画，动效如下图所示：
 
-![image](./images/popularize/animatedButton.gif)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_animatedButton.gif)
 
 Modal 组件使用 FadeAnimated 类实现动画，动效如下图所示：
 
-![image](./images/popularize/animatedModal.gif)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_animatedModal.gif)
 
 Dropdown 组件使用 SlideAnimated 类实现动画，动效如下图所示：
 
-![image](./images/popularize/animatedDropdown.gif)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_animatedDropdown.gif)
 
 
 总之，beeshell 通过样式和动效两个方面，进行 UI 一致性的优化。
@@ -196,7 +196,7 @@ Dropdown 组件使用 SlideAnimated 类实现动画，动效如下图所示：
 
 一键换肤的效果如下图所示：
 
-![image](./images/popularize/theme.png)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_theme.png)
 
 ### 定制化能力分级设计
 
@@ -206,7 +206,7 @@ Dropdown 组件使用 SlideAnimated 类实现动画，动效如下图所示：
 
 这里以一个常见的业务场景：底部滑出弹框，来举例说明分级设计。
 
-![image](./images/popularize/customize1.png)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_customize1.png)
 
 如上图所示：第一个例子比较通用、规范，“区域文字内容”的文字与样式需要支持自定义；第二个例子，需要支持多行文字以及图标，即“区域内容”需要支持自定义；第三个例子，自定义的重点，由区域以及区域内部，转移到区域之间的布局，“区域布局”需要支持自定义。
 
@@ -224,7 +224,7 @@ Dropdown 组件使用 SlideAnimated 类实现动画，动效如下图所示：
 
 这里提供 labelText 和 labelTextStyle 属性，如下图所示：
 
-![image](./images/popularize/customize2.png)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_customize2.png)
 
 代码实现为：
 
@@ -241,19 +241,19 @@ labelText 用于定制文案内容，将 labelTextStyle 整体暴露出来，而
 
 下一步，就是对于多行文字、图标的支持。
 
-![image](./images/popularize/x1.png)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_x1.png)
 
 
 #### 第三级定制化，开放渲染区域
 
 提供 labe 属性，属性值为一个 ReactElement 对象，任意定制 UI，如下图所示：
 
-![image](./images/popularize/customize3.png)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_customize3.png)
 
 
 到这里，区域以及区域内部的定制化需求，就都可以满足了，但是区域布局的定制化，因为布局情况太多，并不容易实现。
 
-![image](./images/popularize/x2.png)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_x2.png)
 
 我觉得这种产品需求，还是挺合理的，如果不能支持，似乎说不过去。
 
@@ -267,21 +267,21 @@ labelText 用于定制文案内容，将 labelTextStyle 整体暴露出来，而
 
 首先，组件库实现一个 SlideModal 组件，这是一个比较底层、基础的组件，功能相对少，支持多个方向的滑动动画，内容完全由开发者自定义，通用性、定制化能力极强。实现效果如下：
 
-![image](./images/popularize/customize4-1.gif)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_customize4-1.gif)
 
 然后，组件库实现了 BottomModal 组件，继承 SlideModal，固定滑动的方向和开始位置，弹框内容横向拉伸至全屏、纵向自适应，功能增强而定制化能力减弱。实现效果如下：
 
-![image](./images/popularize/customize4-2.gif)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_customize4-2.gif)
 
 前文已经讲到，产品需求已经超出了 BottomModal 定制化的能力，强行实现只会带来不良后果。所以，我的方式是组合使用 SlideMdoal，开发一个新的组件，也就是第四级定制化。新组件的实现效果如下：
 
-![image](./images/popularize/customize4-3.gif)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_customize4-3.gif)
 
 第四级定制化，是使用了新的思路，不再盲目的增加一个组件的功能，来帮助开发者满足产品需求，而是提供了基础工具，基础工具实现了底层、复杂的部分，表现层的部分则让渡给开发者，用户自己实现，“授人以鱼不如授人以渔”。
 
 通过四个级别的定制化的能力，轻松搞定所有的产品的需求。
 
-![image](./images/popularize/x3.png)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_x3.png)
 
 ### 功能丰富强大
 
@@ -295,7 +295,7 @@ beeshell 目前已提供的功能有 38（组件 33、基础工具 5）个，并
 
 SlideModal 滑动弹框组件，支持 12 个滑动方向，支持 4 个触控区域，组件实现原理分析如下图所示：
 
-![image](./images/popularize/principleSlideModal.png)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_principleSlideModal.png)
 
 实现 SlideModal 有几个难点：
 
@@ -311,7 +311,7 @@ SlideModal 作为 Topview 实例的子元素，进行展示、布局与交互，
 
 动画的开始位置，通过提供 offsetX 和 offsetY 属性即可，但在指定开始位置后，滑动的方向情况则比较多，一共有 12 个方向，如下图所示：
 
-![image](./images/popularize/directionSlideModal.png)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_directionSlideModal.png)
 
 在一个区域中有 3 个方向，4 个区域共 12 个方向。
 
@@ -321,7 +321,7 @@ SlideModal 作为 Topview 实例的子元素，进行展示、布局与交互，
 
 SlideModal 效果图如下：
 
-![image](./images/popularize/renderingSlideModal.gif)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_renderingSlideModal.gif)
 
 
 除了 SlideModal 之外，还有其他功能强大的组件：Slider 滑块组件，支持纵向和横向滑动；Rate 评分组件，实现一套滑动评分的机制，支持定制任意 UI 元素。由于篇幅有限，在此不再赘述。
@@ -369,7 +369,7 @@ SlideModal 效果图如下：
 
 beeshell 1.0 中已经集成了“黑盒测试”与“白盒测试”。beeshell 2.0 在原有的基础上，进行了一定程度的优化，代码的可靠性与安全性，仍然保持最高级别，而测试覆盖率则由原来的 70% 提升到了 80% 以上，使用 SonarQube 的分析统计结果如下图：
 
-![image](./images/popularize/sonarqube.png)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_sonarqube.png)
 
 不仅如此，beeshell 2.0 在测试领域继续探索，集成了“灰盒测试”，基于开源方案 Detox 实现。
 
@@ -377,7 +377,7 @@ beeshell 1.0 中已经集成了“黑盒测试”与“白盒测试”。beeshel
 
 灰盒测试效果如下图所示：
 
-![image](./images/popularize/e2e.gif)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_e2e.gif)
 
 通过黑盒测试、白盒测试、灰盒测试，三种测试方案，更加全面的保证组件库的代码质量，大大提高了代码可维护性。
 
@@ -390,7 +390,7 @@ beeshell 源码工程，包含了包括组件源码、示例代码、测试文�
 
 前端开发再也不用关心 Native 的部分，无需耗时耗力的维护 Native 环境、依赖，极大降低了前端开发成本。开发调试流程如下图所示：
 
-![image](./images/popularize/develop.png)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_develop.png)
 
 
 ## 未来规划
