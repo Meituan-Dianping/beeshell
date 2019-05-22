@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 [![mnpm version](http://npm.sankuai.com/badge/v/@roo/roo-mobile-rn.svg?style=flat-square)](http://npm.sankuai.com/package/@roo/roo-mobile-rn)
 
 
+
+## [2.0.8] - 2019-05-22
+### Changed
+- Input 新增 inputStyle 属性，支持多行输入
+
 ## [2.0.7] - 2019-05-21
 ### Changed
 - Tab 支持横向换行

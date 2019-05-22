@@ -51,5 +51,6 @@ import { Input } from '@roo/roo-mobile-rn';
 | Name | Type | Required | Default | Description |
 | ---- | ---- | ---- | ---- | ---- |
 | style | ViewStyle | false | {} | 样式 |
+| inputStyle | TextStyle | false | {} | 输入框的样式，与 RN TextInput style 属性一致 |
 | value | string | false | '' | 值 |
 | onChange | Function | false | null | 值变化的回调，参数为输入的文本字符串 |
