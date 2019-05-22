@@ -13,30 +13,6 @@ export default class InputScreen extends Component<any, any> {
     }
   }
 
-  handleDebounce = (val) => {
-    this.setState({
-      userInputValue: val
-    })
-  }
-
-  handleChange = (val) => {
-    this.setState({
-      userInputValue: val
-    })
-  }
-
-  handFocus = (e) => {
-    this.setState({
-      userInputValue: `${e.target} focused`
-    })
-  }
-
-  handBlur = (e) => {
-    this.setState({
-      userInputValue: `${e.target} blured`
-    })
-  }
-
   componentDidMount () {
   }
 
@@ -84,11 +60,37 @@ export default class InputScreen extends Component<any, any> {
           <Form.Item
             style={{ paddingVertical: 13 }}
             label='住址'>
-            <Input textAlign='right' value={this.state.address} placeholder='请输入地址' onChange={(value) => {
-              this.setState({
-                address: value
-              })
-            }} />
+            <Input
+              textAlign='right'
+              value={this.state.address}
+              placeholder='请输入地址'
+              onChange={(value) => {
+                this.setState({
+                  address: value
+                })
+              }}
+            />
+          </Form.Item>
+        </Form>
+
+        <Text style={styles.header}>多行</Text>
+        <Form>
+          <Form.Item
+            label='学校信息'>
+            <View></View>
+            <Input
+              style={{ marginTop: 13 }}
+              inputStyle={{ height: 80, textAlignVertical: 'top' }}
+              textAlign='left'
+              multiline
+              value={this.state.school}
+              placeholder='请输入学校信息'
+              onChange={(value) => {
+                this.setState({
+                  school: value
+                })
+              }}
+            />
           </Form.Item>
         </Form>
       </ScrollView>
