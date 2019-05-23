@@ -10,7 +10,7 @@ import { Modal } from '@roo/roo-mobile-rn';
 
 ### 按需引入
 ```js
-import Modal from '@roo/roo-mobile-rn/dist/components/Modal';
+import { Modal } from '@roo/roo-mobile-rn/dist/components/Modal';
 ```
 
 ## Examples
