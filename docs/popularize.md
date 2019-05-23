@@ -410,7 +410,7 @@ beeshell 源码工程，包含了包括组件源码、示例代码、测试文�
 
 ## 开源相关
 
-### Git 地址
+### Github 地址
 
 [beeshell](https://github.com/Meituan-Dianping/beeshell)
 
