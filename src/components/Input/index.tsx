@@ -6,7 +6,9 @@ import {
   StyleSheet,
   TouchableOpacity,
   Platform,
-  TextInputProps
+  TextInputProps,
+  ViewStyle,
+  TextStyle
 } from 'react-native'
 
 import inputStyles from './styles'
@@ -17,6 +19,8 @@ const styles = StyleSheet.create<any>(inputStyles)
 
 interface InputProps extends TextInputProps {
   textAlign?: string
+  style?: ViewStyle
+  inputStyle?: TextStyle
 }
 
 interface InputState {
@@ -83,17 +87,25 @@ export class Input extends Component<InputProps, InputState> {
     }
   }
 
-  renderiOS = () => {
+  modProps(props) {
     const tmpProps = {
-      ...this.props
+      ...props
     }
+
     delete tmpProps.style
+    delete tmpProps.inputStyle
+
+    return tmpProps
+  }
+
+  renderiOS = () => {
+    const tmpProps = this.modProps(this.props)
 
     return (
       <View style={[styles.container, this.props.style, { flexDirection: 'column', justifyContent: 'center' }]}>
         <TextInput
           {...tmpProps}
-          style={[styles.inputStyle]}
+          style={[styles.inputStyle, this.props.inputStyle]}
           onChange={() => { return }}
           onChangeText={this.handleChange}
           onFocus={this.handleFocus.bind(this)}
@@ -106,17 +118,14 @@ export class Input extends Component<InputProps, InputState> {
   renderAndroid = () => {
     const androidClearButtonMode = this.props.clearButtonMode && this.props.clearButtonMode !== 'never'
     const showDelIcon = androidClearButtonMode && this.props.value && this.state.isEditing
-    const tmpProps = {
-      ...this.props
-    }
-    delete tmpProps.style
+    const tmpProps = this.modProps(this.props)
 
     return (
       <View style={[styles.container, this.props.style, { flexDirection: 'row', alignItems: 'center' }]}>
         <TextInput
           {...tmpProps}
           clearButtonMode='never'
-          style={[styles.inputStyle, { flex: 1 }]}
+          style={[styles.inputStyle, { flex: 1 }, this.props.inputStyle]}
           onChange={() => { return }}
           onChangeText={this.handleChange}
 
