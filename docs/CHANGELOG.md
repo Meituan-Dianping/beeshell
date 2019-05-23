@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 [![npm version](https://img.shields.io/npm/v/beeshell.svg)](https://www.npmjs.com/package/beeshell)
 
+
+## [2.0.3] - 2019-05-23
+### Changed
+- Input 组件增加 inputStyle 属性，支持实现多行输入
+- Tab 支持换行
+- trash 图标替换
+
 ## [2.0.2] - 2019-05-08
 ### Changed
 - Button 动画实现，不支持 Android 平台
