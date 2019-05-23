@@ -31,6 +31,8 @@ interface Props {
 interface State {}
 
 export class Tab extends React.Component<Props, State> {
+  private _scroller: any
+
   static defaultProps = {
     activeColor: variables.mtdGrayBase,
     value: null,
@@ -106,6 +108,9 @@ export class Tab extends React.Component<Props, State> {
         {
           scrollable ?
           <ScrollView
+            ref={(c) => {
+              this._scroller = c
+            }}
             horizontal
             showsHorizontalScrollIndicator={false}>
             <View style={[styles.content, dataContainerStyle]}>

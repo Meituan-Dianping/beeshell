@@ -81,7 +81,7 @@ class Home extends Component<any, any> {
 
   componentDidMount() {
     setTimeout(() => {
-      this.props.navigation.navigate('Input')
+      this.props.navigation.navigate('Tab')
     }, 1000)
   }
 

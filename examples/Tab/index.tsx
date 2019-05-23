@@ -6,6 +6,7 @@ import styles from '../common/styles'
 import variables from '../customTheme'
 
 export default class TabScreen extends Component<any, any> {
+  [prop: string]: any
 
   constructor (props) {
     super(props)
@@ -15,6 +16,12 @@ export default class TabScreen extends Component<any, any> {
       valueC: 2,
       valueX: 1
     }
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this._tab && this._tab._scroller.scrollTo({ x: 370, y: 0, animated: true })
+    }, 1000)
   }
 
   handleChange = (key, value: number) => {
@@ -119,6 +126,9 @@ export default class TabScreen extends Component<any, any> {
 
         <Text style={styles.header}>横向可滚动</Text>
         <Tab
+          ref={(c) => {
+            this._tab = c
+          }}
           value={this.state.valueC}
           scrollable={true}
           data={[
