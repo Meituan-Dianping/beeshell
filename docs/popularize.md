@@ -32,13 +32,11 @@ beeshell 2.0 效果图如下：
 
 ### 架构升级
 
-beeshell 2.0 的架构设计如下图所示：
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_framework_new.png)
 
-![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_framework.png)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_framework_vs.png)
 
-在详细介绍架构之前，先对比下与上个版本的区别，beeshell 1.0 的架构设计如下图所示： 
-
-![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_framework1.0.png)
+![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_framework1.0_new.png)
 
 beeshell 2.0 与 1.0 的架构在整体上保持一致，共分成四层：业务层、组件库（体系）、RN 层、系统层。而 beeshell 2.0 的架构升级，则主要体现在第二层与第三层：
 
@@ -189,7 +187,7 @@ Dropdown 组件使用 SlideAnimated 类实现动画，动效如下图所示：
 ![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_animatedDropdown.gif)
 
 
-#### UI 规范技术实现
+#### 技术实现
 
 beeshell 延用了 Roo（袋鼠 UI）的 UI 设计规范，其内容涵盖了 PC 端与移动端、Web 平台与 RN 平台，对 UI 与交互给出了详细的视觉规范，旨在保证外卖事业部，产品的 UI 一致性。UI 规范的技术实现方式如下：
 
