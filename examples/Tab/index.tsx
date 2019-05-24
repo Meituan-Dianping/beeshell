@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { ScrollView, View, Text, StyleSheet } from 'react-native'
 
-import { Tab } from '../../src'
+import { Tab, Button } from '../../src'
 import styles from '../common/styles'
 import variables from '../customTheme'
+
+const scrollToList = [ 5, 6, 1, 0, 1, 2, 3, 4 ]
 
 export default class TabScreen extends Component<any, any> {
   [prop: string]: any
@@ -13,29 +15,19 @@ export default class TabScreen extends Component<any, any> {
     this.state = {
       value: 1,
       valueA: 1,
-      valueC: 2,
-      valueX: 1
+      valueC: 6,
+      valueX: 1,
+      scrollTimes: 0
     }
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      this._tab && this._tab._scroller.scrollTo({ x: 370, y: 0, animated: true })
-    }, 1000)
   }
 
   handleChange = (key, value: number) => {
     this.setState({
       [key]: value
     } as any)
-  }
-
-  getBgColor = (value) => {
-    return this.state.valueX === value ? { backgroundColor: '#111111' } : {}
-  }
-
-  getFontColor = (value) => {
-    return this.state.valueX === value ? { color: '#fff' } : { color: '#111' }
   }
 
   render () {
@@ -134,31 +126,44 @@ export default class TabScreen extends Component<any, any> {
           data={[
             {
               value: 1,
-              label: '选项一'
+              label: '选项 1'
             }, {
               value: 2,
-              label: '选项二'
+              label: '选项 2'
             }, {
               value: 3,
-              label: '选项三'
+              label: '选项 3'
             }, {
               value: 4,
-              label: '选项四'
+              label: '选项 4'
             }, {
               value: 5,
-              label: '选项五'
+              label: '选项 5'
             }, {
               value: 6,
-              label: '选项六'
+              label: '选项 6'
             }, {
               value: 7,
-              label: '选项七'
+              label: '选项 7'
             }
           ]}
           onChange={ item => this.handleChange('valueC', item.value) }
         />
 
-
+        <Button
+          style={{ margin: 20 }}
+          type='primary'
+          size='sm'
+          textColorInverse
+          onPress={() => {
+            this._tab && this._tab.scrollTo(scrollToList[this.state.scrollTimes % scrollToList.length])
+            this.setState({
+              valueC: scrollToList[this.state.scrollTimes % scrollToList.length] + 1,
+              scrollTimes: this.state.scrollTimes + 1
+            })
+          }}>
+          点击滚动到第 {scrollToList[this.state.scrollTimes % scrollToList.length] + 1} 项
+        </Button>
         <Text style={styles.header}>自定义选项</Text>
         <Tab
           dataItemContainerStyle={{ flex: null }}
