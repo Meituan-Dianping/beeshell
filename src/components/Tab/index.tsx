@@ -48,12 +48,8 @@ export class Tab extends React.Component<Props, State> {
     scrollable: false,
   }
 
-  scrollTo(index: number) {
+  scrollTo(index: number = 0) {
     if (!this.props.scrollable) {
-      return
-    }
-
-    if (this.props.data && this.props.data.length && this.props.data.length !== this._itemLayouts.length) {
       return
     }
 
@@ -68,16 +64,20 @@ export class Tab extends React.Component<Props, State> {
   }
 
   calucateDistance(index, baseX, containerWidth) {
+    let distance = null
+
     // 对缓存的 _itemLayouts 进行排序
     const layouts = this._itemLayouts.sort((a: any, b: any) => {
       return a.index - b.index
     })
 
+    if (!layouts[index] || !layouts[index].layout) {
+      return distance
+    }
     const targetX = layouts[index].layout.x
     const targetWidth = layouts[index].layout.width
 
     let deltaX = null
-    let distance = null
 
     if (baseX <= 0) {
       deltaX = - baseX + targetX + targetWidth - containerWidth
@@ -194,6 +194,7 @@ export class Tab extends React.Component<Props, State> {
             }}
             horizontal
             showsHorizontalScrollIndicator={false}
+            scrollEventThrottle={0}
             onScroll={this.handleScroll}>
             <View collapsable={false} style={[styles.content, dataContainerStyle]}>
               {itemViews}
