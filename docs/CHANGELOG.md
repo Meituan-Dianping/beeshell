@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 [![mnpm version](http://npm.sankuai.com/badge/v/@roo/roo-mobile-rn.svg?style=flat-square)](http://npm.sankuai.com/package/@roo/roo-mobile-rn)
 
 
+
+## [2.0.11] - 2019-05-29
+### Changed
+- Tab scrollTo 方法实现优化
+- Scrollpicker 特殊 Android 机器 Crash 修复
+
 ## [2.0.10] - 2019-05-24
 ### Changed
 - Tab 新增 scrollTo 方法，支持滚动到某一项
