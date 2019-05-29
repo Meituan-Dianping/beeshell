@@ -37,8 +37,8 @@ interface State {}
 export class Tab extends React.Component<Props, State> {
   private _container: any
   private _scroller: any
-  private _scrollerContentContainer: any
   private _itemLayouts: any[] = []
+  private _scrollerContentOffsetX: number = 0
 
   static defaultProps = {
     activeColor: variables.mtdGrayBase,
@@ -57,8 +57,8 @@ export class Tab extends React.Component<Props, State> {
       return
     }
 
-    this._scrollerContentContainer.measure((x, y, width, height, pageX) => {
-      const distance = this.calucateDistance(index, pageX)
+    this._container.measure((x, y, width) => {
+      const distance = this.calucateDistance(index, this._scrollerContentOffsetX, width)
 
       if (distance == null) {
         return
@@ -67,39 +67,38 @@ export class Tab extends React.Component<Props, State> {
     })
   }
 
-  calucateDistance(index, pageX) {
+  calucateDistance(index, baseX, containerWidth) {
     // 对缓存的 _itemLayouts 进行排序
     const layouts = this._itemLayouts.sort((a: any, b: any) => {
       return a.index - b.index
     })
-    const containerWidth = screen.width
+
     const targetX = layouts[index].layout.x
     const targetWidth = layouts[index].layout.width
 
-    let offsetX = null
+    let deltaX = null
     let distance = null
 
-    if (pageX >= 0) {
-      offsetX = pageX + targetX + targetWidth - containerWidth
+    if (baseX <= 0) {
+      deltaX = - baseX + targetX + targetWidth - containerWidth
 
-      if (offsetX >= 0) {
-        distance = - (pageX - offsetX)
+      if (deltaX >= 0) {
+        distance = baseX + deltaX
       }
     }
 
-    if (pageX < 0) {
-      offsetX = pageX + targetX + targetWidth
-
-      if (offsetX <= 0) {
-        distance = - (pageX + Math.abs(pageX) - targetX)
+    if (baseX > 0) {
+      deltaX = - baseX + targetX + targetWidth
+      if (deltaX <= 0) {
+        distance = targetX
       } else {
-        if (offsetX < targetWidth) {
-          distance = - (pageX + Math.abs(pageX) - targetX)
+        if (deltaX < targetWidth) {
+          distance = targetX
         } else {
-          offsetX = offsetX - containerWidth
+          deltaX = deltaX - containerWidth
 
-          if (offsetX > 0) {
-            distance = - (pageX - offsetX)
+          if (deltaX > 0) {
+            distance = baseX + deltaX
           }
         }
       }
@@ -177,6 +176,10 @@ export class Tab extends React.Component<Props, State> {
     })
   }
 
+  handleScroll = (e) => {
+    e && e.nativeEvent && e.nativeEvent.contentOffset && (this._scrollerContentOffsetX = e.nativeEvent.contentOffset.x)
+  }
+
   render () {
     const { scrollable, style, dataContainerStyle } = this.props
     const itemViews = this.renderItems()
@@ -190,8 +193,9 @@ export class Tab extends React.Component<Props, State> {
               this._scroller = c
             }}
             horizontal
-            showsHorizontalScrollIndicator={false}>
-            <View collapsable={false} ref={(c) => { this._scrollerContentContainer = c }} style={[styles.content, dataContainerStyle]}>
+            showsHorizontalScrollIndicator={false}
+            onScroll={this.handleScroll}>
+            <View collapsable={false} style={[styles.content, dataContainerStyle]}>
               {itemViews}
             </View>
           </ScrollView> :

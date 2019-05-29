@@ -22,6 +22,9 @@ export default class TabScreen extends Component<any, any> {
   }
 
   componentDidMount() {
+    // setTimeout(() => {
+    //   this._tab._scroller.scrollTo({ x: -80, y: 0, animated: true })
+    // }, 3000)
   }
 
   handleChange = (key, value: number) => {
@@ -118,6 +121,7 @@ export default class TabScreen extends Component<any, any> {
 
         <Text style={styles.header}>横向可滚动</Text>
         <Tab
+          style={{ marginLeft: 0, marginRight: 0 }}
           ref={(c) => {
             this._tab = c
           }}
@@ -126,25 +130,25 @@ export default class TabScreen extends Component<any, any> {
           data={[
             {
               value: 1,
-              label: '选项 1'
+              label: '选项一'
             }, {
               value: 2,
-              label: '选项 2'
+              label: '选项二'
             }, {
               value: 3,
-              label: '选项 3'
+              label: '选项三'
             }, {
               value: 4,
-              label: '选项 4'
+              label: '选项四'
             }, {
               value: 5,
-              label: '选项 5'
+              label: '选项五'
             }, {
               value: 6,
-              label: '选项 6'
+              label: '选项六'
             }, {
               value: 7,
-              label: '选项 7'
+              label: '选项七'
             }
           ]}
           onChange={ item => this.handleChange('valueC', item.value) }
