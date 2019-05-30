@@ -8,6 +8,7 @@
     "start": "mrn start --appName meituan",
     "test": "jest  --coverage",
     "e2e": "detox test --detectOpenHandles",
+    "build": "mrn build",
     "lint": "tslint -p ./ -c ./tslint.json",
     "tsc:examples": "rm -rf distExamples && tsc",
     "tsc:src": "rm -rf dist && tsc -p ./src && rsync -rv --exclude=*.ts --exclude=*.tsx src/ dist/",
