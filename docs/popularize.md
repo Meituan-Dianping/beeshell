@@ -40,7 +40,7 @@ beeshell 2.0 效果图如下：
 
 ### 架构升级
 
-![image](./images/popularize/beeshell2.0_framework2.0.png)
+![image](./images/popularize/beeshell2.0_framework2.0_new.png)
 
 ![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_framework_vs.png)
 
