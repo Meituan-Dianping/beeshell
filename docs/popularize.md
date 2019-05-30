@@ -351,6 +351,8 @@ labelText 用于定制文案内容，将 labelTextStyle 整体暴露出来，而
 
 ![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_renderingSlideModal.gif)
 
+SlideModal 组件只提供底层支持，如果要应用到真是的业务场景，还需要基于该组件进一步开发。beeshell 也提供了更高层次的定制组件，例如：Dropdown、Popover 等，可以直接使用。
+
 
 除了 SlideModal 之外，还实现了其他功能强大的组件：Slider 滑块组件，支持纵向和横向滑动；Rate 评分组件，实现一套滑动评分的机制，支持定制任意 UI 元素。由于篇幅有限，在此不再赘述。
 
