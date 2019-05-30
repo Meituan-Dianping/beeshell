@@ -6,6 +6,7 @@
 - [Status](#status)
 - [Feature](#feature)
 - [What's included](#whats-included)
+- [Live demo](#live-demo)
 
 ## Quick start
 
@@ -84,3 +85,11 @@
 * [JS Utils](./common/utils.md)
 * [Form 校验](./common/validator.md)
 * [Tree 树形结构处理](./common/Tree.md)
+
+## Live demo
+
+- 下载美团 APP（[iOS](https://itunes.apple.com/cn/app/%E7%BE%8E%E5%9B%A2-%E5%90%83%E5%96%9D%E7%8E%A9%E4%B9%90-%E5%B0%BD%E5%9C%A8%E7%BE%8E%E5%9B%A2/id423084029?mt=8)）
+
+- 进入首页，点击右上角“+”号，选择“扫一扫”，扫描下面二维码
+
+![image](./images/live-demo.png)
