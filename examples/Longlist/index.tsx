@@ -63,11 +63,11 @@ export default class LonglistScreen extends React.Component<any, any> {
   }
 
   componentDidMount () {
-    setTimeout(() => {
-      this._longlist && this._longlist.flatList.scrollToIndex({
-        index: 9
-      })
-    }, 10000)
+    // setTimeout(() => {
+    //   this._longlist && this._longlist.flatList.scrollToIndex({
+    //     index: 9
+    //   })
+    // }, 10000)
   }
 
   fetchList(params) {
