@@ -48,6 +48,7 @@ direction 与 align 属性配合使用。
 ![image](../images/SlideModal/4.gif)
 
 ## Code
+[详细 Code](../../examples/SlideModal/index.tsx)
 
 ```jsx
 import { SlideModal } from 'beeshell';

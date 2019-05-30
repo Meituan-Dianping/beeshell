@@ -311,7 +311,7 @@ export class Scrollpicker extends React.Component<ScrollpickerProps, Scrollpicke
       }
     }
 
-    this.scrollers[scrollIndex].scrollTo({
+    this.scrollers[scrollIndex] && this.scrollers[scrollIndex].scrollTo && this.scrollers[scrollIndex].scrollTo({
       x: 0,
       y: newScrollHeight,
       animated: animated === false ? false : true

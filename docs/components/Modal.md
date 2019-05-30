@@ -10,7 +10,7 @@ import { Modal } from 'beeshell';
 
 ### 按需引入
 ```js
-import Modal from 'beeshell/dist/components/Modal';
+import { Modal } from 'beeshell/dist/components/Modal';
 ```
 
 ## Examples

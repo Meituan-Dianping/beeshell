@@ -29,6 +29,23 @@ export default class CalendarScreen extends Component<any, any> {
             })
           }}>
       </Calendar>
+
+      <Text style={styles.header}>自定义渲染项</Text>
+        <Calendar
+          date={this.state.date}
+          startDate={'2018-04-11'}
+          endDate={'2018-06-22'}
+          renderItem={(item, date, desc) => {
+            return (
+              <Text>{item.dateModel.format('D')}</Text>
+            )
+          }}
+          onChange={(date) => {
+            this.setState({
+              date
+            })
+          }}>
+      </Calendar>
       </ScrollView>
     )
   }
