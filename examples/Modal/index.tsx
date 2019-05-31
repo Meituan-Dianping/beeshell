@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, View, Text, StyleSheet, Animated } from 'react-native'
+import { ScrollView, View, Text, StyleSheet, Animated, Platform } from 'react-native'
 
 import { Button, Modal, ModalProps, Input } from '../../src/'
 import styles from '../common/styles'
@@ -113,14 +113,23 @@ export default class ModalScreen extends Component<{}, any> {
           textColorInverse
           size='sm'
           onPress={() => {
-            this.btnEl.measure((fx, fy, width, height, px, py) => {
+            if (Platform.OS !== 'web') {
+              this.btnEl.measure((fx, fy, width, height, px, py) => {
+                this.setState({
+                  animatedTranslateX: px + width / 2,
+                  animatedTranslateY: py + height / 2
+                }, () => {
+                  this.modal4.open()
+                })
+              })
+            } else {
               this.setState({
-                animatedTranslateX: px + width / 2,
-                animatedTranslateY: py + height / 2
+                animatedTranslateX: 190,
+                animatedTranslateY: 150
               }, () => {
                 this.modal4.open()
               })
-            })
+            }
           }}>
           自定义展示位置与弹出位置
         </Button>
