@@ -54,6 +54,10 @@ export class Input extends Component<InputProps, InputState> {
     this.delayIsEditing = this.delayTaskMemoize(3000)
   }
 
+  componentWillUnmount() {
+    this.delayIsEditing.cancel()
+  }
+
   handleChange = (value) => {
     this.props.onChange && this.props.onChange(value)
   }
@@ -120,7 +124,7 @@ export class Input extends Component<InputProps, InputState> {
     )
   }
 
-  renderAndroid = () => {
+  renderAndroidAndWeb = () => {
     const androidClearButtonMode = this.props.clearButtonMode && this.props.clearButtonMode !== 'never'
     const showDelIcon = androidClearButtonMode && this.props.value && this.state.isEditing
     const tmpProps = this.modProps(this.props)
@@ -173,7 +177,7 @@ export class Input extends Component<InputProps, InputState> {
     if (Platform.OS === 'ios') {
       return this.renderiOS()
     } else {
-      return this.renderAndroid()
+      return this.renderAndroidAndWeb()
     }
   }
 }
