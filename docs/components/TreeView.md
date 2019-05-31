@@ -58,6 +58,8 @@ const flattenedData = [
   }}
 />
 
+```
+
 ## API
 ### Props
 
