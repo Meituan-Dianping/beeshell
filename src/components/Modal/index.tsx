@@ -259,6 +259,7 @@ export class Modal<
     return this.animated.toOut().then(() => {
       return TopviewGetInstance().remove(this.modalState.topviewId)
     }).then(() => {
+      const id = this.modalState.topviewId
       this.modalState.closing = false
       this.modalState.topviewId = null
 
@@ -266,6 +267,7 @@ export class Modal<
         this.props.onClosed({
           ...this.modalState
         })
+      return id
     }).catch((e) => {
       console.log(e)
     })
