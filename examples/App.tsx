@@ -80,9 +80,9 @@ class Home extends Component<any, any> {
   }
 
   componentDidMount() {
-    // setTimeout(() => {
-    //   this.props.navigation.navigate('Tab')
-    // }, 1000)
+    setTimeout(() => {
+      this.props.navigation.navigate('Form')
+    }, 1000)
   }
 
   gotoPage (item) {

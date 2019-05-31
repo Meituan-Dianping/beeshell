@@ -21,7 +21,8 @@ export default {
     alignItems: 'center'
   },
   labelText: {
-    fontSize: variables.mtdFontSizeM
+    fontSize: variables.mtdFontSizeM,
+    color: variables.mtdGrayBase
   },
 
   indicator: {

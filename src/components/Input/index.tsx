@@ -92,6 +92,11 @@ export class Input extends Component<InputProps, InputState> {
       ...props
     }
 
+    if (Platform.OS === 'web') {
+      // web 平台不支持该属性
+      delete tmpProps.textAlign
+    }
+
     delete tmpProps.style
     delete tmpProps.inputStyle
 
@@ -156,6 +161,7 @@ export class Input extends Component<InputProps, InputState> {
             <Icon
               source={require(`../../common/images/icons/times-circle.png`)}
               size={15}
+              tintColor={variables.mtdGrayLighter}
             />
           </TouchableOpacity> : null
         }

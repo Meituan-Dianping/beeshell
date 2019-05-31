@@ -193,7 +193,7 @@ export default class FormScreen extends Component<{}, any> {
             }
           </Form.Item>
           <Form.Item style={{ paddingVertical: 13 }} label='手机号码' hasLine>
-            <Input testID='phone' placeholder='请填写手机号码' textAlign='right' value={this.state.filters.phone} onChange={(value) => { this.handleChangeFilter('phone', value) }} />
+            <Input testID='phone' placeholder='请填写手机号码' textAlign='right' inputStyle={{ textAlign: 'right' }} value={this.state.filters.phone} onChange={(value) => { this.handleChangeFilter('phone', value) }} />
             {
               validateResults.phone && !validateResults.phone.valid ?
               <Text testID='phoneInfo' style={{ color: variables.mtdBrandDanger }}>{validateResults.phone.msg}</Text> : null
