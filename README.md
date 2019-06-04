@@ -11,8 +11,7 @@
 
 在线演示：
 
-- 下载美团 APP（[iOS](https://itunes.apple.com/cn/app/%E7%BE%8E%E5%9B%A2-%E5%90%83%E5%96%9D%E7%8E%A9%E4%B9%90-%E5%B0%BD%E5%9C%A8%E7%BE%8E%E5%9B%A2/id423084029?mt=8)）
-
+- 下载美团 APP（iOS、Android 都可以）
 - 进入首页，点击右上角“+”号，选择“扫一扫”，扫描下面二维码
 
 ![image](./docs/images/live-demo.png)
