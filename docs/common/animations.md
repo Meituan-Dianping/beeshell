@@ -15,7 +15,7 @@ import { FadeAnimated, SlideAnimated } from '@roo/roo-mobile-rn/dist/common/anim
 ![image](../images/common/animations/1.gif)
 
 ## Code
-[详细 Code](../../examples/common/AnimationsScreen/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/common/AnimationsScreen/index.tsx)
 
 ```js
 

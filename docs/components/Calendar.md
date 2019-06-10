@@ -1,3 +1,11 @@
+---
+name: Calendar
+title: 日历
+route: /components/Calendar
+sidebar: true
+---
+
+
 # Calendar
 
 日历组件。
@@ -19,7 +27,7 @@ import { Calendar } from '@roo/roo-mobile-rn/dist/components/Calendar';
 ![image](../images/Calendar/1.gif)
 
 ## Code
-[详细 Code](../../examples/Calendar/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Calendar/index.tsx)
 
 ```jsx
 import { Calendar } from '@roo/roo-mobile-rn';

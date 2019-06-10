@@ -18,7 +18,7 @@ import { Modal } from '@roo/roo-mobile-rn/dist/components/Modal';
 ![image](../images/Modal/1.gif)
 
 ## Code
-[详细 Code](../../examples/Modal/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Modal/index.tsx)
 
 ```jsx
 import { Modal } from '@roo/roo-mobile-rn';

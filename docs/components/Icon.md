@@ -1,3 +1,10 @@
+---
+name: Icon
+title: 图标
+route: /components/Icon
+sidebar: true
+---
+
 # Icon
 
 图标组件。 
@@ -21,7 +28,7 @@ import { Icon } from '@roo/roo-mobile-rn/dist/components/Icon';
 ![image](../images/Icon/1.gif)
 
 ## Code
-[详细 Code](../../examples/Icon/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Icon/index.tsx)
 
 ```jsx
 import { Icon } from '@roo/roo-mobile-rn'

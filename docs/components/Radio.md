@@ -1,3 +1,10 @@
+---
+name: Radio
+title: 单选框
+route: /components/Radio
+sidebar: true
+---
+
 # Radio
 
 单选框组件。
@@ -19,7 +26,7 @@ import { Radio } from '@roo/roo-mobile-rn/dist/components/Radio';
 ![image](../images/Radio/1.gif)
 
 ## Code
-[详细 Code](../../examples/Radio/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Radio/index.tsx)
 
 ```jsx
 import { Radio } from '@roo/roo-mobile-rn'

@@ -13,7 +13,8 @@
     "tsc:examples": "rm -rf distExamples && tsc",
     "tsc:src": "rm -rf dist && tsc -p ./src && rsync -rv --exclude=*.ts --exclude=*.tsx src/ dist/",
     "prepublishOnly": "npm run tsc:src && rsync -v scripts/roo-report.js dist/roo-report.js && node ./scripts/setPackageJSON.js --add",
-    "postpublish": "node ./scripts/setPackageJSON.js"
+    "postpublish": "node ./scripts/setPackageJSON.js",
+    "syncDocs": "rsync -rv docs ../roo-mobile-rn-doc/"
   },
   "files": [
     "dist/**/*.{ts,js,png}"

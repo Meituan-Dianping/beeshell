@@ -21,7 +21,7 @@ import { Progress } from '@roo/roo-mobile-rn/dist/components/Progress';
 
 
 ## Code
-[详细 Code](../../examples/Progress/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Progress/index.tsx)
 
 ```jsx
 <Progress

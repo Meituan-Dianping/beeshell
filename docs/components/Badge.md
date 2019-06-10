@@ -1,3 +1,11 @@
+---
+name: Badge
+title: 徽章
+route: /components/Badge
+sidebar: true
+---
+
+
 # Badge
 
 徽章组件。
@@ -19,7 +27,7 @@ import { Badge } from '@roo/roo-mobile-rn/dist/components/Badge';
 ![image](../images/Badge/1.gif)
 
 ## Code
-[详细 Code](../../examples/Badge/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Badge/index.tsx)
 
 ```jsx
 <Badge label='99+'/>

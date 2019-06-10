@@ -25,7 +25,7 @@ import Tree from '@roo/roo-mobile-rn/dist/common/utils/Tree'
 ![image](../images/common/Tree/2.png)
 
 ## Code
-[详细 Code](../../examples/common/TreeScreen/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/common/TreeScreen/index.tsx)
 
 ```js
 import Tree from '@roo/roo-mobile-rn/dist/common/utils/Tree'

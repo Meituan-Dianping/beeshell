@@ -1,3 +1,11 @@
+---
+name: Form
+title: 表单
+route: /components/Form
+sidebar: true
+---
+
+
 # Form
 
 表单组件。
@@ -27,7 +35,7 @@ import { Form } from '@roo/roo-mobile-rn/dist/components/Form';
 ![image](../images/Form/2.png)
 
 ## Code
-[详细 Code](../../examples/Form/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Form/index.tsx)
 
 ```jsx
 import { Form, Input } from '@roo/roo-mobile-rn';

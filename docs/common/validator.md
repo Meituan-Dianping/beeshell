@@ -15,7 +15,7 @@ import validator from '@roo/roo-mobile-rn/dist/common/utils/validator'
 ![image](../images/common/validator/1.gif)
 
 ## Code
-[详细 Code](../../examples/Form/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Form/index.tsx)
 
 ```js
 const validate = validator.dispatch(

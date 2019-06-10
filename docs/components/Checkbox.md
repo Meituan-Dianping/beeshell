@@ -1,3 +1,10 @@
+---
+name: Checkbox
+title: 复选框
+route: /components/Checkbox
+sidebar: true
+---
+
 # Checkbox
 
 多选框组件。
@@ -19,7 +26,7 @@ import { Checkbox } from '@roo/roo-mobile-rn/dist/components/Checkbox';
 ![image](../images/Checkbox/1.gif)
 
 ## Code
-[详细 Code](../../examples/Checkbox/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Checkbox/index.tsx)
 
 ```jsx
 import { Checkbox } from '@roo/roo-mobile-rn'

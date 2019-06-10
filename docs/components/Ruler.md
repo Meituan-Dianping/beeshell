@@ -38,7 +38,7 @@ import { Ruler } from '@roo/roo-mobile-rn/dist/modules/Ruler';
 ![image](../images/Ruler/3.png)
 
 ## Code
-[详细 Code](../../examples/Ruler/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Ruler/index.tsx)
 
 ```js
 import { Ruler } from '@roo/roo-mobile-rn';

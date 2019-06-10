@@ -19,7 +19,7 @@ import { TreeView } from '@roo/roo-mobile-rn/dist/components/TreeView';
 ![image](../images/TreeView/1.gif)
 
 ## Code
-[详细 Code](../../examples/TreeView/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/TreeView/index.tsx)
 
 ```js
 import { TreeView } from '@roo/roo-mobile-rn';

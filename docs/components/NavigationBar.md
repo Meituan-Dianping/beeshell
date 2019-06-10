@@ -1,3 +1,10 @@
+---
+name: NavigationBar
+title: 导航条
+route: /components/NavigationBar
+sidebar: true
+---
+
 # NavigationBar
 导航条组件。
 
@@ -17,7 +24,7 @@ import { NavigationBar } from '@roo/roo-mobile-rn/dist/components/NavigationBar'
 ![image](../images/NavigationBar/1.gif)
 
 ## Code
-[详细 Code](../../examples/NavigationBar/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/NavigationBar/index.tsx)
 
 ```jsx
 import { NavigationBar } from '@roo/roo-mobile-rn';

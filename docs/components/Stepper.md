@@ -1,3 +1,10 @@
+---
+name: Stepper
+title: 计数器
+route: /components/Stepper
+sidebar: true
+---
+
 # Stepper
 
 计数器组件。
@@ -20,7 +27,7 @@ import Stepper from '@roo/roo-mobile-rn/dist/components/Stepper';
 
 ## Code
 
-[详细 Code](../../examples/Stepper/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Stepper/index.tsx)
 
 ```jsx
 <Stepper

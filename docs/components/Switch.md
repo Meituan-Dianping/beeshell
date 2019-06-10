@@ -1,3 +1,10 @@
+---
+name: Switch
+title: 开关
+route: /components/Switch
+sidebar: true
+---
+
 # Switch
 
 开关组件。
@@ -19,7 +26,7 @@ import { Switch } from '@roo/roo-mobile-rn/dist/components/Switch';
 ![image](../images/Switch/1.gif)
 
 ## Code
-[详细 Code](../../examples/Switch/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Switch/index.tsx)
 
 ```js
 import { Switch } from '@roo/roo-mobile-rn';

@@ -1,3 +1,10 @@
+---
+name: Button
+title: 按钮
+route: /components/Button
+sidebar: true
+---
+
 # Button
 
 按钮组件。
@@ -19,7 +26,7 @@ import { Button } from '@roo/roo-mobile-rn/dist/components/Button';
 ![image](../images/Button/1.gif)
 
 ## Code
-[详细 Code](../../examples/Button/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Button/index.tsx)
 
 ```js
 import { Button } from '@roo/roo-mobile-rn';

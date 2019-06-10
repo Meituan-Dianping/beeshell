@@ -1,3 +1,11 @@
+---
+name: Actionsheet
+title: 行动面板
+route: /components/Actionsheet
+sidebar: true
+---
+
+
 # Actionsheet
 
 行动面板组件。
@@ -21,7 +29,7 @@ import Actionsheet from '@roo/roo-mobile-rn/dist/components/Actionsheet';
 
 
 ## Code
-[详细 Code](../../examples/Actionsheet/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Actionsheet/index.tsx)
 
 ```jsx
 import { Actionsheet } from '@roo/roo-mobile-rn';

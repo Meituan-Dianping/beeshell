@@ -1,3 +1,11 @@
+---
+name: Timepicker
+title: 时间选择器
+route: /components/Timepicker
+sidebar: true
+---
+
+
 # Timepicker
 
 时间选择组件。滚动选择交互，基于 Scrollpicker 实现。
@@ -20,7 +28,7 @@ import Timepicker from '@roo/roo-mobile-rn/dist/components/Timepicker';
 ![image](../images/Timepicker/1.gif)
 
 ## Code
-[详细 Code](../../examples/Timepicker/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Timepicker/index.tsx)
 
 ```jsx
 import { Timepicker } from '@roo/roo-mobile-rn';

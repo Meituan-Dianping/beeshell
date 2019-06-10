@@ -1,3 +1,10 @@
+---
+name: Input
+title: 输入框
+route: /components/Input
+sidebar: true
+---
+
 # Input
 
 输入框组件。
@@ -26,7 +33,7 @@ import { Input } from '@roo/roo-mobile-rn/dist/components/Input';
 
 ## Code
 
-[详细 Code](../../examples/Input/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Input/index.tsx)
 
 ```jsx
 import { Input } from '@roo/roo-mobile-rn';

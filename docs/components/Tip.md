@@ -19,7 +19,7 @@ import { Tip } from '@roo/roo-mobile-rn/dist/components/Tip';
 ![image](../images/Tip/1.gif)
 
 ## Code
-[详细 Code](../../examples/Tip/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Tip/index.tsx)
 
 ```jsx
 import { Tip } from '@roo/roo-mobile-rn';

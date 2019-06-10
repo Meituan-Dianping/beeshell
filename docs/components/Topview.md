@@ -23,7 +23,7 @@ import { TopviewGetInstance } from '@roo/roo-mobile-rn/dist/components/Topview';
 ![image](../images/Topview/1.gif)
 
 ## Code
-[详细 Code](../../examples/Topview/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Topview/index.tsx)
 
 ```js
 import { TopviewGetInstance } from '@roo/roo-mobile-rn';

@@ -48,7 +48,7 @@ direction 与 align 属性配合使用。
 ![image](../images/SlideModal/4.gif)
 
 ## Code
-[详细 Code](../../examples/SlideModal/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/SlideModal/index.tsx)
 
 ```jsx
 import { SlideModal } from '@roo/roo-mobile-rn';
