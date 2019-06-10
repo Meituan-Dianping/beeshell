@@ -2,7 +2,6 @@
 name: Rate
 title: 评分
 route: /components/Rate
-sidebar: true
 ---
 
 # Rate

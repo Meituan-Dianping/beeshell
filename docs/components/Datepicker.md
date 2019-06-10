@@ -2,7 +2,6 @@
 name: Datepicker
 title: 日期选择
 route: /components/Datepicker
-sidebar: true
 ---
 
 # Datepicker

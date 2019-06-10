@@ -2,7 +2,6 @@
 name: Stepper
 title: 计数器
 route: /components/Stepper
-sidebar: true
 ---
 
 # Stepper

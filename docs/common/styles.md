@@ -1,7 +1,6 @@
 ---
 title: 定制主题
 route: /common/styles
-sidebar: true
 ---
 
 # 定制主题

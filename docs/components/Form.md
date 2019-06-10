@@ -2,7 +2,6 @@
 name: Form
 title: 表单
 route: /components/Form
-sidebar: true
 ---
 
 

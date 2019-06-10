@@ -2,7 +2,6 @@
 name: Popover
 title: 弹出框
 route: /components/Popover
-sidebar: true
 ---
 
 # Popover

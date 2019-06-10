@@ -2,7 +2,6 @@
 name: Scrollpicker
 title: 滚动选择
 route: /components/Scrollpicker
-sidebar: true
 ---
 
 # Scrollpicker

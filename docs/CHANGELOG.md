@@ -1,6 +1,5 @@
 ---
 route: /CHANGELOG
-sidebar: true
 ---
 
 # Changelog

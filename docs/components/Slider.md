@@ -2,7 +2,6 @@
 name: Slider
 title: 滑块
 route: /components/Slider
-sidebar: true
 ---
 
 # Slider

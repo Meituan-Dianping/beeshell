@@ -2,7 +2,6 @@
 name: Radio
 title: 单选框
 route: /components/Radio
-sidebar: true
 ---
 
 # Radio

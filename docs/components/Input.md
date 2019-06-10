@@ -2,7 +2,6 @@
 name: Input
 title: 输入框
 route: /components/Input
-sidebar: true
 ---
 
 # Input

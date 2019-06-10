@@ -2,7 +2,6 @@
 name: Dialog
 title: 对话框
 route: /components/Dialog
-sidebar: true
 ---
 
 

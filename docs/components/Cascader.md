@@ -2,7 +2,6 @@
 name: Cascader
 title: 级联选择器
 route: /components/Cascader
-sidebar: true
 ---
 
 

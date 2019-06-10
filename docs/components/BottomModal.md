@@ -2,7 +2,6 @@
 name: BottomModal
 title: 半页弹窗
 route: /components/BottomModal
-sidebar: true
 ---
 
 

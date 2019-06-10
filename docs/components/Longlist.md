@@ -2,7 +2,6 @@
 name: Longlist
 title: 长列表
 route: /components/Longlist
-sidebar: true
 ---
 
 # Longlist

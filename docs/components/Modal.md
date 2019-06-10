@@ -2,7 +2,6 @@
 name: Modal
 title: 模态框
 route: /components/Modal
-sidebar: true
 ---
 
 # Modal
