@@ -1,6 +1,12 @@
+---
+title: Utils
+route: /common/utils
+sidebar: true
+---
+
 # JS Utils
 
-比较基础的工具函数，如有需要请参考 [utils 文件](../../src/common/utils/index.ts)
+比较基础的工具函数，如有需要请参考 [utils 文件](https://github.com/Meituan-Dianping/beeshell/tree/master/src/common/utils/index.ts)
 
 ## Usage
 

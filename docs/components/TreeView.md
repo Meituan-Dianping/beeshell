@@ -1,3 +1,11 @@
+---
+name: TreeView
+title: 树形结构
+route: /components/TreeView
+sidebar: true
+---
+
+
 # TreeView
 
 树形结构组件。

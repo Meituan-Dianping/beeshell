@@ -1,3 +1,11 @@
+---
+name: Progress
+title: 进度条
+route: /components/Progress
+sidebar: true
+---
+
+
 # Progress
 
 进度条组件。

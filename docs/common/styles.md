@@ -54,7 +54,7 @@ console.log(varialbes.mtdBrandPrimary);
 
 ## 主题变量范围
 
-支持定制的主题变量如下，这里只列出部分变量，详见 [varialbes 文件](../../src/common/styles/variables.ts)
+支持定制的主题变量如下，这里只列出部分变量，详见 [varialbes 文件](https://github.com/Meituan-Dianping/beeshell/tree/master/src/common/styles/variables.ts)
 
 ```js
 

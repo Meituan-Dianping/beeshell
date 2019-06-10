@@ -1,3 +1,10 @@
+---
+name: Tab
+title: 标签页
+route: /components/Tab
+sidebar: true
+---
+
 # Tab
 
 标签页组件。

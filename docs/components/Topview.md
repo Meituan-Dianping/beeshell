@@ -1,3 +1,10 @@
+---
+name: Topview
+title: 顶层视图
+route: /components/Topview
+sidebar: true
+---
+
 # Topview
 
 顶层视图组件。

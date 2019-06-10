@@ -1,3 +1,10 @@
+---
+name: SlideModal
+title: 滑动弹框
+route: /components/SlideModal
+sidebar: true
+---
+
 # SlideModal
 
 滑动弹框。支持四个触控区域，十二个动画方向。

@@ -1,3 +1,10 @@
+---
+name: Tag
+title: 标签
+route: /components/Tag
+sidebar: true
+---
+
 # Tag
 
 标签组件。

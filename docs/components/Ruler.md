@@ -1,3 +1,10 @@
+---
+name: Ruler
+title: 刻度尺
+route: /components/Ruler
+sidebar: true
+---
+
 # Ruler
 
 刻度尺组件。因为通过 RN Dimension('window').height 获取的屏幕高度（screenHeight），并不是真正的可视区域的高度，所以，导致弹框类组件（例如：SlideModal），在计算位置时发送错误，通过 Ruler 组件可以测量出真正的屏幕高度。（SlideModal 支持自定义 screenHeight）

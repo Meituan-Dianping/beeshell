@@ -1,3 +1,9 @@
+---
+title: 表单校验
+route: /common/validator
+sidebar: true
+---
+
 # 校验器
 
 使用函数式组合的方式实现，可以配合 Form 组件实现表单校验功能。

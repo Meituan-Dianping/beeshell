@@ -1,3 +1,9 @@
+---
+title: 动画
+route: /common/animations
+sidebar: true
+---
+
 # 动画
 
 基于 Animated 进行二次封装，支持淡入淡出（Fade）与滑动（Slide）动画。

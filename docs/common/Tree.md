@@ -1,3 +1,10 @@
+---
+title: 树形结构处理
+route: /common/Tree
+sidebar: true
+---
+
+
 # Tree 树形结构处理
 
 树形结构有两种表示方法：子表表示法（嵌套）和父指针表示法（扁平）。
