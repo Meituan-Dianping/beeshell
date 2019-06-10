@@ -1,7 +1,6 @@
 ---
 title: 动画
 route: /common/animations
-sidebar: true
 ---
 
 # 动画

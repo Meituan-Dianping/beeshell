@@ -2,7 +2,6 @@
 name: Calendar
 title: 日历
 route: /components/Calendar
-sidebar: true
 ---
 
 

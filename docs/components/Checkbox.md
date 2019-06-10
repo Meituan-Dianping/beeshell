@@ -2,7 +2,6 @@
 name: Checkbox
 title: 复选框
 route: /components/Checkbox
-sidebar: true
 ---
 
 # Checkbox

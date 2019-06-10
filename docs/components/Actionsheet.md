@@ -2,7 +2,6 @@
 name: Actionsheet
 title: 行动面板
 route: /components/Actionsheet
-sidebar: true
 ---
 
 

@@ -2,7 +2,6 @@
 name: Timepicker
 title: 时间选择器
 route: /components/Timepicker
-sidebar: true
 ---
 
 

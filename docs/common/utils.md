@@ -1,7 +1,6 @@
 ---
 title: Utils
 route: /common/utils
-sidebar: true
 ---
 
 # JS Utils

@@ -2,7 +2,6 @@
 name: Switch
 title: 开关
 route: /components/Switch
-sidebar: true
 ---
 
 # Switch

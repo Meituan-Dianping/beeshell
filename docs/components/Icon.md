@@ -2,7 +2,6 @@
 name: Icon
 title: 图标
 route: /components/Icon
-sidebar: true
 ---
 
 # Icon

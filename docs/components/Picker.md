@@ -2,7 +2,6 @@
 name: Picker
 title: 筛选器
 route: /components/Picker
-sidebar: true
 ---
 
 

@@ -1,7 +1,6 @@
 ---
 title: 表单校验
 route: /common/validator
-sidebar: true
 ---
 
 # 校验器

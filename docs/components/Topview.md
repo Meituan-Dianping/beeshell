@@ -2,7 +2,6 @@
 name: Topview
 title: 顶层视图
 route: /components/Topview
-sidebar: true
 ---
 
 # Topview

@@ -2,7 +2,6 @@
 name: Ruler
 title: 刻度尺
 route: /components/Ruler
-sidebar: true
 ---
 
 # Ruler

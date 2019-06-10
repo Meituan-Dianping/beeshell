@@ -1,7 +1,6 @@
 ---
 title: 树形结构处理
 route: /common/Tree
-sidebar: true
 ---
 
 

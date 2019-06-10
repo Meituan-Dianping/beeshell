@@ -2,7 +2,6 @@
 name: Dropdown
 title: 下拉选择
 route: /components/Dropdown
-sidebar: true
 ---
 
 # Dropdown

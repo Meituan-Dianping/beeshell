@@ -2,7 +2,6 @@
 name: Badge
 title: 徽章
 route: /components/Badge
-sidebar: true
 ---
 
 

@@ -2,7 +2,6 @@
 name: SlideModal
 title: 滑动弹框
 route: /components/SlideModal
-sidebar: true
 ---
 
 # SlideModal

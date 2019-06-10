@@ -2,7 +2,6 @@
 name: Progress
 title: 进度条
 route: /components/Progress
-sidebar: true
 ---
 
 

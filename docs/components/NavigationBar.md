@@ -2,7 +2,6 @@
 name: NavigationBar
 title: 导航条
 route: /components/NavigationBar
-sidebar: true
 ---
 
 # NavigationBar

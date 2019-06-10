@@ -2,7 +2,6 @@
 name: Button
 title: 按钮
 route: /components/Button
-sidebar: true
 ---
 
 # Button
