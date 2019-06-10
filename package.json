@@ -25,7 +25,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && npm run tsc:src"
+      "pre-commit": "npm run lint && npm run tsc:src",
+      "post-commit": "npm run syncDocs"
     }
   },
   "devDependencies": {

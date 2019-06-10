@@ -36,7 +36,7 @@ import { Icon } from '@roo/roo-mobile-rn'
 <Icon type='angle-down' size={14} tintColor='#FECB2E' />
 <Icon source={require('@roo/roo-mobile-rn/dist/common/images/icons/angle-down.png')} size={14} tintColor='#FECB2E' />
 // 可以用上面两种方式，使用同一个图标
-// 第二种方式 source 属性的图片名（angle-down）与 第一种方式的 type 属性一致
+// 第二种方式 source 属性的图片名（angle-down）与第一种方式的 type 属性一致
 // 注意使用 RN 默认 JS 打包方案的，只能使用第二种方式
 
 <Icon type='times-circle-o' size={20} tintColor='red' />
