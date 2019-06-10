@@ -1,3 +1,10 @@
+---
+name: Scrollpicker
+title: 滚动选择
+route: /components/Scrollpicker
+sidebar: true
+---
+
 # Scrollpicker
 
 滚动选择组件。纯 JS 模拟滚动选择，跨平台。
@@ -27,7 +34,7 @@ import Scrollpicker from 'beeshell/dist/components/Scrollpicker';
 ![image](../images/Scrollpicker/proportion.png)
 
 ## Code
-[详细 Code](../../examples/Scrollpicker/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Scrollpicker/index.tsx)
 
 ```jsx
 import { Scrollpicker } from 'beeshell';

@@ -33,7 +33,7 @@ export default class PickerScreen extends Component<{}, State> {
 
   componentDidMount () {
     setTimeout(() => {
-      this.picker1.open().then(() => {
+      this.picker1 && this.picker1.open().then(() => {
         console.log('opened')
       })
     })

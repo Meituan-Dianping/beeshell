@@ -1,3 +1,10 @@
+---
+name: Modal
+title: 模态框
+route: /components/Modal
+sidebar: true
+---
+
 # Modal
 模态窗组件。Modal 是一个基础弹窗，内容完全由用户自定义，定制化程度极高。如果没有这么高的定制化需求，我们也提供了在 Modal 基础上的封装组件（继承自 Modal），例如：[Dialog](./Dialog)。
 
@@ -18,7 +25,7 @@ import { Modal } from 'beeshell/dist/components/Modal';
 ![image](../images/Modal/1.gif)
 
 ## Code
-[详细 Code](../../examples/Modal/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Modal/index.tsx)
 
 ```jsx
 import { Modal } from 'beeshell';

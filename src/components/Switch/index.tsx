@@ -248,7 +248,7 @@ export class Switch extends Component<SwitchProps, SwitchState> {
         {...this.panResponder.panHandlers}
         style={[styles.container, this.getContainBaseStyle(), this.props.style]}>
           <Animated.View style={[this.getRockerBaseStyle(), {
-            borderWidth: (Platform.OS === 'android' && Platform.Version < 21) ? StyleSheet.hairlineWidth : 0
+            borderWidth: (Platform.OS === 'android' && Platform.Version < 21 || Platform.OS === 'web') ? StyleSheet.hairlineWidth : 0
           },
             (Platform.OS === 'android' && Platform.Version >= 21) ? { elevation } : {}
           ]}

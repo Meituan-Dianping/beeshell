@@ -1,3 +1,10 @@
+---
+name: Topview
+title: 顶层视图
+route: /components/Topview
+sidebar: true
+---
+
 # Topview
 
 顶层视图组件。
@@ -23,7 +30,7 @@ import { TopviewGetInstance } from 'beeshell/dist/components/Topview';
 ![image](../images/Topview/1.gif)
 
 ## Code
-[详细 Code](../../examples/Topview/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Topview/index.tsx)
 
 ```js
 import { TopviewGetInstance } from 'beeshell';

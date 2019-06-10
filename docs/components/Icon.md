@@ -1,3 +1,10 @@
+---
+name: Icon
+title: 图标
+route: /components/Icon
+sidebar: true
+---
+
 # Icon
 
 图标组件。 
@@ -21,12 +28,17 @@ import { Icon } from 'beeshell/dist/components/Icon';
 ![image](../images/Icon/1.gif)
 
 ## Code
-[详细 Code](../../examples/Icon/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Icon/index.tsx)
 
 ```jsx
 import { Icon } from 'beeshell'
 
 <Icon type='angle-down' size={14} tintColor='#FECB2E' />
+<Icon source={require('beeshell/dist/common/images/icons/angle-down.png')} size={14} tintColor='#FECB2E' />
+// 可以用上面两种方式，使用同一个图标
+// 第二种方式 source 属性的图片名（angle-down）与第一种方式的 type 属性一致
+// 注意使用 RN 默认 JS 打包方案的，只能使用第二种方式
+
 <Icon type='times-circle-o' size={20} tintColor='red' />
 ```
 

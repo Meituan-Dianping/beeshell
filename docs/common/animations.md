@@ -1,3 +1,9 @@
+---
+title: 动画
+route: /common/animations
+sidebar: true
+---
+
 # 动画
 
 基于 Animated 进行二次封装，支持淡入淡出（Fade）与滑动（Slide）动画。
@@ -15,7 +21,7 @@ import { FadeAnimated, SlideAnimated } from 'beeshell/dist/common/animations'
 ![image](../images/common/animations/1.gif)
 
 ## Code
-[详细 Code](../../examples/common/AnimationsScreen/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/common/AnimationsScreen/index.tsx)
 
 ```js
 

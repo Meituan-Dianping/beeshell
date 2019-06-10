@@ -12,7 +12,7 @@
     "lint": "tslint -p ./ -c ./tslint.json",
     "tsc:examples": "rm -rf distExamples && tsc",
     "tsc:src": "rm -rf dist && tsc -p ./src && rsync -rv --exclude=*.ts --exclude=*.tsx src/ dist/",
-    "prepublish": "npm run tsc:src"
+    "prepublishOnly": "npm run tsc:src"
   },
   "files": [
     "dist/**/*.{ts,js,png}"

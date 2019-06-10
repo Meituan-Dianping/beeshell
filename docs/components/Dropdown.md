@@ -1,3 +1,10 @@
+---
+name: Dropdown
+title: 下拉选择
+route: /components/Dropdown
+sidebar: true
+---
+
 # Dropdown
 
 下拉选择。
@@ -19,7 +26,7 @@ import { Dropdown } from 'beeshell/dist/modules/Dropdown';
 ![image](../images/Dropdown/1.gif)
 
 ## Code
-[详细 Code](../../examples/Dropdown/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Dropdown/index.tsx)
 
 ```jsx
 import { Dropdown } from 'beeshell';

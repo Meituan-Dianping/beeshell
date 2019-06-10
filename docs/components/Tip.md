@@ -1,3 +1,11 @@
+---
+name: Tip
+title: 提示框
+route: /components/Tip
+sidebar: true
+---
+
+
 # Tip
 
 全局提示组件。
@@ -19,7 +27,7 @@ import { Tip } from 'beeshell/dist/components/Tip';
 ![image](../images/Tip/1.gif)
 
 ## Code
-[详细 Code](../../examples/Tip/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Tip/index.tsx)
 
 ```jsx
 import { Tip } from 'beeshell';

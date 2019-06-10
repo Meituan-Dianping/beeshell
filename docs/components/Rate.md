@@ -1,3 +1,10 @@
+---
+name: Rate
+title: 评分
+route: /components/Rate
+sidebar: true
+---
+
 # Rate
 
 评分组件。实现一套滑动评分的机制，支持定制任意图标。
@@ -18,7 +25,7 @@ import Rate from 'beeshell/dist/components/Rate';
 ![image](../images/Rate/1.gif)
 
 ## Code
-[详细 Code](../../examples/Rate/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Rate/index.tsx)
 
 ```jsx
 import { Rate } from 'beeshell'

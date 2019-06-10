@@ -1,3 +1,9 @@
+---
+title: 表单校验
+route: /common/validator
+sidebar: true
+---
+
 # 校验器
 
 使用函数式组合的方式实现，可以配合 Form 组件实现表单校验功能。
@@ -15,7 +21,7 @@ import validator from 'beeshell/dist/common/utils/validator'
 ![image](../images/common/validator/1.gif)
 
 ## Code
-[详细 Code](../../examples/Form/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Form/index.tsx)
 
 ```js
 const validate = validator.dispatch(

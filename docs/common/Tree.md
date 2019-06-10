@@ -1,3 +1,10 @@
+---
+title: 树形结构处理
+route: /common/Tree
+sidebar: true
+---
+
+
 # Tree 树形结构处理
 
 树形结构有两种表示方法：子表表示法（嵌套）和父指针表示法（扁平）。
@@ -25,7 +32,7 @@ import Tree from 'beeshell/dist/common/utils/Tree'
 ![image](../images/common/Tree/2.png)
 
 ## Code
-[详细 Code](../../examples/common/TreeScreen/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/common/TreeScreen/index.tsx)
 
 ```js
 import Tree from 'beeshell/dist/common/utils/Tree'

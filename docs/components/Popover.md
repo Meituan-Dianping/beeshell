@@ -1,3 +1,10 @@
+---
+name: Popover
+title: 弹出框
+route: /components/Popover
+sidebar: true
+---
+
 # Popover
 
 弹出框组件。
@@ -19,7 +26,7 @@ import Popover from 'beeshell/dist/components/Popover';
 ![image](../images/Popover/1.gif)
 
 ## Code
-[详细 Code](../../examples/Popover/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Popover/index.tsx)
 
 ```jsx
 import { Popover } from 'beeshell';

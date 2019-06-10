@@ -1,3 +1,11 @@
+---
+name: BottomModal
+title: 半页弹窗
+route: /components/BottomModal
+sidebar: true
+---
+
+
 # BottomModal
 
 半页弹窗。
@@ -19,7 +27,7 @@ import BottomModal from 'beeshell/dist/components/BottomModal';
 ![image](../images/BottomModal/1.gif)
 
 ## Code
-[详细 Code](../../examples/BottomModal/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/BottomModal/index.tsx)
 
 ```jsx
 import { BottomModal } from 'beeshell';

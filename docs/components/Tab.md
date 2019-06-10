@@ -1,3 +1,10 @@
+---
+name: Tab
+title: 标签页
+route: /components/Tab
+sidebar: true
+---
+
 # Tab
 
 标签页组件。
@@ -19,7 +26,7 @@ import Tab from 'beeshell/dist/components/Tab';
 ![image](../images/Tab/1.gif)
 
 ## Code
-[详细 Code](../../examples/Tab/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Tab/index.tsx)
 
 ```jsx
 <Tab

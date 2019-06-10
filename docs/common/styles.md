@@ -1,3 +1,9 @@
+---
+title: 定制主题
+route: /common/styles
+sidebar: true
+---
+
 # 定制主题
 
 组件库提供了一套统一的样式变量，所有的组件的实现，都使用统一的样式变量。用户可以定制自己的样式变量。
@@ -43,12 +49,12 @@ import variables from './customTheme';
 console.log(varialbes.mtdBrandPrimary);
 ```
 
-详细代码参考 [index 文件](../../examples/index.ts)和 [customTheme 文件](../../examples/customTheme.ts)
+详细代码参考 [index 文件](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/index.ts)和 [customTheme 文件](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/customTheme.ts)
 
 
 ## 主题变量范围
 
-支持定制的主题变量如下，这里只列出部分变量，详见 [varialbes 文件](../../src/common/styles/variables.ts)
+支持定制的主题变量如下，这里只列出部分变量，详见 [varialbes 文件](https://github.com/Meituan-Dianping/beeshell/tree/master/src/common/styles/variables.ts)
 
 ```js
 

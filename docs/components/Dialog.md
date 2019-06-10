@@ -1,3 +1,11 @@
+---
+name: Dialog
+title: 对话框
+route: /components/Dialog
+sidebar: true
+---
+
+
 # Dialog
 对话框组件。
 
@@ -18,7 +26,7 @@ import Dialog from 'beeshell/dist/components/Dialog';
 ![image](../images/Dialog/1.gif)
 
 ## Code
-[详细 Code](../../examples/Dialog/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Dialog/index.tsx)
 
 ```jsx
 import { Dialog } from 'beeshell';

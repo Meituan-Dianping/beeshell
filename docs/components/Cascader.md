@@ -1,3 +1,11 @@
+---
+name: Cascader
+title: 级联选择器
+route: /components/Cascader
+sidebar: true
+---
+
+
 # Cascader
 
 级联选择组件。支持嵌套（字表表示法）和扁平（父指针表示法）的树形数据结构。
@@ -21,7 +29,7 @@ import { Cascader } from 'beeshell/dist/components/Cascader';
 ![image](../images/Cascader/1.gif)
 
 ## Code
-[详细 Code](../../examples/Cascader/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Cascader/index.tsx)
 
 ```jsx
 import { Cascader } from 'beeshell';

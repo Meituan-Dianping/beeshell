@@ -1,3 +1,10 @@
+---
+name: Datepicker
+title: 日期选择
+route: /components/Datepicker
+sidebar: true
+---
+
 # Datepicker
 
 日期选择组件。滚动选择交互，基于 Scrollpicker 实现。
@@ -20,7 +27,7 @@ import Datepicker from 'beeshell/dist/components/Datepicker';
 ![image](../images/Datepicker/1.gif)
 
 ## Code
-[详细 Code](../../examples/Datepicker/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Datepicker/index.tsx)
 
 ```jsx
 import { Datepicker } from 'beeshell';

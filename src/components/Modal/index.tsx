@@ -245,9 +245,8 @@ export class Modal<
 
   close () {
     if (this.modalState.closing || this.modalState.topviewId == null) {
-      const msg = '不能重复关闭'
-      // console.log(msg)
-      return Promise.reject(msg)
+      // '重复关闭'
+      return Promise.resolve()
     }
 
     this.modalState.closing = true
@@ -260,6 +259,7 @@ export class Modal<
     return this.animated.toOut().then(() => {
       return TopviewGetInstance().remove(this.modalState.topviewId)
     }).then(() => {
+      const id = this.modalState.topviewId
       this.modalState.closing = false
       this.modalState.topviewId = null
 
@@ -267,21 +267,22 @@ export class Modal<
         this.props.onClosed({
           ...this.modalState
         })
+      return id
     }).catch((e) => {
       console.log(e)
     })
   }
 
   open (c?: any, args?: any) {
-    if (this.modalState.opening || this.modalState.topviewId) {
-      const msg = '不能重复打开'
-      // console.log(msg)s
+    if (!TopviewGetInstance()) {
+      const msg = 'Topview instance is not existed.'
+      console.log(msg)
       return Promise.reject(msg)
     }
 
-    if (!TopviewGetInstance()) {
-      console.log('Topview instance is not existed.')
-      return Promise.reject()
+    if (this.modalState.opening || this.modalState.topviewId) {
+      // '不能重复打开'
+      return Promise.resolve()
     }
 
     this.modalState.opening = true

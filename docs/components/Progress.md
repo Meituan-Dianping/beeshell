@@ -1,3 +1,11 @@
+---
+name: Progress
+title: 进度条
+route: /components/Progress
+sidebar: true
+---
+
+
 # Progress
 
 进度条组件。
@@ -21,7 +29,7 @@ import { Progress } from 'beeshell/dist/components/Progress';
 
 
 ## Code
-[详细 Code](../../examples/Progress/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Progress/index.tsx)
 
 ```jsx
 <Progress

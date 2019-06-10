@@ -1,3 +1,10 @@
+---
+name: Longlist
+title: 长列表
+route: /components/Longlist
+sidebar: true
+---
+
 # Longlist
 
 长列表组件，基于 FlatList 实现，支持下拉刷新，上拉加载更多。
@@ -18,7 +25,7 @@ import Longlist from 'beeshell/dist/components/Longlist';
 ![image](../images/Longlist/1.gif)
 
 ## Code
-[详细 Code](../../examples/Longlist/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Longlist/index.tsx)
 
 ```js
 import { Longlist } from 'beeshell';

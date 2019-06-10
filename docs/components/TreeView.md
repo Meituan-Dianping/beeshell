@@ -1,3 +1,11 @@
+---
+name: TreeView
+title: 树形结构
+route: /components/TreeView
+sidebar: true
+---
+
+
 # TreeView
 
 树形结构组件。
@@ -19,7 +27,7 @@ import { TreeView } from 'beeshell/dist/components/TreeView';
 ![image](../images/TreeView/1.gif)
 
 ## Code
-[详细 Code](../../examples/TreeView/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/TreeView/index.tsx)
 
 ```js
 import { TreeView } from 'beeshell';

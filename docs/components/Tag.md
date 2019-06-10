@@ -1,3 +1,10 @@
+---
+name: Tag
+title: 标签
+route: /components/Tag
+sidebar: true
+---
+
 # Tag
 
 标签组件。
@@ -20,7 +27,7 @@ import Tag from 'beeshell/dist/components/Tag';
 
 ## Code
 
-[详细 Code](../../examples/Tag/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Tag/index.tsx)
 
 ```jsx
 <Tag style={{ marginRight: 5, marginBottom: 5 }} type='default'>默认 default</Tag>

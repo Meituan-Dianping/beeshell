@@ -1,3 +1,10 @@
+---
+name: Slider
+title: 滑块
+route: /components/Slider
+sidebar: true
+---
+
 # Slider
 
 滑块组件。
@@ -19,7 +26,7 @@ import { Slider } from 'beeshell/dist/components/Slider';
 ![image](../images/Slider/1.gif)
 
 ## Code
-[详细 Code](../../examples/Slider/index.tsx)
+[详细 Code](https://github.com/Meituan-Dianping/beeshell/tree/master/examples/Slider/index.tsx)
 
 ```js
 import { Slider } from 'beeshell';
