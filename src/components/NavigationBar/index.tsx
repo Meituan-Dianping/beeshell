@@ -1,14 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component, ReactElement } from 'react'
 import {
   Text,
   View,
-  TextInput,
-  StyleSheet,
   TouchableOpacity,
-  StyleProp,
-  ViewStyle
+  ViewStyle,
+  TextStyle
 } from 'react-native'
-import { noop } from '../../common/utils/fns'
 import { Icon } from '../Icon'
 import navigationBarStyles from './styles'
 import variables from '../../common/styles/variables'
@@ -17,11 +14,22 @@ export interface NavigationBarProps {
   testID?: string
   style?: ViewStyle
   proportion?: number[]
-  title?: any
-  backLabel?: any
+
+  titleContainer?: ReactElement<any>
+  title?: string
+  titleStyle?: TextStyle
+
+  backLabel?: ReactElement<any>
+  backLabelIcon?: ReactElement<any>
+  backLabelText?: string
+  backLabelTextStyle?: TextStyle
   onPressBack?: Function
-  forwardLabel?: any
+
+  forwardLabel?: ReactElement<any>
+  forwardLabelText?: string
+  forwardLabelTextStyle?: TextStyle
   onPressForward?: Function
+
   renderItem?: Function
 }
 
@@ -31,9 +39,12 @@ export class NavigationBar extends Component<NavigationBarProps, any> {
     proportion: [1, 2, 1],
 
     title: '标题',
-    backLabel: '返回',
+    titleStyle: {},
+
+    backLabelText: '返回',
     onPressBack: null,
-    forwardLabel: null,
+
+    forwardLabelText: null,
     onPressForward: null,
     renderItem: null
   }
@@ -43,14 +54,24 @@ export class NavigationBar extends Component<NavigationBarProps, any> {
   }
 
   renderItem(index) {
-    const { backLabel, onPressBack, title, forwardLabel, onPressForward } = this.props
+    const {
+      backLabel,
+      backLabelIcon,
+      backLabelText,
+      backLabelTextStyle,
+      onPressBack,
+      titleContainer,
+      title,
+      titleStyle,
+      forwardLabel,
+      forwardLabelText,
+      forwardLabelTextStyle,
+      onPressForward
+    } = this.props
     const fontSize = variables.mtdFontSizeL
     const fontColor = variables.mtdGrayBase
 
     if (index === 0) {
-      if (backLabel == null) {
-        return null
-      }
       return (
         <TouchableOpacity
           testID='back'
@@ -72,17 +93,23 @@ export class NavigationBar extends Component<NavigationBarProps, any> {
                 minWidth: 30,
                 alignItems: 'center'
               }}>
-              <Icon
-                source={require(`../../common/images/icons/angle-left.png`)}
-                size={fontSize}
-                tintColor={fontColor}>
-              </Icon>
+              {
+                React.isValidElement(backLabelIcon) ? backLabelIcon :
+                <Icon
+                  source={require(`../../common/images/icons/angle-left.png`)}
+                  size={fontSize}
+                  tintColor={fontColor}>
+                </Icon>
+              }
               <Text
-                style={{
-                  fontSize,
-                  color: fontColor
-                }}>
-                {backLabel}
+                style={[
+                  {
+                    fontSize,
+                    color: fontColor
+                  },
+                  backLabelTextStyle
+                ]}>
+                {backLabelText}
               </Text>
             </View>
           }
@@ -97,13 +124,13 @@ export class NavigationBar extends Component<NavigationBarProps, any> {
             paddingVertical: variables.mtdVSpacingXL,
             paddingHorizontal: variables.mtdHSpacingXL
           }}>
-          { React.isValidElement(title) ? title : <Text style={{ textAlign: 'center', fontSize, color: fontColor }} >{title}</Text>}
+          { React.isValidElement(titleContainer) ? titleContainer : <Text style={[{ textAlign: 'center', fontSize, color: fontColor }, titleStyle]}>{title}</Text>}
         </View>
       )
     }
 
     if (index === 2) {
-      return forwardLabel == null ? null : (
+      return (
         <TouchableOpacity
           testID='forward'
           style={{
@@ -119,11 +146,14 @@ export class NavigationBar extends Component<NavigationBarProps, any> {
           {
             React.isValidElement(forwardLabel) ? forwardLabel :
             <Text
-              style={{
-                fontSize,
-                color: fontColor
-              }}>
-              {forwardLabel}
+              style={[
+                {
+                  fontSize,
+                  color: fontColor
+                },
+                forwardLabelTextStyle
+              ]}>
+              {forwardLabelText}
             </Text>
           }
         </TouchableOpacity>
