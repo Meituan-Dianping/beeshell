@@ -81,7 +81,7 @@ class Home extends Component<any, any> {
 
   componentDidMount() {
     setTimeout(() => {
-      this.props.navigation.navigate('Modal')
+      this.props.navigation.navigate('NavigationBar')
     }, 1000)
   }
 
@@ -170,13 +170,13 @@ class Home extends Component<any, any> {
   }
 }
 
-function makeHeader (navigation, title, backLabel, item?) {
+function makeHeader (navigation, title, backLabelText, item?) {
   return (
     <NavigationBar
       testID={item ? `navigationBar${item.key}` : undefined}
       style={{ borderBottomColor: variables.mtdBorderColorDark, borderBottomWidth: StyleSheet.hairlineWidth }}
       title={title}
-      backLabel={backLabel}
+      backLabelText={backLabelText}
       onPressBack={() => {
         navigation.back()
       }}

@@ -30,8 +30,8 @@ import { NavigationBar } from 'beeshell';
 
 <NavigationBar
   title='标题'
-  backLabel='返回'
-  forwardLabel='下一步'
+  backLabelText='返回'
+  forwardLabelText='下一步'
   onPressBack={() => {
   }}
   onPressForward={() => {
@@ -45,9 +45,15 @@ import { NavigationBar } from 'beeshell';
 | Name | Type | Required | Default | Description |
 | ---- | ---- | ---- | ---- | ---- |
 | style | ViewStyle | false | {} | 自定义样式 |
-| title | any | false | '标题' | 中间区域展示内容，可以是字符串或者 ReactElement |
-| backLabel | any | false | '返回' | 左边区域展示内容，可以是字符串或者 ReactElement |
-| forwardLabel | any | false | '下一步' | 右边区域展示内容，可以是字符串或者 ReactElement |
+| titleContainer | ReactElement | false | null | 中间区域展示内容 |
+| title | string | false | '标题' | 中间区域标题 |
+| backLabel | ReactElement | false | null | 左边区域展示内容 |
+| backLabelText | string | false | '返回' | 左边区域文案 |
+| backLabelTextStyle | TextStyle | false | {} | 左边区域文案样式 |
+| backLabelIcon | ReactElement | false | angel-left 图标 | 左边区域图标 |
+| forwardLabel | ReactElement | false | null | 右边区域展示内容 |
+| forwardLabelText | string | false | '下一步' | 右边区域文案 |
+| forwardLabelTextStyle | TextStyle | false | {} | 右边区域文案样式 |
 | onPressBack | Function | false | null | 左边区域点击回调 |
 | onPressForward | Function | false | null | 右边区域点击回调 |
 | proportion | number[] | false | [1, 2, 1] | 渲染区域布局占比 |

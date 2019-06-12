@@ -2,7 +2,6 @@
 name: Tip
 title: 提示框
 route: /components/Tip
-sidebar: true
 ---
 
 

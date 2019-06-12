@@ -2,7 +2,6 @@
 name: TreeView
 title: 树形结构
 route: /components/TreeView
-sidebar: true
 ---
 
 

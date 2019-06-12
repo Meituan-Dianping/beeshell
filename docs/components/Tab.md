@@ -2,7 +2,6 @@
 name: Tab
 title: 标签页
 route: /components/Tab
-sidebar: true
 ---
 
 # Tab
