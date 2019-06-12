@@ -9,6 +9,10 @@ All notable changes to this project will be documented in this file.
 
 
 
+## [2.0.12] - 2019-06-12
+### Changed
+- NavigationBar 定制能力增强
+
 ## [2.0.11] - 2019-05-29
 ### Changed
 - Tab scrollTo 方法实现优化
