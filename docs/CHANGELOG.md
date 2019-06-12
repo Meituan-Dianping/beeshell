@@ -8,6 +8,12 @@ All notable changes to this project will be documented in this file.
 [![npm version](https://img.shields.io/npm/v/beeshell.svg)](https://www.npmjs.com/package/beeshell)
 
 
+## [2.0.5] - 2019-06-12
+### Changed
+- 某些组件 Web 平台支持
+- Modal 重复打开、关闭不再 reject，改为 resolve
+- NavigationBar 定制能力增强
+
 ## [2.0.4] - 2019-05-30
 ### Changed
 - Tab 组件新增 scrollTo 方法
