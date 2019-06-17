@@ -120,7 +120,7 @@ export default class SlideModalScreen extends Component<any, any> {
           ref={c => {
             this.slideModalX = c
           }}
-          slideModalStyles={{
+          styles={{
             container: { top: 100, bottom: 100, left: 100, right: 100 },
             backdrop: [{ backgroundColor: 'red' }],
             content: { width: '100%' }

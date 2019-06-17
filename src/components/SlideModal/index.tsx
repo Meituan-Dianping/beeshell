@@ -38,7 +38,7 @@ export const slideModalStyles = StyleSheet.create({
 })
 
 export interface SlideModalProps extends ModalProps {
-  slideModalStyles?: { container?: StyleProp<ViewStyle>, backdrop?: StyleProp<ViewStyle>, content?: StyleProp<ViewStyle> }
+  styles?: { container?: StyleProp<ViewStyle>, backdrop?: StyleProp<ViewStyle>, content?: StyleProp<ViewStyle> }
   screenWidth?: number
   screenHeight?: number
   offsetX?: number | null | undefined
@@ -54,7 +54,7 @@ export class SlideModal<
 > extends Modal<T> {
   static defaultProps = {
     ...Modal.defaultProps,
-    slideModalStyles: {},
+    styles: {},
     cancelable: false,
     offsetX: 0,
     offsetY: undefined,
@@ -334,7 +334,7 @@ export class SlideModal<
             {
               ...contentContainerRect
             },
-            this.props.slideModalStyles.container
+            this.props.styles.container
           ]}>
           <TouchableOpacity
             testID='backdrop'
@@ -343,7 +343,7 @@ export class SlideModal<
               {
                 backgroundColor: this.props.backdropColor
               },
-              this.props.slideModalStyles.backdrop
+              this.props.styles.backdrop
             ]}
             activeOpacity={1}
             onPress={() => {
@@ -365,7 +365,7 @@ export class SlideModal<
 
                 opacity: this.animated.getState().opacity
               },
-              this.props.slideModalStyles.content
+              this.props.styles.content
             ]}
             onLayout={this.handleLayout}>
             {tmp || null}
