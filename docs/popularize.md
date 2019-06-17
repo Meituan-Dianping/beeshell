@@ -226,7 +226,7 @@ beeshell 使用了默认的字体行高，在一定程度保证了可读性和�
 - 提示用户完成手势操作后会发生什么
 - 暗示元素间的等级和空间关系
 - 让用户忽视系统背后发生的事情（比如抓取内容、或加载下一个视图）
-- 使应用更有个性、更优雅、更令人愉悦
+- 使应用更有个性、更优雅、体验更加一致
 
 beeshell 组件库基于 Animated 进行了二次封装，提供 FadeAnimated 和 SlideAnimated 两个动画类，支持淡入淡出动画和滑动动画，可以使用策略模式集成到任何组件中。
 
@@ -384,7 +384,7 @@ beeshell 通过四个级别的定制化的能力，可以轻松搞定所有的�
 
 ![image](//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:db7f371d/beeshell2.0_renderingSlideModal.gif)
 
-对比业界开源 RN 组件库，没有几个可以超过 SlideModal 的支持业务的能力。
+对比业界开源 RN 组件库，针对滑动弹框场景，没有几个可以超过 SlideModal 的业务支持能力。
 
 SlideModal 组件只提供底层支持，如果要应用到真实的业务场景，还需要基于该组件进一步开发。beeshell 也提供了更高层次的定制组件，例如：Dropdown、Popover 等，可以直接使用。
 
