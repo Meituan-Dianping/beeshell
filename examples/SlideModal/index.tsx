@@ -110,6 +110,36 @@ export default class SlideModalScreen extends Component<any, any> {
         <Button
           style={{ marginTop: 12 }}
           size='sm'
+          onPress={() => {
+            this.slideModalX.open()
+          }}>
+          自定义样式
+        </Button>
+
+        <SlideModal<SlideModalProps>
+          ref={c => {
+            this.slideModalX = c
+          }}
+          slideModalStyles={{
+            container: { top: 100, bottom: 100, left: 100, right: 100 },
+            backdrop: [{ backgroundColor: 'red' }],
+            content: { width: '100%' }
+          }}
+          screenHeight={screenHeight}
+          cancelable={true}>
+
+          <View style={{ backgroundColor: '#fff', padding: 20 }}>
+            <View>
+              <Text style={{ backgroundColor: '#fff' }}>自定义内容</Text>
+              <Text>内容比较简单，完全由用户自定义</Text>
+            </View>
+          </View>
+        </SlideModal>
+
+
+        <Button
+          style={{ marginTop: 12 }}
+          size='sm'
           ref={element => {
             this.btnEl2 = element
           }}

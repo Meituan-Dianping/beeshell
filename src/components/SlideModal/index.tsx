@@ -4,6 +4,8 @@ import {
   TouchableOpacity,
   StyleSheet,
   Animated,
+  StyleProp,
+  ViewStyle
 } from 'react-native'
 import { Modal, ModalProps } from '../Modal'
 import { SlideAnimated } from '../../common/animations'
@@ -36,6 +38,7 @@ export const slideModalStyles = StyleSheet.create({
 })
 
 export interface SlideModalProps extends ModalProps {
+  slideModalStyles?: { container?: StyleProp<ViewStyle>, backdrop?: StyleProp<ViewStyle>, content?: StyleProp<ViewStyle> }
   screenWidth?: number
   screenHeight?: number
   offsetX?: number | null | undefined
@@ -51,8 +54,8 @@ export class SlideModal<
 > extends Modal<T> {
   static defaultProps = {
     ...Modal.defaultProps,
+    slideModalStyles: {},
     cancelable: false,
-
     offsetX: 0,
     offsetY: undefined,
     direction: 'up',
@@ -287,7 +290,6 @@ export class SlideModal<
   }
 
   getContent (inner?): any {
-    const styles = slideModalStyles
     const { screenWidth, screenHeight } = this.props
     const tmp = inner == null ? this.props.children : inner
     const { contentContainerRect, contentRect } = this.getRects()
@@ -328,10 +330,11 @@ export class SlideModal<
         <View
           collapsable={false}
           style={[
-            styles.container,
+            slideModalStyles.container,
             {
               ...contentContainerRect
-            }
+            },
+            this.props.slideModalStyles.container
           ]}>
           <TouchableOpacity
             testID='backdrop'
@@ -339,7 +342,8 @@ export class SlideModal<
               slideModalStyles.backdrop,
               {
                 backgroundColor: this.props.backdropColor
-              }
+              },
+              this.props.slideModalStyles.backdrop
             ]}
             activeOpacity={1}
             onPress={() => {
@@ -349,7 +353,7 @@ export class SlideModal<
 
           <Animated.View
             style={[
-              styles.content,
+              slideModalStyles.content,
               {
                 ...contentRect
               },
@@ -360,7 +364,8 @@ export class SlideModal<
                 ],
 
                 opacity: this.animated.getState().opacity
-              }
+              },
+              this.props.slideModalStyles.content
             ]}
             onLayout={this.handleLayout}>
             {tmp || null}

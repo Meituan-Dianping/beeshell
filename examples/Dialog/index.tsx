@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, View, Text, StyleSheet } from 'react-native'
+import { ScrollView, View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
 import { Button, Dialog, Icon } from '../../src/'
 import variables from '../customTheme'
@@ -147,10 +147,19 @@ export default class DialogScreen extends Component<{}, State> {
             }
             body={
               <View style={{ backgroundColor: '#fff', padding: 20 }}>
-                <View style={{ backgroundColor: '#ebebea', height: 100, justifyContent: 'center', alignItems: 'center' }}>
-                  <Text>自定义内容</Text>
+                <View style={{ backgroundColor: '#ebebea', height: 80 }}>
+                  <ScrollView
+                    style={{ flex: 1 }}>
+                    <TouchableOpacity activeOpacity={1}>
+                      <Text style={{ textAlign: 'center', paddingVertical: 5 }}>文字多了，纵向滚动</Text>
+                      <Text style={{ textAlign: 'center', paddingVertical: 5 }}>文字多了，纵向滚动</Text>
+                      <Text style={{ textAlign: 'center', paddingVertical: 5 }}>文字多了，纵向滚动</Text>
+                      <Text style={{ textAlign: 'center', paddingVertical: 5 }}>文字多了，纵向滚动</Text>
+                    </TouchableOpacity>
+                  </ScrollView>
                 </View>
-              </View>}
+              </View>
+            }
             cancelable={true}
             operations={[
               {
