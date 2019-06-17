@@ -1,6 +1,6 @@
 {
   "name": "@roo/roo-mobile-rn",
-  "version": "2.0.12",
+  "version": "2.0.13",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
