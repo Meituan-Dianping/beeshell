@@ -151,6 +151,9 @@ export default class BottomModalScreen extends Component<{}, any> {
         </Button>
 
         <SlideModal<SlideModalProps>
+          styles={{
+            root: { bottom: 0, height: null }
+          }}
           ref={(c) => { this.slideModal = c }}
           cancelable={true}>
           <View

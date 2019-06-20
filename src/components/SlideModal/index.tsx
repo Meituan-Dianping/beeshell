@@ -38,7 +38,7 @@ export const slideModalStyles = StyleSheet.create({
 })
 
 export interface SlideModalProps extends ModalProps {
-  styles?: { container?: StyleProp<ViewStyle>, backdrop?: StyleProp<ViewStyle>, content?: StyleProp<ViewStyle> }
+  styles?: { root?: StyleProp<ViewStyle>, container?: StyleProp<ViewStyle>, backdrop?: StyleProp<ViewStyle>, content?: StyleProp<ViewStyle> }
   screenWidth?: number
   screenHeight?: number
   offsetX?: number | null | undefined
@@ -297,13 +297,16 @@ export class SlideModal<
 
     return (
       <View
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: screenWidth,
-          height: screenHeight,
-        }}
+        style={[
+          {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: screenWidth,
+            height: screenHeight,
+          },
+          this.props.styles.root
+        ]}
         collapsable={false}
         pointerEvents='box-none'>
 
