@@ -5,7 +5,7 @@ import { Button, SlideModal, SlideModalProps, BottomModal, Icon } from '../../sr
 import styles from '../common/styles'
 import variables from 'src/common/styles/variables'
 
-const screen = Dimensions.get('window')
+const window = Dimensions.get('window')
 
 export default class BottomModalScreen extends Component<{}, any> {
   [propName: string]: any
@@ -155,7 +155,7 @@ export default class BottomModalScreen extends Component<{}, any> {
           cancelable={true}>
           <View
             style={{
-              width: screen.width,
+              width: window.width,
               backgroundColor: '#fff',
               paddingHorizontal: 15
             }}>

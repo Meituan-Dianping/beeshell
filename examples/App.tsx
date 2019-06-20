@@ -81,7 +81,7 @@ class Home extends Component<any, any> {
 
   componentDidMount() {
     setTimeout(() => {
-      this.props.navigation.navigate('BottomModal')
+      this.props.navigation.navigate('Dropdown')
     }, 1000)
   }
 

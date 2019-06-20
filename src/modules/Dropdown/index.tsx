@@ -125,7 +125,7 @@ export class Dropdown extends React.Component<DropdownProps> {
         direction={this.props.direction}
         offsetX={this.props.offsetX}
         offsetY={this.props.offsetY}
-        cancelable={true}>
+        cancelable={this.props.cancelable}>
         { this.getContent() }
       </SlideModal>
     )

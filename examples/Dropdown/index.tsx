@@ -4,7 +4,7 @@ import { Button, Dropdown, Icon } from '../../src/'
 import styles from '../common/styles'
 import variables from '../customTheme'
 
-const screen = Dimensions.get('window')
+const window = Dimensions.get('window')
 
 export default class DropdownScreen extends Component<{}, any> {
   [propName: string]: any
@@ -108,9 +108,9 @@ export default class DropdownScreen extends Component<{}, any> {
               this.slideModal2 = c
             }}
             offsetX={0}
-            style={{ width: screen.width, height: 80 }}
+            style={{ width: window.width, height: 80 }}
             offsetY={this.state.offsetY2}
-            cancelable={true}
+            cancelable={false}
             value={value}
             data={data}
             onChange={this.handleChange}

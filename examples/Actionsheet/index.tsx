@@ -5,8 +5,6 @@ import { Button, Actionsheet, Icon } from '../../src/'
 import variables from '../customTheme'
 import styles from '../common/styles'
 
-const screen = Dimensions.get('window')
-
 export default class ActionsheetScreen extends Component<any, any> {
   private actionsheet = null;
   [propName: string]: any

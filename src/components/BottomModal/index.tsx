@@ -14,7 +14,7 @@ import {
 import styleUtils from '../../common/styles/utils'
 import bottomModalStyles from './styles'
 
-const screen = Dimensions.get('window')
+const window = Dimensions.get('window')
 
 export interface BottomModalProps extends SlideModalProps {
   testID?: string
@@ -38,7 +38,7 @@ export class BottomModal extends SlideModal<BottomModalProps> {
     ...SlideModal.defaultProps,
 
     cancelable: true,
-    screenWidth: screen.width,
+    screenWidth: window.width,
     titleContainer: null,
     title: '标题',
     titleStyle: {},

@@ -3,8 +3,8 @@ import { ScrollView, View, Text, StyleSheet, Dimensions, StatusBar, Platform } f
 import { Button, SlideModal, SlideModalProps, BottomModal } from '../../src/'
 import styles from '../common/styles'
 
-const screen = Dimensions.get('window')
-const screenHeight = Platform.OS === 'ios' ? screen.height : screen.height - StatusBar.currentHeight
+const window = Dimensions.get('window')
+const screenHeight = Platform.OS === 'ios' ? window.height : window.height - StatusBar.currentHeight
 
 const directonsWithAlign = [
   {
@@ -75,8 +75,8 @@ export default class SlideModalScreen extends Component<any, any> {
   render () {
     const target = directonsWithAlign[this.state.directionIndex]
     const contentEl = <View style={{ backgroundColor: '#fff', width: 50, height: 40 }}></View>
-    const centerX = screen.width / 2
-    const centerY = screen.height / 2
+    const centerX = window.width / 2
+    const centerY = window.height / 2
 
     return (
       <ScrollView
@@ -217,7 +217,7 @@ export default class SlideModalScreen extends Component<any, any> {
             style={{
               backgroundColor: '#fff',
               padding: 20,
-              width: screen.width
+              width: window.width
             }}>
             <View>
               <Text>自定义内容</Text>
@@ -294,7 +294,7 @@ export default class SlideModalScreen extends Component<any, any> {
         >
           <View
             style={{
-              height: screen.height,
+              height: window.height,
               backgroundColor: '#fff',
               padding: 20
             }}

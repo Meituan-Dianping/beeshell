@@ -13,8 +13,8 @@ import { Popover, Button } from '../../src'
 import styles from '../common/styles'
 import variables from '../customTheme'
 
-const screen = Dimensions.get('window')
-const screenHeight = Platform.OS === 'ios' ? screen.height : screen.height - StatusBar.currentHeight
+const window = Dimensions.get('window')
+const screenHeight = Platform.OS === 'ios' ? window.height : window.height - StatusBar.currentHeight
 const directonsWithAlign = [
   {
     direction: ['right'],

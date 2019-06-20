@@ -14,7 +14,7 @@ import actionsheetStyles from './styles'
 
 export { actionsheetStyles }
 
-const screen = Dimensions.get('window')
+const window = Dimensions.get('window')
 
 interface DataItem {
   label: string
@@ -137,7 +137,7 @@ export class Actionsheet extends SlideModal<ActionsheetProps> {
   getContent () {
     const styles = actionsheetStyles
     const inner = (
-      <View style={[styles.container, { width: screen.width }]}>
+      <View style={[styles.container, { width: window.width }]}>
         { this.getHeader() }
         { this.getBody() }
         { this.getFooter() }
