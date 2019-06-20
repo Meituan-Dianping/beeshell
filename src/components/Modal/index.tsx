@@ -16,7 +16,7 @@ import variables from '../../common/styles/variables'
 
 export { modalStyles }
 
-const screen = Dimensions.get('window')
+const window = Dimensions.get('window')
 
 
 export interface ModalProps {
@@ -53,8 +53,8 @@ export class Modal<
     scrollable: false,
     backdropColor: variables.mtdFillBackdrop,
 
-    screenWidth: screen.width,
-    screenHeight: screen.height,
+    screenWidth: window.width,
+    screenHeight: window.height,
 
     offsetX: 0,
     offsetY: 0,

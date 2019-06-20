@@ -5,10 +5,10 @@ import { Ruler, Input } from '../../src/'
 import variables from '../customTheme'
 import styles from '../common/styles'
 
-const screen = Dimensions.get('window')
+const window = Dimensions.get('window')
 
-const screenWidth = Number(screen.width).toFixed(2)
-const screenHeight = Number(screen.height).toFixed(2)
+const screenWidth = Number(window.width).toFixed(2)
+const screenHeight = Number(window.height).toFixed(2)
 const StatusBarCurrentHeight = StatusBar.currentHeight == null ? '不存在' : Number(StatusBar.currentHeight).toFixed(2)
 
 export default class RulerScreen extends Component<any, any> {

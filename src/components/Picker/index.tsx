@@ -14,7 +14,7 @@ import pickerStyles from './styles'
 import { Icon } from '../Icon'
 import { SlideModal, SlideModalProps } from '../SlideModal'
 
-const screen = Dimensions.get('window')
+const window = Dimensions.get('window')
 
 export interface PickerProps {
   style?: ViewStyle
@@ -190,7 +190,7 @@ export class Picker extends React.Component<PickerProps, PickerState> {
           }}>
           <View
             style={{
-              width: screen.width
+              width: window.width
             }}>
             { this.props.children }
           </View>

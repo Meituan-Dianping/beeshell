@@ -81,6 +81,7 @@ this._slideModal.close()
 
 | Name | Type | Required | Default | Description |
 | ---- | ---- | ---- | ---- | ---- |
+| styles | { root: ViewStyle, container: ViewStyle, backdrop: ViewStyle, content: ViewStyle } | false | {} | 自定义各层级元素样式 |
 | offsetX | number | false | 0 | 弹出位置 X 轴坐标 |
 | offsetY | number | false | screen.height | 弹出位置 Y 轴坐标 |
 | direction | string/string[] | false | 'up' | 动画的方向，值为 'up' 'down' 'left' 'right' ['up', 'left' ] 等 |

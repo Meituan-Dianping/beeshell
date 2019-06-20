@@ -55,8 +55,8 @@ this._modal.close()
 | cancelable | boolean | false | true | 点击蒙层是否消失 |
 | scrollable | boolean | false | false | 内容超出屏幕是否可以滚动 |
 | backdropColor | string | false | 'rgba(0, 0, 0, 0.3)' | 蒙层颜色 |
-| screenWidth | number | false | screen.width | 屏幕宽度 |
-| screenHeight | number | false | screen.height | 屏幕高度 |
+| screenWidth | number | false | Dimensions.get('window').width | 注意不是屏幕宽度，是可视区（visual viewport）宽度，命名错误 |
+| screenHeight | number | false | Dimensions.get('window').height | 注意不是屏幕高度，是可视区（visual viewport）高度，命名错误 |
 | offsetX | number | false | 0 | X 轴偏移 |
 | offsetY | number | false | 0 | Y 轴偏移 |
 | animatedTranslateX | number | false | null | 弹出位置的 X 轴坐标，默认从屏幕中间弹出 |

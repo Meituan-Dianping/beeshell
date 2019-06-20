@@ -11,9 +11,6 @@ import {
     Dimensions
 } from 'react-native'
 
-const screen = Dimensions.get('window')
-
-
 import variables from '../../common/styles/variables'
 import tabStyle from './styles'
 
