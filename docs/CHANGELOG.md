@@ -9,6 +9,14 @@ All notable changes to this project will be documented in this file.
 
 
 
+## v2.0.14
+*2019-06-20*
+
+**⚡️Changed**
+
+- SlideModal 组件 styles 属性完善
+- Dropdown 组件支持 cancelable 属性
+
 ## v2.0.13
 *2019-06-17*
 
