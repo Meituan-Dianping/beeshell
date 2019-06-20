@@ -8,6 +8,14 @@ All notable changes to this project will be documented in this file.
 [![npm version](https://img.shields.io/npm/v/beeshell.svg)](https://www.npmjs.com/package/beeshell)
 
 
+## 2.0.6
+*2019-06-20*
+
+**⚡️Changed**
+
+- SlideModal 组件增加 styles 属性
+- Dropdown 组件支持 cancelable 属性
+
 ## 2.0.5
 *2019-06-12*
 
