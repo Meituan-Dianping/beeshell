@@ -94,9 +94,14 @@ export class Longlist extends React.Component<LonglistProps, any> {
   renderFooter() {
     const { data, total, renderFooter } = this.props
     const { loading } = this.state
+    let footer = null
 
     if (renderFooter) {
-      return renderFooter(loading, data, total)
+      footer = renderFooter(loading, data, total)
+    }
+
+    if (React.isValidElement(footer)) {
+      return footer
     }
 
     if (loading) {

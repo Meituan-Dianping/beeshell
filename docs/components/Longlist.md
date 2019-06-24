@@ -67,7 +67,7 @@ import { Longlist } from 'beeshell';
 | renderItem         | Function     | true     | null    | 渲染每一项                   |
 | onEndReached       | Function     | true     | null    | 当列表被滚动到距离内容最底部不足 onEndReachedThreshold 的距离时调用。无参数，需要返回一个 Promise 对象 |
 | onRefresh          | Function     | false    | null    | 下拉刷新回调。无参数，需要返回一个 Promise 对象 |
-| renderFooter       | Function     | false    | null    | 自定义 footer 部分渲染内容。参数为 loading 加载状态，data 数据源，total 数据总长度，需要返回一个 ReactElement |
+| renderFooter       | Function     | false    | null    | 自定义页脚部分渲染内容。参数为 loading 加载状态，data 数据源，total 数据总长度，需要返回一个 ReactElement |
 
 ### Methods
 

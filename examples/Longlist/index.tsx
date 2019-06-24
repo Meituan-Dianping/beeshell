@@ -152,6 +152,11 @@ export default class LonglistScreen extends React.Component<any, any> {
           onRefresh={() => {
             return this.refreshState(1)
           }}
+          renderFooter={(loading, data, total) => {
+            // if (data.length && data.length >= total) {
+            //   return <Text style={{ color: variables.mtdBrandDanger }}>无更多数据！！！</Text>
+            // }
+          }}
         />
       </View>
     )
