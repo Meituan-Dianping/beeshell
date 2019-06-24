@@ -21,6 +21,7 @@ export interface LonglistProps extends FlatListProps<any> {
   total?: number
   onEndReached?: any
   onRefresh?: any
+  renderFooter?: any
   initialNumToRender?: number
 }
 
@@ -91,8 +92,12 @@ export class Longlist extends React.Component<LonglistProps, any> {
   }
 
   renderFooter() {
-    const { data, total } = this.props
+    const { data, total, renderFooter } = this.props
     const { loading } = this.state
+
+    if (renderFooter) {
+      return renderFooter(loading, data, total)
+    }
 
     if (loading) {
       return (

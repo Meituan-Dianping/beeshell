@@ -20,7 +20,7 @@ import styles from '../common/styles'
 import variables from '../customTheme'
 
 const dataModal = {
-  total: 30,
+  total: 10,
   list: [
     {
       id: 1
