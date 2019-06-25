@@ -150,7 +150,11 @@ export default class ModalScreen extends Component<{}, any> {
             marginLeft: contentContainerPosition.indexOf('left') !== -1 ? 20 : null,
             marginRight: contentContainerPosition.indexOf('right') !== -1 ? 20 : null
           }}
-          onClosed={() => {
+          onClose={(...args) => {
+            console.log(args, 'close')
+          }}
+          onClosed={(...args) => {
+            console.log(args, 'closed')
             this.setState({
               contentContainerPositionIndex: (this.state.contentContainerPositionIndex + 1) % contentContainerPositions.length
             })

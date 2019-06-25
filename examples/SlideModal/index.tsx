@@ -169,7 +169,11 @@ export default class SlideModalScreen extends Component<any, any> {
           align={target.align as any}
           cancelable={true}
           fullScreenPatch={[true, true, true]}
-          onClosed={() => {
+          onClose={(...args) => {
+            console.log(args, 'close')
+          }}
+          onClosed={(...args) => {
+            console.log(args, 'closed')
             this.setState({
               directionIndex: (this.state.directionIndex + 1) % directonsWithAlign.length
             })

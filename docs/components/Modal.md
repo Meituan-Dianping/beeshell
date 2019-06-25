@@ -63,8 +63,8 @@ this._modal.close()
 | animatedTranslateY | number | false | null | 弹出位置的 Y 轴坐标，默认从屏幕中间弹出 |
 | onOpen | Function | false | null | 打开弹窗回调 |
 | onOpened | Function | false | null | 打开弹窗后回调 |
-| onClose | Function | false | null | 关闭弹窗回调 |
-| onClosed | Function | false | null | 关闭弹窗后回调 |
+| onClose | Function | false | null | 关闭弹窗回调。通过第一个参数是否等于 'backdrop'，可以判断是否是点击遮罩关闭的弹框 |
+| onClosed | Function | false | null | 关闭弹窗后回调。通过第一个参数是否等于 'backdrop'，可以判断是否是点击遮罩关闭的弹框 |
 
 
 ### Methods
