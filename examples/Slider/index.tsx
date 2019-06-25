@@ -72,6 +72,28 @@ export default class SliderScreen extends Component<any, any> {
           />
         </View>
 
+        <Text style={styles.header}>自定义滑块</Text>
+        <View style={[styles.panel]}>
+          <Slider
+            max={1500}
+            value={500}
+            thumbSize={50}
+            renderThumb={() => {
+              return (
+                <View
+                  style={{
+                    width: 50,
+                    height: 50,
+                    borderRadius: 50,
+                    backgroundColor: variables.mtdBrandDanger,
+                    opacity: 0.7
+                  }}>
+                </View>
+              )
+            }}
+          />
+        </View>
+
         <Text style={styles.header}>双滑块、自定义颜色、粗细</Text>
         <View style={[styles.panel]}>
           <Slider
