@@ -266,6 +266,7 @@ export class SlideModal<
       throw new TypeError(`fullScreenPatch 参数 ${fullScreenPatch} 为无效值`)
     }
     const rects = this.getRects()
+
     const tmp = fullScreenPatch.map((patchItem, patchIndex) => {
       if (patchItem) {
         return `contentClockwise${patchIndex + 1}Rect`
@@ -278,7 +279,7 @@ export class SlideModal<
       return {
         key,
         cancelable,
-        closeFn: this.close.bind(this, this.modalState.topviewId),
+        closeFn: this.close.bind(this, 'backdrop'),
         rect: {
           ...rects[key],
           backgroundColor: backdropColor,

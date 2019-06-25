@@ -132,7 +132,7 @@ export class Modal<
 
   handlePressBackdrop = () => {
     if (this.props.cancelable) {
-      this.close().catch(e => {
+      this.close('backdrop').catch(e => {
         return null
       })
     }
@@ -243,7 +243,7 @@ export class Modal<
     }
   }
 
-  close () {
+  close (...args) {
     if (this.modalState.closing || this.modalState.topviewId == null) {
       // '重复关闭'
       return Promise.resolve()
@@ -251,10 +251,7 @@ export class Modal<
 
     this.modalState.closing = true
 
-    this.props.onClose &&
-      this.props.onClose({
-        ...this.modalState
-      })
+    this.props.onClose && this.props.onClose(...args)
 
     return this.animated.toOut().then(() => {
       return TopviewGetInstance().remove(this.modalState.topviewId)
@@ -263,10 +260,8 @@ export class Modal<
       this.modalState.closing = false
       this.modalState.topviewId = null
 
-      this.props.onClosed &&
-        this.props.onClosed({
-          ...this.modalState
-        })
+      this.props.onClosed && this.props.onClosed(...args)
+
       return id
     }).catch((e) => {
       console.log(e)
