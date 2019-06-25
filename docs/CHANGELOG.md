@@ -9,6 +9,14 @@ All notable changes to this project will be documented in this file.
 
 
 
+## 2.0.8
+*2019-06-25*
+
+**⚡️Changed**
+
+- Modal 系列 close 方法支持传入任意参数，onClose、onClosed 属性获取 close 方法传入的参数，点击遮罩关闭的情况，回调方法的第一个参数为 'backdrop'
+
+
 ## 2.0.7
 *2019-06-24*
 
