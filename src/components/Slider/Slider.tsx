@@ -325,6 +325,9 @@ export default class Slider extends PureComponent<SliderProps, State> {
    */
   getRatio = (value: number) => {
     const { min, max } = this.props
+    if (max === min) {
+      return 0
+    }
     return (value - min) / (max - min)
   }
 
