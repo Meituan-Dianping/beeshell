@@ -8,6 +8,13 @@ All notable changes to this project will be documented in this file.
 [![npm version](https://img.shields.io/npm/v/beeshell.svg)](https://www.npmjs.com/package/beeshell)
 
 
+## 2.0.9
+*2019-06-26*
+
+**🐛 Fixed**
+
+- Slider 组件修复 Android 平台 min 等于 max 时的 Bug
+
 
 ## 2.0.8
 *2019-06-25*
