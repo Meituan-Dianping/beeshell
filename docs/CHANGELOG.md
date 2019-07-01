@@ -8,6 +8,14 @@ All notable changes to this project will be documented in this file.
 [![npm version](https://img.shields.io/npm/v/beeshell.svg)](https://www.npmjs.com/package/beeshell)
 
 
+## 2.0.10
+*2019-07-01*
+
+**🐛 Fixed**
+
+- Slider 组件完善 step 属性与 marks 属性的关联关系
+
+
 ## 2.0.9
 *2019-06-26*
 
