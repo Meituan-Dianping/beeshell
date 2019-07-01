@@ -8,6 +8,15 @@ All notable changes to this project will be documented in this file.
 [![npm version](https://img.shields.io/npm/v/beeshell.svg)](https://www.npmjs.com/package/beeshell)
 
 
+
+## 2.0.11
+*2019-07-01*
+
+**🐛 Fixed**
+
+- Topview replace 方式完善，解决无法输入中文的问题
+
+
 ## 2.0.10
 *2019-07-01*
 

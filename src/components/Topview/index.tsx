@@ -86,30 +86,28 @@ class Topview extends Component<any, {count: number, modelList: Array<any>}> {
 
   replace (c, id) {
     return new Promise(resolve => {
-      setTimeout(() => {
-        let { modelList } = this.state
-        const tmpList = modelList.concat()
-        let tmpIndex
-        let tmpItem = tmpList.filter((item, index) => {
-          if (item.id === id) {
-            tmpIndex = index
-            return true
-          }
-        })[0]
-
-        tmpItem = {
-          ...tmpItem,
-          component: c
+      let { modelList } = this.state
+      const tmpList = modelList.concat()
+      let tmpIndex
+      let tmpItem = tmpList.filter((item, index) => {
+        if (item.id === id) {
+          tmpIndex = index
+          return true
         }
+      })[0]
 
-        tmpList.splice(tmpIndex, 1, tmpItem)
+      tmpItem = {
+        ...tmpItem,
+        component: c
+      }
+      console.log(c)
+      tmpList.splice(tmpIndex, 1, tmpItem)
 
-        this.setState({
-          modelList: tmpList
-        })
-
-        return resolve()
+      this.setState({
+        modelList: tmpList
       })
+
+      return resolve()
     }).catch(e => {
       console.error(e)
     })
