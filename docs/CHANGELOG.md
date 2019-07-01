@@ -9,6 +9,20 @@ All notable changes to this project will be documented in this file.
 
 
 
+## v2.0.15
+*2019-07-01*
+
+**⚡️Changed**
+
+- Longlist 组件支持自定义页脚区域
+- Modal 系列，可以在 onClose、onClosed 中获取相关参数
+
+**🐛 Fixed**
+
+- Slider 组件修复 min 等于 max 时崩溃的问题
+- Topview replace 方式完善，解决无法输入中文的问题
+
+
 ## v2.0.14
 *2019-06-20*
 
