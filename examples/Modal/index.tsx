@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, View, Text, StyleSheet, Animated, Platform } from 'react-native'
+import { ScrollView, View, Text, StyleSheet, Animated, Platform, TextInput } from 'react-native'
 
 import { Button, Modal, ModalProps, Input } from '../../src/'
 import styles from '../common/styles'
@@ -25,7 +25,8 @@ export default class ModalScreen extends Component<{}, any> {
       contentContainerPositionIndex: 0,
       animatedTranslateX: undefined,
       animatedTranslateY: undefined,
-      foo: 0
+      foo: 0,
+      inputInfo2: '2222'
     }
   }
 
@@ -50,7 +51,6 @@ export default class ModalScreen extends Component<{}, any> {
       <ScrollView
         style={styles.body}
         contentContainerStyle={styles.container}>
-
         <Button
           style={{ marginTop: 12 }}
           type='primary'
@@ -217,13 +217,22 @@ export default class ModalScreen extends Component<{}, any> {
             style={{
               width: 200,
               height: 1000,
+              padding: 20,
               backgroundColor: '#fff',
               alignItems: 'center',
               justifyContent: 'center',
               borderRadius: 4
             }}>
             <Text>自定义内容</Text>
-            <Input />
+            <Input
+              style={{ width: '100%' }}
+              value={this.state.inputInfo2}
+              onChange={(value) => {
+                this.setState({
+                  inputInfo2: value
+                })
+              }}
+            />
           </View>
         </Modal>
       </ScrollView>
