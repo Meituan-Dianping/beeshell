@@ -352,8 +352,8 @@ export default class Slider extends PureComponent<SliderProps, State> {
    * 刻度属性只有正在非纵向轴、非双滑块下才生效
    */
   showStep = () => {
-    const { vertical, step, marks, range } = this.props
-    if (!range && !vertical && step && marks) {
+    const { vertical, step, range } = this.props
+    if (!range && !vertical && step) {
       return true
     }
     return false
@@ -460,7 +460,7 @@ export default class Slider extends PureComponent<SliderProps, State> {
    */
   renderMarks = () => {
     const { step, marks, min, max, thumbSize } = this.props
-    if (!this.showStep()) {
+    if (!this.showStep() || !marks) {
       return null
     }
     const maxStep = Math.ceil(Math.abs((max - min) / step)) + 1
