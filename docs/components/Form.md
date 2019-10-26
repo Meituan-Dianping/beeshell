@@ -42,10 +42,10 @@ import { Form, Input } from 'beeshell';
 <Form>
   <Form.Item label="姓名" hasLine>
     <Input value="" onChange={() => {}} />
-    <Text>描述信息<Text>
+    <Text>描述信息</Text>
   </Form.Item>
   <Form.Item label="邮箱" labelWidth={100} hasLine>
-    <Input value="" onChange={() => {})} />
+    <Input value="" onChange={() => {}} />
   </Form.Item>
 </Form>
 ```
