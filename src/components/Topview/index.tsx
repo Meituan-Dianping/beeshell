@@ -100,7 +100,6 @@ class Topview extends Component<any, {count: number, modelList: Array<any>}> {
         ...tmpItem,
         component: c
       }
-      console.log(c)
       tmpList.splice(tmpIndex, 1, tmpItem)
 
       this.setState({
