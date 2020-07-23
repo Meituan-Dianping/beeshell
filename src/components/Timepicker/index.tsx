@@ -126,6 +126,10 @@ export class Timepicker extends React.Component<TimepickerProps, any> {
     const ret = tmpValue.map((valueItem, valueIndex) => {
       return list[valueIndex][valueItem].value
     })
+  this.setState({
+       ...this.state,
+       value: ret,
+     })
     this.props.onChange && this.props.onChange(ret.join(':'))
   }
 
