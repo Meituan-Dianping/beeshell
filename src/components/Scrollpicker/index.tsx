@@ -152,6 +152,10 @@ export class Scrollpicker extends React.Component<ScrollpickerProps, Scrollpicke
     })
   }
 
+  componentWillUnmount() {
+    this.timer && clearTimeout(this.timer)
+  }
+
   componentWillReceiveProps (nextProps) {
 
     if (nextProps !== this.props) {
@@ -281,9 +285,12 @@ export class Scrollpicker extends React.Component<ScrollpickerProps, Scrollpicke
   }
 
   onScroll (scrollIndex, scrollHeight) {
-    const targetItemIndex = this.scrollProper(scrollIndex, scrollHeight)
+    this.timer && clearTimeout(this.timer);
+    this.timer = setTimeout(()=>{
+      const targetItemIndex = this.scrollProper(scrollIndex, scrollHeight);
+      this.props.onChange && this.props.onChange(scrollIndex, targetItemIndex);
 
-    this.props.onChange && this.props.onChange(scrollIndex, targetItemIndex)
+    },100)
   }
 
   scrollProper (scrollIndex, scrollHeight, animated?) {
@@ -354,9 +361,16 @@ export class Scrollpicker extends React.Component<ScrollpickerProps, Scrollpicke
                 style={styles.scroller}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={[styles.scrollerContentContainer]}
-                onScrollEndDrag={(e) => {
-                  this.onScroll(scrollIndex, (e as any).nativeEvent.contentOffset.y)
-                }}
+                onScrollEndDrag: (e) => {
+                   this.onScroll(scrollIndex, e.nativeEvent.contentOffset.y);
+                },
+                onMomentumScrollBegin:()=>{
+                   this.timer && clearTimeout(this.timer);
+                   this.timer = null
+                },
+                onMomentumScrollEnd: (e) => {
+                   this.onScroll(scrollIndex, e.nativeEvent.contentOffset.y);
+                }
               >
                 {scrollItem.map((item, index) => {
                   return (
