@@ -48,15 +48,15 @@ export class FadeAnimated extends CommonAnimated {
     }
 
     this.state.opacity = new Animated.Value(
-      this.getPropertyValue('opacity', true)
+      this.getPropertyValue('opacity', true) ?? 0
     )
-    this.state.scale = new Animated.Value(this.getPropertyValue('scale', true))
+    this.state.scale = new Animated.Value(this.getPropertyValue('scale', true) ?? 0)
 
     this.state.translateX = new Animated.Value(
-      this.getPropertyValue('translateX', true)
+      this.getPropertyValue('translateX', true) ?? 0
     )
     this.state.translateY = new Animated.Value(
-      this.getPropertyValue('translateY', true)
+      this.getPropertyValue('translateY', true) ?? 0
     )
   }
 
